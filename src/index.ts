@@ -1,26 +1,26 @@
-import MAvatar from './components/avatar'
-import { VueConstructor} from 'vue'
+import MAvatar from './components/avatar';
+import { VueConstructor } from 'vue';
 const components = [
-    MAvatar
-]
+    MAvatar,
+];
 
-const install = function (Vue: VueConstructor, opts = {}) {
-    components.forEach(component => {
-	    const name = component.name
-	    Vue.component(name, component)
-	    console.log(component.name)
-    })
-}
+const install = (Vue: VueConstructor, opts = {}) => {
+    components.forEach( (component) => {
+        const name = component.name;
+        Vue.component(name, component);
+    });
+};
 /* istanbul ignore if */
 // if (typeof window !== 'undefined' && window.Vue) {
 //     install(window.Vue)
 // }
 
 
-export default{
+export default {
     install,
-    MAvatar
-}
+    MAvatar,
+};
 export {
-    MAvatar
-}
+    MAvatar,
+};
+

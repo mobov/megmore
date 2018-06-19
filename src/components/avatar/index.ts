@@ -1,10 +1,9 @@
-import MAvatar from './avatar.vue'
-import Vue from 'vue'
-import { VueConstructor } from 'vue'
+import MAvatar from './avatar.vue';
+import { VueConstructor } from 'vue';
 
 /* istanbul ignore next */
-(MAvatar as Model.Component).install = function install (Vue:VueConstructor) {
-    Vue.component(MAvatar.name, MAvatar)
-}
+MAvatar.install = function install(Vue: VueConstructor) {
+  Vue.component(MAvatar.name, MAvatar);
+};
 
-export default MAvatar
+export default MAvatar;
