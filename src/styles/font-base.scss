@@ -1,0 +1,19 @@
+html {
+  font-size: 14px;
+  -webkit-text-size-adjust: 100%
+}
+
+@media screen and (min-width: 375px) {
+  html {
+    /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
+    font-size: calc(87.5% + 2 * (100vw - 375px) / 39);
+    font-size: calc(14px + 2 * (100vw - 375px) / 39);
+  }
+}
+@media screen and (min-width: 414px) {
+  html {
+    /* 414px-1000px每100像素宽字体增加1px(18px-22px) */
+    font-size: calc(100% + 2 * (100vw - 375px) / 39);
+    font-size: calc(16px + 4 * (100vw - 414px) / 586);
+  }
+}

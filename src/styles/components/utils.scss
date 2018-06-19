@@ -1,0 +1,30 @@
+/**
+ * bg & color 背景 颜色
+ */
+@each $main, $colors in $--Colors {
+    @each $key, $color in $colors {
+        @if($key == 500){
+            .m-bg--#{$main} {
+                background-color: $color;
+            }
+            .m-color--#{$main}{
+                color: $color;
+            }
+        }@else{
+            .m-bg--#{$main}#{$key} {
+                background-color: $color;
+            }
+            .m-color--#{$main}#{$key}{
+                color: $color;
+            }
+        }
+    }
+}
+/**
+ * shadow 阴影
+ */
+@each $key, $shadow in $--Shadows {
+    .m-shadow--#{$key} {
+        box-shadow: $shadow;
+    }
+}

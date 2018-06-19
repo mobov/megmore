@@ -1,0 +1,53 @@
+$--color-primary: m-get-color(purple, 200);
+$--color-danger: m-get-color(red, 500);
+$--color-success: m-get-color(green, 500);
+$--color-warning: m-get-color(orange, 500);
+$--color-info: m-get-color(blue, 500);
+
+//font-size
+$--font-size-h1: 0.5rem;
+$--font-size-h2: 0.5rem;
+$--font-size-h3: 0.5rem;
+$--font-size-h4: 0.5rem;
+$--font-size-h5: 0.5rem;
+$--font-size-h6: 0.5rem;
+$--font-size-p-xs: 0.5rem;
+$--font-size-p-sm: 0.5rem;
+$--font-size-p-md: 0.5rem;
+
+//space
+$--Space: (
+    clear: 0px !important,
+    xs: .2rem,
+    sm: .5rem,
+    md: 1rem,
+    lg: 2rem,
+    hg: 4rem
+);
+//avatar
+$--Size-avatar: (
+    xs: rem(30),
+    sm: rem(45),
+    md: rem(60),
+    lg: rem(75),
+    hg: rem(90),
+);
+//avatar
+$--FontSize-avatar: (
+    xs: rem(20),
+    sm: rem(30),
+    md: rem(40),
+    lg: rem(50),
+    hg: rem(60),
+);
+
+//space size
+$--size-space-side: 2rem;
+$--size-space-updown: 2rem;
+//navbar size
+$--size-navbar: rem(90);
+//toolbar size
+$--size-toolbar: rem(90);
+
+
+

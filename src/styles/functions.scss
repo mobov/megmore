@@ -1,0 +1,12 @@
+/**
+ * 获取rem单位值
+ */
+@function rem($value){
+    @return #{$value/ 30}rem;
+}
+/**
+ * 获取调色板颜色
+ */
+@function m-get-color($color, $hue) {
+    @return map-get(map-get($--Colors, $color), $hue);
+}
