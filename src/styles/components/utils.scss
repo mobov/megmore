@@ -20,11 +20,12 @@
         }
     }
 }
+
 /**
- * shadow 阴影
+ * elevation 阴影
  */
-@each $key, $shadow in $--Shadows {
-    .m-shadow--#{$key} {
-        box-shadow: $shadow;
+@each $index, $elevation in $--Elevations {
+    .m-shadow--#{$index} {
+        box-shadow: $elevation;
     }
 }

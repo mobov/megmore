@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <m-avatar src="zz"></m-avatar>
     <router-view/>
   </div>
 </template>

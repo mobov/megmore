@@ -2,7 +2,7 @@
     <div class="home">
         <img src="../assets/logo.png"/>
         <m-avatar size="sm" @click="handleAvatarClick">
-            <img src="http://cdn.duitang.com/uploads/item/201601/24/20160124191335_BcwtX.jpeg"/>
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1529431432654&di=ae676f70cc8f86de168540d686f3d028&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D1993103690%2C3565942105%26fm%3D214%26gp%3D0.jpg"/>
         </m-avatar>
     </div>
 </template>

@@ -1,0 +1,54 @@
+@import "colors";
+@import "elevation";
+$--color-primary: m-get-color(purple, 200);
+$--color-danger: m-get-color(red, 500);
+$--color-success: m-get-color(green, 500);
+$--color-warning: m-get-color(orange, 500);
+$--color-info: m-get-color(blue, 500);
+
+//font-size
+$--font-size-h1: d(70);
+$--font-size-h2: d(60);
+$--font-size-h3: d(10);
+$--font-size-h4: d(10);
+$--font-size-h5: d(10);
+$--font-size-h6: d(10);
+$--font-size-p-xs: d(10);
+$--font-size-p-sm: d(10);
+$--font-size-p-md: d(10);
+
+//space
+$--Space: (
+    xs: d(10),
+    sm: d(20),
+    md: d(30),
+    lg: d(40),
+    hg: d(50),
+);
+//avatar
+$--Size-avatar: (
+    xs: d(30),
+    sm: d(45),
+    md: d(60),
+    lg: d(75),
+    hg: d(90),
+);
+//avatar
+$--FontSize-avatar: (
+    xs: d(20),
+    sm: d(30),
+    md: d(40),
+    lg: d(50),
+    hg: d(60),
+);
+
+//space size
+$--size-space-side: d(30);
+$--size-space-updown: d(20);
+//navbar size
+$--size-navbar: d(90);
+//toolbar size
+$--size-toolbar: d(90);
+
+
+

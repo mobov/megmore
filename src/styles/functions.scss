@@ -1,7 +1,7 @@
 /**
  * 获取rem单位值
  */
-@function rem($value){
+@function d($value){
     @return #{$value/ 30}rem;
 }
 /**
