@@ -1,0 +1,15 @@
+/**
+ * 主题生产
+ */
+@mixin theme-generator(
+    $theme: default,
+    $appBarBg: getColor('blue', 500),
+    $appBarColor: white
+){
+    .theme-#{$theme}{
+        .m-app-bar {
+            background-color: $appBarBg;
+            color: $appBarColor;
+        }
+    }
+}

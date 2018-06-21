@@ -7,6 +7,6 @@
 /**
  * 获取调色板颜色
  */
-@function m-get-color($color, $hue) {
+@function getColor($color, $hue) {
     @return map-get(map-get($--Colors, $color), $hue);
 }

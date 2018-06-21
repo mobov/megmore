@@ -1,7 +1,9 @@
 import MApp from './components/app'
 import MAvatar from './components/avatar'
+import MAppBar from './components/appBar'
 import { VueConstructor } from 'vue'
 const components = [
+    MAppBar,
     MAvatar,
 ]
 
@@ -21,9 +23,11 @@ const install = (Vue: VueConstructor, opts = {}) => {
 
 export default {
     install,
+    MAppBar,
     MAvatar,
 }
 export {
+    MAppBar,
     MAvatar,
 }
 

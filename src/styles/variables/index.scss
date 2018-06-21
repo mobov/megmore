@@ -1,10 +1,11 @@
 @import "colors";
 @import "elevation";
-$--color-primary: m-get-color(purple, 200);
-$--color-danger: m-get-color(red, 500);
-$--color-success: m-get-color(green, 500);
-$--color-warning: m-get-color(orange, 500);
-$--color-info: m-get-color(blue, 500);
+
+$--color-primary: getColor(purple, 500);
+$--color-danger: getColor(red, 500);
+$--color-success: getColor(green, 500);
+$--color-warning: getColor(orange, 500);
+$--color-info: getColor(blue, 500);
 
 //font-size
 $--font-size-h1: d(70);
@@ -45,8 +46,9 @@ $--FontSize-avatar: (
 //space size
 $--size-space-side: d(30);
 $--size-space-updown: d(20);
-//navbar size
-$--size-navbar: d(90);
+
+//appBar size
+$--size-appBar: d(90);
 //toolbar size
 $--size-toolbar: d(90);
 
