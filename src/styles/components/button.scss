@@ -1,0 +1,34 @@
+@mixin button-height($size) {
+ min-height: $size;
+ height: $size;
+}
+
+@mixin button-bg($type) {
+ background-color: $type
+}
+
+.m-button {
+ margin: d(6) d(8);
+ @each $name,
+ $value in $--Size-button-height {
+  &.#{$name} {
+   @include button-height($value);
+  }
+ }
+ @include button-height(map-get($--Size-button-height, sm));
+ @each $name,
+ $value in $--Color {
+  &.#{$name} {
+   @include button-bg($value);
+  }
+ }
+ &.round {
+  border-radius: $--size-button-round-radius
+ }
+
+ border-radius: $--size-button-radius;
+ min-width: $--size-button-min-width;
+ cursor: pointer;
+ font-size: $--font-size-p-md;
+ box-shadow: map-get($--Elevations,3);
+}

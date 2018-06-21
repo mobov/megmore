@@ -7,3 +7,9 @@ declare module 'vue/types/vue' {
 }
 
 
+declare global {
+  namespace Model{
+    export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'hg'
+    export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'
+  }
+}

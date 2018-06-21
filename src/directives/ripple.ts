@@ -1,8 +1,8 @@
 import { VNodeDirective } from 'vue'
 
-function style (el: HTMLElement, value: string) {
-  el.style['transform'] = value
-  el.style['webkitTransform'] = value
+function style(el: HTMLElement, value: string) {
+  el.style.transform = value
+  el.style.webkitTransform = value
 }
 
 declare global {
@@ -14,7 +14,7 @@ declare global {
     _ripple: undefined | {
       enabled?: boolean
       centered?: boolean
-      class?: string
+      class?: string,
     }
   }
 }
@@ -25,7 +25,7 @@ interface RippleOptions {
 }
 
 const ripple = {
-  show (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
+  show(e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
       return
     }
@@ -48,7 +48,7 @@ const ripple = {
 
     el.appendChild(container)
     const computed = window.getComputedStyle(el)
-    if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
+    if (computed.position !== 'absolute' && computed.position !== 'fixed') { el.style.position = 'relative' }
 
     const offset = el.getBoundingClientRect()
     const x = value.center ? 0 : e.clientX - offset.left - halfSize
@@ -65,40 +65,40 @@ const ripple = {
     }, 0)
   },
 
-  hide (el: HTMLElement | null) {
-    if (!el || !el._ripple || !el._ripple.enabled) return
+  hide(el: HTMLElement | null) {
+    if (!el || !el._ripple || !el._ripple.enabled) { return }
 
     const ripples = el.getElementsByClassName('v-ripple__animation')
 
-    if (ripples.length === 0) return
+    if (ripples.length === 0) { return }
     const animation = ripples[ripples.length - 1]
 
-    if (animation.dataset.isHiding) return
-    else animation.dataset.isHiding = 'true'
+    if (animation.dataset.isHiding) { return }
+    else { animation.dataset.isHiding = 'true' }
 
     const diff = performance.now() - Number(animation.dataset.activated)
-    let delay = Math.max(300 - diff, 0)
+    const delay = Math.max(300 - diff, 0)
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--visible')
 
       setTimeout(() => {
         const ripples = el.getElementsByClassName('v-ripple__animation')
-        if (ripples.length === 0) el.style.position = null
+        if (ripples.length === 0) { el.style.position = null }
         animation.parentNode && el.removeChild(animation.parentNode)
       }, 300)
     }, delay)
-  }
+  },
 }
 
-function isRippleEnabled (value: any): value is true {
+function isRippleEnabled(value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e: MouseEvent) {
+function rippleShow(e: MouseEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
-  if (!element) return
+  if (!element) { return }
   value.center = element._ripple!.centered
   if (element._ripple!.class) {
     value.class = element._ripple!.class
@@ -106,11 +106,11 @@ function rippleShow (e: MouseEvent) {
   ripple.show(e, element, value)
 }
 
-function rippleHide (e: Event) {
+function rippleHide(e: Event) {
   ripple.hide(e.currentTarget as HTMLElement | null)
 }
 
-function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
+function updateRipple(el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
     ripple.hide(el)
@@ -140,7 +140,7 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
   }
 }
 
-function removeListeners (el: HTMLElement) {
+function removeListeners(el: HTMLElement) {
   el.removeEventListener('mousedown', rippleShow, false)
   el.removeEventListener('touchend', rippleHide, false)
   el.removeEventListener('touchcancel', rippleHide, false)
@@ -149,16 +149,16 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('dragstart', rippleHide, false)
 }
 
-function directive (el: HTMLElement, binding: VNodeDirective) {
+function directive(el: HTMLElement, binding: VNodeDirective) {
   updateRipple(el, binding, false)
 }
 
-function unbind (el: HTMLElement) {
+function unbind(el: HTMLElement) {
   delete el._ripple
   removeListeners(el)
 }
 
-function update (el: HTMLElement, binding: VNodeDirective) {
+function update(el: HTMLElement, binding: VNodeDirective) {
   if (binding.value === binding.oldValue) {
     return
   }
@@ -171,5 +171,5 @@ export default {
   name: 'ripple',
   bind: directive,
   unbind,
-  update
+  update,
 }

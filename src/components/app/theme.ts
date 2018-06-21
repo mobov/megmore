@@ -4,8 +4,8 @@
 const themeMap = {
     default: {
         appBar: {
-            backgroundColor: ''
-        }
-    }
+            backgroundColor: '',
+        },
+    },
 }
 

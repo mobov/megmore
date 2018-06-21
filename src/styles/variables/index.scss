@@ -1,11 +1,26 @@
 @import "colors";
 @import "elevation";
 
-$--color-primary: getColor(purple, 500);
-$--color-danger: getColor(red, 500);
-$--color-success: getColor(green, 500);
-$--color-warning: getColor(orange, 500);
-$--color-info: getColor(blue, 500);
+$--relative-base: 16;
+
+
+$--Color:(
+    primary: getColor(purple, 500),
+    danger: getColor(red, 500),
+    success: getColor(green, 500),
+    warning: getColor(orange, 500),
+    info: getColor(blue, 500),
+    default:getColor(blue, 50)
+);
+
+$--color-primary: map-get($map: $--Color, $key:primary );
+$--color-danger: map-get($map: $--Color, $key:danger );
+$--color-success:  map-get($map: $--Color, $key:success );
+$--color-warning:  map-get($map: $--Color, $key:warning );
+$--color-info:  map-get($map: $--Color, $key:info );
+$--color-default:  map-get($map: $--Color, $key:default );
+
+
 
 //font-size
 $--font-size-h1: d(70);
@@ -48,9 +63,23 @@ $--size-space-side: d(30);
 $--size-space-updown: d(20);
 
 //appBar size
-$--size-appBar: d(90);
+$--size-appBar: d(50);
 //toolbar size
 $--size-toolbar: d(90);
 
+//button height size
+$--Size-button-height:(
+    xs: d(24),
+    sm: d(30),
+    md: d(36),
+    lg: d(44),
+    hg: d(50),
+);
+
+$--size-button-min-width:d(88);
+
+$--size-button-radius:d(2);
+
+$--size-button-round-radius:d(28)
 
 
