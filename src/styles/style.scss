@@ -1,7 +1,8 @@
 @import "import";
-@import 'normalize';
-@import 'font-base';
-@import 'base';
-@import "components/index";
-@import "utils";
+@import 'utils/normalize';
+@import 'utils/font-base';
+@import 'utils/base';
+/*按需引入部分*/
+@import "components";
 @import "themes/default";
+@import "utils/common";

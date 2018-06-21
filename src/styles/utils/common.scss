@@ -1,6 +1,8 @@
 /**
- * bg & color 背景 颜色
+ * 通用样式
  */
+
+//bg & color 背景 颜色
 @each $main, $colors in $--Palettes {
     @each $key, $color in $colors {
         @if($key == 500){
@@ -21,9 +23,7 @@
     }
 }
 
-/**
- * elevation 阴影
- */
+//elevation 阴影
 @each $index, $elevation in $--Elevations {
     .m-shadow--#{$index} {
         box-shadow: $elevation;
