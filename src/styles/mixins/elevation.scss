@@ -1,0 +1,3 @@
+@mixin elevation($value: 1){
+    box-shadow: getElevation($value);
+}

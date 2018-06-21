@@ -1,7 +1,6 @@
 /**
  * 获取rem单位值
  */
-
 @function d($value) {
  @return #{$value/ $--relative-base}rem;
 }
@@ -9,7 +8,13 @@
 /**
  * 获取调色板颜色
  */
-
 @function getColor($color, $hue) {
- @return map-get(map-get($--Colors, $color), $hue);
+ @return map-get(map-get($--Palettes, $color), $hue);
+}
+
+/**
+ * 获取阴影
+ */
+@function getElevation($value){
+ @return map-get($--Elevations, $value)
 }

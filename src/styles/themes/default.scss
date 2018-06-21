@@ -1,7 +1,6 @@
-@import "../import";
-@include theme-generator(
+@include theme-generate(
     //主题名字
     $theme: default,
-    $appBarBg: getColor(blue, 500),
+    $appBarBg: getColor(teal, 500),
     $appBarColor: white
 )

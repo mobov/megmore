@@ -1,9 +1,9 @@
-@import "colors";
-@import "elevation";
+@import "palettes";
+@import "elevations";
 
 $--relative-base: 16;
 
-
+//color
 $--Color:(
     primary: getColor(purple, 500),
     danger: getColor(red, 500),
@@ -12,15 +12,6 @@ $--Color:(
     info: getColor(blue, 500),
     default:getColor(blue, 50)
 );
-
-$--color-primary: map-get($map: $--Color, $key:primary );
-$--color-danger: map-get($map: $--Color, $key:danger );
-$--color-success:  map-get($map: $--Color, $key:success );
-$--color-warning:  map-get($map: $--Color, $key:warning );
-$--color-info:  map-get($map: $--Color, $key:info );
-$--color-default:  map-get($map: $--Color, $key:default );
-
-
 
 //font-size
 $--font-size-h1: d(70);
@@ -63,7 +54,7 @@ $--size-space-side: d(30);
 $--size-space-updown: d(20);
 
 //appBar size
-$--size-appBar: d(50);
+$--size-appBar: d(60);
 //toolbar size
 $--size-toolbar: d(90);
 

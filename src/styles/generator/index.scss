@@ -1,15 +1,15 @@
+@import "appBar";
 /**
  * 主题生产
  */
-@mixin theme-generator(
+@mixin theme-generate(
     $theme: default,
     $appBarBg: getColor('blue', 500),
     $appBarColor: white
 ){
     .theme-#{$theme}{
-        .m-app-bar {
-            background-color: $appBarBg;
-            color: $appBarColor;
-        }
+        //appBar
+        @include theme-appBar($appBarBg, $appBarColor)
+        //buttons
     }
 }

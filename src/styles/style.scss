@@ -2,8 +2,6 @@
 @import 'normalize';
 @import 'font-base';
 @import 'base';
+@import "components";
+@import "utils";
 @import "themes/default";
-@import "components/utils";
-@import "components/appBar";
-@import "components/avatar";
-@import "components/button";

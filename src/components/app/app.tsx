@@ -1,4 +1,4 @@
-<script lang="tsx">
+
 import { Component, Prop, Provide, Model, Vue } from 'vue-property-decorator'
 // import Resize from '../../directives/resize'
 
@@ -32,7 +32,3 @@ export default class MApp extends Vue {
     }
 
 }
-</script>
-<style lang="scss" scoped>
-    @import "../../styles/components/app";
-</style>
