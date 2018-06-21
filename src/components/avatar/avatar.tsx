@@ -1,39 +1,41 @@
-<script lang="tsx">
+
 import { FunctionalComponentOptions} from 'vue'
 import { Component, Prop, Vue} from 'vue-property-decorator'
 import { isHexColor, isStyleUnit } from 'es-treasure'
+
+const name = 'MAvatar'
 const prefix = 'm-avatar'
+
 const sizeMap = ['xs', 'sm', 'md', 'lg', 'hg']
 
 @Component({
+  name,
   functional: true,
 } as FunctionalComponentOptions)
 export default class MAvatar extends Vue {
 
-  public name = 'MAvatar'
   @Prop({
     type: [String, Number],
     default: 'sm',
   })
-
   private size!: string|number
+
   @Prop({
     type: [String],
     default: '#000000',
   })
-
   private color!: string
+
   @Prop({
     type: [String],
     default: '#ffffff',
   })
-
   private bgColor!: string
+
   @Prop({
     type: [Number],
     default: 0,
   })
-
   private shadow!: number
 
 // { data, props, children }
@@ -50,7 +52,12 @@ export default class MAvatar extends Vue {
         const styles = Object.assign({},context.data.style, context.data.staticStyle)
 
         return (
-            <div class={`m-avatar ${type} ${classes} ${staticClasses}`} style={styles}>{name}</div>
+            <div staticClass={prefix}
+                 class={`${type} ${classes} ${staticClasses}`}
+                 style={styles}
+            >
+
+            </div>
         )
     }
 
@@ -87,4 +94,3 @@ export default class MAvatar extends Vue {
   //   return h('div', data, children)
   // }
 }
-</script>

@@ -1,4 +1,4 @@
-import MAvatar from './avatar.vue'
+import MAvatar from './avatar'
 import { VueConstructor } from 'vue'
 
 /* istanbul ignore next */

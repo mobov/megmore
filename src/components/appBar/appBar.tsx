@@ -1,7 +1,7 @@
-<script lang="tsx">
 import { Component, Prop, Provide, Inject, Model, Vue } from 'vue-property-decorator'
 
 const name = 'MAppBar'
+const prefix = 'm-app-bar'
 
 @Component({
     name,
@@ -14,10 +14,9 @@ export default class MAppBar extends Vue {
     private size !: string
 
     public render(h: any) {
-        console.log(this.$slots)
         return (
-            <div staticClass={name}
-                 class={`${name}--${size}`}
+            <div staticClass={prefix}
+                 class={`${prefix}--${this.size}`}
             >
                 {this.$slots.default}
             </div>
@@ -25,7 +24,3 @@ export default class MAppBar extends Vue {
     }
 
 }
-</script>
-<style lang="scss" scoped>
-    @import "../../styles/components/appBar";
-</style>

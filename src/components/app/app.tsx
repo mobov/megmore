@@ -1,9 +1,10 @@
-
 import { Component, Prop, Provide, Model, Vue } from 'vue-property-decorator'
 // import Resize from '../../directives/resize'
+const name = 'MApp'
+const prefix = 'm-app'
 
 @Component({
-    name: 'MApp',
+    name,
     // directives: {
     //     Resize
     // }
@@ -19,11 +20,11 @@ export default class MApp extends Vue {
 
 
     public render(h: any) {
-        let style = ''
         console.log(this.theme)
         console.log(this.$slots)
+
         return (
-            <div staticClass="m-app"
+            <div staticClass={prefix}
                  class={`theme-${this.theme}`}
             >
                 {this.$slots.default}

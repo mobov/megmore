@@ -1,4 +1,4 @@
-import MAppBar from './appBar.vue'
+import MAppBar from './appBar'
 import { VueConstructor } from 'vue'
 
 /* istanbul ignore next */

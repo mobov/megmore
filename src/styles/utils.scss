@@ -1,7 +1,7 @@
 /**
  * bg & color 背景 颜色
  */
-@each $main, $colors in $--Colors {
+@each $main, $colors in $--Palettes {
     @each $key, $color in $colors {
         @if($key == 500){
             .m-bg--#{$main} {
