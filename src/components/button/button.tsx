@@ -1,4 +1,3 @@
-import { FunctionalComponentOptions } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { isHexColor, isStyleUnit } from 'es-treasure'
@@ -10,6 +9,7 @@ const prefix = 'm-button'
     name
 })
 export default class MButton extends Vue {
+
  @Prop({
   type: String,
   default: 'md',
