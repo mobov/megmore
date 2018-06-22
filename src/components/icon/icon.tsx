@@ -1,18 +1,17 @@
 
 import { FunctionalComponentOptions} from 'vue'
+import Paths from './paths'
 import { Component, Prop, Vue} from 'vue-property-decorator'
 import { isHexColor, isStyleUnit } from 'es-treasure'
 
-const name = 'MAvatar'
-const prefix = 'm-avatar'
-
-const sizeMap = ['xs', 'sm', 'md', 'lg', 'hg']
+const name = 'MIcon'
+const prefix = 'm-icon'
 
 @Component({
   name,
   functional: true,
 } as FunctionalComponentOptions)
-export default class MAvatar extends Vue {
+export default class MIcon extends Vue {
 
   @Prop({
     type: [String, Number],
@@ -26,38 +25,27 @@ export default class MAvatar extends Vue {
   })
   private color!: string
 
-  @Prop({
-    type: [String],
-    default: '#ffffff',
-  })
-  private bgColor!: string
-
-  @Prop({
-    type: [Number],
-    default: 0,
-  })
-  private shadow!: number
-
-// { data, props, children }
     public render(createElement: any, context: any) {
         console.log(createElement)
         console.log(context)
-
-
-        // console.log(props)
+        console.log(name)
         const name = context.props.name
-        const type = context.props.type
+        const path = Paths[name]
+
+        // console.log(path)
         const staticClasses = context.data.staticClass !== undefined ? context.data.staticClass : ''
         const classes = context.data.class !== undefined ? context.data.class : ''
         const styles = Object.assign({},context.data.style, context.data.staticStyle)
 
         return (
-            <div staticClass={prefix}
-                 class={`${type} ${classes} ${staticClasses}`}
+	        <svg xmlns="http://www.w3.org/2000/svg"
+                 version="1.1"
+                 staticClass={`${prefix} ${prefix}--${path}`}
+                 class={`${classes}`}
                  style={styles}
             >
-
-            </div>
+		        <path d={path} />
+	        </svg>
         )
     }
 
