@@ -1,10 +1,9 @@
-@mixin theme-appBar(
-    $appBarBg,
-    $appBarColor
+@mixin _appBar(
+    $appBar--bg,
+    $appBar--color
 ){
-    //appBar
     .m-app-bar {
-        background-color: $appBarBg;
-        color: $appBarColor;
+        background-color: $appBar--bg;
+        color: $appBar--color;
     }
 }

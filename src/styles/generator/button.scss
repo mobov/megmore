@@ -1,8 +1,8 @@
-@mixin theme-button(
-    $button-primary-bg
+@mixin _button(
+    $button--color,
+    $--Color
 ){
-    //appBar
-    .m-button.primary{
-     background-color: $button-primary-bg
+    .m-button {
+        color: $button--color;
     }
 }

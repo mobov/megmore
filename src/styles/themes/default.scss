@@ -1,6 +1,16 @@
 @include theme-generate(
     //主题名字
     $theme: default,
-    $appBarBg: getColor(teal, 500),
-    $appBarColor: white
+    $--Color:(
+        primary: getColor(purple, 500),
+        danger: getColor(red, 500),
+        success: getColor(green, 500),
+        warning: getColor(orange, 500),
+        info: getColor(blue, 500),
+        default:getColor(blue, 50)
+    ),
+
+    $appBar--bg: getColor(teal, 500),
+    $appBar--color: white
+
 )

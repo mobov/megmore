@@ -1,15 +1,27 @@
 @import "appBar";
+@import "button";
 /**
  * 主题生产
  */
 @mixin theme-generate(
     $theme: default,
-    $appBarBg: getColor('blue', 500),
-    $appBarColor: white
+    $--Color:(
+        primary: getColor(purple, 500),
+        danger: getColor(red, 500),
+        success: getColor(green, 500),
+        warning: getColor(orange, 500),
+        info: getColor(blue, 500),
+        default:getColor(blue, 50)
+    ),
+    $appBar--bg: getColor(teal, 500),
+    $appBar--color: white,
+    $button--color: white
 ){
     .theme-#{$theme}{
         //appBar
-        @include theme-appBar($appBarBg, $appBarColor)
+        @include _appBar($appBar--bg, $appBar--color);
+
         //buttons
+        @include _button($button--color, $--Color)
     }
 }
