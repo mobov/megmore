@@ -1,0 +1,8 @@
+@mixin _button(
+    $button--color,
+    $--Color
+){
+    .m-button {
+        color: $button--color;
+    }
+}

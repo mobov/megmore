@@ -1,9 +1,9 @@
 
 import { FunctionalComponentOptions} from 'vue'
-import Paths from './paths'
+// import Paths from './paths'
 import { Component, Prop, Vue} from 'vue-property-decorator'
 import { isHexColor, isStyleUnit } from 'es-treasure'
-
+console.log(ac_unit)
 const name = 'MIcon'
 const prefix = 'm-icon'
 
@@ -26,11 +26,14 @@ export default class MIcon extends Vue {
   private color!: string
 
     public render(createElement: any, context: any) {
-        console.log(createElement)
-        console.log(context)
-        console.log(name)
+        // console.log(createElement)
+        // console.log(context)
+        // console.log(name)
+        // const icon = (import('@/views/' + file + '.vue')).default
+        console.log()
         const name = context.props.name
-        const path = Paths[name]
+        // const path = Paths[name]
+        // console.log(path)
 
         // console.log(path)
         const staticClasses = context.data.staticClass !== undefined ? context.data.staticClass : ''
@@ -40,7 +43,7 @@ export default class MIcon extends Vue {
         return (
 	        <svg xmlns="http://www.w3.org/2000/svg"
                  version="1.1"
-                 staticClass={`${prefix} ${prefix}--${path}`}
+                 staticClass={`${prefix} ${prefix}-- ${staticClasses}`}
                  class={`${classes}`}
                  style={styles}
             >
