@@ -2,8 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import '../../src/styles/style.scss'
+
+import '../../src/icons/ac_unit'
 import Megmore from '../../src/index'
 Vue.use(Megmore)
+
 
 Vue.config.productionTip = false
 
