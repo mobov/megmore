@@ -1,12 +1,1 @@
-import { MIcon } from '../'
-
-MIcon.register({
- "get_app": {
-  "paths": [
-   "M5.016 18h13.969v2.016h-13.969v-2.016zM18.984 9l-6.984 6.984-6.984-6.984h3.984v-6h6v6h3.984z"
-  ],
-  "height": "24",
-  "width": "24",
-  "viewBox": "0 0 24 24"
- }
-})
+export default {"get_app":{"paths":["M5.016 18h13.969v2.016h-13.969v-2.016zM18.984 9l-6.984 6.984-6.984-6.984h3.984v-6h6v6h3.984z"],"height":"24","width":"24","viewBox":"0 0 24 24"}}

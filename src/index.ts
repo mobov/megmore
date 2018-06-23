@@ -1,40 +1,21 @@
-import MApp from './components/app'
-import MAvatar from './components/avatar'
-import MAppBar from './components/appBar'
-import MButton from './components/button'
-import MIcon from './components/icon'
+import './styles/style.scss'
+import * as components from './components'
 import { VueConstructor } from 'vue'
-const components = [
-    MAppBar,
-    MAvatar,
-    MButton,
-    MIcon,
-]
-const install = (Vue: VueConstructor, opts = {}) => {
-    //  必装组件
-    Vue.component(MApp.name, MApp)
-    Vue.use(MApp)
-    components.forEach( (component) => {
-        const name = component.name
-        Vue.component(name, component)
-    })
-}
-/* istanbul ignore if */
-// if (typeof window !== 'undefined' && window.Vue) {
-//     install(window.Vue)
-// }
+import { Megmore as MegmorePlugin, MegmoreUseOptions } from 'types'
 
-export default {
-    install,
-    MAppBar,
-    MAvatar,
-    MButton,
-    MIcon
-}
-export {
-    MAppBar,
-    MAvatar,
-    MButton,
-    MIcon
+const Megmore: MegmorePlugin = {
+    install (Vue: VueConstructor, args?: MegmoreUseOptions): void {
+        const MegmoreComponent: MegmorePlugin = components.Megmore
+
+        Vue.use(MegmoreComponent, {
+            components,
+            ...args
+        })
+    }
 }
 
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Megmore)
+}
+
+export default Megmore

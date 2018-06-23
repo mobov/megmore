@@ -1,4 +1,5 @@
 import { Component, Prop, Provide, Model, Vue } from 'vue-property-decorator'
+import { Gunpla } from '../Megmore/theme'
 // import Resize from '../../directives/resize'
 const name = 'MApp'
 const prefix = 'm-app'
@@ -11,22 +12,12 @@ const prefix = 'm-app'
 })
 export default class MApp extends Vue {
 
-    @Provide()
-    @Prop({ type: [String], default: 'default'})
-    private theme : string
-
-    @Prop({ type: [String] })
-    private bgColor !: string
 
 
     public render(h: any) {
-        console.log(this.theme)
-        console.log(this.$slots)
-
+        console.log(Vue)
         return (
-            <div staticClass={prefix}
-                 class={`theme-${this.theme}`}
-            >
+            <div staticClass={prefix}>
                 {this.$slots.default}
             </div>
         )

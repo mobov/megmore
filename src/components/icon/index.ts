@@ -1,11 +1,10 @@
 import { MIcon, setIcons} from './icon'
-import { VueConstructor } from 'vue'
 
 /* istanbul ignore next */
-MIcon.install = function install(Vue: VueConstructor) {
+MIcon.install = function install(Vue) {
   Vue.component(MIcon.name, MIcon)
 }
-MIcon.register = function register(data: any = {}) {
+MIcon.register = function register(data) {
     setIcons(data)
 }
 

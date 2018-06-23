@@ -1,2 +1,7 @@
-import Button from './button'
-export default Button
+import MButton from './button'
+
+/* istanbul ignore next */
+MButton.install = function install(Vue) {
+    Vue.component(MButton.name, MButton)
+}
+export default MButton
