@@ -4,6 +4,7 @@ import router from './router'
 import '../../src/styles/style.scss'
 
 import '../../src/icons/ac_unit'
+import '../../src/icons/archive'
 import Megmore from '../../src/index'
 Vue.use(Megmore)
 

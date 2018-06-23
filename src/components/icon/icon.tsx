@@ -1,34 +1,19 @@
-
 import { FunctionalComponentOptions} from 'vue'
-// import Paths from './paths'
 import { Component, Prop, Vue} from 'vue-property-decorator'
 import { isHexColor, isStyleUnit } from 'es-treasure'
 
 const name = 'MIcon'
 const prefix = 'm-icon'
 
+const sizeMap: any = {
+    'xs': 20,
+    'sm': 30,
+    'md': 40,
+    'lg': 50,
+    'xl': 60
+}
 
 let Icons: any = {}
-// function renderPaths (name: string){
-//     let result : any[]
-//     console.log(name)
-//     const icon = Icons[name]
-//     if(icon === undefined) console.error(`存在未注册的图标${name}`)
-//     console.log(icon)
-//     if(icon.paths){
-//         // icon.paths.forEach(path => {
-//         //     result.push(<path>{path}<path/>)
-//         // })
-//     }
-//     // return  <path d={Icons[name]} />
-//     // <template v-if="icon && icon.paths">
-//     //
-//     // </template>
-//     // <template v-if="icon && icon.polygons">
-//     //             <polygon v-for="(polygon, i) in icon.polygons" :key="`polygon-${i}`" v-bind="polygon"/>
-//     //     <path v-for="(path, i) in icon.paths" :key="`path-${i}`" v-bind="path"/>    </template>
-//     // <template v-if="icon && icon.raw"><g v-html="raw"></g></template>
-// }
 
 @Component({
   name,
@@ -36,8 +21,7 @@ let Icons: any = {}
 } as FunctionalComponentOptions)
 export class MIcon extends Vue {
     @Prop({
-        type: String,
-        default: 'sm',
+        type: String
     })
     private name!: string
 
@@ -45,7 +29,7 @@ export class MIcon extends Vue {
         type: [String, Number],
         default: 'sm',
     })
-    private size!: string|number
+    private size!: string
 
     @Prop({
         type: String,
@@ -60,17 +44,17 @@ export class MIcon extends Vue {
             console.error(`存在未注册的图标${name}`)
             return ''
         }
-        const height = context.props.height !== undefined ? context.props.height : icon.height
-        const width = context.props.width !== undefined ? context.props.width : icon.width
+
+        const height = sizeMap[context.props.size] ? sizeMap[context.props.size] : context.props.size
+        const width = height * (icon.height / icon.width)
         const staticClasses = context.data.staticClass !== undefined ? context.data.staticClass : ''
         const classes = context.data.class !== undefined ? context.data.class : ''
-        const styles = Object.assign({},context.data.style, context.data.staticStyle)
-        console.log(context)
+        const styles = Object.assign({fill:'currentColor'}, context.data.style, context.data.staticStyle)
 
         return (
 	        <svg xmlns="http://www.w3.org/2000/svg"
                  version="1.1"
-                 staticClass={`${prefix} ${prefix}--${staticClasses}`}
+                 staticClass={`${prefix} ${prefix}--${name} ${staticClasses}`}
                  class={`${classes}`}
                  style={styles}
                  height={height}
