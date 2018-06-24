@@ -15,6 +15,11 @@
 
 <script lang="ts">
 export default {
+    data(){
+        return {
+            modal:false
+        }
+    },
     methods: {
 	    handleAvatarClose () {
 
