@@ -15,6 +15,8 @@ const Megmore: MegmorePlugin = {
             }
         })
 
+
+        
         useTheme('unicon')
 
         if (opts.components) {
