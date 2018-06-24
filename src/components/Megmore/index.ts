@@ -1,7 +1,7 @@
 import { VueConstructor } from 'vue/types'
 import { Megmore as MegmorePlugin } from 'types'
 import MIcon from '../icon'
-import { getTheme, register } from './theme'
+import { getTheme, registerTheme, renderTheme } from './theme'
 const Megmore: MegmorePlugin = {
     install (Vue: VueConstructor, opts: any = {}) {
         if ((this as any).installed) return
@@ -9,14 +9,19 @@ const Megmore: MegmorePlugin = {
 
         Vue.prototype.$megmore = new Vue({
             data: {
-                breakpoint: {},
-                dark: false,
                 // options: options(opts.options),
                 // rtl: opts.rtl,
                 theme: 'unicon'
+            },
+            methods: {
+                useTheme(name = 'unicon'){
+                    this.theme = name
+                },
+                getTheme,
+                registerTheme
             }
         })
-
+        renderTheme('unicon')
         if (opts.components) {
             Object.values(opts.components).forEach(component => {
                 Vue.use(component)

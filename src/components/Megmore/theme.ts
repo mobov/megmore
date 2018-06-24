@@ -24,20 +24,80 @@ let Theme : any = {
     }
 }
 
-function rend() {
-
+/**
+ * todo://抽离进es-treasure
+ * @param {string} name
+ * @return {string}
+ */
+function midlineCase(name: string) {
+    let SPECIAL_CHARS_REGEXP = /([A-Z])/g;
+    return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+        return offset ? '-' + separator.toLowerCase() : letter
+    })
 }
 
 /**
+ * 构造样式表内容
+ * @param name
+ * @param data
+ * @return {string}
+ */
+function getThemeContext(name: string, data: any) {
+    let context = '@charset "utf-8" '
+    Object.keys(data).forEach(attribute =>{
+        context += `.m-theme--${name}`
+        if(data[attribute] instanceof Object){
+            const subData = data[attribute]
+            context += `.m-${midlineCase(attribute)}{`
+            Object.keys(subData).forEach(subAttribute =>{
+                if(subAttribute === 'bgColor'){
+                    context += `background-color: ${subData[subAttribute]};
+                    `
+                }else if(subAttribute === 'elevations'){
+                    context += `box-shadow: ${subData[subAttribute]};
+                    `
+                }else{
+                    context += `background-color: ${subData[subAttribute]};
+                    `
+                }
+            })
+            context += `}`
+        }else{
+            context += `.${midlineCase(attribute)}-bg{ 
+                    background-color: ${data[attribute]}
+                }`
+            context += `.${midlineCase(attribute)}-color{
+                    color: ${data[attribute]}
+                }`
+        }
+    })
+    console.log(new Date().getTime())
+
+    return context
+}
+/**
+ * 使用主题
+ * @param {string} name
+ */
+export function renderTheme(name: string) {
+    const themeConf = Theme[name] ? Theme[name] : Theme.unicon
+    const $themeStyle = document.createElement('style')
+    $themeStyle.setAttribute('id', 'themeUnicon')
+    $themeStyle.setAttribute('type', 'text/css')
+    const $themeText = document.createTextNode(getThemeContext(name, themeConf))
+    $themeStyle.appendChild($themeText)
+    document.head.appendChild($themeStyle)
+}
+/**
  * 主题注册
  */
-export function register() {
+export function registerTheme() {
     //todo:主题校验
 
 }
 
 /**
- * 获取主题
+ * 获取主题配置
  * @param {string} name
  * @return {any}
  */
