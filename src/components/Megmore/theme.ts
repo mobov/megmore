@@ -79,20 +79,15 @@ function getThemeContext(name: string, data: any) {
  */
 export function useTheme(name: string) {
     const themeConf = Theme[name] ? Theme[name] : Theme.unicon
-    if(document.head.querySelector(`#theme-${name}`)){
-        const $themeStyle = document.head.querySelector(`#theme-${name}`)
-        const $themeText = document.createTextNode(getThemeContext(name, themeConf))
-        $themeStyle.childNodes[0] = $themeText
-    }else{
+    if(!document.head.querySelector(`#theme-${name}`)){
         const $themeStyle = document.createElement('style')
         $themeStyle.setAttribute('id', 'theme-unicon')
         $themeStyle.setAttribute('type', 'text/css')
         const $themeText = document.createTextNode(getThemeContext(name, themeConf))
         $themeStyle.appendChild($themeText)
         document.head.appendChild($themeStyle)
-        document.body.dataset.megmoreTheme = name
     }
-
+    document.body.dataset.megmoreTheme = name
 }
 /**
  * 主题注册
