@@ -16,11 +16,6 @@ let Theme : any = {
             color: 'white',
             elevations: Elevations[3]
         },
-        icon: {
-            bgColor: Palettes.lightblue_A700,
-            color: 'white',
-            elevations: Elevations[3]
-        },
     }
 }
 
@@ -45,10 +40,10 @@ function midlineCase(name: string) {
 function getThemeContext(name: string, data: any) {
     let context = '@charset "utf-8" '
     Object.keys(data).forEach(attribute =>{
-        context += `.m-theme--${name}`
+        context += `[data-megmore-theme=${name}] `
         if(data[attribute] instanceof Object){
             const subData = data[attribute]
-            context += `.m-${midlineCase(attribute)}{`
+            context += ` .m-${midlineCase(attribute)}{`
             Object.keys(subData).forEach(subAttribute =>{
                 if(subAttribute === 'bgColor'){
                     context += `background-color: ${subData[subAttribute]};
@@ -57,16 +52,16 @@ function getThemeContext(name: string, data: any) {
                     context += `box-shadow: ${subData[subAttribute]};
                     `
                 }else{
-                    context += `background-color: ${subData[subAttribute]};
+                    context += `${subAttribute}: ${subData[subAttribute]};
                     `
                 }
             })
             context += `}`
         }else{
-            context += `.${midlineCase(attribute)}-bg{ 
+            context += ` .${midlineCase(attribute)}-bg{ 
                     background-color: ${data[attribute]}
                 }`
-            context += `.${midlineCase(attribute)}-color{
+            context += ` .${midlineCase(attribute)}-color{
                     color: ${data[attribute]}
                 }`
         }
@@ -87,6 +82,7 @@ export function renderTheme(name: string) {
     const $themeText = document.createTextNode(getThemeContext(name, themeConf))
     $themeStyle.appendChild($themeText)
     document.head.appendChild($themeStyle)
+    document.body.dataset.megmoreTheme = name
 }
 /**
  * 主题注册
