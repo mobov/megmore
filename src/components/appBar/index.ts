@@ -1,8 +1,7 @@
 import MAppBar from './appBar'
-import { VueConstructor } from 'vue'
 
 /* istanbul ignore next */
-MAppBar.install = function install(Vue: VueConstructor) {
+MAppBar.install = function install(Vue) {
   Vue.component(MAppBar.name, MAppBar)
 }
 

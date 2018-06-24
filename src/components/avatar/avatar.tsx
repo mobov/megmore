@@ -21,22 +21,10 @@ export default class MAvatar extends Vue {
   private size!: string|number
 
   @Prop({
-    type: [String],
-    default: '#000000',
-  })
-  private color!: string
-
-  @Prop({
-    type: [String],
-    default: '#ffffff',
-  })
-  private bgColor!: string
-
-  @Prop({
     type: [Number],
     default: 0,
   })
-  private shadow!: number
+  private elevation!: number
 
 // { data, props, children }
     public render(createElement: any, context: any) {

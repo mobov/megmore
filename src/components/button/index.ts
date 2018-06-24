@@ -1,6 +1,7 @@
-import Button from './button'
-import {VueConstructor} from 'vue'
-Button.install = function install(Vue: VueConstructor) {
- Vue.component(Button.name, Button)
+import MButton from './button'
+
+/* istanbul ignore next */
+MButton.install = function install(Vue) {
+    Vue.component(MButton.name, MButton)
 }
-export default Button
+export default MButton
