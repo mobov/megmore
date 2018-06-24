@@ -39,6 +39,7 @@ fileEntries.forEach((fileName, index) => {
 			return temp
 		})()
 	}
+
 	if(strPolygons){
 		svgData[name].polygons = (()=>{
 			let temp = []

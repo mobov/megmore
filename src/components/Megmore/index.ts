@@ -14,7 +14,9 @@ const Megmore: MegmorePlugin = {
                 registerTheme
             }
         })
+
         useTheme('unicon')
+
         if (opts.components) {
             Object.values(opts.components).forEach(component => {
                 Vue.use(component)
