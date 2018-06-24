@@ -3,7 +3,6 @@ import { FunctionalComponentOptions} from 'vue'
 // import Paths from './paths'
 import { Component, Prop, Vue} from 'vue-property-decorator'
 import { isHexColor, isStyleUnit } from 'es-treasure'
-console.log(ac_unit)
 const name = 'MIcon'
 const prefix = 'm-icon'
 

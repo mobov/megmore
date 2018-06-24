@@ -3,12 +3,14 @@ import MAvatar from './components/avatar'
 import MAppBar from './components/appBar'
 import MButton from './components/button'
 import MIcon from './components/icon'
+import Modal from './components/modal'
 import { VueConstructor } from 'vue'
 const components = [
     MAppBar,
     MAvatar,
     MButton,
     MIcon,
+    Modal
 ]
 const install = (Vue: VueConstructor, opts = {}) => {
     //  必装组件
@@ -29,12 +31,14 @@ export default {
     MAppBar,
     MAvatar,
     MButton,
-    MIcon
+    MIcon,
+    Modal,
 }
 export {
     MAppBar,
     MAvatar,
     MButton,
-    MIcon
+    MIcon,
+    Modal,
 }
 

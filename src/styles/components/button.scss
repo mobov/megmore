@@ -16,16 +16,14 @@
   }
  }
  @include button-height(map-get($--Size-button-height, sm));
- @each $name,
- $value in $--Color {
-  &.#{$name} {
-   @include button-bg($value);
-  }
- }
+ 
  &.round {
   border-radius: $--size-button-round-radius
  }
-
+ &:not(.default){
+  color:getColor(grey,50);
+ }
+ color:getColor(grey,A400);
  border-radius: $--size-button-radius;
  min-width: $--size-button-min-width;
  cursor: pointer;

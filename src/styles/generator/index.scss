@@ -22,6 +22,6 @@
         @include _appBar($appBar--bg, $appBar--color);
 
         //buttons
-        @include _button($button--color, $--Color)
+        @include _button( $--Color)
     }
 }

@@ -1,8 +1,10 @@
-@mixin _button(
-    $button--color,
-    $--Color
-){
-    .m-button {
-        color: $button--color;
-    }
+@mixin _button( $--Color) {
+ .m-button.primary {
+  @each $name,
+  $value in $--Color {
+   &.#{$name} {
+    background-color:$value;
+   }
+  }
+ }
 }
