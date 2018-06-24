@@ -4,6 +4,8 @@
 import Palettes from './palettes'
 import Elevations from './elevations'
 
+let currentTheme = 'unicon'
+
 let Theme : any = {
     unicon: {
         themePrimary: Palettes.lightblue_A700,
@@ -50,6 +52,7 @@ function getThemeContext(name: string, data: any) {
                     `
                 }else if(subAttribute === 'elevations'){
                     context += `box-shadow: ${subData[subAttribute]};
+                                -webkit-box-shadow: ${subData[subAttribute]};
                     `
                 }else{
                     context += `${subAttribute}: ${subData[subAttribute]};
@@ -74,15 +77,22 @@ function getThemeContext(name: string, data: any) {
  * 使用主题
  * @param {string} name
  */
-export function renderTheme(name: string) {
+export function useTheme(name: string) {
     const themeConf = Theme[name] ? Theme[name] : Theme.unicon
-    const $themeStyle = document.createElement('style')
-    $themeStyle.setAttribute('id', 'themeUnicon')
-    $themeStyle.setAttribute('type', 'text/css')
-    const $themeText = document.createTextNode(getThemeContext(name, themeConf))
-    $themeStyle.appendChild($themeText)
-    document.head.appendChild($themeStyle)
-    document.body.dataset.megmoreTheme = name
+    if(document.head.querySelector(`#theme-${name}`)){
+        const $themeStyle = document.head.querySelector(`#theme-${name}`)
+        const $themeText = document.createTextNode(getThemeContext(name, themeConf))
+        $themeStyle.childNodes[0] = $themeText
+    }else{
+        const $themeStyle = document.createElement('style')
+        $themeStyle.setAttribute('id', 'theme-unicon')
+        $themeStyle.setAttribute('type', 'text/css')
+        const $themeText = document.createTextNode(getThemeContext(name, themeConf))
+        $themeStyle.appendChild($themeText)
+        document.head.appendChild($themeStyle)
+        document.body.dataset.megmoreTheme = name
+    }
+
 }
 /**
  * 主题注册
