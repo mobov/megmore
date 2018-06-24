@@ -7,8 +7,6 @@ const prefix = 'm-app-bar'
     name,
 })
 export default class MAppBar extends Vue {
-    @Prop({ type: [String] })
-    private bgColor !: string
 
     @Prop({ type: [String], default: 'sm' })
     private size !: string

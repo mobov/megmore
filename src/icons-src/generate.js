@@ -23,18 +23,30 @@ fileEntries.forEach((fileName, index) => {
 	let data = fs.readFileSync(path.resolve(__dirname, `${sourceDir + fileName}`))
 	const strSVG = data.toString().getTags('svg')[0]
 	const strPaths = data.toString().getTags('path')
+	const strPolygons = data.toString().getTags('polygon')
 	let svgData = {}
 	svgData[name] = {
-		paths: (()=>{
-			let temp = []
-			strPaths.forEach(path=>{
-				temp.push(path.getAttributes('d'))
-			})
-			return temp
-		})(),
 		height: strSVG.getAttributes('height'),
 		width: strSVG.getAttributes('width'),
 		viewBox: strSVG.getAttributes('viewBox')
+	}
+	if(strPaths){
+		svgData[name].paths = (()=>{
+			let temp = []
+			strPaths.forEach(item=>{
+				temp.push(item.getAttributes('d'))
+			})
+			return temp
+		})()
+	}
+	if(strPolygons){
+		svgData[name].polygons = (()=>{
+			let temp = []
+			strPolygons.forEach(item=>{
+				temp.push(item.getAttributes('points'))
+			})
+			return temp
+		})()
 	}
 	let buffer = `export default ${JSON.stringify(svgData)}`
 	fs.writeFile(path.resolve(__dirname, `${outputDir + name}.js`), buffer, (err) => {if (err) throw err})

@@ -61,7 +61,8 @@ export class MIcon extends Vue {
                  width={width}
                  viewBox={icon.viewBox}
             >
-                {icon.paths.map(path => <path d={path} />)}
+                {icon.paths ? icon.paths.map(path => <path d={path} />) : ''}
+                {icon.polygons ? icon.polygons.map(path => <polygon points={path} />) : ''}
 	        </svg>
         )
     }
