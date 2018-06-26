@@ -43,11 +43,13 @@ $--FontSize-avatar: (
 );
 
 //space size
-$--size-space-side: d(30);
-$--size-space-updown: d(20);
+$--space-x: d(20);
+$--space-y: d(30);
 
 //appBar size
 $--size-appBar: d(60);
+$--space-appBar-inset-y: d(20);
+$--space-appBar-inset-x: d(15);
 //toolbar size
 $--size-toolbar: d(90);
 

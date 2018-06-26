@@ -3,4 +3,10 @@
     width: 100%;
     height: $--size-appBar;
     //min-height: $--size-appBar;
+    display: flex;
+    align-items: center;
+    padding: $--space-appBar-inset-y $--space-appBar-inset-x;
+    .m-icon {
+        cursor: pointer;
+    }
 }

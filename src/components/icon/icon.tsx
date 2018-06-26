@@ -1,6 +1,5 @@
 import { FunctionalComponentOptions} from 'vue'
 import { Component, Prop, Vue} from 'vue-property-decorator'
-import { isHexColor, isStyleUnit } from 'es-treasure'
 
 const name = 'MIcon'
 const prefix = 'm-icon'
@@ -13,7 +12,7 @@ const sizeMap: any = {
     'xl': 60
 }
 
-let Icons: any = {}
+const Icons: any = {}
 
 @Component({
   name,
@@ -21,7 +20,7 @@ let Icons: any = {}
 } as FunctionalComponentOptions)
 export class MIcon extends Vue {
     @Prop({
-        type: String
+        type: String,
     })
     private name!: string
 
@@ -37,24 +36,23 @@ export class MIcon extends Vue {
     })
     private color!: string
 
-    public render(createElement: any, context: any) {
-        const name = context.props.name
-        const icon = Icons[name]
-        if(icon === undefined){
+    public render(createElement: any, { props, data, children }) {
+        const icon = Icons[props.name]
+        if (icon === undefined) {
             console.error(`存在未注册的图标${name}`)
             return ''
         }
 
-        const height = sizeMap[context.props.size] ? sizeMap[context.props.size] : context.props.size
+        const height = sizeMap[props.size] ? sizeMap[props.size] : props.size
         const width = height * (icon.height / icon.width)
-        const staticClasses = context.data.staticClass !== undefined ? context.data.staticClass : ''
-        const classes = context.data.class !== undefined ? context.data.class : ''
-        const styles = Object.assign({fill:'currentColor'}, context.data.style, context.data.staticStyle)
+        const staticClasses = data.staticClass !== undefined ? data.staticClass : ''
+        const classes = data.class !== undefined ? data.class : ''
+        const styles = Object.assign({fill: 'currentColor'}, data.style, data.staticStyle)
 
         return (
-	        <svg xmlns="http://www.w3.org/2000/svg"
-                 version="1.1"
-                 staticClass={`${prefix} ${prefix}--${name} ${staticClasses}`}
+	        <svg xmlns='http://www.w3.org/2000/svg'
+                 version='1.1'
+                 staticClass={`${prefix} ${prefix}--${props.name} ${staticClasses}`}
                  class={`${classes}`}
                  style={styles}
                  height={height}
@@ -69,8 +67,8 @@ export class MIcon extends Vue {
 }
 
 export function setIcons(data: any = {}) {
-    for (let name in data) {
-        let icon = data[name]
+    for (const item in data) {
+        const icon = data[item]
 
         if (icon.d) {
             if (!icon.paths) {
