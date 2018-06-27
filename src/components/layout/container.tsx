@@ -1,5 +1,5 @@
-import { FunctionalComponentOptions} from 'vue'
-import { Component, Prop, Vue} from 'vue-property-decorator'
+import { FunctionalComponentOptions } from 'vue'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 const name = 'MContainer'
 const prefix = 'm-container'
@@ -8,7 +8,7 @@ const prefix = 'm-container'
     name,
     functional: true,
 } as FunctionalComponentOptions)
-export class MIcon extends Vue {
+export default class MContainer extends Vue {
     @Prop({
         type: String,
     })
@@ -19,8 +19,11 @@ export class MIcon extends Vue {
     })
     private tag!: string
 
+
     public render(h: any, { props, data, children }) {
-        data.staticClass = `${prefix}` + data.staticClass !== undefined ? data.staticClass : ''
+        const staticClass = data.staticClass !== undefined ? data.staticClass : ''
+        data.staticClass = `${prefix} ${staticClass}`.trim()
+
         if (props.id) {
             data.domProps = data.domProps || {}
             data.domProps.id = props.id

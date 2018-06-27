@@ -1,21 +1,7 @@
 @import "palettes";
 @import "elevations";
 
-$--relative-base: 16;
-
-//color
-
-
-//font-size
-$--font-size-h1: d(70);
-$--font-size-h2: d(60);
-$--font-size-h3: d(10);
-$--font-size-h4: d(10);
-$--font-size-h5: d(10);
-$--font-size-h6: d(10);
-$--font-size-p-xs: d(10);
-$--font-size-p-sm: d(10);
-$--font-size-p-md: d(10);
+$--relative-base: 16 !default;
 
 //space
 $--Space: (
@@ -66,6 +52,9 @@ $--size-button-min-width:d(88);
 
 $--size-button-radius:d(2);
 
-$--size-button-round-radius:d(28)
+$--size-button-round-radius:d(28);
 
 
+$--transition-base:             all .2s ease-in-out !default;
+$--transition-fade:             opacity .15s linear !default;
+$--transition-collapse:         height .35s ease !default;

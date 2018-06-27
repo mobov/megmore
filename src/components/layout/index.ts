@@ -1,14 +1,21 @@
+import './layout.scss'
 import MContainer from './container'
-
-const Layout = {}
+import MRow from './row'
+import MCol from './col'
 
 /* istanbul ignore next */
-Layout.install = function install (Vue) {
+MContainer.install = function install(Vue) {
   Vue.component(MContainer.name, MContainer)
+}
+MRow.install = function install(Vue) {
+    Vue.component(MRow.name, MRow)
+}
+MCol.install = function install(Vue) {
+    Vue.component(MCol.name, MCol)
 }
 
 export {
     MContainer,
+    MRow,
+    MCol,
 }
-
-export default Layout

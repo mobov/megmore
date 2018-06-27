@@ -5,11 +5,11 @@ const name = 'MIcon'
 const prefix = 'm-icon'
 
 const sizeMap: any = {
-    'xs': 20,
-    'sm': 30,
-    'md': 40,
-    'lg': 50,
-    'xl': 60
+    xs: 20,
+    sm: 30,
+    md: 40,
+    lg: 50,
+    xl: 60,
 }
 
 const Icons: any = {}
@@ -39,7 +39,7 @@ export class MIcon extends Vue {
     public render(createElement: any, { props, data, children }) {
         const icon = Icons[props.name]
         if (icon === undefined) {
-            console.error(`存在未注册的图标${name}`)
+            console.error(`存在未注册的图标${props.name}`)
             return ''
         }
 
@@ -69,7 +69,6 @@ export class MIcon extends Vue {
 export function setIcons(data: any = {}) {
     for (const item in data) {
         const icon = data[item]
-
         if (icon.d) {
             if (!icon.paths) {
                 icon.paths = []
@@ -84,6 +83,6 @@ export function setIcons(data: any = {}) {
             icon.polygons.push({ points: icon.points })
         }
 
-        Icons[name] = icon
+        Icons[item] = icon
     }
 }

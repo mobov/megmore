@@ -1,0 +1,25 @@
+/*
+ * 栅格布局系统，参照bootstrap
+ */
+$--grid-columns: 12 !default;
+$--grid-gutter-size: d(30) !default;
+/*
+ * 栅格响应断点
+ */
+$--Grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+) !default;
+
+/*
+ * 栅格容器尺寸
+ */
+$--Container-max-size: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px
+) !default;

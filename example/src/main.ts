@@ -3,16 +3,16 @@ import App from './App.vue'
 import router from './router'
 
 
-import { MIcon_ac_unit, MIcon_menu } from '../../src/icons/index'
+import { MIcon_menu } from '../../src/icons/index'
 import Megmore from '../../src/index'
+
+console.log(MIcon_menu)
 Vue.use(Megmore, {
   theme: 'unicon',
   icons: {
-      MIcon_ac_unit,
       MIcon_menu,
   },
 })
-console.log(Megmore)
 
 Vue.config.productionTip = false
 

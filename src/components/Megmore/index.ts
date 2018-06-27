@@ -3,7 +3,7 @@ import { Megmore as MegmorePlugin } from 'types'
 import MIcon from '../icon'
 import { getTheme, registerTheme, useTheme } from './theme'
 const Megmore: MegmorePlugin = {
-    install (Vue: VueConstructor, opts: any = {}) {
+    install(Vue: VueConstructor, opts: any = {}) {
         if ((this as any).installed) return
         (this as any).installed = true
 
@@ -11,12 +11,9 @@ const Megmore: MegmorePlugin = {
             methods: {
                 useTheme,
                 getTheme,
-                registerTheme
-            }
+                registerTheme,
+            },
         })
-
-
-        
         useTheme('unicon')
 
         if (opts.components) {

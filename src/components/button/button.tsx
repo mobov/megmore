@@ -9,19 +9,16 @@ const prefix = 'm-button'
     name
 })
 export default class MButton extends Vue {
-
  @Prop({
   type: String,
   default: 'md',
  })
  private size!: Model.Size
-
  @Prop({
   type: String,
   default: 'default',
  })
  private type!: Model.Type
-
  @Prop({
   type: Boolean,
  })

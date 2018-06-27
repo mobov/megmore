@@ -7,5 +7,5 @@ MIcon.install = function install(Vue) {
 MIcon.register = function register(data) {
     setIcons(data)
 }
-
+export { MIcon }
 export default MIcon
