@@ -5,54 +5,54 @@ $--relative-base: 16 !default;
 
 //space
 $--Space: (
-    xs: d(10),
-    sm: d(20),
-    md: d(30),
-    lg: d(40),
-    hg: d(50),
+    xs: 3,
+    sm: 6,
+    md: 12,
+    lg: 24,
+    xl: 48,
 );
 //avatar
 $--Size-avatar: (
-    xs: d(30),
-    sm: d(45),
-    md: d(60),
-    lg: d(75),
-    hg: d(90),
+    xs: 30,
+    sm: 45,
+    md: 60,
+    lg: 75,
+    xl: 90,
 );
 //avatar
 $--FontSize-avatar: (
-    xs: d(20),
-    sm: d(30),
-    md: d(40),
-    lg: d(50),
-    hg: d(60),
+    xs: 20,
+    sm: 30,
+    md: 40,
+    lg: 50,
+    xl: 60,
 );
 
 //space size
-$--space-x: d(20);
-$--space-y: d(30);
+$--space-x: 20;
+$--space-y: 30;
 
 //appBar size
-$--size-appBar: d(60);
-$--space-appBar-inset-y: d(20);
-$--space-appBar-inset-x: d(15);
+$--size-appBar: 60;
+$--space-appBar-inset-y: 20;
+$--space-appBar-inset-x: 15;
 //toolbar size
-$--size-toolbar: d(90);
+$--size-toolbar: 90;
 
 //button height size
 $--Size-button-height:(
-    xs: d(24),
-    sm: d(30),
-    md: d(36),
-    lg: d(44),
-    hg: d(50),
+    xs: 24,
+    sm: 30,
+    md: 36,
+    lg: 44,
+    xl: 50,
 );
 
-$--size-button-min-width:d(88);
+$--size-button-min-width: 88;
 
-$--size-button-radius:d(2);
+$--size-button-radius: 2;
 
-$--size-button-round-radius:d(28);
+$--size-button-round-radius: 28;
 
 
 $--transition-base:             all .2s ease-in-out !default;

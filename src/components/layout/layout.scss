@@ -52,25 +52,26 @@
         }
     }
 
-    @each $key, $value in $--Grid-breakpoints {
-        &-space-#{$key} {
-            padding: 5px;
+    @each $breakpoint, $value in $--Grid-breakpoints {
+        &-space-#{$breakpoint} {
+            padding: d(map_get($--Space, $breakpoint));
             .m-col {
-                margin: 5px;
+                padding: d(map_get($--Space, $breakpoint));
             }
         }
     }
 }
 
 .m-col {
-
-    @debug $--grid-columns;
-    @each $key, $value in $--Grid-breakpoints {
-        &-#{$key} {
-            @for $col from 1 through $--grid-columns {
-                &-#{$col} {
-                    width: calc(100% / #{$--grid-columns / $col});
-                    box-sizing: border-box;
+    box-sizing: border-box;
+    @each $breakpoint, $value in $--Grid-breakpoints {
+        @include media-breakpoint-up($breakpoint, $--Grid-breakpoints) {
+            &-#{$breakpoint} {
+                @for $col from 1 through $--grid-columns {
+                    &-#{$col} {
+                        width: calc(100% / #{$--grid-columns / $col});
+                        box-sizing: border-box;
+                    }
                 }
             }
         }

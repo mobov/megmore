@@ -40,18 +40,19 @@ export default class MRow extends Vue {
     private space!: string
     @Prop({
         type: String,
-        default: 'xs',
     })
     private space!: string
 
     public render(h: any, { props, data, children }) {
-        const staticClass = data.staticClass !== undefined ? data.staticClass : ''
-        data.staticClass = `${prefix} ${prefix}-wrap-${props.wrap} ${prefix}-justify-${props.justify} ${prefix}-align-${props.align} ${prefix}-space-${props.space} ${staticClass}`.trim()
-
+        data.staticClass = data.staticClass !== undefined ? data.staticClass : ''
+        data.staticClass += `${prefix} ${prefix}-wrap-${props.wrap} ${prefix}-justify-${props.justify} ${prefix}-align-${props.align} `
+        if(props.space) data.staticClass += `${prefix}-space-${props.space}`
+        data.staticClass = data.staticClass.trim()
         if (props.id) {
             data.domProps = data.domProps || {}
             data.domProps.id = props.id
         }
+
         return h(props.tag, data, children)
     }
 }

@@ -1,11 +1,11 @@
 @import "../import";
 .m-app-bar {
     width: 100%;
-    height: $--size-appBar;
+    height: d($--size-appBar);
     //min-height: $--size-appBar;
     display: flex;
     align-items: center;
-    padding: $--space-appBar-inset-y $--space-appBar-inset-x;
+    padding: d($--space-appBar-inset-y) d($--space-appBar-inset-x);
     .m-icon {
         cursor: pointer;
     }

@@ -19,7 +19,7 @@
     //尺寸
     @each $name, $value in $--Size-avatar {
         &.#{$name} {
-            @include size-avatar($value);
+            @include size-avatar(d($value));
         }
     }
     //形状

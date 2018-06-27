@@ -1,22 +1,26 @@
 <style lang="scss">
     .flex-item {
-
         height: 100px;
-
         background-color:seagreen;
     }
 </style>
 <template>
     <m-container>
-        <m-row>
-            <m-col class="flex-item">
-                哈哈哈
+        <m-row space="sm">
+            <m-col :sm="3">
+                <div class="flex-item">
+                    哈哈哈
+                </div>
             </m-col>
-            <m-col class="flex-item">
-                哈哈哈
+            <m-col :sm="6">
+                <div class="flex-item">
+                    哈哈哈
+                </div>
             </m-col>
-            <m-col class="flex-item">
-                哈哈哈
+            <m-col :sm="3">
+                <div class="flex-item">
+                    哈哈哈
+                </div>
             </m-col>
         </m-row>
     </m-container>

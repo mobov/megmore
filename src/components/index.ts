@@ -1,5 +1,5 @@
 // 基础
-export { default as Megmore } from './Megmore'
+export { default as Megmore } from './megmore'
 // 拓展
 export { default as MAppBar } from './appBar'
 export { default as MAvatar } from './avatar'

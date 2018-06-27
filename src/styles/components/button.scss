@@ -12,20 +12,20 @@
  @each $name,
  $value in $--Size-button-height {
   &.#{$name} {
-   @include button-height($value);
+   @include button-height(d($value));
   }
  }
- @include button-height(map-get($--Size-button-height, sm));
+ @include button-height(d(map-get($--Size-button-height, sm)));
  
  &.round {
-  border-radius: $--size-button-round-radius
+  border-radius: d($--size-button-round-radius)
  }
  &:not(.default){
   color:getColor(grey,50);
  }
  color:getColor(grey,A400);
- border-radius: $--size-button-radius;
- min-width: $--size-button-min-width;
+ border-radius: d($--size-button-radius);
+ min-width: d($--size-button-min-width);
  cursor: pointer;
  //font-size: $--font-size-p-md;
  box-shadow: map-get($--Elevations,3);
