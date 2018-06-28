@@ -1,4 +1,5 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import MIcon from '../icon'
 import { VNode } from 'vue'
 import { isHexColor, isStyleUnit } from 'es-treasure'
 
@@ -6,7 +7,8 @@ const name = 'MButton'
 const prefix = 'm-button'
 
 @Component({
-    name
+    name,
+    components: { MIcon },
 })
 export default class MButton extends Vue {
  @Prop({
@@ -25,13 +27,14 @@ export default class MButton extends Vue {
  private round = false
 
  public render(): VNode {
+  console.log(this)
+
   return (
    <button staticClass={prefix}
-           class={`m-button ${this.size} ${this.type} ${this.round ? 'round' : ''}`}
+           class={`${this.size} ${this.type} ${this.round ? 'round' : ''}`}
            onClick={this.handleClick}
    >
-    {/*className不会起作用*/}
-    <div class="m-spin"/>
+    <m-icon />
     {this.$slots.default}
    </button>
   )
