@@ -5,7 +5,7 @@ import { getZIndex } from '@/util'
 @Component
 export default class ModalMixin extends Vue {
   @Prop({
-    default: true,
+    default: false,
   })
   public show!: boolean
 
