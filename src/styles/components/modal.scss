@@ -1,40 +1,85 @@
-.m-modal{
- $name:modal-transition;
+@mixin fullscreen {
  position: fixed;
  left: 0;
  top: 0;
  right: 0;
  bottom: 0;
- &-wrap{
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+}
+
+$prefix:m-modal;
+.#{$prefix} {
+ @include fullscreen();
+ &--wrap {
+  @include fullscreen();
   background-color: rgba($color: #000000, $alpha: 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all .5s;
-  transform-origin:50% 50%;
+  transform-origin: 50% 50%;
  }
- &-content{
-  min-height: 200px;
+ &--content {
   background-color: #ffffff;
   @include elevation(24);
   transition: all .5s;
-  transform-origin:50% 50%;
+  transform-origin: 50% 50%;
+  position: relative;
+  height: auto;
+  margin: 0 auto;
+  padding: d(15);
+  &.full-screen {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   .#{$prefix}--body {
+    flex: 1
+   }
+  }
  }
- &.#{$name}-enter,&.#{$name}-leave-to{
-  .m-modal-wrap{
+ &--body {
+  min-height: 100px;
+ }
+ &--footer {
+  display: flex;
+  justify-content: flex-end
+ }
+ .m-icon--close {
+  position: absolute;
+  right: d(20);
+  top: d(10);
+  cursor: pointer
+ }
+ &--title {
+  height: d(30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+ } //过度动画
+ $name:modal-transition;
+ &.#{$name}-enter,
+ &.#{$name}-leave-to {
+  .#{$prefix}--wrap {
    opacity: 0
   }
-  .m-modal-content{
-   transform: scale(0.5);
+  .#{$prefix}--content {
+   transform: scale(0.2);
+   opacity: 0
   }
  }
- &.#{$name}-enter-active,&.#{$name}-leave-active{
+ &.#{$name}-enter-active,
+ &.#{$name}-leave-active {
   transition: all .5s;
-  transform-origin:50% 50%;
+  transform-origin: 50% 50%;
+ } //全屏模式动画
+ $nameFullscreen:modal-fullscreen-transition;
+ &.#{$nameFullscreen}-enter,
+ &.#{$nameFullscreen}-leave-to {
+  .#{$prefix}--content {
+   transform: translateY(100%);
+  }
+ }
+ &.#{$nameFullscreen}-enter-active,
+ &.#{$nameFullscreen}-leave-active {
+  transition: all .5s;
+  transform-origin: 50% 50%;
  }
 }

@@ -1,9 +1,0 @@
-@mixin _appBar(
-    $appBar--bg,
-    $appBar--color
-){
-    .m-app-bar {
-        background-color: $appBar--bg;
-        color: $appBar--color;
-    }
-}

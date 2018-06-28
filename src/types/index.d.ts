@@ -11,7 +11,11 @@ declare const Megmore: Megmore
 export default Megmore
 export interface Megmore {
     install: PluginFunction<MegmoreUseOptions>
-    version: string
+    version?: string
+}
+
+export interface Component extends Vue{
+  install:(Vue:VueConstructor)=>void
 }
 
 export interface MegmoreUseOptions {
@@ -21,9 +25,16 @@ export interface MegmoreUseOptions {
     options?: Partial<MegmoreOptions>
 }
 
+export interface ModalComponent extends Vue{
+  escPress:()=>void
+}
+
 declare global {
   namespace Model{
     export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'hg'
     export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'
+  }
+  interface Window{
+    Vue:VueConstructor
   }
 }

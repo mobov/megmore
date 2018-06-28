@@ -23,6 +23,15 @@
                 </div>
             </m-col>
         </m-row>
+        <m-button @click="modal=true">modal</m-button>
+        <m-button @click="$confirm">confirm</m-button>
+        <m-modal title="标题zz" :show.sync="modal">
+            <m-button @click="modalInner=true">modal</m-button>
+            <m-modal :width="300" :show.sync="modalInner"></m-modal>
+        </m-modal>
+        <m-button @click="fullscreenModal=true">fullscreen modal</m-button>
+        <m-modal :show.sync="fullscreenModal" :fullscreen="true" @click.native="log">
+        </m-modal>
     </m-container>
     <!--<div class="home">-->
         <!--<m-icon style="color:red;font-size: 50px"-->
@@ -34,7 +43,6 @@
         <!--<m-button type="primary" @click="modal=true">-->
             <!--asd-->
         <!--</m-button>-->
-        <!--<m-modal v-model="modal"></m-modal>-->
     <!--</div>-->
 </template>
 
@@ -42,7 +50,9 @@
 export default {
     data(){
         return {
-            modal:false
+            modal:false,
+            modalInner:false,
+            fullscreenModal:false
         }
     },
     methods: {

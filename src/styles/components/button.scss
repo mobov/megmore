@@ -9,6 +9,7 @@
 
 .m-button {
  margin: d(6) d(8);
+ padding: 0 d(8);
  @each $name,
  $value in $--Size-button-height {
   &.#{$name} {

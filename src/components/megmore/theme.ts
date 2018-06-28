@@ -6,7 +6,7 @@ import Elevations from './elevations'
 
 let currentTheme = 'unicon'
 
-let Theme : any = {
+let Theme: any = {
     unicon: {
         themePrimary: Palettes.lightblue_A700,
         themeDanger: Palettes.red_300,
@@ -18,9 +18,11 @@ let Theme : any = {
             color: 'white',
             elevations: Elevations[3]
         },
+        button: {
+            
+        }
     }
 }
-
 /**
  * todo://抽离进es-treasure
  * @param {string} name
@@ -28,7 +30,7 @@ let Theme : any = {
  */
 function midlineCase(name: string) {
     let SPECIAL_CHARS_REGEXP = /([A-Z])/g;
-    return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+    return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
         return offset ? '-' + separator.toLowerCase() : letter
     })
 }
@@ -41,26 +43,26 @@ function midlineCase(name: string) {
  */
 function getThemeContext(name: string, data: any) {
     let context = '@charset "utf-8" '
-    Object.keys(data).forEach(attribute =>{
+    Object.keys(data).forEach(attribute => {
         context += `[data-megmore-theme=${name}] `
-        if(data[attribute] instanceof Object){
+        if (data[attribute] instanceof Object) {
             const subData = data[attribute]
             context += ` .m-${midlineCase(attribute)}{`
-            Object.keys(subData).forEach(subAttribute =>{
-                if(subAttribute === 'bgColor'){
+            Object.keys(subData).forEach(subAttribute => {
+                if (subAttribute === 'bgColor') {
                     context += `background-color: ${subData[subAttribute]};
                     `
-                }else if(subAttribute === 'elevations'){
+                } else if (subAttribute === 'elevations') {
                     context += `box-shadow: ${subData[subAttribute]};
                                 -webkit-box-shadow: ${subData[subAttribute]};
                     `
-                }else{
+                } else {
                     context += `${subAttribute}: ${subData[subAttribute]};
                     `
                 }
             })
             context += `}`
-        }else{
+        } else {
             context += ` .${midlineCase(attribute)}-bg{ 
                     background-color: ${data[attribute]}
                 }`
@@ -79,7 +81,7 @@ function getThemeContext(name: string, data: any) {
  */
 export function useTheme(name: string) {
     const themeConf = Theme[name] ? Theme[name] : Theme.unicon
-    if(!document.head.querySelector(`#theme-${name}`)){
+    if (!document.head.querySelector(`#theme-${name}`)) {
         const $themeStyle = document.createElement('style')
         $themeStyle.setAttribute('id', 'theme-unicon')
         $themeStyle.setAttribute('type', 'text/css')
@@ -102,10 +104,10 @@ export function registerTheme() {
  * @param {string} name
  * @return {any}
  */
-export function getTheme(name: string){
-    if(Theme[name]){
+export function getTheme(name: string) {
+    if (Theme[name]) {
         return Theme[name]
-    }else{
+    } else {
         return Theme.unicon
     }
 }

@@ -38,6 +38,7 @@ export default class MButton extends Vue {
  }
 
  private handleClick(e: MouseEvent) {
+    console.log(e)
   this.$emit('click', e)
  }
 }

@@ -1,1 +1,0 @@
-export default {"flag":{"paths":["M14.391 6h5.625v9.984h-7.031l-0.375-1.969h-5.625v6.984h-1.969v-17.016h9z"],"height":"24","width":"24","viewBox":"0 0 24 24"}}
