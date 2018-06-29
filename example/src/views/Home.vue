@@ -41,7 +41,7 @@
     <!--</div>-->
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 export default {
     data(){
         return {
@@ -58,7 +58,16 @@ export default {
 
         },
         async confirm(){
-            await this.$confirm()
+            await this.$confirm({
+                title:'dsa',
+                content(h){
+                    return (
+                        <span>
+                            sssssssssssss
+                        </span>
+                    )
+                }
+            })
             console.log('confirm')
         }
     }

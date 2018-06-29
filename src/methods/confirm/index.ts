@@ -1,19 +1,19 @@
 import MModal from '@/components/modal'
-import { Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
+import { ComponentOptions } from 'vue';
 import { Model } from '@/types'
 
-
+@Component
 class Confirm extends MModal {
  public resolve!: () => void
  public reject!: () => void
- private el = document.createElement('div')
+ public title!: string
  public confirm() {
-  console.log('$confirm')
-  super.confirm()
+  MModal.options.methods.confirm.call(this)
   this.resolve()
  }
  public cancel() {
-  super.cancel()
+  MModal.options.methods.cancel.call(this)
   this.reject()
  }
  public afterLeave() {
@@ -21,9 +21,11 @@ class Confirm extends MModal {
  }
 }
 
-const confirm = async (options: Model.ConfirmOptions) => {
+const confirm = async (options: Model.ConfirmOptions = { title: '', content: '' }) => {
  return new Promise(async (resolve, reject) => {
   const instance = new Confirm()
+  instance.title = options.title as string
+  instance.content = options.content as (string | Model.Render)
   instance.resolve = resolve
   instance.reject = reject
   instance.$mount()

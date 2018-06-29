@@ -1,9 +1,9 @@
 import './styles/style.scss'
 import * as components from './components'
-// import * as directives from './directives'
+import directives from './directives'
 import Vue, { VueConstructor } from 'vue'
 import { Megmore as MegmorePlugin, MegmoreUseOptions } from './types'
-import * as methods from '@/methods'
+import  methods from '@/methods'
 
 const Megmore: MegmorePlugin = {
     install(Vue: VueConstructor, args?: MegmoreUseOptions): void {
@@ -15,11 +15,9 @@ const Megmore: MegmorePlugin = {
             ...args,
         })
 
-        Vue.mixin({
-            methods: {
-                ...methods,
-            },
-        })
+        Vue.use(directives)
+
+        Vue.use(methods)
     },
 }
 

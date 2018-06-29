@@ -27,21 +27,18 @@ export default class MButton extends Vue {
  private round = false
 
  public render(): VNode {
-  console.log(this)
 
   return (
    <button staticClass={prefix}
            class={`${this.size} ${this.type} ${this.round ? 'round' : ''}`}
            onClick={this.handleClick}
    >
-    <m-icon />
     {this.$slots.default}
    </button>
   )
  }
 
  private handleClick(e: MouseEvent) {
-    console.log(e)
   this.$emit('click', e)
  }
 }

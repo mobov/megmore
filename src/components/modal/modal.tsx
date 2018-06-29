@@ -3,9 +3,21 @@ import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
 import MIcon from '../icon'
 import MButton from '../button'
-
+import Render from '../render'
+import { Model } from '@/types';
 @Component
 export default class MModal extends mixins(modalMixin) {
+ @Prop({
+  default: '',
+ })
+ public title!: string  // 标题
+
+ @Prop({})
+ public renderContent!: any
+ @Prop({
+  default: '',
+ })
+ public content!: string | Model.Render // 内容，可为render函数
 
  @Prop({
   default: 600,
@@ -18,10 +30,7 @@ export default class MModal extends mixins(modalMixin) {
  })
  private top!: number  // 弹窗距离顶部高度
 
- @Prop({
-  default: '',
- })
- private title!: string  // 标题
+
 
  get style() {
   const wType = typeof this.width
@@ -43,8 +52,9 @@ export default class MModal extends mixins(modalMixin) {
  public cancel() {
   this.hide()
  }
- public render() {
+ public render(h) {
   const contentClass = `${this.fullscreen ? 'full-screen' : ''}`
+  const { content } = this
   return (
    this.domExist && (
     <transition name={this.transitionName} onAfterLeave={this.afterLeave}>
@@ -59,7 +69,7 @@ export default class MModal extends mixins(modalMixin) {
        </div>
        <m-icon name='close' onClick={this.hide}>X</m-icon>
        <div class='m-modal--body'>
-        {this.$slots.default}
+        {typeof content === 'function' ? (<Render context={content}></Render>) : this.$slots.default || this.content}
        </div>
        {this.$slots.footer || (
         <div class='m-modal--footer'>
