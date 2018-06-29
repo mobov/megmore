@@ -24,7 +24,7 @@
             </m-col>
         </m-row>
         <m-button @click="modal=true">modal</m-button>
-        <m-button @click="$confirm">confirm</m-button>
+        <m-button @click="confirm">confirm</m-button>
         <m-modal title="标题zz" :show.sync="modal">
             <m-button @click="modalInner=true">modal</m-button>
             <m-modal :width="300" :show.sync="modalInner"></m-modal>
@@ -61,6 +61,10 @@ export default {
         },
 	    handleAvatarClick () {
 
+        },
+        async confirm(){
+            await this.$confirm()
+            console.log('confirm')
         }
     }
 }

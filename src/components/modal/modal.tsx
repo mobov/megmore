@@ -35,7 +35,6 @@ export default class MModal extends mixins(modalMixin) {
   return this.fullscreen ? 'modal-fullscreen-transition' : 'modal-transition'
  }
 
- 
  @Emit()
  public confirm() {
   this.hide()

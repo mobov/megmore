@@ -7,12 +7,12 @@ export default class ModalMixin extends Vue {
   @Prop({
     default: false,
   })
-  public show!: boolean
+  public show!: boolean// 控制显示隐藏
 
   @Prop({
     default: false,
   })
-  public fullscreen!: boolean
+  public fullscreen!: boolean// 全屏模式
 
   @Prop({
     default: true,
@@ -22,7 +22,6 @@ export default class ModalMixin extends Vue {
   public domExist = false//  添加或移除BODY层dom
   public selfShow: boolean = false
 
-  protected overlayZIndex = getZIndex()
 
   protected zIndex = getZIndex()
 
@@ -43,9 +42,6 @@ export default class ModalMixin extends Vue {
   public afterLeave() {
     this.domExist = false
   }
-  public resetZIndex() {
-    this.zIndex = getZIndex()
-  }
   public async setZIndex() {
     await this.$nextTick()
     const dom = this.$el
@@ -62,6 +58,7 @@ export default class ModalMixin extends Vue {
   }
   protected beforeDestroy() {
     this.domExist = false
+    this.$el.remove()
   }
   private async mounted() {
     document.body.appendChild(this.$el)
