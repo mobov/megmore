@@ -3,6 +3,11 @@
 @import 'utils/font-base';
 @import 'utils/base';
 /*按需引入部分*/
-@import "components";
+@import "./components/app";
+@import "./components/appBar";
+@import "./components/avatar";
+@import "./components/button";
+@import "./components/modal";
+@import "./directives/ripple";
 //@import "themes/default";
 @import "utils/common";

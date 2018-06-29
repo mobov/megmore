@@ -12,9 +12,10 @@
                 </m-button>
             </m-col>
             <m-col :sm="3">
-                <div class="flex-item">
+                <div style="height: 50px;background-color: #3e2723;width: 200px"    v-ripple>
                     哈哈哈
                 </div>
+
             </m-col>
         </m-row>
         <m-button @click="modal=true">modal</m-button>
