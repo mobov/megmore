@@ -1,4 +1,4 @@
-import { FunctionalComponentOptions } from 'vue'
+import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 const name = 'MRow'
@@ -43,7 +43,7 @@ export default class MRow extends Vue {
     })
     private space!: string
 
-    public render(h: any, { props, data, children }) {
+    public render(h: any, { props, data, children }): VNode {
         data.staticClass = data.staticClass !== undefined ? data.staticClass : ''
         data.staticClass += `${prefix} ${prefix}-wrap-${props.wrap} ${prefix}-justify-${props.justify} ${prefix}-align-${props.align} `
         if(props.space) data.staticClass += `${prefix}-space-${props.space}`

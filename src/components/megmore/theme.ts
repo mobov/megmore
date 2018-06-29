@@ -4,75 +4,100 @@
 import Palettes from './palettes'
 import Elevations from './elevations'
 
-let currentTheme = 'unicon'
+const currentTheme = 'unicon'
 
-let Theme: any = {
+const Theme: any = {
     unicon: {
-        themePrimary: Palettes.lightblue_A700,
-        themeDanger: Palettes.red_300,
-        themeWarning: Palettes.red_300,
-        themeSuccess: Palettes.orange_700,
-        themeInfo: Palettes.cyan_400,
+        theme: {
+            primary: Palettes.lightblue_A700,
+            danger: Palettes.red_300,
+            warning: Palettes.red_300,
+            success: Palettes.orange_700,
+            info: Palettes.cyan_400,
+        },
         appBar: {
             bgColor: Palettes.lightblue_A700,
             color: 'white',
-            elevations: Elevations[3]
+            elevation: Elevations[3],
         },
-        button: {
-            
-        }
-    }
+    },
 }
+
 /**
  * todo://抽离进es-treasure
  * @param {string} name
  * @return {string}
  */
 function midlineCase(name: string) {
-    let SPECIAL_CHARS_REGEXP = /([A-Z])/g;
-    return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
+    const SPECIAL_CHARS_REGEXP = /([A-Z])/g
+    return name.replace(SPECIAL_CHARS_REGEXP, (_, separator, letter, offset) => {
         return offset ? '-' + separator.toLowerCase() : letter
     })
 }
 
 /**
- * 构造样式表内容
+ * 属性映射规则
+ * @type {{bgColor: string; elevation: string[]}}
+ */
+const themeFormatMap: any = {
+    bgColor: 'background-color',
+    elevation: 'box-shadow',
+}
+/**
+ * 构造主题属性样式
+ * @param {string} name
+ * @param {string} selector
+ * @param attrData
+ * @return {string}
+ */
+function collectSpecialStyles(name: string, selector: string, attrData: any) {
+    let tempText = ''
+    Object.keys(attrData).forEach(attrName => {
+        tempText += `[data-megmore-theme=${name}] .${selector}-${midlineCase(attrName)}-bg{
+                        background-color: ${attrData[attrName]}
+                    }\n`
+        tempText += `[data-megmore-theme=${name}] .${selector}-${midlineCase(attrName)}-color {
+                        color: ${attrData[attrName]}
+                    }\n`
+    })
+    return tempText
+}
+/**
+ * 构造属性样式
+ * @param {string} name
+ * @param {string} selector
+ * @param attrData
+ * @return {string}
+ */
+function collectSelectorStyles(name: string, selector: string, attrData: any) {
+    let tempText = `[data-megmore-theme=${name}] .m-${midlineCase(selector)}{\n`
+    Object.keys(attrData).forEach(attrName => {
+        if (themeFormatMap[attrName]) {
+            tempText += `${themeFormatMap[attrName]}: ${attrData[attrName]};\n`
+        } else {
+            tempText += `${attrName}: ${attrData[attrName]};\n`
+        }
+    })
+    return tempText += '}\n'
+}
+/**
+ * 构造样式表
  * @param name
  * @param data
  * @return {string}
  */
-function getThemeContext(name: string, data: any) {
-    let context = '@charset "utf-8" '
-    Object.keys(data).forEach(attribute => {
-        context += `[data-megmore-theme=${name}] `
-        if (data[attribute] instanceof Object) {
-            const subData = data[attribute]
-            context += ` .m-${midlineCase(attribute)}{`
-            Object.keys(subData).forEach(subAttribute => {
-                if (subAttribute === 'bgColor') {
-                    context += `background-color: ${subData[subAttribute]};
-                    `
-                } else if (subAttribute === 'elevations') {
-                    context += `box-shadow: ${subData[subAttribute]};
-                                -webkit-box-shadow: ${subData[subAttribute]};
-                    `
-                } else {
-                    context += `${subAttribute}: ${subData[subAttribute]};
-                    `
-                }
-            })
-            context += `}`
-        } else {
-            context += ` .${midlineCase(attribute)}-bg{ 
-                    background-color: ${data[attribute]}
-                }`
-            context += ` .${midlineCase(attribute)}-color{
-                    color: ${data[attribute]}
-                }`
+function collectStyles(name: string, data: any) {
+    let context = '@charset "utf-8";\n'
+    Object.keys(data).forEach(selector => {
+        if (data[selector] instanceof Object) {
+            if (selector === 'theme') {
+                context += collectSpecialStyles(name, selector, data[selector])
+            } else {
+                context += collectSelectorStyles(name, selector, data[selector])
+            }
+            context += `\n`
         }
     })
-    console.log(new Date().getTime())
-
     return context
 }
 /**
@@ -85,7 +110,7 @@ export function useTheme(name: string) {
         const $themeStyle = document.createElement('style')
         $themeStyle.setAttribute('id', 'theme-unicon')
         $themeStyle.setAttribute('type', 'text/css')
-        const $themeText = document.createTextNode(getThemeContext(name, themeConf))
+        const $themeText = document.createTextNode(collectStyles(name, themeConf))
         $themeStyle.appendChild($themeText)
         document.head.appendChild($themeStyle)
     }
@@ -95,10 +120,8 @@ export function useTheme(name: string) {
  * 主题注册
  */
 export function registerTheme() {
-    //todo:主题校验
-
+    // todo:主题校验
 }
-
 /**
  * 获取主题配置
  * @param {string} name

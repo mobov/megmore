@@ -19,8 +19,8 @@ presetIcons.forEach((icon) => {
     Icons[icon] = iconLib[`MIcon_${icon}`][icon]
 })
 @Component({
-    name,
-    functional: true,
+  name,
+  functional: true,
 } as FunctionalComponentOptions)
 export class MIcon extends Vue {
     @Prop({
@@ -40,8 +40,6 @@ export class MIcon extends Vue {
     })
     private color!: string
 
-
-
     public render(createElement: any, { props, data, children, listeners }) {
         const icon = Icons[props.name]
         if (icon === undefined) {
@@ -54,7 +52,7 @@ export class MIcon extends Vue {
         const staticClasses = data.staticClass !== undefined ? data.staticClass : ''
         const classes = data.class !== undefined ? data.class : ''
         const styles = Object.assign({ fill: 'currentColor' }, data.style, data.staticStyle)
-        
+
         return (
             <svg xmlns='http://www.w3.org/2000/svg'
                 version='1.1'
@@ -67,31 +65,32 @@ export class MIcon extends Vue {
                 onClick={listeners.click || function () { }}
             >
 
-                {icon.paths ? icon.paths.map(path => <path d={path} />) : ''}
-                {icon.polygons ? icon.polygons.map(path => <polygon points={path} />) : ''}
+                {icon.paths ? icon.paths.map((path: string) => <path d={path} />) : ''}
+                {icon.polygons ? icon.polygons.map((path: string) => <polygon points={path} />) : ''}
             </svg>
         )
     }
-
 }
 
 export function setIcons(data: any = {}) {
     for (const item in data) {
-        const icon = data[item]
-        if (icon.d) {
-            if (!icon.paths) {
-                icon.paths = []
+        if (data.hasOwnProperty(item)) {
+            const icon = data[item]
+            if (icon.d) {
+                if (!icon.paths) {
+                    icon.paths = []
+                }
+                icon.paths.push({ d: icon.d })
             }
-            icon.paths.push({ d: icon.d })
-        }
 
-        if (icon.points) {
-            if (!icon.polygons) {
-                icon.polygons = []
+            if (icon.points) {
+                if (!icon.polygons) {
+                    icon.polygons = []
+                }
+                icon.polygons.push({ points: icon.points })
             }
-            icon.polygons.push({ points: icon.points })
-        }
 
-        Icons[item] = icon
+            Icons[item] = icon
+        }
     }
 }

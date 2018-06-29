@@ -17,6 +17,10 @@
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
     "no-namespace": false,
-    "semicolon": [true, "never"]
+    "semicolon": [false, "never"],
+    "no-console": [
+      false
+    ],
+    "arrow-parens": [false, "ban-single-arg-parens"]
   }
 }

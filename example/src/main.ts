@@ -16,8 +16,8 @@ Vue.mixin({
   methods: {
     log(...args) {
       console.log(...args)
-    }
-  }
+    },
+  },
 })
 new Vue({
   router,

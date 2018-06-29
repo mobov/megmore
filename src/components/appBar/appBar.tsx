@@ -20,5 +20,4 @@ export default class MAppBar extends Vue {
             </div>
         )
     }
-
 }

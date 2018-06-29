@@ -13,17 +13,18 @@ declare module 'vue/types/vue' {
 declare const Megmore: Megmore
 export default Megmore
 export interface Megmore {
-  install: PluginFunction<MegmoreUseOptions>
-  version?: string
+    install: PluginFunction<MegmoreUseOptions>
+    version?: string
 }
 
 
+}
 
 export interface MegmoreUseOptions {
-  components?: Record<string, PluginObject<any> | PluginFunction<never>>
-  theme?: Partial<MegmoreTheme> | false
-  icons?: Partial<MegmoreIcons>
-  options?: Partial<MegmoreOptions>
+    components?: Record<string, PluginObject<any> | PluginFunction<never>>
+    theme?: Partial<MegmoreTheme> | false
+    icons?: Partial<MegmoreIcons> | false
+    // options?: Partial<MegmoreOptions>
 }
 
 
@@ -44,9 +45,13 @@ export namespace Model {//  各种数据模型
    }
 }
 
+
 declare global {
-  
-  interface Window {
-    Vue: VueConstructor
+  namespace Model{
+    export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'hg'
+    export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'
+  }
+  interface Window{
+    Vue:VueConstructor
   }
 }
