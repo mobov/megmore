@@ -24,14 +24,15 @@
         pointer-events: none;
         overflow: hidden;
         will-change: transform, opacity;
+        &--enter {
+            transition: none
+        }
+        &--visible {
+            opacity: $--ripple-visible-opacity
+        }
     }
 
-    &--enter {
-        transition: none
-    }
-    &--visible {
-        opacity: $--ripple-visible-opacity
-    }
+
 }
 
 

@@ -5,7 +5,7 @@
     //min-height: $--size-appBar;
     display: flex;
     align-items: center;
-    padding: d($--space-appBar-inset-y) d($--space-appBar-inset-x);
+    padding: 0 d($--space-appBar-inset-x);
     .m-icon {
         cursor: pointer;
     }

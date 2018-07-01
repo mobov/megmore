@@ -1,4 +1,4 @@
-import { FunctionalComponentOptions } from 'vue'
+import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import * as iconLib from '../../icons'
 const presetIcons = ['menu', 'close']// 预设注册Icon
@@ -40,11 +40,11 @@ export class MIcon extends Vue {
     })
     private color!: string
 
-    public render(createElement: any, { props, data, children, listeners }) {
+    public render(createElement: any, { props, data, children, listeners }): VNode {
         const icon = Icons[props.name]
         if (icon === undefined) {
             console.error(`存在未注册的图标${props.name}`)
-            return ''
+            return <template />
         }
 
         const height = sizeMap[props.size] ? sizeMap[props.size] : props.size
@@ -62,7 +62,7 @@ export class MIcon extends Vue {
                 height={height}
                 width={width}
                 viewBox={icon.viewBox}
-                onClick={listeners.click || function () { }}
+                onClick={listeners.click || function (): void { }}
             >
 
                 {icon.paths ? icon.paths.map((path: string) => <path d={path} />) : ''}
@@ -72,7 +72,7 @@ export class MIcon extends Vue {
     }
 }
 
-export function setIcons(data: any = {}) {
+export function setIcons(data: any = {}): void {
     for (const item in data) {
         if (data.hasOwnProperty(item)) {
             const icon = data[item]

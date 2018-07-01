@@ -28,7 +28,7 @@ const Theme: any = {
  * @param {string} name
  * @return {string}
  */
-function midlineCase(name: string) {
+function midlineCase(name: string): string {
     const SPECIAL_CHARS_REGEXP = /([A-Z])/g
     return name.replace(SPECIAL_CHARS_REGEXP, (_, separator, letter, offset) => {
         return offset ? '-' + separator.toLowerCase() : letter
@@ -50,7 +50,7 @@ const themeFormatMap: any = {
  * @param attrData
  * @return {string}
  */
-function collectSpecialStyles(name: string, selector: string, attrData: any) {
+function collectSpecialStyles(name: string, selector: string, attrData: any): string {
     let tempText = ''
     Object.keys(attrData).forEach(attrName => {
         tempText += `[data-megmore-theme=${name}] .${selector}-${midlineCase(attrName)}-bg{
@@ -69,7 +69,7 @@ function collectSpecialStyles(name: string, selector: string, attrData: any) {
  * @param attrData
  * @return {string}
  */
-function collectSelectorStyles(name: string, selector: string, attrData: any) {
+function collectSelectorStyles(name: string, selector: string, attrData: any): string {
     let tempText = `[data-megmore-theme=${name}] .m-${midlineCase(selector)}{\n`
     Object.keys(attrData).forEach(attrName => {
         if (themeFormatMap[attrName]) {
@@ -86,7 +86,7 @@ function collectSelectorStyles(name: string, selector: string, attrData: any) {
  * @param data
  * @return {string}
  */
-function collectStyles(name: string, data: any) {
+function collectStyles(name: string, data: any): string {
     let context = '@charset "utf-8";\n'
     Object.keys(data).forEach(selector => {
         if (data[selector] instanceof Object) {
@@ -104,7 +104,7 @@ function collectStyles(name: string, data: any) {
  * 使用主题
  * @param {string} name
  */
-export function useTheme(name: string) {
+export function useTheme(name: string): void {
     const themeConf = Theme[name] ? Theme[name] : Theme.unicon
     if (!document.head.querySelector(`#theme-${name}`)) {
         const $themeStyle = document.createElement('style')
@@ -119,15 +119,15 @@ export function useTheme(name: string) {
 /**
  * 主题注册
  */
-export function registerTheme() {
+export function registerTheme(): void {
     // todo:主题校验
 }
 /**
  * 获取主题配置
  * @param {string} name
- * @return {any}
+ * @return {object}
  */
-export function getTheme(name: string) {
+export function getTheme(name: string): object {
     if (Theme[name]) {
         return Theme[name]
     } else {

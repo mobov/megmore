@@ -1,4 +1,5 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Model } from '@/types'
 import MIcon from '../icon'
 import { VNode } from 'vue'
 import { isHexColor, isStyleUnit } from 'es-treasure'
@@ -30,6 +31,7 @@ export default class MButton extends Vue {
 
   return (
    <button staticClass={prefix}
+           v-m-ripple
            class={`${this.size} ${this.type} ${this.round ? 'round' : ''}`}
            onClick={this.handleClick}
    >

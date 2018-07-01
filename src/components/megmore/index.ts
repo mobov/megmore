@@ -19,13 +19,13 @@ const Megmore: MegmorePlugin = {
         useTheme('unicon')
         // 注册组件
         if (opts.components) {
-            Object.values(opts.components).forEach((component: object) => {
+            Object.values(opts.components).forEach((component: any) => {
                 Vue.use(component)
             })
         }
         // 注册图标
         if (opts.icons) {
-            Object.values(opts.icons).forEach((icon: object) => {
+            Object.values(opts.icons).forEach((icon: any ) => {
                 MIcon.register(icon)
             })
         }

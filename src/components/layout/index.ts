@@ -4,13 +4,13 @@ import MRow from './row'
 import MCol from './col'
 
 /* istanbul ignore next */
-MContainer.install = function install(Vue) {
+MContainer.install = function install(Vue): void {
   Vue.component(MContainer.name, MContainer)
 }
-MRow.install = function install(Vue) {
+MRow.install = function install(Vue): void {
     Vue.component(MRow.name, MRow)
 }
-MCol.install = function install(Vue) {
+MCol.install = function install(Vue): void {
     Vue.component(MCol.name, MCol)
 }
 

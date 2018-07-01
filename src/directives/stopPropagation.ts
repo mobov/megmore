@@ -9,5 +9,5 @@ export default {
    event.stopImmediatePropagation()
   }
   el.addEventListener('click', clickHandler, true)
- }
+ },
 }

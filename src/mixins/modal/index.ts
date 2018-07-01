@@ -1,6 +1,6 @@
 import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator'
 import manage from './modalManage'
-import { getZIndex } from '@/util'
+import { getZIndex } from '@/utils'
 // You can declare a mixin as the same style as components.
 @Component
 export default class ModalMixin extends Vue {
