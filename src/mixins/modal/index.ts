@@ -20,8 +20,8 @@ export default class ModalMixin extends Vue {
   public escPressClose!: boolean
 
   public domExist = false//  添加或移除BODY层dom
-  public selfShow: boolean = false
 
+  public visible = false// 组件内部的显示隐藏状态
 
   protected zIndex = getZIndex()
 
@@ -29,7 +29,7 @@ export default class ModalMixin extends Vue {
     return this.show
   }
   set _value(val: boolean) {
-    this.selfShow = val
+    this.visible = val
     this.$emit('update:show', val)
   }
 
@@ -42,8 +42,7 @@ export default class ModalMixin extends Vue {
   public afterLeave() {
     this.domExist = false
   }
-  public async setZIndex() {
-    await this.$nextTick()
+  public setZIndex() {
     const dom = this.$el
     this.zIndex = getZIndex()
     if (dom && dom.style) {
@@ -51,7 +50,7 @@ export default class ModalMixin extends Vue {
     }
   }
   public escPress() {
-    if (!this.escPressClose || !this.selfShow) {
+    if (!this.escPressClose || !this._value) {
       return
     }
     this._value = false
@@ -63,14 +62,12 @@ export default class ModalMixin extends Vue {
   private async mounted() {
     document.body.appendChild(this.$el)
   }
-  private created() {
-    this.selfShow = this._value
-  }
-  @Watch('_value')
-  private visibleChangeHandle(val: boolean, oldVal: boolean) {
-    this._value = val
+
+  @Watch('_value', { immediate: true })
+  private async visibleChangeHandle(val: boolean, oldVal: boolean) {
     if (val) {
       this.domExist = val
+      await this.$nextTick()
       this.setZIndex()
       manage.open(this)
     } else {
