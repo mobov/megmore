@@ -23,21 +23,13 @@ presetIcons.forEach((icon) => {
   functional: true,
 } as FunctionalComponentOptions)
 export class MIcon extends Vue {
-    @Prop({
-        type: String,
-    })
+    @Prop({ type: String })
     private name!: string
 
-    @Prop({
-        type: [String, Number],
-        default: 'sm',
-    })
-    private size!: string
+    @Prop({ type: [String, Number], default: 'sm' })
+    private size!: string | number
 
-    @Prop({
-        type: String,
-        default: '#000000',
-    })
+    @Prop({ type: String, default: '#000000' })
     private color!: string
 
     public render(createElement: any, { props, data, children, listeners }): VNode {

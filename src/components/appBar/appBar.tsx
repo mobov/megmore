@@ -10,7 +10,7 @@ const prefix = 'm-app-bar'
 export default class MAppBar extends Vue {
 
     @Prop({ type: [String], default: 'sm' })
-    private size !: string
+    private size!: string
 
     public render(h: any): VNode {
         return (

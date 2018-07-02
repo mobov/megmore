@@ -9,6 +9,17 @@ declare module 'vue/types/vue' {
     $confirm: () => Promise<any>
   }
 }
+/**
+ * 类型参数
+ */
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'// 尺寸
+export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'//  主题类型
+/**
+ * 组件
+ */
+export declare class MegComponent extends Vue {
+  static install (vue: typeof Vue): void
+}
 
 declare const Megmore: Megmore
 export default Megmore
@@ -27,16 +38,10 @@ export interface MegmoreUseOptions {
 export type Render = (h: () => VNode, context: RenderContext) => VNode
 
 export namespace Model {//  各种数据模型
-  export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'// 尺寸
-  export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'//  主题类型
+
   export interface ModalComponent extends Vue {// 模态框组件
     escPress: () => void
   }
-  
-  export interface Component extends Vue {//  普通组件
-    install: (Vue: VueConstructor) => void
-  }
-
   export interface ConfirmOptions {
     title?: string,
     content?: string | Render,

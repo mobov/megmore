@@ -9,14 +9,9 @@ const prefix = 'm-container'
     functional: true,
 } as FunctionalComponentOptions)
 export default class MContainer extends Vue {
-    @Prop({
-        type: String,
-    })
+    @Prop({ type: String })
     private id!: string
-    @Prop({
-        type: String,
-        default: 'div',
-    })
+    @Prop({ type: String, default: 'div' })
     private tag!: string
 
 

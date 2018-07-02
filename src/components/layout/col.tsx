@@ -10,36 +10,21 @@ const prefix = 'm-col'
     functional: true,
 } as FunctionalComponentOptions)
 export default class MCol extends Vue {
-    @Prop({
-        type: String,
-    })
+    @Prop({ type: String })
     private id!: string
-    @Prop({
-        type: String,
-        default: 'div',
-    })
+    @Prop({ type: String, default: 'div' })
     private tag!: string
-    @Prop({
-        type: Number,
-        default: 12,
-    })
+    @Prop({ type: Number, default: 12 })
     private xs!: number
-    @Prop({
-        type: Number,
-    })
+    @Prop({ type: Number })
     private sm!: number
-    @Prop({
-        type: Number,
-    })
+    @Prop({ type: Number })
     private md!: number
-    @Prop({
-        type: Number,
-    })
+    @Prop({ type: Number })
     private lg!: number
-    @Prop({
-        type: Number,
-    })
+    @Prop({ type: Number })
     private xl!: number
+    
     public render(h: any, { props, data, children }): VNode {
         const staticClass = data.staticClass !== undefined ? data.staticClass : ''
         data.staticClass = `${prefix} ${staticClass} `
