@@ -2,8 +2,6 @@
  * 波纹动画
  * */
 import { VNodeDirective } from 'vue'
-import { getTouchRect } from '@/utils'
-import { strStyles } from 'es-treasure'
 
 const name = 'MRipple'
 const prefix = 'm-ripple'
@@ -56,7 +54,7 @@ const ripple = {
 
         el.appendChild(container)
         const computed = window.getComputedStyle(el)
-        if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
+        if (computed.position !== 'absolute' && computed.position !== 'fixed') { el.style.position = 'relative' }
 
         const offset = el.getBoundingClientRect()
         const x = value.center ? 0 : e.clientX - offset.left - halfSize
@@ -74,39 +72,38 @@ const ripple = {
     },
 
     hide(el: HTMLElement | null) {
-        if (!el || !el._ripple || !el._ripple.enabled) return
+        if (!el || !el._ripple || !el._ripple.enabled) { return }
 
         const ripples = el.getElementsByClassName('v-ripple__animation')
 
-        if (ripples.length === 0) return
+        if (ripples.length === 0) { return }
         const animation = ripples[ripples.length - 1]
 
-        if (animation.dataset.isHiding) return
-        else animation.dataset.isHiding = 'true'
+        if (animation.dataset.isHiding) { return } else { animation.dataset.isHiding = 'true' }
 
         const diff = performance.now() - Number(animation.dataset.activated)
-        let delay = Math.max(300 - diff, 0)
+        const delay = Math.max(300 - diff, 0)
 
         setTimeout(() => {
             animation.classList.remove('v-ripple__animation--visible')
 
             setTimeout(() => {
-                const ripples = el.getElementsByClassName('v-ripple__animation')
-                if (ripples.length === 0) el.style.position = null
-                animation.parentNode && el.removeChild(animation.parentNode)
+                const $ripples = el.getElementsByClassName('v-ripple__animation')
+                if ($ripples.length === 0) { el.style.position = null }
+                if (animation.parentNode) { el.removeChild(animation.parentNode) }
             }, 300)
         }, delay)
     },
 }
 
-function isRippleEnabled (value: any): value is true {
+function isRippleEnabled(value: any): value is true {
     return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e: MouseEvent) {
+function rippleShow(e: MouseEvent): void {
     const value: RippleOptions = {}
     const element = e.currentTarget as HTMLElement
-    if (!element) return
+    if (!element) { return }
     value.center = element._ripple!.centered
     if (element._ripple!.class) {
         value.class = element._ripple!.class

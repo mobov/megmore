@@ -44,7 +44,7 @@ export class MIcon extends Vue {
         const staticClasses = data.staticClass !== undefined ? data.staticClass : ''
         const classes = data.class !== undefined ? data.class : ''
         const styles = Object.assign({ fill: 'currentColor' }, data.style, data.staticStyle)
-
+        listeners.click = listeners.click || null
         return (
             <svg xmlns='http://www.w3.org/2000/svg'
                 version='1.1'
@@ -54,7 +54,7 @@ export class MIcon extends Vue {
                 height={height}
                 width={width}
                 viewBox={icon.viewBox}
-                onClick={listeners.click || function (): void { }}
+                onClick={listeners.click}
             >
 
                 {icon.paths ? icon.paths.map((path: string) => <path d={path} />) : ''}

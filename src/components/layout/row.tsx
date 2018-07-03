@@ -24,8 +24,11 @@ export default class MRow extends Vue {
 
     public render(h: any, { props, data, children }: any): VNode {
         data.staticClass = data.staticClass !== undefined ? data.staticClass : ''
-        data.staticClass += `${prefix} ${prefix}-wrap-${props.wrap} ${prefix}-justify-${props.justify} ${prefix}-align-${props.align} `
-        if (props.space) data.staticClass += `${prefix}-space-${props.space}`
+        data.staticClass += `${prefix}
+                             ${prefix}-wrap-${props.wrap}
+                             ${prefix}-justify-${props.justify}
+                             ${prefix}-align-${props.align} `
+        if (props.space) { data.staticClass += `${prefix}-space-${props.space}` }
         data.staticClass = data.staticClass.trim()
         if (props.id) {
             data.domProps = data.domProps || {}
