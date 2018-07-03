@@ -1,5 +1,5 @@
 /**
- * material shadow 阴影值
+ * 断点
  */
 export default ['xs', 'sm', 'md', 'lg', 'xl']
 

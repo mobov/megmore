@@ -2,6 +2,7 @@ import { FunctionalComponentOptions, VNode } from 'vue'
 import Breakpoints, {default as breakpoints} from '../megmore/breakpoints'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
+
 const name = 'MCol'
 const prefix = 'm-col'
 
@@ -24,8 +25,8 @@ export default class MCol extends Vue {
     private lg!: number
     @Prop({ type: Number })
     private xl!: number
-    
-    public render(h: any, { props, data, children }): VNode {
+
+    public render(h: any, { props, data, children }: any) {
         const staticClass = data.staticClass !== undefined ? data.staticClass : ''
         data.staticClass = `${prefix} ${staticClass} `
         Breakpoints.forEach(breakpoint => {

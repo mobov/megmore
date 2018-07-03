@@ -6,9 +6,6 @@ const prefix = 'm-app'
 
 @Component({
     name,
-    // directives: {
-    //     Resize
-    // }
 })
 export default class MApp extends Vue {
 

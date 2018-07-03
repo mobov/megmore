@@ -1,11 +1,15 @@
-import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions, ComponentOptions, RenderContext, VNode } from 'vue'
+import { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions, ComponentOptions, RenderContext, VNode } from 'vue'
+import { Component, Prop, Provide, Inject, Model, Vue } from 'vue-property-decorator'
 import { ENXIO } from 'constants';
 
 declare module 'vue/types/vue' {
   interface VueConstructor {
-    register(data: any): void
+    register(data: any): void,
+    install (vue: typeof Vue): void
+    render(h: any, context: any):VNode
   }
   interface Vue {
+
     $confirm: () => Promise<any>
   }
 }
@@ -14,12 +18,7 @@ declare module 'vue/types/vue' {
  */
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'// 尺寸
 export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'//  主题类型
-/**
- * 组件
- */
-export declare class MegComponent extends Vue {
-  static install (vue: typeof Vue): void
-}
+
 
 declare const Megmore: Megmore
 export default Megmore
@@ -45,7 +44,7 @@ export namespace Model {//  各种数据模型
   export interface ConfirmOptions {
     title?: string,
     content?: string | Render,
-    type?: Model.Type
+    //type?: Model.Type
   }
 }
 

@@ -15,7 +15,7 @@ export default class MContainer extends Vue {
     private tag!: string
 
 
-    public render(h: any, { props, data, children }) {
+    public render(h: any, { props, data, children }: any) {
         const staticClass = data.staticClass !== undefined ? data.staticClass : ''
         data.staticClass = `${prefix} ${staticClass}`.trim()
 

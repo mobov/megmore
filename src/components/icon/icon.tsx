@@ -32,7 +32,7 @@ export class MIcon extends Vue {
     @Prop({ type: String, default: '#000000' })
     private color!: string
 
-    public render(createElement: any, { props, data, children, listeners }): VNode {
+    public render(h: any, { props, data, children, listeners }: any): VNode {
         const icon = Icons[props.name]
         if (icon === undefined) {
             console.error(`存在未注册的图标${props.name}`)
