@@ -65,6 +65,7 @@ export default class ModalMixin extends Vue {
 
   @Watch('_value', { immediate: true })
   private async visibleChangeHandle(val: boolean, oldVal: boolean) {
+    this.visible = val
     if (val) {
       this.domExist = val
       await this.$nextTick()
