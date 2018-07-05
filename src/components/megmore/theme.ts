@@ -20,6 +20,7 @@ const Theme: any = {
             color: 'white',
             elevation: Elevations[3],
         },
+        button: {},
     },
 }
 
@@ -70,6 +71,10 @@ function collectSpecialStyles(name: string, selector: string, attrData: any): st
  * @return {string}
  */
 function collectSelectorStyles(name: string, selector: string, attrData: any): string {
+    console.log(attrData)
+    const modifies = Theme[name].theme
+
+    //  普通状态样式构造
     let tempText = `[data-megmore-theme=${name}] .m-${midlineCase(selector)}{\n`
     Object.keys(attrData).forEach(attrName => {
         if (themeFormatMap[attrName]) {
@@ -78,8 +83,25 @@ function collectSelectorStyles(name: string, selector: string, attrData: any): s
             tempText += `${attrName}: ${attrData[attrName]};\n`
         }
     })
-    return tempText += '}\n'
+    tempText += '}\n'
+
+
+    return tempText
 }
+
+/**
+ * 修饰符样式构造
+ */
+function collectModifyStyles(name: string) {
+    const { theme } = Theme[name]
+    let str = ''
+    Object.keys(theme).forEach(key => {
+        str += `.color--${key} \{color:${theme[key]}\}\n`
+        str += `.bg--${key} \{background-color:${theme[key]}\}\n`
+    })
+    return str
+}
+
 /**
  * 构造样式表
  * @param name
@@ -95,6 +117,7 @@ function collectStyles(name: string, data: any): string {
             } else {
                 context += collectSelectorStyles(name, selector, data[selector])
             }
+            context += collectModifyStyles(name)
             context += `\n`
         }
     })

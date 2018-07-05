@@ -31,7 +31,7 @@ export default class MButton extends Vue {
         return (
             <button staticClass={prefix}
                 v-m-ripple
-                class={`${this.size} ${this.type} ${this.round ? 'round' : ''}`}
+                class={`${this.size} ${prefix}--${this.type} bg--${this.type}  color--${this.type} ${this.round ? (prefix + '--round') : ''}`}
                 onClick={this.handleClick}
             >
                 {this.$slots.default}

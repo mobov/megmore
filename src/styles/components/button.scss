@@ -10,6 +10,7 @@
 .m-button {
  margin: d(6) d(8);
  padding: 0 d(8);
+ $prefix:'m-button';
  @each $name,
  $value in $--Size-button-height {
   &.#{$name} {
@@ -21,7 +22,7 @@
  &.round {
   border-radius: d($--size-button-round-radius)
  }
- &:not(.default){
+ &:not(.#{$prefix}--default){
   color:getColor(grey,50);
  }
  color:getColor(grey,A400);
