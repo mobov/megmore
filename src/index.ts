@@ -3,7 +3,7 @@ import * as components from './components'
 import directives from './directives'
 import Vue, { VueConstructor } from 'vue'
 import { Megmore as MegmorePlugin, MegmoreUseOptions } from './types'
-import  methods from '@/methods'
+import methods from '@/methods'
 
 const Megmore: MegmorePlugin = {
     install(Vue: VueConstructor, args?: MegmoreUseOptions): void {
@@ -11,7 +11,7 @@ const Megmore: MegmorePlugin = {
 
         Vue.use(MegmoreComponent, {
             components,
-        /*    directives,*/
+            /*    directives,*/
             ...args,
         })
 

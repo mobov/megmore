@@ -10,6 +10,7 @@
 .m-button {
  margin: d(6) d(8);
  padding: 0 d(8);
+
  $prefix:'m-button';
  @each $name,
  $value in $--Size-button-height {
@@ -31,4 +32,11 @@
  cursor: pointer;
  //font-size: $--font-size-p-md;
  box-shadow: map-get($--Elevations,3);
+
+ &>*{
+  vertical-align: middle;
+ }
+ &>span{
+  margin-left: d(5)
+ }
 }

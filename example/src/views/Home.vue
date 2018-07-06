@@ -24,9 +24,10 @@
             <m-button @click="modalInner=true">modal</m-button>
             <m-modal :width="300" :show.sync="modalInner"></m-modal>
         </m-modal>
-        <m-button @click="fullscreenModal=true">fullscreen modal</m-button>
+        <m-button color="red" loading @click="fullscreenModal=true">fullscreen modal</m-button>
         <m-modal :show.sync="fullscreenModal" :fullscreen="true" @click.native="log">
         </m-modal>
+        <m-spin size="xs"></m-spin>
     </m-container>
     <!--<div class="home">-->
         <!--<m-icon style="color:red;font-size: 50px"-->

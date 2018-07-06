@@ -21,6 +21,9 @@ const Theme: any = {
             elevation: Elevations[3],
         },
         button: {},
+        spinPath: {
+            stroke: Palettes.lightblue_A700,
+        }
     },
 }
 

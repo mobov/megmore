@@ -1,3 +1,51 @@
-.m-spin{
- 
+.m-spin-wrap {
+ width: d(map-get( $--Size-spin, sm));
+ height: d(map-get( $--Size-spin, sm));
+ position: relative;
+ display: inline-block;
+ @each $name,
+ $value in $--Size-spin {
+  &.m-spin-wrap--#{$name} {
+   width: d($value);
+   height: d($value);
+  }
+ }
+ .m-spin {
+  animation: rotate 2s linear infinite;
+  transform-origin: center center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  .m-spin-path {
+   stroke-dasharray: 1, 200;
+   stroke-dashoffset: 0;
+   animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+   stroke-linecap: round;
+  }
+ }
+}
+
+@keyframes rotate {
+ to {
+  -webkit-transform: rotate(1turn);
+  transform: rotate(1turn)
+ }
+}
+
+@keyframes dash {
+ 0% {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0
+ }
+ 50% {
+  stroke-dasharray: 89, 200;
+  stroke-dashoffset: -35
+ }
+ to {
+  stroke-dasharray: 89, 200;
+  stroke-dashoffset: -124
+ }
 }
