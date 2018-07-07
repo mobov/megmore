@@ -2,12 +2,12 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm="3">
-                <m-button type="primary" @click="modal=true">
+                <m-button color="primary" @click="modal=true">
                 asd
                 </m-button>
             </m-col>
             <m-col :sm="6">
-                <m-button type="primary" @click="modal=true">
+                <m-button color="primary" @click="modal=true">
                 asd
                 </m-button>
             </m-col>
@@ -24,7 +24,7 @@
             <m-button @click="modalInner=true">modal</m-button>
             <m-modal :width="300" :show.sync="modalInner"></m-modal>
         </m-modal>
-        <m-button color="red" loading @click="fullscreenModal=true">fullscreen modal</m-button>
+        <m-button color="primary" loading @click="fullscreenModal=true">fullscreen modal</m-button>
         <m-modal :show.sync="fullscreenModal" :fullscreen="true" @click.native="log">
         </m-modal>
         <m-spin size="xs"></m-spin>
@@ -44,11 +44,12 @@
 
 <script lang="tsx">
 export default {
+    name: 'Home',
     data(){
         return {
             modal:false,
             modalInner:false,
-            fullscreenModal:false
+            fullscreenModal:false,
         }
     },
     methods: {
@@ -61,7 +62,7 @@ export default {
         async confirm(){
             await this.$confirm({
                 title:'dsa',
-                content(h){
+                content(h: any){
                     return (
                         <span>
                             sssssssssssss

@@ -6,17 +6,17 @@
 @each $main, $colors in $--Palettes {
     @each $key, $color in $colors {
         @if($key == 500){
-            .m-bg--#{$main} {
+            .bg-#{$main} {
                 background-color: $color;
             }
-            .m-color--#{$main}{
+            .color-#{$main}{
                 color: $color;
             }
         }@else{
-            .m-bg--#{$main}#{$key} {
+            .bg-#{$main}#{$key} {
                 background-color: $color;
             }
-            .m-color--#{$main}#{$key}{
+            .color-#{$main}#{$key}{
                 color: $color;
             }
         }
@@ -25,7 +25,7 @@
 
 //elevation 阴影
 @each $index, $elevation in $--Elevations {
-    .m-shadow--#{$index} {
+    .elevation-#{$index} {
         box-shadow: $elevation;
     }
 }

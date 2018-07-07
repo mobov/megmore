@@ -18,12 +18,10 @@ const Theme: any = {
         appBar: {
             bgColor: Palettes.lightblue_A700,
             color: 'white',
-            elevation: Elevations[3],
         },
-        button: {},
         spinPath: {
             stroke: Palettes.lightblue_A700,
-        }
+        },
     },
 }
 
@@ -57,11 +55,14 @@ const themeFormatMap: any = {
 function collectSpecialStyles(name: string, selector: string, attrData: any): string {
     let tempText = ''
     Object.keys(attrData).forEach(attrName => {
-        tempText += `[data-megmore-theme=${name}] .${selector}-${midlineCase(attrName)}-bg{
+        tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)} {
                         background-color: ${attrData[attrName]}
                     }\n`
-        tempText += `[data-megmore-theme=${name}] .${selector}-${midlineCase(attrName)}-color {
+        tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)} {
                         color: ${attrData[attrName]}
+                    }\n`
+        tempText += `[data-megmore-theme=${name}] .line-${midlineCase(attrName)} {
+                        border-color: ${attrData[attrName]}
                     }\n`
     })
     return tempText

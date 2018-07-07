@@ -9,7 +9,7 @@ const prefix = 'm-app'
 })
 export default class MApp extends Vue {
 
-    public render(h: any, context: any): VNode {
+    public render(h: any, context: any) {
         return (
             <div staticClass={prefix}>
                 {this.$slots.default}

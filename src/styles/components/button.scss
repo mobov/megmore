@@ -8,35 +8,38 @@
 }
 
 .m-button {
- margin: d(6) d(8);
- padding: 0 d(8);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: d(6) d(8);
+    padding: 0 d(8);
 
- $prefix:'m-button';
- @each $name,
- $value in $--Size-button-height {
-  &.#{$name} {
-   @include button-height(d($value));
-  }
- }
- @include button-height(d(map-get($--Size-button-height, sm)));
- 
- &.round {
-  border-radius: d($--size-button-round-radius)
- }
- &:not(.#{$prefix}--default){
-  color:getColor(grey,50);
- }
- color:getColor(grey,A400);
- border-radius: d($--size-button-radius);
- min-width: d($--size-button-min-width);
- cursor: pointer;
- //font-size: $--font-size-p-md;
- box-shadow: map-get($--Elevations,3);
+    @each $name, $value in $--Size-button-height {
+        &.#{$name} {
+            @include button-height(d($value));
+        }
+    }
+    @include button-height(d(map-get($--Size-button-height, sm)));
+    
+    &.normal {
+        @include elevation(2)
+    }
 
- &>*{
-  vertical-align: middle;
- }
- &>span{
-  margin-left: d(5)
- }
+    &.round {
+        border-radius: d($--size-button-round-radius)
+    }
+    &:not(.bg-default){
+        color:getColor(grey,50);
+    }
+    color:getColor(grey,A400);
+    border-radius: d($--size-button-radius);
+    min-width: d($--size-button-min-width);
+    cursor: pointer;
+
+    &>*{
+        vertical-align: middle;
+    }
+//  &>span{
+//   margin-left: d(5)
+//  }
 }
