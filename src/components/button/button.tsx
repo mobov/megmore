@@ -9,7 +9,7 @@ const prefix = 'm-button'
 
 @Component({
     name,
-    components: { MIcon },
+    components: { MIcon, MSpin },
 })
 export default class MButton extends Vue {
     @Prop({ type: String, default: 'md' })
@@ -20,6 +20,9 @@ export default class MButton extends Vue {
 
     @Prop({ type: String, default: 'normal' })
     private type!: Model.ButtonType
+
+    @Prop({ type: String, default: 'square' })
+    private shape!: Model.Shape
 
     @Prop({ type: Boolean })
     private round!: boolean
@@ -37,9 +40,10 @@ export default class MButton extends Vue {
         const classes = {
             [`${this.size}`]: true,
             [`${this.type}`]: true,
-            'round': this.round,
+            [`${this.shape}`]: true,
             [`color-${this.color}`]: this.type !== 'normal' && !isHexColor(this.color),
             [`bg-${this.color}`]: this.type === 'normal' && !isHexColor(this.color),
+            [`border-${this.color}`]: this.type === 'outline' && !isHexColor(this.color),
             [`elevation-${this.elevation}`]: this.elevation,
         }
         return classes

@@ -12,10 +12,9 @@
                 </m-button>
             </m-col>
             <m-col :sm="3">
-                <div style="height: 50px; width: 200px" v-m-ripple>
-                    哈哈哈
-                </div>
-
+                <m-button color="primary" type="outline">
+                outline
+                </m-button>
             </m-col>
         </m-row>
         <m-button @click="modal=true">modal</m-button>

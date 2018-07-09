@@ -1,8 +1,3 @@
-@mixin button-height($size) {
- min-height: $size;
- height: $size;
-}
-
 @mixin button-bg($type) {
  background-color: $type
 }
@@ -14,32 +9,47 @@
     margin: d(6) d(8);
     padding: 0 d(8);
 
+    // si
     @each $name, $value in $--Size-button-height {
         &.#{$name} {
-            @include button-height(d($value));
+            @include flex-size(d($value), y);
         }
     }
-    @include button-height(d(map-get($--Size-button-height, sm)));
-    
+    // type
     &.normal {
         @include elevation(2)
     }
-
-    &.round {
-        border-radius: d($--size-button-round-radius)
+    &.outline {
+        border-width: 2px;
+        border-style: solid;
     }
+    // shape
+    &.square {
+        border-radius: 0
+    }
+    &.corner {
+        border-radius: d(map-get($--Radius, corner))
+    }
+    &.round {
+        border-radius: d(map-get($--Radius, round))
+    }
+    &.circle {
+        border-radius: 50%;
+        @each $name, $value in $--Size-button-height {
+            &.#{$name} {
+                @include flex-size(d($value), x);
+            }
+        }
+    }
+
     &:not(.bg-default){
         color:getColor(grey,50);
     }
     color:getColor(grey,A400);
-    border-radius: d($--size-button-radius);
     min-width: d($--size-button-min-width);
     cursor: pointer;
 
     &>*{
         vertical-align: middle;
     }
-//  &>span{
-//   margin-left: d(5)
-//  }
 }

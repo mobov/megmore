@@ -26,3 +26,23 @@
         @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value}.";
     }
 }
+
+/**
+ * flex中尺寸
+ */
+@mixin flex-size($size, $direction: xy) {
+    @if($direction == x){
+        min-width: $size;
+        width: $size;
+    }
+    @else if($direction == y){
+        min-height: $size;
+        height: $size;
+    }
+    @else {
+        min-height: $size;
+        height: $size;
+        min-width: $size;
+        width: $size;
+    }
+}
