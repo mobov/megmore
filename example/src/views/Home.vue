@@ -12,8 +12,14 @@
                 </m-button>
             </m-col>
             <m-col :sm="3">
+                <m-button color="primary" shape="circle">
+                C
+                </m-button>
                 <m-button color="primary" type="outline">
                 outline
+                </m-button>
+                <m-button color="primary" type="outline" shape="round">
+                round
                 </m-button>
             </m-col>
         </m-row>
