@@ -1,0 +1,20 @@
+.m-drawer__wrap {
+  $name: m-drawer;
+  @include fullscreen;
+  .m-drawer__content {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: d(200);
+    background-color: #fff;
+  }
+  &.#{$name}-enter,
+  &.#{$name}-leave-to {
+    transform: translateX(-100%)
+  }
+  &.#{$name}-leave-active,
+  &.#{$name}-enter-active {
+    transition: all 0.5s
+  }
+}

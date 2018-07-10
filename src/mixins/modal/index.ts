@@ -55,6 +55,12 @@ export default class ModalMixin extends Vue {
     }
     this._value = false
   }
+  public closeLastModal() {
+    manage.closeLast()
+  }
+  public eveStop(e: Event) {
+    e.stopPropagation()
+  }
   protected beforeDestroy() {
     this.domExist = false
     this.$el.remove()
@@ -64,8 +70,10 @@ export default class ModalMixin extends Vue {
   }
 
   @Watch('_value', { immediate: true })
+  @Watch('visible', { immediate: true })
   private async visibleChangeHandle(val: boolean, oldVal: boolean) {
     this.visible = val
+    this.$emit('update:show', val)
     if (val) {
       this.domExist = val
       await this.$nextTick()

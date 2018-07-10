@@ -6,6 +6,8 @@ import MIcon from '../icon'
 import MButton from '../button'
 import Render from '../render'
 import { Model } from '@/types';
+import Overlay from '../base/overlay'
+import modamManage from '@/mixins/modal/modalManage'
 @Component
 export default class MModal extends mixins(modalMixin) {
   @Prop({
@@ -58,12 +60,8 @@ export default class MModal extends mixins(modalMixin) {
     return (
       this.domExist && (
         <transition name={this.transitionName} onAfterLeave={this.afterLeave}>
-          <div staticClass='m-modal' v-show={this.visible}>
-            {!this.fullscreen && (
-              <div staticClass='m-modal--wrap' onClick={this.hide} >
-              </div>
-            )}
-            <div staticClass='m-modal--content' class={contentClass} style={this.style}>
+          <div staticClass='m-modal' v-show={this.visible} onClick={this.closeLastModal}>
+            <div staticClass='m-modal--content' class={contentClass} style={this.style} onClick={this.eveStop}>
               <div class='m-modal--title'>
                 {this.$slots.title || this.title}
               </div>
@@ -75,10 +73,10 @@ export default class MModal extends mixins(modalMixin) {
                 <div class='m-modal--footer'>
                   <m-button onClick={this.cancel}>
                     取消
-         </m-button>
+                  </m-button>
                   <m-button onClick={this.confirm}>
                     确认
-         </m-button>
+                  </m-button>
                 </div>
               )}
             </div>

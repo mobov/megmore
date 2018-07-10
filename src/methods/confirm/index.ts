@@ -2,7 +2,7 @@ import MModal from '@/components/modal'
 import { Component, Vue } from 'vue-property-decorator'
 import { ComponentOptions, VNode } from 'vue';
 import { Model } from '@/types'
-
+import { openOverlay, closeOverlay } from '../overlay'
 @Component
 class Confirm extends MModal {
   public resolve!: () => void
@@ -22,6 +22,7 @@ class Confirm extends MModal {
 }
 
 const confirm = async (options: Model.ConfirmOptions = { title: '', content: '' }) => {
+  openOverlay()
   return new Promise(async (resolve, reject) => {
     const instance = new Confirm()
     instance.title = options.title as string
@@ -32,6 +33,7 @@ const confirm = async (options: Model.ConfirmOptions = { title: '', content: '' 
     instance.domExist = true
     await instance.$nextTick()
     instance.visible = true
+    instance.setZIndex()
   })
 }
 export default confirm

@@ -27,7 +27,9 @@ export namespace Model {//  各种数据模型
   export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 
   export interface ModalComponent extends Vue {// 模态框组件
-    escPress: () => void
+    escPress: () => void,
+    show: boolean,
+    _value: boolean
   }
   export interface Component extends Vue {//  普通组件
     install: (Vue: VueConstructor) => void
@@ -37,7 +39,7 @@ export namespace Model {//  各种数据模型
   }
   export interface ConfirmOptions {
     title?: string,
-    content?: string |  Render,
+    content?: string | Render,
     type?: Model.Type
   }
 }

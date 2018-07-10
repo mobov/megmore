@@ -27,12 +27,14 @@
         <m-button @click="confirm">confirm</m-button>
         <m-modal title="标题zz" :show.sync="modal">
             <m-button @click="modalInner=true">modal</m-button>
+            <m-button @click="drawer=true">drawer</m-button>
             <m-modal :width="300" :show.sync="modalInner"></m-modal>
         </m-modal>
         <m-button color="primary" loading @click="fullscreenModal=true">fullscreen modal</m-button>
         <m-modal :show.sync="fullscreenModal" :fullscreen="true" @click.native="log">
         </m-modal>
         <m-spin size="xs"></m-spin>
+        <m-drawer :show.sync="drawer"></m-drawer>
     </m-container>
     <!--<div class="home">-->
         <!--<m-icon style="color:red;font-size: 50px"-->
@@ -55,6 +57,7 @@ export default {
             modal:false,
             modalInner:false,
             fullscreenModal:false,
+            drawer:true
         }
     },
     methods: {
