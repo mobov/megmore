@@ -15,10 +15,10 @@
                 <m-button color="primary" shape="circle">
                 C
                 </m-button>
-                <m-button color="primary" type="outline">
+                <m-button color="primary" variety="outline">
                 outline
                 </m-button>
-                <m-button color="primary" type="outline" shape="round">
+                <m-button color="primary" variety="outline" shape="round">
                 round
                 </m-button>
             </m-col>

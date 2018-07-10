@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 
-import { MIcon_more_vert, MIcon_account_circle } from '../../src/icons/index'
+import { MIcon_more_vert, MIcon_account_circle } from '../../src/icons'
 import Megmore from '../../src/index'
 
 Vue.use(Megmore, {

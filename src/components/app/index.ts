@@ -1,4 +1,4 @@
-import MApp from './app'
+import MApp from '@/components/app/app'
 import { VueConstructor } from 'vue'
 
 /* istanbul ignore next */

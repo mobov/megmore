@@ -1,20 +1,20 @@
 import './layout.scss'
-import MContainer from './container'
-import MRow from './row'
-import MCol from './col'
-import MFlexFiller from './flex-filler'
+import MContainer from '@/components/layout/container'
+import MRow from '@/components/layout/row'
+import MCol from '@/components/layout/col'
+import MFlexFiller from '@/components/layout/flex-filler'
 
 /* istanbul ignore next */
-MContainer.install = function install(Vue): void {
+MContainer.install = function install(Vue: any): void {
   Vue.component(MContainer.name, MContainer)
 }
-MRow.install = function install(Vue): void {
+MRow.install = function install(Vue: any): void {
     Vue.component(MRow.name, MRow)
 }
-MCol.install = function install(Vue): void {
+MCol.install = function install(Vue: any): void {
     Vue.component(MCol.name, MCol)
 }
-MFlexFiller.install = function install(Vue): void {
+MFlexFiller.install = function install(Vue: any): void {
     Vue.component(MFlexFiller.name, MFlexFiller)
 }
 

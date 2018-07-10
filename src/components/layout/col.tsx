@@ -1,5 +1,5 @@
 import { FunctionalComponentOptions, VNode } from 'vue'
-import Breakpoints, {default as breakpoints} from '../megmore/breakpoints'
+import Breakpoints, {default as breakpoints} from '@/components/megmore/breakpoints'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 
