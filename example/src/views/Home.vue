@@ -2,23 +2,23 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm="3">
-                <m-button color="primary" @click="modal=true">
+                <m-button type="primary" @click="modal=true">
                 asd
                 </m-button>
             </m-col>
             <m-col :sm="6">
-                <m-button color="primary" @click="modal=true">
+                <m-button type="primary" @click="modal=true">
                 asd
                 </m-button>
             </m-col>
             <m-col :sm="3">
-                <m-button color="primary" shape="circle">
+                <m-button type="primary" shape="circle">
                 C
                 </m-button>
-                <m-button color="primary" type="outline">
+                <m-button type="primary" variety="outline">
                 outline
                 </m-button>
-                <m-button color="primary" type="outline" shape="round">
+                <m-button type="primary" variety="outline" shape="round">
                 round
                 </m-button>
             </m-col>

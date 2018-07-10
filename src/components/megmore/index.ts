@@ -1,6 +1,6 @@
-import { VueConstructor } from 'vue/types'
+import { VueConstructor } from 'vue'
 import { Megmore as MegmorePlugin, MegmoreUseOptions } from '@/types'
-import { getTheme, registerTheme, useTheme } from './theme'
+import { getTheme, registerTheme, useTheme } from '@/components/megmore/theme'
 import MIcon from '@/components/icon'
 
 const Megmore: MegmorePlugin = {

@@ -1,8 +1,8 @@
 /**
  * Created by nocoolyoyo on 2018/6/23.
  */
-import Palettes from './palettes'
-import Elevations from './elevations'
+import Palettes from '@/components/megmore/palettes'
+import Elevations from '@/components/megmore/elevations'
 
 const currentTheme = 'unicon'
 

@@ -1,5 +1,5 @@
 import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator'
-import manage from './modalManage'
+import manage from '@/mixins/modal/modalManage'
 import { getZIndex } from '@/utils'
 // You can declare a mixin as the same style as components.
 @Component

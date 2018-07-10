@@ -1,7 +1,7 @@
-import MAvatar from './avatar'
+import MAvatar from '@/components/avatar/avatar'
 
 /* istanbul ignore next */
-MAvatar.install = function install(Vue): void {
+MAvatar.install = function install(Vue: any): void {
   Vue.component(MAvatar.name, MAvatar)
 }
 

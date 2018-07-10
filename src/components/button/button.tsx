@@ -1,8 +1,8 @@
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
-import MIcon from '../icon'
+import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { isHexColor } from 'es-treasure'
-import MSpin from '../spin'
+import MSpin from '@/components/spin'
 import { Model } from '@/types'
 const name = 'MButton'
 const prefix = 'm-button'
@@ -16,16 +16,13 @@ export default class MButton extends Vue {
     private size!: Model.Size
 
     @Prop({ type: String, default: 'default' })
-    private color!: Model.Color
+    private type!: Model.Color
 
     @Prop({ type: String, default: 'normal' })
-    private type!: Model.ButtonType
+    private variety!: Model.Variety
 
     @Prop({ type: String, default: 'square' })
     private shape!: Model.Shape
-
-    @Prop({ type: Boolean })
-    private round!: boolean
 
     @Prop({ type: Boolean })
     private block!: boolean
@@ -39,11 +36,12 @@ export default class MButton extends Vue {
     get classes(): any {
         const classes = {
             [`${this.size}`]: true,
-            [`${this.type}`]: true,
+            [`${this.variety}`]: true,
             [`${this.shape}`]: true,
-            [`color-${this.color}`]: this.type !== 'normal' && !isHexColor(this.color),
-            [`bg-${this.color}`]: this.type === 'normal' && !isHexColor(this.color),
-            [`border-${this.color}`]: this.type === 'outline' && !isHexColor(this.color),
+            [`${this.block}`]: this.block,
+            [`color-${this.type}`]: this.variety !== 'normal' && !isHexColor(this.type),
+            [`bg-${this.type}`]: this.variety === 'normal' && !isHexColor(this.type),
+            [`border-${this.type}`]: this.variety === 'outline' && !isHexColor(this.type),
             [`elevation-${this.elevation}`]: this.elevation,
         }
         return classes

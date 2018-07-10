@@ -10,7 +10,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    >img {
+    box-sizing: border-box;
+    cursor: pointer;
+    > img {
         min-width: 100%;
         min-height: 100%;
         max-width: 100%;
@@ -22,14 +24,35 @@
             @include size-avatar(d($value));
         }
     }
-    //形状
+    // shape
     &.circle {
-        border-radius: 50%;
+        border-radius: map-get($map: $--Radius, $key: circle);
+        > img {
+            border-radius: map-get($map: $--Radius, $key: circle);
+        }
+    }
+    &.round {
+        border-radius: map-get($map: $--Radius, $key: round);
+        > img {
+            border-radius: map-get($map: $--Radius, $key: round);
+        }
+    }
+    &.corner {
+        border-radius: map-get($map: $--Radius, $key: corner);
+        > img {
+            border-radius: map-get($map: $--Radius, $key: corner);
+        }
     }
     &.square {
         border-radius: 0;
     }
-    //背景颜色继承utils .bg-name-value
-    //颜色继承utils .color-name-value
-    //阴影继承utils .shadow-name-value
+    // variety 
+    &.outline {
+        border-width: 2px;
+        border-style: solid;
+    }
+    
+    // 背景颜色继承utils .bg-name-value
+    // 颜色继承utils .color-name-value
+    // 阴影继承utils .shadow-name-value
 }

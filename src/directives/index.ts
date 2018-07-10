@@ -1,4 +1,4 @@
-import Ripple from './ripple'
+import Ripple from '@/directives/ripple'
 import { VueConstructor } from 'vue';
 
 export {
