@@ -15,7 +15,7 @@ export default class MButton extends Vue {
     @Prop({ type: String, default: 'md' })
     private size!: Model.Size
 
-    @Prop({ type: String, default: 'primary' })
+    @Prop({ type: String, default: 'default' })
     private type!: Model.Color
 
     @Prop({ type: String, default: 'normal' })
