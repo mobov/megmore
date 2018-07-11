@@ -1,13 +1,18 @@
-import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch, Mixins } from 'vue-property-decorator'
 import manage from '@/mixins/modal/modalManage'
 import { getZIndex } from '@/utils'
-// You can declare a mixin as the same style as components.
+import { openOverlay } from '@/methods/overlay'
+import toggleable from '../toggleable'
+/**
+ * 弹窗控制通用mixin
+ */
 @Component
-export default class ModalMixin extends Vue {
+export default class ModalMixin extends Mixins(toggleable) {
   @Prop({
-    default: false,
+    default: '标题',
+    type: String,
   })
-  public show!: boolean// 控制显示隐藏
+  public title!: string// 控制显示隐藏
 
   @Prop({
     default: false,
@@ -21,24 +26,15 @@ export default class ModalMixin extends Vue {
 
   public domExist = false//  添加或移除BODY层dom
 
-  public visible = false// 组件内部的显示隐藏状态
 
   protected zIndex = getZIndex()
 
-  get _value(): boolean {
-    return this.show
-  }
-  set _value(val: boolean) {
-    this.visible = val
-    this.$emit('update:show', val)
-  }
+
 
   get dom(): HTMLElement {
     return this.$el
   }
-  public hide() {
-    this._value = false
-  }
+ 
   public afterLeave() {
     this.domExist = false
   }
@@ -50,16 +46,31 @@ export default class ModalMixin extends Vue {
     }
   }
   public escPress() {
-    if (!this.escPressClose || !this._value) {
+    if (!this.escPressClose || !this.visible) {
       return
     }
-    this._value = false
+    this.visible = false
   }
   public closeLastModal() {
     manage.closeLast()
   }
   public eveStop(e: Event) {
     e.stopPropagation()
+  }
+  @Watch('show', { immediate: true })
+  @Watch('visible', { immediate: true })
+  public async visibleChangeHandle(val: boolean, oldVal: boolean) {
+    this.$emit('update:show', val)
+    if (val) {
+      this.domExist = val
+      await this.$nextTick()
+      this.setZIndex()
+      manage.open(this)
+      openOverlay()
+    } else {
+      manage.close(this)
+    }
+    this.visible = val
   }
   protected beforeDestroy() {
     this.domExist = false
@@ -69,18 +80,5 @@ export default class ModalMixin extends Vue {
     document.body.appendChild(this.$el)
   }
 
-  @Watch('_value', { immediate: true })
-  @Watch('visible', { immediate: true })
-  private async visibleChangeHandle(val: boolean, oldVal: boolean) {
-    this.visible = val
-    this.$emit('update:show', val)
-    if (val) {
-      this.domExist = val
-      await this.$nextTick()
-      this.setZIndex()
-      manage.open(this)
-    } else {
-      manage.close(this)
-    }
-  }
+
 }

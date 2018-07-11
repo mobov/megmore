@@ -22,7 +22,6 @@ class Confirm extends MModal {
 }
 
 const confirm = async (options: Model.ConfirmOptions = { title: '', content: '' }) => {
-  openOverlay()
   return new Promise(async (resolve, reject) => {
     const instance = new Confirm()
     instance.title = options.title as string
@@ -33,7 +32,6 @@ const confirm = async (options: Model.ConfirmOptions = { title: '', content: '' 
     instance.domExist = true
     await instance.$nextTick()
     instance.visible = true
-    instance.setZIndex()
   })
 }
 export default confirm

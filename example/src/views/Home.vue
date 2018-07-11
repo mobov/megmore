@@ -22,44 +22,48 @@
             <m-modal :width="300" :show.sync="modalInner"></m-modal>
         </m-modal>
         <m-button color="primary" loading @click="fullscreenModal=true">fullscreen modal</m-button>
+        <m-button color="primary" loading @click="bottomSheet=true">bottomSheet</m-button>
         <m-modal :show.sync="fullscreenModal" :fullscreen="true" @click.native="log">
         </m-modal>
+        <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
-        <m-drawer :show.sync="drawer"></m-drawer>
+        <MExpansionPanel style="width:500px;margin:0 auto">
+            <MExpansionPanelContent v-for="item in 10">
+                <template slot="header">
+                    title
+                </template>
+                <template>
+                    阿斯打扫打扫大
+                </template>
+            </MExpansionPanelContent>
+        </MExpansionPanel>
     </m-container>
 </template>
 
 <script lang="tsx">
 export default {
-    name: 'Home',
-    data(){
-        return {
-            modal:false,
-            modalInner:false,
-            fullscreenModal:false,
-            drawer:true
+  name: "Home",
+  data() {
+    return {
+      modal: false,
+      modalInner: false,
+      fullscreenModal: false,
+      drawer: true,
+      bottomSheet: false
+    };
+  },
+  methods: {
+    handleAvatarClose() {},
+    handleAvatarClick() {},
+    async confirm() {
+      await this.$confirm({
+        title: "dsa",
+        content(h: any) {
+          return <span>sssssssssssss</span>;
         }
-    },
-    methods: {
-	    handleAvatarClose () {
-
-        },
-	    handleAvatarClick () {
-
-        },
-        async confirm(){
-            await this.$confirm({
-                title:'dsa',
-                content(h: any){
-                    return (
-                        <span>
-                            sssssssssssss
-                        </span>
-                    )
-                }
-            })
-            console.log('confirm')
-        }
+      });
+      console.log("confirm");
     }
-}
+  }
+};
 </script>

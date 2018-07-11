@@ -18,6 +18,7 @@ export const openOverlay = async (options: Model.ConfirmOptions = { title: '', c
         await instance.$nextTick()
         instance.show = true
     }
+    console.log(modalManage.last)
     instance.$el.style.zIndex = String(Number(modalManage.last.$el.style.zIndex) - 1)
 }
 export const closeOverlay = async () => {

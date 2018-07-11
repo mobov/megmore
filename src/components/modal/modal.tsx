@@ -4,12 +4,13 @@ import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
 import MIcon from '@/components/icon'
 import MButton from '@/components/button'
-import Render from '@/components/render'
+import Render from '@/components/base/render'
 import { Model } from '@/types';
 import Overlay from '@/components/base/overlay'
 import modamManage from '@/mixins/modal/modalManage'
 @Component
 export default class MModal extends mixins(modalMixin) {
+  public static options: any
   @Prop({
     default: '',
   })
@@ -20,7 +21,6 @@ export default class MModal extends mixins(modalMixin) {
     type: [Object, String],
   })
   public content!: string | VNode // 内容，可为render函数
-
   @Prop({
     default: 600,
     type: [String, Number],
@@ -31,7 +31,6 @@ export default class MModal extends mixins(modalMixin) {
     default: 50,
   })
   private top!: number  // 弹窗距离顶部高度
-
 
 
   get style() {

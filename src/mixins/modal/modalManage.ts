@@ -3,15 +3,14 @@ import { Model } from '@/types';
 import { openOverlay, closeOverlay } from '@/methods/overlay'
 interface PopupManager {
   instances: Model.ModalComponent[],
-  open: (v: Vue) => void,
-  close: (v: Vue) => void,
+  open: (v: Model.ModalComponent) => void | undefined,
+  close: (v: Model.ModalComponent) => void,
   closeLast: () => void,
   last: Model.ModalComponent
 }
 const popupManager: PopupManager = {
   instances: [],   //  保存已打开的弹窗类组件实例
-  open(instance: Vue) {
-    openOverlay()
+  open(instance: Model.ModalComponent) {
     if (!instance) {
       return
     }
@@ -21,7 +20,7 @@ const popupManager: PopupManager = {
     this.instances.push(instance)
     console.log(this.instances)
   },
-  close(instance: Vue) {
+  close(instance: Model.ModalComponent) {
     const index = this.instances.indexOf(instance)
     if (index === -1) {
       return

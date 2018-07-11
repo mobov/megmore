@@ -12,7 +12,7 @@ declare module 'vue/types/vue' {
     render(h: any, context: any):VNode
   }
   interface Vue {
-
+    options:any,
     $confirm: () => Promise<any>
   }
 }

@@ -7100,10 +7100,6 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-reflect-metadata@^0.1.10:
-  version "0.1.12"
-  resolved "http://r.cnpmjs.org/reflect-metadata/download/reflect-metadata-0.1.12.tgz#311bf0c6b63cd782f228a81abe146a2bfa9c56f2"
-
 regenerate-unicode-properties@^7.0.0:
   version "7.0.0"
   resolved "http://r.cnpmjs.org/regenerate-unicode-properties/download/regenerate-unicode-properties-7.0.0.tgz#107405afcc4a190ec5ed450ecaa00ed0cafa7a4c"
@@ -8475,7 +8471,7 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-class-component@^6.0.0, vue-class-component@^6.1.0:
+vue-class-component@^6.0.0, vue-class-component@^6.2.0:
   version "6.2.0"
   resolved "http://r.cnpmjs.org/vue-class-component/download/vue-class-component-6.2.0.tgz#7adb1daa9a868c75f30f97f33f4f1b94aee62089"
 
@@ -8514,12 +8510,11 @@ vue-parser@^1.1.5:
   dependencies:
     parse5 "^3.0.3"
 
-vue-property-decorator@^6.0.0:
-  version "6.1.0"
-  resolved "http://r.cnpmjs.org/vue-property-decorator/download/vue-property-decorator-6.1.0.tgz#ef97bcc1bfe794ec060133ca04a5aca02e808828"
+vue-property-decorator@^7.0.0:
+  version "7.0.0"
+  resolved "http://registry.npm.taobao.org/vue-property-decorator/download/vue-property-decorator-7.0.0.tgz#46f53dd741eb86c3af091bb0492400c450eebf19"
   dependencies:
-    reflect-metadata "^0.1.10"
-    vue-class-component "^6.1.0"
+    vue-class-component "^6.2.0"
 
 vue-router@^3.0.1:
   version "3.0.1"
