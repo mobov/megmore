@@ -7,13 +7,13 @@ import Render from '@/components/render'
 import { Model } from '@/types';
 import Overlay from '@/components/base/overlay'
 @Component
-export default class MDrawer extends mixins(modalMixin) {
+export default class MBottomSheet extends mixins(modalMixin) {
   public render(h) {
     return (
       this.domExist && (
-        <transition name='m-drawer' onAfterLeave={this.afterLeave} >
-          <div class='m-drawer__wrap' onClick={this.closeLastModal} v-show={this.visible} >
-            <div staticClass='m-drawer__content'onClick={this.eveStop}></div>
+        <transition name='m-bottom-sheet' onAfterLeave={this.afterLeave} >
+          <div class='m-bottom-sheet__wrap' onClick={this.closeLastModal} v-show={this.visible} >
+            <div staticClass='m-bottom-sheet__content'onClick={this.eveStop}></div>
           </div>
         </transition>
       )

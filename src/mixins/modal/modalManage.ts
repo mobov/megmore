@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { Model } from '@/types';
-import { openOverlay, closeOverlay } from '../../methods/overlay'
+import { openOverlay, closeOverlay } from '@/methods/overlay'
 interface PopupManager {
   instances: Model.ModalComponent[],
   open: (v: Vue) => void,
@@ -11,7 +11,7 @@ interface PopupManager {
 const popupManager: PopupManager = {
   instances: [],   //  保存已打开的弹窗类组件实例
   open(instance: Vue) {
-    openOverlay()
+    
     if (!instance) {
       return
     }

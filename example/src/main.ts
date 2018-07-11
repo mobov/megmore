@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 
 
-import { MIcon_more_vert, MIcon_account_circle } from '../../src/icons'
-import Megmore from '../../src/index'
+import { MIcon_more_vert, MIcon_account_circle } from '@/icons'
+import Megmore from '@'
 
 Vue.use(Megmore, {
   theme: 'unicon',

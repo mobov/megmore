@@ -1,0 +1,20 @@
+.m-bottom-sheet__wrap {
+  $name: m-bottom-sheet;
+  @include fullscreen;
+  .m-bottom-sheet__content {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: d(200);
+    width: 100vw;
+    background-color: #fff;
+  }
+  &.#{$name}-enter,
+  &.#{$name}-leave-to {
+    transform: translateY(100%)
+  }
+  &.#{$name}-leave-active,
+  &.#{$name}-enter-active {
+    transition: all 0.5s
+  }
+}

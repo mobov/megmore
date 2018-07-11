@@ -1,6 +1,7 @@
 import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator'
 import manage from '@/mixins/modal/modalManage'
 import { getZIndex } from '@/utils'
+import { openOverlay } from '@/methods/overlay'
 // You can declare a mixin as the same style as components.
 @Component
 export default class ModalMixin extends Vue {
@@ -8,6 +9,13 @@ export default class ModalMixin extends Vue {
     default: false,
   })
   public show!: boolean// 控制显示隐藏
+
+
+  @Prop({
+    default: '标题',
+    type: String,
+  })
+  public title!: string// 控制显示隐藏
 
   @Prop({
     default: false,
@@ -72,15 +80,16 @@ export default class ModalMixin extends Vue {
   @Watch('_value', { immediate: true })
   @Watch('visible', { immediate: true })
   private async visibleChangeHandle(val: boolean, oldVal: boolean) {
-    this.visible = val
     this.$emit('update:show', val)
     if (val) {
       this.domExist = val
       await this.$nextTick()
       this.setZIndex()
       manage.open(this)
+      openOverlay()
     } else {
       manage.close(this)
     }
+    this.visible = val
   }
 }

@@ -4,7 +4,7 @@
   opacity: 0.3;
   transition: all .5s;
   transform-origin: 50% 50%;
-  &-enter,
+  &.overlay-enter,
   &.overlay-leave-to {
     opacity: 0
   }
