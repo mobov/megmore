@@ -6,7 +6,7 @@ import MIcon from '@/components/icon'
 import MButton from '@/components/button'
 import Render from '@/components/render'
 import { Model } from '@/types';
-import Overlay from '../base/overlay'
+import Overlay from '@/components/base/overlay'
 import modamManage from '@/mixins/modal/modalManage'
 @Component
 export default class MModal extends mixins(modalMixin) {

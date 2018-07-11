@@ -1,4 +1,4 @@
-import MDrawer from './drawer'
+import MDrawer from '@/components/drawer/drawer'
 
 /* istanbul ignore next */
 MDrawer.install = function install(Vue) {

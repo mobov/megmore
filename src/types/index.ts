@@ -19,7 +19,7 @@ export namespace Model {//  各种数据模型
   export type Type = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default'//  颜色主题类型
 
   export type Color = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'default' | string //  颜色主题类型
-  export type Variety = 'normal' | 'flat' | 'outline' //  类型变异
+  export type Variety = 'normal' | 'flat' | 'outline' |  'pure' //  类型变异
   export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 
   export interface ModalComponent extends Vue {// 模态框组件

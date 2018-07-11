@@ -1,0 +1,76 @@
+@import "../import";
+
+$--size-time-picker-header: 100;
+
+.m-datetime-picker,
+.m-date-picker,
+.m-time-picker {
+    user-select: none;
+    overflow: hidden;
+    line-height: 1.2;
+    width: d($--size-time-picker-portrait);
+    border-radius: d($--radius);
+    &.landscope {
+        width: d($--size-time-picker-landscope);
+    }
+};
+
+.m-time-picker-header {
+    color: white;
+    padding: d($--space-y) d($--space-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: d($--size-time-picker-header);
+    &-date {
+        flex-grow: 1;
+        &--year {
+            cursor: pointer;
+            font-size: d(14);
+            margin-bottom: d(4);
+        }
+        &--day {
+            cursor: pointer;
+            font-size: d(24);
+            margin-bottom: d(5);
+        }
+    }
+    &-time {
+        height: d(70);
+        display: flex;
+        align-items: flex-end;
+        &--hour {
+            cursor: pointer;
+            font-size: d(36)
+        }
+        &--ampm {
+            margin: d(8) 0 d(4) d(8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            font-size: d(14);
+            //> div {
+            //    margin-top: d(5);
+            //}
+        }
+    }
+}
+
+.m-time-picker-panel-date {
+    color: getColor(gray, A700);
+    &--header {
+        display: flex;
+        justify-content: space-between;
+        &-handler {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &-table {
+        line-height: 1.5;
+        text-align: center;
+        width: 100%;
+    }
+
+}

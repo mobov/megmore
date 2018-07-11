@@ -28,9 +28,12 @@ $--FontSize-avatar: (
     xl: 60,
 );
 
-//space size
-$--space-x: 20;
-$--space-y: 30;
+// space size
+$--space-x: 25;
+$--space-y: 20;
+
+// radius
+$--radius: 2;
 
 //appBar size
 $--size-appBar: 60;
@@ -60,7 +63,7 @@ $--Radius: (
 
 $--size-button-min-width: 88;
 
-$--size-button-radius: 2;
+
 
 $--size-button-round-radius: 28;
 
@@ -76,5 +79,9 @@ $--Transitions: (
 $--transition-base:             all .2s ease-in-out !default;
 $--transition-fade:             opacity .15s linear !default;
 $--transition-collapse:         height .35s ease !default;
+
+// timePicker 
+$--size-time-picker-portrait: 300;
+$--size-time-picker-landscope: 600;
 
 

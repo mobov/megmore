@@ -1,6 +1,6 @@
-@mixin button-bg($type) {
- background-color: $type
-}
+/**
+ * button
+ */
 
 .m-button {
     display: flex;
@@ -8,7 +8,7 @@
     justify-content: space-around;
     margin: d(6) d(8);
     padding: 0 d(8);
-
+    border-radius: d($--radius);
     // si
     @each $name, $value in $--Size-button-height {
         &.#{$name} {

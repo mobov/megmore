@@ -9,6 +9,8 @@ const currentTheme = 'unicon'
 const Theme: any = {
     unicon: {
         theme: {
+            legacy: Palettes.grey_A700,
+            default: Palettes.grey_A100,
             primary: Palettes.lightblue_A700,
             danger: Palettes.red_300,
             warning: Palettes.red_300,
@@ -24,7 +26,6 @@ const Theme: any = {
         },
     },
 }
-
 /**
  * todo://抽离进es-treasure
  * @param {string} name
@@ -36,7 +37,6 @@ function midlineCase(name: string): string {
         return offset ? '-' + separator.toLowerCase() : letter
     })
 }
-
 /**
  * 属性映射规则
  * @type {{bgColor: string; elevation: string[]}}
@@ -55,14 +55,21 @@ const themeFormatMap: any = {
 function collectSpecialStyles(name: string, selector: string, attrData: any): string {
     let tempText = ''
     Object.keys(attrData).forEach(attrName => {
+        // bg
         tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)} {
                         background-color: ${attrData[attrName]}
                     }\n`
+        // color
         tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)} {
                         color: ${attrData[attrName]}
                     }\n`
+        // border
         tempText += `[data-megmore-theme=${name}] .line-${midlineCase(attrName)} {
                         border-color: ${attrData[attrName]}
+                    }\n`
+        // active
+        tempText += `[data-megmore-theme=${name}] .active-${midlineCase(attrName)} {
+                        color: ${attrData[attrName]}
                     }\n`
     })
     return tempText
@@ -89,10 +96,8 @@ function collectSelectorStyles(name: string, selector: string, attrData: any): s
     })
     tempText += '}\n'
 
-
     return tempText
 }
-
 /**
  * 修饰符样式构造
  */
@@ -105,7 +110,6 @@ function collectModifyStyles(name: string) {
     })
     return str
 }
-
 /**
  * 构造样式表
  * @param name

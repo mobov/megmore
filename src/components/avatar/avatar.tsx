@@ -47,7 +47,6 @@ export default class MAvatar extends Vue {
     this.loaded = true
   }
   public render(h: any) {
-      console.log(this)
       const { src, classes, imgClasses, onLoad } = this
 
       return (

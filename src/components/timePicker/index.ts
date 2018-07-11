@@ -1,8 +1,9 @@
-import MDatePicker from '@/components/date-picker/datepicker'
+import MDatePicker from './date'
 
 /* istanbul ignore next */
 MDatePicker.install = function install(Vue: any) {
     Vue.component(MDatePicker.name, MDatePicker)
 }
-
-export default MDatePicker
+export {
+    MDatePicker,
+}
