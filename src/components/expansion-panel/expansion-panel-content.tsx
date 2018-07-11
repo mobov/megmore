@@ -40,7 +40,7 @@ export default class MExpansionPanelContent extends mixins(toggleable) {
       ''
     return (
       <div class='m-expansion-panel-content'>
-        <div class='m-expansion-panel-content__header' onClick={this.toggle}>
+        <div v-m-ripple class='m-expansion-panel-content__header' onClick={this.toggle}>
           {this.$slots.header}
           {
             this.$slots.headerIcon

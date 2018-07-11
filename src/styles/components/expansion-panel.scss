@@ -1,12 +1,12 @@
 .m-expansion-panel-content {
   $name: m-expansion-panel-content;
-  min-height: d(50);
   .#{$name}__header {
-    min-height: d(50);
+    font-size: d(14);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: d(5) d(10);
+    padding: d(5) d(20);
+    border-top: 1px solid getColor(grey, 400);
     cursor: pointer;
     .#{$name}__header-icon {
       transition: all .3s;
@@ -17,7 +17,6 @@
   }
   .#{$name}__body {
     $transName: m-expansion-panel;
-    border-top: 1px solid getColor(grey, 400);
     &.#{$transName}-enter-active,
     &.#{$transName}-leave-active {
       transition: all .3s;
@@ -27,11 +26,12 @@
       // height: 0;
     }
     .#{$name}__body-content {
-      padding: d(5) d(5);
+      padding: d(16);
     }
+    font-size: d(12)
   }
 }
 
 .m-expansion-panel {
-  border: 1px solid getColor(grey, 300);
+  border: 1px solid getColor(grey, 50);
 }

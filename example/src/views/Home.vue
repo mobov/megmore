@@ -37,7 +37,7 @@
         <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
         <MExpansionPanel style="width:500px;margin:0 auto">
-            <MExpansionPanelContent>
+            <MExpansionPanelContent v-for="item in 10">
                 <template slot="header">
                     title
                 </template>
