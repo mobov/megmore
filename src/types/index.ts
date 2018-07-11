@@ -7,6 +7,13 @@ export interface Megmore {
 }
 export default Megmore
 
+interface MegmoreTheme {
+  [key: string]: any
+}
+
+interface MegmoreIcons {
+  [key: string]: any
+}
 export interface MegmoreUseOptions {
   components?: Record<string, PluginObject<any> | PluginFunction<never>>
   theme?: Partial<MegmoreTheme> | false
@@ -25,7 +32,8 @@ export namespace Model {//  各种数据模型
   export interface ModalComponent extends Vue {// 模态框组件
     escPress: () => void,
     show: boolean,
-    _value: boolean
+    _value: boolean,
+    visible: boolean
   }
   export interface Component extends Vue {//  普通组件
     install: (Vue: VueConstructor) => void

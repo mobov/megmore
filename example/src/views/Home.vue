@@ -36,6 +36,16 @@
         </m-modal>
         <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
+        <MExpansionPanel style="width:500px;margin:0 auto">
+            <MExpansionPanelContent>
+                <template slot="header">
+                    title
+                </template>
+                <template>
+                    阿斯打扫打扫大
+                </template>
+            </MExpansionPanelContent>
+        </MExpansionPanel>
     </m-container>
     <!--<div class="home">-->
         <!--<m-icon style="color:red;font-size: 50px"-->

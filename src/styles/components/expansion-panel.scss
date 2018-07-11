@@ -1,0 +1,37 @@
+.m-expansion-panel-content {
+  $name: m-expansion-panel-content;
+  min-height: d(50);
+  .#{$name}__header {
+    min-height: d(50);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: d(5) d(10);
+    cursor: pointer;
+    .#{$name}__header-icon {
+      transition: all .3s;
+      &.#{$name}__header-icon--active {
+        transform: rotate(180deg)
+      }
+    }
+  }
+  .#{$name}__body {
+    $transName: m-expansion-panel;
+    border-top: 1px solid getColor(grey, 400);
+    &.#{$transName}-enter-active,
+    &.#{$transName}-leave-active {
+      transition: all .3s;
+    }
+    &.#{$transName}-leave-to,
+    &.#{$transName}-enter {
+      // height: 0;
+    }
+    .#{$name}__body-content {
+      padding: d(5) d(5);
+    }
+  }
+}
+
+.m-expansion-panel {
+  border: 1px solid getColor(grey, 300);
+}
