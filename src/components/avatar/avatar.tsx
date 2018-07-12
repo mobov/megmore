@@ -29,7 +29,7 @@ export default class MAvatar extends Vue {
   private loaded: boolean = false
 
   get classes(): any {
-    const classes = {
+    return {
         [`${this.size}`]: true,
         [`${this.variety}`]: true,
         [`${this.shape}`]: true,
@@ -38,7 +38,6 @@ export default class MAvatar extends Vue {
         [`border-${this.type}`]: this.variety === 'outline' && !isHexColor(this.type),
         [`elevation-${this.elevation}`]: this.elevation,
     }
-    return classes
   }
   get imgClasses(): any {
     return this.loaded ? 'loaded' : ''

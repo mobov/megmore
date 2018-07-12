@@ -34,7 +34,7 @@ export default class MButton extends Vue {
     private elevation!: number
 
     get classes(): any {
-        const classes = {
+        return {
             [`${this.size}`]: true,
             [`${this.variety}`]: true,
             [`${this.shape}`]: true,
@@ -44,7 +44,6 @@ export default class MButton extends Vue {
             [`border-${this.type}`]: this.variety === 'outline' && !isHexColor(this.type),
             [`elevation-${this.elevation}`]: this.elevation,
         }
-        return classes
     }
 
     @Emit('click')
@@ -56,7 +55,7 @@ export default class MButton extends Vue {
                 class={this.classes}
                 onClick={this.handleClick}
             >
-                {this.loading && (this.$slots.spinner || <m-spin ></m-spin>)}
+                {this.loading && (this.$slots.spinner || <MSpin/>)}
                 <span>{this.$slots.default}</span>
             </button>
         )
