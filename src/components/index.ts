@@ -11,6 +11,7 @@ export { default as MSpin } from '@/components/spin'
 export { default as MDrawer } from '@/components/drawer'
 export { default as MBottomSheet } from '@/components/bottom-sheet'
 export { MExpansionPanel, MExpansionPanelContent } from '@/components/expansion-panel'
+export { MForm, MFormItem } from '@/components/form'
 
 export { MContainer, MRow, MCol, MFlexFiller } from '@/components/layout'
 export { MDatePicker } from '@/components/timePicker'
