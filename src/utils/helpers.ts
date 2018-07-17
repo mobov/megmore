@@ -107,7 +107,7 @@ export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDi
 }
 
 export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void {
-  var once = () => {
+  const once = () => {
     cb()
     el.removeEventListener(event, once, false)
   }

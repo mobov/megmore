@@ -1,6 +1,6 @@
 import Ripple from '@/directives/ripple'
 import ClickOutside from '@/directives/click-outside'
-import { VueConstructor } from 'vue';
+import { VueConstructor } from 'vue'
 
 export {
   Ripple,

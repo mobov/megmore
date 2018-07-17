@@ -4,7 +4,6 @@
 import { VNodeDirective } from 'vue'
 
 const name = 'MRipple'
-const prefix = 'm-ripple'
 
 function style(el: HTMLElement, value: string) {
     el.style.transform = value
@@ -138,7 +137,6 @@ function updateRipple(el: HTMLElement, binding: VNodeDirective, wasEnabled: bool
         el.addEventListener('mousedown', rippleShow, false)
         el.addEventListener('mouseup', rippleHide, false)
         el.addEventListener('mouseleave', rippleHide, false)
-        // Anchor tags can be dragged, causes other hides to fail - #1537
         el.addEventListener('dragstart', rippleHide, false)
     } else if (!enabled && wasEnabled) {
         removeListeners(el)
