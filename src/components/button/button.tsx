@@ -53,10 +53,9 @@ export default class MButton extends Vue {
         return (
             <button v-m-ripple staticClass={prefix}
                 class={this.classes}
-                onClick={this.handleClick}
-            >
+                onClick={this.handleClick}>
                 {this.loading && (this.$slots.spinner || <MSpin/>)}
-                <span>{this.$slots.default}</span>
+                {this.$slots.default}
             </button>
         )
     }

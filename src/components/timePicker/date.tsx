@@ -1,8 +1,9 @@
-import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
+import '@/utils/date'
+import { Component, Prop, Emit, Vue, Model } from 'vue-property-decorator'
 import MTimePickerHeader from './parts/header'
 import MTimePickerPanelDate from './parts/panel-date'
 import { VNode } from 'vue'
-import { Model } from '@/types'
+import { Color } from '@/types/model'
 
 const name = 'MDatePicker'
 const prefix = 'm-date-picker'
@@ -13,13 +14,17 @@ const prefix = 'm-date-picker'
 })
 export default class MDatePicker extends Vue {
     @Prop({ type: String, default: 'primary' })
-    private type!: Model.Color
+    private type!: Color
+
+    @Prop({ type: Number })
+    private elevation!: number
+
+    @Model('change', { type: String })
+    private value: string
 
     @Prop({ type: Boolean, default: false })
     private ampm!: boolean
 
-    @Prop({ type: Number })
-    private elevation!: number
 
     get classes(): any {
         return{
@@ -28,13 +33,13 @@ export default class MDatePicker extends Vue {
     }
 
     public render(): VNode {
-        const { classes, ampm, type } = this
+        const { classes, ampm, value, type } = this
 
         return (
             <div staticClass={prefix} class={classes}>
-                <MTimePickerHeader ampm={ampm} type={type}/>
+                <MTimePickerHeader ampm={ampm} type={type} />
                 <div class={`${prefix}--main`}>
-                    <MTimePickerPanelDate type={type}/>
+                    <MTimePickerPanelDate value={value} type={type} />
                 </div>
             </div>
         )

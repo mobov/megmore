@@ -68,7 +68,14 @@ function collectSpecialStyles(name: string, selector: string, attrData: any): st
                         border-color: ${attrData[attrName]}
                     }\n`
         // active
-        tempText += `[data-megmore-theme=${name}] .active-${midlineCase(attrName)} {
+        tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)}.active {
+                        color: ${attrData[attrName]}
+                    }\n
+                    [data-megmore-theme=${name}] .bg-${midlineCase(attrName)}.active {
+                        background-color: ${attrData[attrName]}
+                    }\n`
+        // hover
+        tempText += `[data-megmore-theme=${name}] .hover-${midlineCase(attrName)}:hover {
                         color: ${attrData[attrName]}
                     }\n`
     })
