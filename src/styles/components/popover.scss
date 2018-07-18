@@ -1,0 +1,22 @@
+.m-popover{
+ display: inline-block
+}
+.m-popover__content{
+ $name:'m-popover';
+ position: fixed;
+ background: #fff;
+ border-radius: 2px;
+ max-height: 100%;
+ max-width: 80%;
+ overflow: auto;
+ box-shadow: getElevation(10);
+ 
+ &.#{$name}-enter-active,&.#{$name}-leave-active{
+  transition: all .3s
+ }
+ &.#{$name}-enter,&.#{$name}-leave-to{
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: 0 0
+ }
+}
