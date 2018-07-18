@@ -13,7 +13,8 @@ declare module 'vue/types/vue' {
   }
   interface Vue {
     options:any,
-    $confirm: () => Promise<any>
+    $confirm: () => Promise<any>,
+    _isVue:boolean
   }
 }
 declare global {

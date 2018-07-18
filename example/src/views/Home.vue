@@ -29,16 +29,21 @@
         </m-modal>
         <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
+       
         <MExpansionPanel style="width:500px;margin:0 auto">
-            <MExpansionPanelContent v-for="item in 10">
+            <MExpansionPanelContent v-for="item in 30">
                 <template slot="header">
                     title
                 </template>
                 <template>
-                    阿斯打扫打扫大
+                     <m-popover>
+                        <m-date-picker elevation=2></m-date-picker>
+                        <m-button slot="ref">Popover</m-button>
+                    </m-popover>
                 </template>
             </MExpansionPanelContent>
         </MExpansionPanel>
+        
     </m-container>
 </template>
 

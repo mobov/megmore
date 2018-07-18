@@ -19,8 +19,10 @@ export default class ModalMixin extends Vue {
 
   @Watch('show', { immediate: true })
   @Watch('visible', { immediate: true })
-  public async visibleChangeHandle(val: boolean, oldVal: boolean) {
+  public async visibleChangeHandle(val: any, oldVal: boolean) {
+   if((val as boolean) instanceof Boolean){
     this.$emit('update:show', val)
     this.visible = val
+   }
   }
 }

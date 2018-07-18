@@ -11,7 +11,7 @@ interface Node extends Element {
   bindingFn: () => void,
  }
 }
-const nodeList: Node[] = [];
+const nodeList: Node[] = []// 点击发生在这些列表中的元素之外时触发
 
 
 let startClick: MouseEvent;
@@ -21,13 +21,18 @@ let seed = 0;
 
 on(document, 'mousedown', (e: MouseEvent) => { startClick = e })
 on(document, 'mouseup', (e: MouseEvent) => {
- nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
+ const checkDom = nodeList.some((node) => {// 元素在白名单某个DOM内部
+  return node.contains((e.target as Element) || startClick.target)
+ })
+ if (!checkDom) {
+  nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
+ }
 })
 function createDocumentHandler(el: Node, binding: any, vnode: any) {
  return (mouseup: MouseEvent, mousedown: MouseEvent) => {
-  const target1 = mouseup.target as HTMLElement
-  const target2 = mousedown.target as HTMLElement
-  if (el.contains(target1) || el.contains(target2)) {
+  const target1 = mouseup.target as Node
+  const target2 = mousedown.target as Node
+  if (el.contains(target1) || el.contains(target2) || nodeList.includes(target1) || nodeList.includes(target1)) {
    return
   }
 
