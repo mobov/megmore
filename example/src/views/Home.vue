@@ -52,11 +52,13 @@ export default {
       fullscreenModal: false,
       drawer: true,
       bottomSheet: false,
-      dateValue: '1531712495000'
+      dateValue: new Date()
     };
   },
   methods: {
-    handleAvatarClose() {},
+    handleAvatarClose() {
+
+    },
     handleAvatarClick() {},
     async confirm() {
       await this.$confirm({

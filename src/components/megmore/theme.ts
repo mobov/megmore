@@ -1,6 +1,7 @@
 /**
  * Created by nocoolyoyo on 2018/6/23.
  */
+import Color from 'color'
 import Palettes from '@/components/megmore/palettes'
 import Elevations from '@/components/megmore/elevations'
 
@@ -9,6 +10,7 @@ const currentTheme = 'unicon'
 const Theme: any = {
     unicon: {
         theme: {
+            pure: Palettes.grey_A100,
             legacy: Palettes.grey_A700,
             default: Palettes.grey_A100,
             primary: Palettes.lightblue_A700,
@@ -19,7 +21,7 @@ const Theme: any = {
         },
         appBar: {
             bgColor: Palettes.lightblue_A700,
-            color: 'white',
+            color: Palettes.grey_A100,
         },
         spinPath: {
             stroke: Palettes.lightblue_A700,
@@ -39,8 +41,9 @@ function midlineCase(name: string): string {
 }
 /**
  * 属性映射规则
- * @type {{bgColor: string; elevation: string[]}}
+ * @type {{bgColor: string; elevation: string}}
  */
+
 const themeFormatMap: any = {
     bgColor: 'background-color',
     elevation: 'box-shadow',
@@ -54,7 +57,9 @@ const themeFormatMap: any = {
  */
 function collectSpecialStyles(name: string, selector: string, attrData: any): string {
     let tempText = ''
+    console.log()
     Object.keys(attrData).forEach(attrName => {
+
         // bg
         tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)} {
                         background-color: ${attrData[attrName]}
@@ -67,18 +72,32 @@ function collectSpecialStyles(name: string, selector: string, attrData: any): st
         tempText += `[data-megmore-theme=${name}] .line-${midlineCase(attrName)} {
                         border-color: ${attrData[attrName]}
                     }\n`
-        // active
-        tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)}.active {
-                        color: ${attrData[attrName]}
-                    }\n
-                    [data-megmore-theme=${name}] .bg-${midlineCase(attrName)}.active {
-                        background-color: ${attrData[attrName]}
-                    }\n`
+
+        const colorObj = Color(attrData[attrName])
+
         // hover
-        tempText += `[data-megmore-theme=${name}] .hover-${midlineCase(attrName)}:hover {
-                        color: ${attrData[attrName]}
-                    }\n`
+        if(colorObj.isDark()){
+            tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)}--hover:hover {
+                    color: ${colorObj.lighten(.4)}
+                    border-color: ${colorObj.lighten(.4)}
+                }\n`
+            tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)}--hover:hover {
+                    background-color: ${colorObj.lighten(.4)}
+                }\n`
+        } else {
+            tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)}--hover:hover {
+                    color: ${colorObj.darken(.2)}
+                    border-color: ${colorObj.darken(.2)}
+                }\n`
+            tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)}--hover:hover {
+                    background-color: ${colorObj.darken(.2)}
+                }\n`
+        }
+
+
     })
+
+
     return tempText
 }
 /**

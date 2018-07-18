@@ -31,11 +31,13 @@ export default class MTimePickerPanelDate extends Vue {
     @Prop({ type: Number, default: 0 })
     private firstDayOfWeek!: number
 
-    @Prop({ type: Number, default: new Date().getFullYear() })
-    private year!: number  // 2010
+    @Prop({ type: Date, default: new Date() })
+    private value!: Date
 
-    @Prop({ type: Number, default: new Date().getMonth() })
-    private month!: number  // 2010
+    // @Prop({ type: String, default: new Date() })
+    // private valueFormat!: any
+
+    private viewValue: Date = this.value
 
     get classes(): any {
         return {
@@ -43,30 +45,52 @@ export default class MTimePickerPanelDate extends Vue {
         }
     }
 
-    public render(): VNode {
-        const { classes, year, month } = this
-        const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
-        const currentDate = new Date(`2018 06 15 14:05:06`)
-        const monthDays = currentDate.maxDayOfMonth()
-        const week = currentDate.getDay()
+    public handleDayClick(): void {
 
+    }
+
+    public render(): VNode {
+
+        const { classes, value, viewValue,
+                handleDayClick } = this
+        const nowDate = new Date()
+        const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
+        const isCurMonth = viewValue.getFullYear() === nowDate.getFullYear() && viewValue.getMonth() === nowDate.getMonth()
+        const viewMonthDays = viewValue.maxDayOfMonth()
+        const viewDay = viewValue.getDay()
+        const valueDate = value.getDate()
+        console.log(valueDate)
         const RTableHead = () => {
             const Tds: any = []
+
             WeekMap.forEach(week => Tds.push(<td>{week}</td>))
+
             return (<thead><tr>{Tds}</tr></thead>)
         }
 
         const RTableBody = () => {
             const Trs: any = []
             let Tds: any = []
-            for (let day = 1; day <= monthDays; day++){
-                Tds.push(<td>{day > week ? <MButton style="margin: 0" shape="circle" variety="flat" type="legacy">{day}</MButton> : ''}</td>)
-
-                if(day%7 === 0 || day === monthDays){
-                    Trs.push(<tr>{Tds}</tr>)
-                    Tds = []
+            if(isCurMonth){
+                for (let day = 1; day <= viewMonthDays; day++){
+                    const isCurDay = day === valueDate
+                    Tds.push(<td>{day > viewDay ? <MButton onClick={handleDayClick} style="margin: 0" shape="circle" elevation={0} variety={isCurDay ? 'normal' : 'flat'} type={isCurDay ? 'primary' : 'legacy'}>{day}</MButton> : ''}</td>)
+                    if(day%7 === 0 || day === viewMonthDays){
+                        Trs.push(<tr>{Tds}</tr>)
+                        Tds = []
+                    }
+                }
+            } else {
+                for (let day = 1; day <= viewMonthDays; day++){
+                    Tds.push(<td>{day > viewDay ? <MButton onClick={handleDayClick} style="margin: 0" shape="circle" variety="flat" type="legacy">{day}</MButton> : ''}</td>)
+                    if(day%7 === 0 || day === viewMonthDays){
+                        Trs.push(<tr>{Tds}</tr>)
+                        Tds = []
+                    }
                 }
             }
+
+
             return (<tbody>{Trs}</tbody>)
         }
 

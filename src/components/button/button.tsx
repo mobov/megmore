@@ -3,7 +3,7 @@ import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { isHexColor } from 'es-treasure'
 import MSpin from '@/components/spin'
-import { Model } from '@/types'
+import { Size, Color, Variety, Shape } from '@/types/model'
 const name = 'MButton'
 const prefix = 'm-button'
 
@@ -13,16 +13,16 @@ const prefix = 'm-button'
 })
 export default class MButton extends Vue {
     @Prop({ type: String, default: 'md' })
-    private size!: Model.Size
+    private size!: Size
 
     @Prop({ type: String, default: 'default' })
-    private type!: Model.Color
+    private type!: Color
 
     @Prop({ type: String, default: 'normal' })
-    private variety!: Model.Variety
+    private variety!: Variety
 
     @Prop({ type: String, default: 'square' })
-    private shape!: Model.Shape
+    private shape!: Shape
 
     @Prop({ type: Boolean })
     private block!: boolean
@@ -34,15 +34,18 @@ export default class MButton extends Vue {
     private elevation!: number
 
     get classes(): any {
+        const isNormal = this.variety === 'normal'
+        const isOutline = this.variety === 'outline'
         return {
             [`${this.size}`]: true,
             [`${this.variety}`]: true,
             [`${this.shape}`]: true,
             [`${this.block}`]: this.block,
-            [`color-${this.type}`]: this.variety !== 'normal' && !isHexColor(this.type),
-            [`bg-${this.type}`]: this.variety === 'normal' && !isHexColor(this.type),
-            [`border-${this.type}`]: this.variety === 'outline' && !isHexColor(this.type),
-            [`elevation-${this.elevation}`]: this.elevation,
+            [`color-${this.type}`]: !isNormal,
+            [`border-${this.type}`]: isOutline,
+            [`bg-${this.type}`]: isNormal,
+            [`bg-${this.type}--hover`]: isNormal,
+            [`elevation-${this.elevation}`]: true,
         }
     }
 
@@ -51,7 +54,7 @@ export default class MButton extends Vue {
 
     public render(): VNode {
         return (
-            <button v-m-ripple staticClass={prefix}
+            <button v-m-ripple staticClass={`${prefix} hover`}
                 class={this.classes}
                 onClick={this.handleClick}>
                 {this.loading && (this.$slots.spinner || <MSpin/>)}

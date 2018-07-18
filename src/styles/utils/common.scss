@@ -2,23 +2,17 @@
  * 通用样式
  */
 
-//bg & color 背景 颜色
+//bg & color & hover & active 背景 颜色
 @each $main, $colors in $--Palettes {
     @each $key, $color in $colors {
-        @if($key == 500){
-            .bg-#{$main} {
-                background-color: $color;
-            }
-            .color-#{$main}{
-                color: $color;
-            }
-        }@else{
-            .bg-#{$main}#{$key} {
-                background-color: $color;
-            }
-            .color-#{$main}#{$key}{
-                color: $color;
-            }
+        .bg-#{$main}#{$key} {
+            background-color: $color;
+        }
+        .color-#{$main}#{$key}{
+            color: $color;
+        }
+        .border-#{$main}#{$key}{
+            border-color: $color;
         }
     }
 }

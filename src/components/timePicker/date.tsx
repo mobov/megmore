@@ -19,12 +19,11 @@ export default class MDatePicker extends Vue {
     @Prop({ type: Number })
     private elevation!: number
 
-    @Model('change', { type: String })
-    private value: string
+    @Model('change', { type: Date, default: new Date() })
+    private value: Date
 
     @Prop({ type: Boolean, default: false })
     private ampm!: boolean
-
 
     get classes(): any {
         return{
@@ -37,7 +36,7 @@ export default class MDatePicker extends Vue {
 
         return (
             <div staticClass={prefix} class={classes}>
-                <MTimePickerHeader ampm={ampm} type={type} />
+                <MTimePickerHeader value={value} ampm={ampm} type={type} />
                 <div class={`${prefix}--main`}>
                     <MTimePickerPanelDate value={value} type={type} />
                 </div>

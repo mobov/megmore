@@ -14,5 +14,26 @@ Date.prototype.isLeapYear = function() {
 Date.prototype.maxDayOfMonth = function(){
     return (32 - new Date(this.getFullYear(), this.getMonth(), 32).getDate())
 }
+/**
+ * 获取补零月份
+ */
+Date.prototype.getZeroizeMonth = function(){
+    const value = this.getMonth().toString()
+    return value.length === 2 ? value : `0${value}`
+}
+/**
+ * 获取补零小时
+ */
+Date.prototype.getZeroizeHours = function(){
+    const value = this.getHours().toString()
+    return value.length === 2 ? value : `0${value}`
+}
+/**
+ * 获取补零分钟
+ */
+Date.prototype.getZeroizeMinutes = function(){
+    const value = this.getMinutes().toString()
+    return value.length === 2 ? value : `0${value}`
+}
 
 

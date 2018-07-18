@@ -8,6 +8,11 @@ export type Color = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'def
 export type Variety = 'normal' | 'flat' | 'outline' |  'pure' //  类型变异
 export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 
+// date
+export type DateValueType = 'timestamp' | 'date'  //  形状
+export type DatePickerType = 'year' | 'month' | 'week' | 'date' | 'time'  | 'datetime'
+export type FirstDayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7
+
 export interface ModalComponent extends Vue {// 模态框组件
     escPress: () => void,
     show: boolean,

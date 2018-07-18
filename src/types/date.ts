@@ -4,4 +4,7 @@
 interface Date {
     isLeapYear(): boolean
     maxDayOfMonth(): number
+    getZeroizeMonth(): string | number
+    getZeroizeHours(): string | number
+    getZeroizeMinutes(): string | number
 }
