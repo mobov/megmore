@@ -29,13 +29,13 @@ export default class MTimePickerHeader extends Vue {
         const value = new Date(this.value)
         return (
             <div staticClass={`${prefix}`} class={classes}>
-                <div class={`${prefix}-date`}>
-                    <div staticClass={`${prefix}-date--year`}>{value.getFullYear()}</div>
-                    <div staticClass={`${prefix}-date--day`}>{value.getMonth()}-{value.getDate()}</div>
+                <div class={`${prefix}__date`}>
+                    <div staticClass={`${prefix}__date-year`}>{value.getFullYear()}</div>
+                    <div staticClass={`${prefix}__date-day`}>{value.getMonth()}-{value.getDate()}</div>
                 </div>
-                <div class={`${prefix}-time`}>
-                    <div staticClass={`${prefix}-time--hour`}>{value.getHours()}:{value.getMinutes()}</div>
-                    <div staticClass={`${prefix}-time--ampm`}>
+                <div class={`${prefix}__time`}>
+                    <div staticClass={`${prefix}__time-hour`}>{value.getHours()}:{value.getMinutes()}</div>
+                    <div staticClass={`${prefix}__time-ampm`}>
                         <div>AM</div>
                         <div>PM</div>
                     </div>

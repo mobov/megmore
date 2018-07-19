@@ -114,8 +114,8 @@ export default class MTimePickerPanelDate extends Vue {
                 Tds.push(<td> </td>)
             }
             for (let date = 1; date <= viewMonthDays; date ++){
-                const isCurDate = isCurMonth && (date === viewDate)
-                Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, date)} style="margin: 0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{date}</MButton></td>)
+                const isCurDate = isCurMonth && (date === propDate)
+                Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, date)} class="m--m-0 m--p-0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{date}</MButton></td>)
                 if((date + viewFirstWeekDay) %7 === 0 || date === viewMonthDays){
                     Trs.push(<tr>{Tds}</tr>)
                     Tds = []
@@ -126,17 +126,17 @@ export default class MTimePickerPanelDate extends Vue {
         }
 
         return (
-            <div staticClass={`${prefix}`} class={classes}>
-                <div class={`${prefix}--header`}>
-                    <div staticClass={`${prefix}--header-year`}>
+            <div staticClass={prefix} class={classes}>
+                <div class={`${prefix}__header`}>
+                    <div staticClass={`${prefix}__header-year`}>
                         <MButton variety="flat" type="legacy">{viewYear}</MButton>
                     </div>
-                    <div staticClass={`${prefix}--header-handler`}>
+                    <div staticClass={`${prefix}__header-handler`}>
                         <MButton variety="flat" onClick={()=>handleMonthToggle('prev')} shape="circle" type="legacy"><MIcon name="navigate_before" /></MButton>
                         <MButton variety="flat" onClick={()=>handleMonthToggle('next')} shape="circle" type="legacy"><MIcon name="navigate_next" /></MButton>
                     </div>
                  </div>
-                <table class={`${prefix}-table`}>
+                <table class={`${prefix}__table`}>
                     {RTableHead()}
                     {RTableBody()}
                 </table>

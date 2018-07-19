@@ -38,7 +38,7 @@ export default class MDatePicker extends Vue {
         return (
             <div staticClass={prefix} class={classes}>
                 <MTimePickerHeader value={value} ampm={ampm} type={type} />
-                <div class={`${prefix}--main`}>
+                <div class={`${prefix}__main`}>
                     <MTimePickerPanelDate value={value} onInput={handleValueInput} type={type} />
                 </div>
             </div>
