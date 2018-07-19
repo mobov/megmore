@@ -5,13 +5,9 @@ import MTimePickerPanelDate from './parts/panel-date'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
-const name = 'MDatePicker'
 const prefix = 'm-date-picker'
 
-@Component({
-    name,
-    components: { MTimePickerHeader, MTimePickerPanelDate },
-})
+@Component({ components: { MTimePickerHeader, MTimePickerPanelDate }})
 export default class MDatePicker extends Vue {
     @Prop({ type: String, default: 'primary' })
     private type!: Color
@@ -27,7 +23,7 @@ export default class MDatePicker extends Vue {
 
     get classes(): any {
         return{
-            [`elevation-${this.elevation}`]: this.elevation,
+            [`m--elevation-${this.elevation}`]: this.elevation,
         }
     }
     public handleValueInput(val: any): void {

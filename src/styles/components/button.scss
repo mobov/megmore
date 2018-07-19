@@ -8,7 +8,8 @@
   justify-content: space-around;
   margin: d(6) d(8);
   padding: 0 d(8);
-  border-radius: d($--radius); // si
+  border-radius: d($--radius);
+  // size
   @each $name,
   $value in $--Size-button-height {
     &.m--#{$name} {
@@ -35,7 +36,7 @@
     border-radius: 50%;
     @each $name,
     $value in $--Size-button-height {
-      &.#{$name} {
+      &.m--#{$name} {
         @include flex-size(d($value), x);
       }
     }

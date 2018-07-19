@@ -3,9 +3,7 @@ import MButton from '@/components/button'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
-import {emit} from "cluster";
 
-const name = 'MTimePickerPanelDate'
 const prefix = 'm-time-picker-panel-date'
 
 
@@ -14,10 +12,7 @@ const Months: any = []
 const Weeks: any = []
 const Days: any = []
 
-@Component({
-    name,
-    components: { MButton, MIcon },
-})
+@Component({ components: { MButton, MIcon }})
 
 export default class MTimePickerPanelDate extends Vue {
     @Prop({ type: String, default: 'primary' })
@@ -79,18 +74,18 @@ export default class MTimePickerPanelDate extends Vue {
         date.setMonth( action === 'prev' ? month - 1 : month + 1)
         this.viewValue = date.getTime()
     }
-   // @emit('input')
+
+    @Emit('input')
     public handleDateClick(year: number, month: number, date: number): void {
-        // if(year === this.propYear && month === this.propMonth && this.propDate === date) { return }
-        //
+        if(year === this.propYear &&
+           month === this.propMonth &&
+           date === this.propDate) { return }
+        //        console.log(temp.getTime())
         const temp = new Date(this.viewValue)
-        // console.log(temp.getTime())
-        // if(year !== this.propYear) { temp.setFullYear(year) }
-        // if(year !== this.propMonth) { temp.setMonth(month) }
-        // if(year !== this.propDate) { temp.setDate(date) }
-        temp.setFullYear(year)
-        temp.setMonth(month)
-        temp.setDate(date)
+
+        if (year !== this.propYear) { temp.setFullYear(year) }
+        if (year !== this.propMonth) { temp.setMonth(month) }
+        if (year !== this.propDate) { temp.setDate(date) }
         this.viewValue = temp.getTime()
     }
 
@@ -115,10 +110,10 @@ export default class MTimePickerPanelDate extends Vue {
         const RTableBody = () => {
             const Trs: any = []
             let Tds: any = []
-            for(let pre = 0; pre < viewFirstWeekDay; pre++) {
+            for(let pre = 0; pre < viewFirstWeekDay; pre ++) {
                 Tds.push(<td> </td>)
             }
-            for (let date = 1; date <= viewMonthDays; date++){
+            for (let date = 1; date <= viewMonthDays; date ++){
                 const isCurDate = isCurMonth && (date === viewDate)
                 Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, date)} style="margin: 0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{date}</MButton></td>)
                 if((date + viewFirstWeekDay) %7 === 0 || date === viewMonthDays){

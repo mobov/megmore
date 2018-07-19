@@ -4,13 +4,10 @@ import { VNode } from 'vue'
 import { isHexColor } from 'es-treasure'
 import MSpin from '@/components/spin'
 import { Size, Color, Variety, Shape } from '@/types/model'
-const name = 'MButton'
+
 const prefix = 'm-button'
 
-@Component({
-    name,
-    components: { MIcon, MSpin },
-})
+@Component({ components: { MIcon, MSpin } })
 export default class MButton extends Vue {
     @Prop({ type: String, default: 'md' })
     private size!: Size
@@ -30,7 +27,7 @@ export default class MButton extends Vue {
     @Prop({ type: Boolean })
     private loading!: boolean
 
-    @Prop({ type: Number })
+    @Prop({ type: Number, default: 0 })
     private elevation!: number
 
     get classes(): any {
@@ -45,19 +42,20 @@ export default class MButton extends Vue {
             [`m--border-${this.type}`]: isOutline,
             [`m--bg-${this.type}`]: isNormal,
             [`m--bg-${this.type}-hover`]: isNormal,
-            [`m--elevation-${this.elevation}`]: this.elevation ? true : false,
+            [`m--elevation-${this.elevation}`]: true,
         }
     }
 
     @Emit('click')
-    public handleClick(e: MouseEvent): void { return void (0) }
+    public handleClick(e: MouseEvent): void { void(0) }
 
     public render(): VNode {
         return (
-            <button v-m-ripple staticClass={`${prefix}`}
+            <button v-m-ripple
+                staticClass={`${prefix}`}
                 class={this.classes}
                 onClick={this.handleClick}>
-                {this.loading && (this.$slots.spinner || <MSpin />)}
+                {this.loading && (this.$slots.spinner || <MSpin/>)}
                 {this.$slots.default}
             </button>
         )

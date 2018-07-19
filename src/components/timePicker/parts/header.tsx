@@ -5,12 +5,9 @@ import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
-const name = 'MTimePickerHeader'
 const prefix = 'm-time-picker-header'
 
-@Component({
-    name,
-})
+@Component
 export default class MTimePickerHeader extends Vue {
     @Prop({ type: String, default: 'primary' })
     private type!: Color
@@ -23,7 +20,7 @@ export default class MTimePickerHeader extends Vue {
 
     get classes(): any {
         return {
-            [`bg-${this.type}`]: this.type,
+            [`m--bg-${this.type}`]: this.type,
         }
     }
 
