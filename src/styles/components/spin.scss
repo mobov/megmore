@@ -1,18 +1,18 @@
 @import "../import";
 
-.m-spin-wrap {
+.m-spin__wrap {
  width: d(map-get( $--Size-spin, sm));
  height: d(map-get( $--Size-spin, sm));
  position: relative;
  display: inline-block;
  @each $name,
  $value in $--Size-spin {
-  &.m-spin-wrap--#{$name} {
+  &.m--#{$name} {
    width: d($value);
    height: d($value);
   }
  }
- .m-spin {
+ .m-spin__content {
   animation: rotate 2s linear infinite;
   transform-origin: center center;
   position: absolute;
@@ -21,7 +21,7 @@
   left: 0;
   right: 0;
   margin: auto;
-  .m-spin-path {
+  .m-spin {
    stroke-dasharray: 1, 200;
    stroke-dashoffset: 0;
    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;

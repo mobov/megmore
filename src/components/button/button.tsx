@@ -37,27 +37,27 @@ export default class MButton extends Vue {
         const isNormal = this.variety === 'normal'
         const isOutline = this.variety === 'outline'
         return {
-            [`${this.size}`]: true,
-            [`${this.variety}`]: true,
-            [`${this.shape}`]: true,
-            [`${this.block}`]: this.block,
-            [`color-${this.type}`]: !isNormal,
-            [`border-${this.type}`]: isOutline,
-            [`bg-${this.type}`]: isNormal,
-            [`bg-${this.type}--hover`]: isNormal,
-            [`elevation-${this.elevation}`]: true,
+            [`m--${this.size}`]: true,
+            [`m--${this.variety}`]: true,
+            [`m--${this.shape}`]: true,
+            [`m--${this.block}`]: this.block,
+            [`m--color-${this.type}`]: !isNormal,
+            [`m--border-${this.type}`]: isOutline,
+            [`m--bg-${this.type}`]: isNormal,
+            [`m--bg-${this.type}-hover`]: isNormal,
+            [`m--elevation-${this.elevation}`]: this.elevation ? true : false,
         }
     }
 
     @Emit('click')
-    public handleClick(e: MouseEvent): void { return void(0) }
+    public handleClick(e: MouseEvent): void { return void (0) }
 
     public render(): VNode {
         return (
-            <button v-m-ripple staticClass={`${prefix} hover`}
+            <button v-m-ripple staticClass={`${prefix}`}
                 class={this.classes}
                 onClick={this.handleClick}>
-                {this.loading && (this.$slots.spinner || <MSpin/>)}
+                {this.loading && (this.$slots.spinner || <MSpin />)}
                 {this.$slots.default}
             </button>
         )

@@ -73,7 +73,7 @@ export default class ModalMixin extends Mixins(toggleable) {
     } else {
       manage.close(this)
     }
-    // this.visible = val
+    this.visible = val
   }
   protected beforeDestroy() {
     this.domExist = false

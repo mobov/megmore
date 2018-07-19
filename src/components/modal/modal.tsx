@@ -2,12 +2,9 @@ import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
-import MIcon from '@/components/icon'
-import MButton from '@/components/button'
 import Render from '@/components/base/render'
-import { Model } from '@/types';
+import * as Model  from '@/types/model';
 import Overlay from '@/components/base/overlay'
-import modamManage from '@/mixins/modal/modalManage'
 @Component
 export default class MModal extends mixins(modalMixin) {
   public static options: any
@@ -60,16 +57,16 @@ export default class MModal extends mixins(modalMixin) {
       this.domExist && (
         <transition name={this.transitionName} onAfterLeave={this.afterLeave}>
           <div staticClass='m-modal' v-show={this.domReady && this.visible} onClick={this.closeLastModal}>
-            <div staticClass='m-modal--content' class={contentClass} style={this.style} onClick={this.eveStop}>
-              <div class='m-modal--title'>
+            <div staticClass='m-modal__content' class={contentClass} style={this.style} onClick={this.eveStop}>
+              <div class='m-modal__title'>
                 {this.$slots.title || this.title}
               </div>
               <m-icon name='close' onClick={this.hide}>X</m-icon>
-              <div class='m-modal--body'>
+              <div class='m-modal__body'>
                 {typeof content === 'function' ? (<Render content={content}></Render>) : this.$slots.default || this.content}
               </div>
               {this.$slots.footer || (
-                <div class='m-modal--footer'>
+                <div class='m-modal__footer'>
                   <m-button onClick={this.cancel}>
                     取消
                   </m-button>

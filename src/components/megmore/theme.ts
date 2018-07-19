@@ -23,7 +23,7 @@ const Theme: any = {
             bgColor: Palettes.lightblue_A700,
             color: Palettes.grey_A100,
         },
-        spinPath: {
+        'm-spin__path': {
             stroke: Palettes.lightblue_A700,
         },
     },
@@ -35,9 +35,15 @@ const Theme: any = {
  */
 function midlineCase(name: string): string {
     const SPECIAL_CHARS_REGEXP = /([A-Z])/g
-    return name.replace(SPECIAL_CHARS_REGEXP, (_, separator, letter, offset) => {
-        return offset ? '-' + separator.toLowerCase() : letter
-    })
+    const BE_REGEXP = /m(\-[A-z]+)+__[A-z]+/g
+    if (BE_REGEXP.test(name)) {//   BEM原样输出
+        return name
+    }
+    else {
+        return name.replace(SPECIAL_CHARS_REGEXP, (_, separator, letter, offset) => {
+            return offset ? '-' + separator.toLowerCase() : letter
+        })
+    }
 }
 /**
  * 属性映射规则
@@ -61,35 +67,35 @@ function collectSpecialStyles(name: string, selector: string, attrData: any): st
     Object.keys(attrData).forEach(attrName => {
 
         // bg
-        tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)} {
+        tempText += `[data-megmore-theme=${name}] .m--bg-${midlineCase(attrName)} {
                         background-color: ${attrData[attrName]}
                     }\n`
         // color
-        tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)} {
+        tempText += `[data-megmore-theme=${name}] .m--color-${midlineCase(attrName)} {
                         color: ${attrData[attrName]}
                     }\n`
         // border
-        tempText += `[data-megmore-theme=${name}] .line-${midlineCase(attrName)} {
+        tempText += `[data-megmore-theme=${name}] .m--line-${midlineCase(attrName)} {
                         border-color: ${attrData[attrName]}
                     }\n`
 
         const colorObj = Color(attrData[attrName])
 
         // hover
-        if(colorObj.isDark()){
-            tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)}--hover:hover {
+        if (colorObj.isDark()) {
+            tempText += `[data-megmore-theme=${name}] .m--color-${midlineCase(attrName)}-hover:hover {
                     color: ${colorObj.lighten(.4)}
                     border-color: ${colorObj.lighten(.4)}
                 }\n`
-            tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)}--hover:hover {
+            tempText += `[data-megmore-theme=${name}] .m--bg-${midlineCase(attrName)}-hover:hover {
                     background-color: ${colorObj.lighten(.4)}
                 }\n`
         } else {
-            tempText += `[data-megmore-theme=${name}] .color-${midlineCase(attrName)}--hover:hover {
+            tempText += `[data-megmore-theme=${name}] .m--color-${midlineCase(attrName)}-hover:hover {
                     color: ${colorObj.darken(.2)}
                     border-color: ${colorObj.darken(.2)}
                 }\n`
-            tempText += `[data-megmore-theme=${name}] .bg-${midlineCase(attrName)}--hover:hover {
+            tempText += `[data-megmore-theme=${name}] .m--bg-${midlineCase(attrName)}-hover:hover {
                     background-color: ${colorObj.darken(.2)}
                 }\n`
         }

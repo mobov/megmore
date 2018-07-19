@@ -19,9 +19,9 @@ export default class MSpin extends Vue {
 
  public render(createElement: any, context: any) {
   return (
-   <div class={`m-spin-wrap m-spin-wrap--${context.props.size}`}>
-    <svg class='m-spin' viewBox='25 25 50 50' >
-     <circle style={{ stroke: context.props.color }} cx='50' cy='50' r='20' fill='none' stroke-width='5' stroke-miterlimit='10' class='m-spin-path'></circle>
+   <div class={`m-spin__wrap m--${context.props.size}`}>
+    <svg class='m-spin__content' viewBox='25 25 50 50' >
+     <circle style={{ stroke: context.props.color }} cx='50' cy='50' r='20' fill='none' stroke-width='5' stroke-miterlimit='10' class='m-spin__path'></circle>
     </svg>
    </div>
   )
