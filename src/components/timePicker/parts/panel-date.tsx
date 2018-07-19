@@ -35,10 +35,7 @@ export default class MTimePickerPanelDate extends Vue {
     @Model('change', { type: Number, default: new Date().getTime() })
     private value: number
 
-    // @Prop({ type: String, default: new Date() })
-    // private valueFormat!: any
-
-    viewValue: number = this.value
+    viewValueStamp: number = this.value
 
     get classes(): any {
         return {
@@ -46,69 +43,89 @@ export default class MTimePickerPanelDate extends Vue {
         }
     }
 
-    public handleMonthChange(): void {
-
+    get propValue(): Date {
+        return new Date(this.value)
+    }
+    get propYear(): number {
+        return this.propValue.getFullYear()
+    }
+    get propMonth(): number {
+        return this.propValue.getMonth()
+    }
+    get propDate(): number {
+        return this.propValue.getDate()
+    }
+    get viewValue(): any {
+        return new Date(this.viewValueStamp)
+    }
+    set viewValue(val: any) {
+        this.viewValueStamp = val
+    }
+    get viewYear(): number {
+        return this.viewValue.getFullYear()
+    }
+    get viewMonth(): number {
+        return this.viewValue.getMonth()
+    }
+    get viewDate(): number {
+        return this.viewValue.getDate()
     }
     public handleYearClick(): void {
 
     }
-   // @emit('input')
-    public handleDateClick(val: number, isCurDay: boolean = false): void {
-        if(isCurDay) { return }
-        // const { viewValue } = this
+    public handleMonthToggle(action: 'prev' | 'next'): void{
         const date = new Date(this.viewValue)
-        date.setDate(val)
+        const month = date.getMonth()
+        date.setMonth( action === 'prev' ? month - 1 : month + 1)
         this.viewValue = date.getTime()
-
+    }
+   // @emit('input')
+    public handleDateClick(year: number, month: number, date: number): void {
+        // if(year === this.propYear && month === this.propMonth && this.propDate === date) { return }
+        //
+        const temp = new Date(this.viewValue)
+        // console.log(temp.getTime())
+        // if(year !== this.propYear) { temp.setFullYear(year) }
+        // if(year !== this.propMonth) { temp.setMonth(month) }
+        // if(year !== this.propDate) { temp.setDate(date) }
+        temp.setFullYear(year)
+        temp.setMonth(month)
+        temp.setDate(date)
+        this.viewValue = temp.getTime()
     }
 
     public render(): VNode {
 
-        const { classes, handleDateClick } = this
-        const value = new Date(this.value)
-        const viewValue = new Date(this.viewValue)
-        console.log(viewValue)
-        const nowDate = new Date()
+        const { propValue, propYear, propMonth, propDate,
+                viewValue, viewYear, viewMonth, viewDate,
+                classes, handleDateClick, handleMonthToggle } = this
+
         const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
-        const isCurMonth = viewValue.getFullYear() === nowDate.getFullYear() && viewValue.getMonth() === nowDate.getMonth()
+
         const viewMonthDays = viewValue.maxDayOfMonth()
         const viewFirstWeekDay = viewValue.firstWeekDay()
-        const viewDate = viewValue.getDate()
 
-
+        const isCurMonth = viewYear === propYear && viewMonth === propMonth
         const RTableHead = () => {
             const Tds: any = []
-
             WeekMap.forEach(week => Tds.push(<td>{week}</td>))
-
             return (<thead><tr>{Tds}</tr></thead>)
         }
-        console.log(viewFirstWeekDay)
+
         const RTableBody = () => {
             const Trs: any = []
             let Tds: any = []
             for(let pre = 0; pre < viewFirstWeekDay; pre++) {
                 Tds.push(<td> </td>)
             }
-            if(isCurMonth){
-                for (let day = 1; day <= viewMonthDays; day++){
-                    const isCurDay = day === viewDate
-                    Tds.push(<td><MButton onClick={()=>handleDateClick(day, isCurDay)} style="margin: 0" shape="circle" variety={isCurDay ? 'normal' : 'flat'} type={isCurDay ? 'primary' : 'legacy'}>{day}</MButton></td>)
-                    if((day + viewFirstWeekDay) %7 === 0 || day === viewMonthDays){
-                        Trs.push(<tr>{Tds}</tr>)
-                        Tds = []
-                    }
-                }
-            } else {
-                for (let day = 1; day <= viewMonthDays; day++){
-                    Tds.push(<td><MButton onClick={()=>handleDateClick(day)} style="margin: 0" shape="circle" variety="flat" type="legacy">{day}</MButton></td>)
-                    if((day + viewFirstWeekDay) %7 === 0 || day === viewMonthDays){
-                        Trs.push(<tr>{Tds}</tr>)
-                        Tds = []
-                    }
+            for (let date = 1; date <= viewMonthDays; date++){
+                const isCurDate = isCurMonth && (date === viewDate)
+                Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, date)} style="margin: 0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{date}</MButton></td>)
+                if((date + viewFirstWeekDay) %7 === 0 || date === viewMonthDays){
+                    Trs.push(<tr>{Tds}</tr>)
+                    Tds = []
                 }
             }
-
 
             return (<tbody>{Trs}</tbody>)
         }
@@ -117,11 +134,11 @@ export default class MTimePickerPanelDate extends Vue {
             <div staticClass={`${prefix}`} class={classes}>
                 <div class={`${prefix}--header`}>
                     <div staticClass={`${prefix}--header-year`}>
-                        <MButton variety="flat" type="legacy">2018</MButton>
+                        <MButton variety="flat" type="legacy">{viewYear}</MButton>
                     </div>
                     <div staticClass={`${prefix}--header-handler`}>
-                        <MButton variety="flat" shape="circle" type="legacy"><MIcon name="navigate_before" /></MButton>
-                        <MButton variety="flat" shape="circle" type="legacy"><MIcon name="navigate_next" /></MButton>
+                        <MButton variety="flat" onClick={()=>handleMonthToggle('prev')} shape="circle" type="legacy"><MIcon name="navigate_before" /></MButton>
+                        <MButton variety="flat" onClick={()=>handleMonthToggle('next')} shape="circle" type="legacy"><MIcon name="navigate_next" /></MButton>
                     </div>
                  </div>
                 <table class={`${prefix}-table`}>

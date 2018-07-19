@@ -20,10 +20,8 @@ Date.prototype.maxDayOfMonth = function(){
  */
 Date.prototype.firstWeekDay = function(){
     const temp = new Date(this)
-    console.log(temp)
     temp.setDate(1)
-    console.log(temp)
-    return temp.getDate()
+    return temp.getDay()
 }
 /**
  * 获取补零月份
