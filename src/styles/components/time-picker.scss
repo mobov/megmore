@@ -22,28 +22,28 @@ $--size-time-picker-header: 100;
     justify-content: space-between;
     align-items: flex-end;
     height: d($--size-time-picker-header);
-    &-date {
+    &__date {
         flex-grow: 1;
-        &--year {
+        &-year {
             cursor: pointer;
             font-size: d(14);
             margin-bottom: d(4);
         }
-        &--day {
+        &-day {
             cursor: pointer;
             font-size: d(24);
             margin-bottom: d(5);
         }
     }
-    &-time {
+    &__time {
         height: d(70);
         display: flex;
         align-items: flex-end;
-        &--hour {
+        &-hour {
             cursor: pointer;
             font-size: d(36)
         }
-        &--ampm {
+        &-ampm {
             margin: d(8) 0 d(4) d(8);
             display: flex;
             flex-direction: column;
@@ -59,7 +59,7 @@ $--size-time-picker-header: 100;
 
 .m-time-picker-panel-date {
     color: getColor(gray, A700);
-    &--header {
+    &__header {
         display: flex;
         justify-content: space-between;
         &-handler {
@@ -67,8 +67,15 @@ $--size-time-picker-header: 100;
             justify-content: space-between;
         }
     }
-    &-table {
+    &__table {
+        td {
+            > * {
+                margin: 0 auto;
+            }
+        }
         line-height: 1.5;
+        border: none;
+        border-spacing: 0;
         text-align: center;
         width: 100%;
         padding-bottom: d($--space-y / 2);

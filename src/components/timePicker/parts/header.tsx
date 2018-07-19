@@ -5,12 +5,9 @@ import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
-const name = 'MTimePickerHeader'
 const prefix = 'm-time-picker-header'
 
-@Component({
-    name,
-})
+@Component
 export default class MTimePickerHeader extends Vue {
     @Prop({ type: String, default: 'primary' })
     private type!: Color
@@ -23,7 +20,7 @@ export default class MTimePickerHeader extends Vue {
 
     get classes(): any {
         return {
-            [`bg-${this.type}`]: this.type,
+            [`m--bg-${this.type}`]: this.type,
         }
     }
 
@@ -32,13 +29,13 @@ export default class MTimePickerHeader extends Vue {
         const value = new Date(this.value)
         return (
             <div staticClass={`${prefix}`} class={classes}>
-                <div class={`${prefix}-date`}>
-                    <div staticClass={`${prefix}-date--year`}>{value.getFullYear()}</div>
-                    <div staticClass={`${prefix}-date--day`}>{value.getMonth()}-{value.getDate()}</div>
+                <div class={`${prefix}__date`}>
+                    <div staticClass={`${prefix}__date-year`}>{value.getFullYear()}</div>
+                    <div staticClass={`${prefix}__date-day`}>{value.getMonth()}-{value.getDate()}</div>
                 </div>
-                <div class={`${prefix}-time`}>
-                    <div staticClass={`${prefix}-time--hour`}>{value.getHours()}:{value.getMinutes()}</div>
-                    <div staticClass={`${prefix}-time--ampm`}>
+                <div class={`${prefix}__time`}>
+                    <div staticClass={`${prefix}__time-hour`}>{value.getHours()}:{value.getMinutes()}</div>
+                    <div staticClass={`${prefix}__time-ampm`}>
                         <div>AM</div>
                         <div>PM</div>
                     </div>

@@ -2,24 +2,32 @@
  * 通用样式
  */
 
-//bg & color & hover & active 背景 颜色
+// bg & color 颜色
 @each $main, $colors in $--Palettes {
     @each $key, $color in $colors {
-        .bg-#{$main}#{$key} {
+        .m--bg-#{$main}#{$key} {
             background-color: $color;
         }
-        .color-#{$main}#{$key}{
+        .m--color-#{$main}#{$key}{
             color: $color;
         }
-        .border-#{$main}#{$key}{
+        .m--border-#{$main}#{$key}{
             border-color: $color;
         }
     }
 }
 
-//elevation 阴影
+// elevation 阴影
 @each $index, $elevation in $--Elevations {
-    .elevation-#{$index} {
+    .m--elevation-#{$index} {
         box-shadow: $elevation;
     }
+}
+
+// space 间距
+.m--m-0 {
+    margin: 0;
+}
+.m--p-0 {
+    padding: 0;
 }

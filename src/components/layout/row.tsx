@@ -1,13 +1,9 @@
 import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
-const name = 'MRow'
 const prefix = 'm-row'
 
-@Component({
-    name,
-    functional: true,
-} as FunctionalComponentOptions)
+@Component({ functional: true } as FunctionalComponentOptions)
 export default class MRow extends Vue {
 
     @Prop({ type: String })

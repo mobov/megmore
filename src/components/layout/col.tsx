@@ -2,13 +2,9 @@ import { FunctionalComponentOptions, VNode } from 'vue'
 import Breakpoints, {default as breakpoints} from '@/components/megmore/breakpoints'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
-const name = 'MCol'
 const prefix = 'm-col'
 
-@Component({
-    name,
-    functional: true,
-} as FunctionalComponentOptions)
+@Component({ functional: true } as FunctionalComponentOptions)
 export default class MCol extends Vue {
     @Prop({ type: String })
     private id!: string
