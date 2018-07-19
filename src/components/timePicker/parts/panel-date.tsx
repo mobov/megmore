@@ -72,7 +72,7 @@ export default class MTimePickerPanelDate extends Vue {
         const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
         const isCurMonth = viewValue.getFullYear() === nowDate.getFullYear() && viewValue.getMonth() === nowDate.getMonth()
         const viewMonthDays = viewValue.maxDayOfMonth()
-        const viewDay = viewValue.getDay()
+        const viewFirstWeekDay = viewValue.firstWeekDay()
         const viewDate = viewValue.getDate()
 
 
@@ -83,19 +83,18 @@ export default class MTimePickerPanelDate extends Vue {
 
             return (<thead><tr>{Tds}</tr></thead>)
         }
-
+        console.log(viewFirstWeekDay)
         const RTableBody = () => {
             const Trs: any = []
             let Tds: any = []
-            for(let pre = 0; pre < viewDay; pre++) {
+            for(let pre = 0; pre < viewFirstWeekDay; pre++) {
                 Tds.push(<td> </td>)
             }
             if(isCurMonth){
                 for (let day = 1; day <= viewMonthDays; day++){
-                    console.log(day + viewDay)
                     const isCurDay = day === viewDate
                     Tds.push(<td><MButton onClick={()=>handleDateClick(day, isCurDay)} style="margin: 0" shape="circle" variety={isCurDay ? 'normal' : 'flat'} type={isCurDay ? 'primary' : 'legacy'}>{day}</MButton></td>)
-                    if((day + viewDay) %7 === 0 || day === viewMonthDays){
+                    if((day + viewFirstWeekDay) %7 === 0 || day === viewMonthDays){
                         Trs.push(<tr>{Tds}</tr>)
                         Tds = []
                     }
@@ -103,8 +102,7 @@ export default class MTimePickerPanelDate extends Vue {
             } else {
                 for (let day = 1; day <= viewMonthDays; day++){
                     Tds.push(<td><MButton onClick={()=>handleDateClick(day)} style="margin: 0" shape="circle" variety="flat" type="legacy">{day}</MButton></td>)
-
-                    if((day + viewDay) %7 === 0 || day === viewMonthDays){
+                    if((day + viewFirstWeekDay) %7 === 0 || day === viewMonthDays){
                         Trs.push(<tr>{Tds}</tr>)
                         Tds = []
                     }

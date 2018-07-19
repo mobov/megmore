@@ -15,6 +15,17 @@ Date.prototype.maxDayOfMonth = function(){
     return (32 - new Date(this.getFullYear(), this.getMonth(), 32).getDate())
 }
 /**
+ * 当月第一天所在星期
+ * @return {number}
+ */
+Date.prototype.firstWeekDay = function(){
+    const temp = new Date(this)
+    console.log(temp)
+    temp.setDate(1)
+    console.log(temp)
+    return temp.getDate()
+}
+/**
  * 获取补零月份
  */
 Date.prototype.getZeroizeMonth = function(){
@@ -35,5 +46,6 @@ Date.prototype.getZeroizeMinutes = function(){
     const value = this.getMinutes().toString()
     return value.length === 2 ? value : `0${value}`
 }
+
 
 
