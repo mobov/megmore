@@ -48,7 +48,7 @@ export class MIcon extends Vue {
         return (
             <svg xmlns='http://www.w3.org/2000/svg'
                 version='1.1'
-                staticClass={`${prefix} ${prefix}--${props.name} ${staticClasses}`}
+                staticClass={`${prefix} ${prefix}__${props.name} ${staticClasses}`}
                 class={`${classes}`}
                 style={styles}
                 height={height}
