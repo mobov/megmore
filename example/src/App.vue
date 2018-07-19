@@ -1,8 +1,8 @@
 <template>
   <m-app>
     <m-app-bar @click.native="log">
-      <m-button shape="circle" variety="flat" size="lg">
-        <m-icon name="menu" @click="drawer=true"></m-icon>
+      <m-button shape="circle" variety="flat" size="lg" @click="drawer=true">
+        <m-icon name="menu" ></m-icon>
       </m-button>
       <m-flex-filler />
       <m-button variety="flat" size="lg">

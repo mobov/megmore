@@ -1,8 +1,9 @@
-import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
+import {Component, Prop, Emit, Vue, Inject, Model} from 'vue-property-decorator'
 import MButton from '@/components/button'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
+import {emit} from "cluster";
 
 const name = 'MTimePickerPanelDate'
 const prefix = 'm-time-picker-panel-date'
@@ -31,13 +32,13 @@ export default class MTimePickerPanelDate extends Vue {
     @Prop({ type: Number, default: 0 })
     private firstDayOfWeek!: number
 
-    @Prop({ type: Date, default: new Date() })
-    private value!: Date
+    @Model('change', { type: Number, default: new Date().getTime() })
+    private value: number
 
     // @Prop({ type: String, default: new Date() })
     // private valueFormat!: any
 
-    private viewValue: Date = this.value
+    viewValue: number = this.value
 
     get classes(): any {
         return {
@@ -45,21 +46,36 @@ export default class MTimePickerPanelDate extends Vue {
         }
     }
 
-    public handleDayClick(): void {
+    public handleMonthChange(): void {
+
+    }
+    public handleYearClick(): void {
+
+    }
+   // @emit('input')
+    public handleDateClick(val: number, isCurDay: boolean = false): void {
+        if(isCurDay) { return }
+        // const { viewValue } = this
+        const date = new Date(this.viewValue)
+        date.setDate(val)
+        this.viewValue = date.getTime()
 
     }
 
     public render(): VNode {
 
-        const { classes, value, viewValue,
-                handleDayClick } = this
+        const { classes, handleDateClick } = this
+        const value = new Date(this.value)
+        const viewValue = new Date(this.viewValue)
+        console.log(viewValue)
         const nowDate = new Date()
         const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
         const isCurMonth = viewValue.getFullYear() === nowDate.getFullYear() && viewValue.getMonth() === nowDate.getMonth()
         const viewMonthDays = viewValue.maxDayOfMonth()
         const viewDay = viewValue.getDay()
-        const valueDate = value.getDate()
-        console.log(valueDate)
+        const viewDate = viewValue.getDate()
+
+
         const RTableHead = () => {
             const Tds: any = []
 
@@ -71,19 +87,24 @@ export default class MTimePickerPanelDate extends Vue {
         const RTableBody = () => {
             const Trs: any = []
             let Tds: any = []
+            for(let pre = 0; pre < viewDay; pre++) {
+                Tds.push(<td> </td>)
+            }
             if(isCurMonth){
                 for (let day = 1; day <= viewMonthDays; day++){
-                    const isCurDay = day === valueDate
-                    Tds.push(<td>{day > viewDay ? <MButton onClick={handleDayClick} style="margin: 0" shape="circle" elevation={0} variety={isCurDay ? 'normal' : 'flat'} type={isCurDay ? 'primary' : 'legacy'}>{day}</MButton> : ''}</td>)
-                    if(day%7 === 0 || day === viewMonthDays){
+                    console.log(day + viewDay)
+                    const isCurDay = day === viewDate
+                    Tds.push(<td><MButton onClick={()=>handleDateClick(day, isCurDay)} style="margin: 0" shape="circle" variety={isCurDay ? 'normal' : 'flat'} type={isCurDay ? 'primary' : 'legacy'}>{day}</MButton></td>)
+                    if((day + viewDay) %7 === 0 || day === viewMonthDays){
                         Trs.push(<tr>{Tds}</tr>)
                         Tds = []
                     }
                 }
             } else {
                 for (let day = 1; day <= viewMonthDays; day++){
-                    Tds.push(<td>{day > viewDay ? <MButton onClick={handleDayClick} style="margin: 0" shape="circle" variety="flat" type="legacy">{day}</MButton> : ''}</td>)
-                    if(day%7 === 0 || day === viewMonthDays){
+                    Tds.push(<td><MButton onClick={()=>handleDateClick(day)} style="margin: 0" shape="circle" variety="flat" type="legacy">{day}</MButton></td>)
+
+                    if((day + viewDay) %7 === 0 || day === viewMonthDays){
                         Trs.push(<tr>{Tds}</tr>)
                         Tds = []
                     }

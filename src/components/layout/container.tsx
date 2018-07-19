@@ -9,11 +9,12 @@ const prefix = 'm-container'
     functional: true,
 } as FunctionalComponentOptions)
 export default class MContainer extends Vue {
+
     @Prop({ type: String })
     private id!: string
+
     @Prop({ type: String, default: 'div' })
     private tag!: string
-
 
     public render(h: any, { props, data, children }: any) {
         const staticClass = data.staticClass !== undefined ? data.staticClass : ''

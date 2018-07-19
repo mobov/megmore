@@ -18,8 +18,8 @@ export default class MTimePickerHeader extends Vue {
     @Prop({ type: Boolean })
     private anpm!: boolean
 
-    @Prop({ type: Date, default: new Date() })
-    private value!: Date
+    @Prop({ type: Number, default: new Date().getTime() })
+    private value!: number
 
     get classes(): any {
         return {
@@ -28,8 +28,8 @@ export default class MTimePickerHeader extends Vue {
     }
 
     public render(): VNode {
-        const { classes, value } = this
-
+        const { classes } = this
+        const value = new Date(this.value)
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 <div class={`${prefix}-date`}>

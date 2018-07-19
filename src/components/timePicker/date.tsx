@@ -30,15 +30,20 @@ export default class MDatePicker extends Vue {
             [`elevation-${this.elevation}`]: this.elevation,
         }
     }
-
+    public handleValueInput(val: any): void {
+        console.log(val)
+    }
     public render(): VNode {
-        const { classes, ampm, value, type } = this
-
+        console.log(this)
+        const { classes, ampm, type,
+                handleValueInput} = this
+        const value = this.value.getTime()
+        console.log(value)
         return (
             <div staticClass={prefix} class={classes}>
                 <MTimePickerHeader value={value} ampm={ampm} type={type} />
                 <div class={`${prefix}--main`}>
-                    <MTimePickerPanelDate value={value} type={type} />
+                    <MTimePickerPanelDate value={value} onInput={handleValueInput} type={type} />
                 </div>
             </div>
         )

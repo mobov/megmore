@@ -9,16 +9,22 @@ const prefix = 'm-row'
     functional: true,
 } as FunctionalComponentOptions)
 export default class MRow extends Vue {
+
     @Prop({ type: String })
     private id!: string
+
     @Prop({ type: String, default: 'div' })
     private tag!: string
+
     @Prop({ type: String, default: 'normal' })
     private wrap!: string
+
     @Prop({ type: String, default: 'start' })
     private justify!: string
+
     @Prop({ type: String, default: 'stretch' })
     private align!: string
+
     @Prop({ type: String, default: 'xs' })
     private space!: string
 
