@@ -2529,7 +2529,7 @@ color@^0.11.0:
 
 color@^3.0.0:
   version "3.0.0"
-  resolved "http://10.0.0.56:4873/color/-/color-3.0.0.tgz#d920b4328d534a3ac8295d68f7bd4ba6c427be9a"
+  resolved "http://registry.npm.taobao.org/color/download/color-3.0.0.tgz#d920b4328d534a3ac8295d68f7bd4ba6c427be9a"
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
@@ -6537,10 +6537,6 @@ pkg-dir@^2.0.0:
 pn@^1.1.0:
   version "1.1.0"
   resolved "http://r.cnpmjs.org/pn/download/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
-
-popper.js@^1.14.3:
-  version "1.14.3"
-  resolved "http://10.0.0.56:4873/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
 
 portfinder@^1.0.13, portfinder@^1.0.9:
   version "1.0.13"

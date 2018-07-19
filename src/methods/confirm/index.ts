@@ -29,8 +29,6 @@ const confirm = async (options: Model.ConfirmOptions = { title: '', content: '' 
     instance.resolve = resolve
     instance.reject = reject
     instance.$mount()
-    instance.domExist = true
-    await instance.$nextTick()
     instance.visible = true
   })
 }

@@ -59,7 +59,7 @@ export default class MModal extends mixins(modalMixin) {
     return (
       this.domExist && (
         <transition name={this.transitionName} onAfterLeave={this.afterLeave}>
-          <div staticClass='m-modal' v-show={this.visible} onClick={this.closeLastModal}>
+          <div staticClass='m-modal' v-show={this.domReady && this.visible} onClick={this.closeLastModal}>
             <div staticClass='m-modal--content' class={contentClass} style={this.style} onClick={this.eveStop}>
               <div class='m-modal--title'>
                 {this.$slots.title || this.title}

@@ -22,6 +22,7 @@ export default class ModalMixin extends Mixins(toggleable) {
   @Prop({
     default: true,
   })
+
   public escPressClose!: boolean
 
   public domExist = false//  添加或移除BODY层dom
@@ -29,14 +30,15 @@ export default class ModalMixin extends Mixins(toggleable) {
 
   protected zIndex = getZIndex()
 
-
+  protected domReady = false//  标记dom是否已经插入
 
   get dom(): HTMLElement {
     return this.$el
   }
- 
+
   public afterLeave() {
     this.domExist = false
+    this.domReady = false
   }
   public setZIndex() {
     const dom = this.$el
@@ -63,14 +65,15 @@ export default class ModalMixin extends Mixins(toggleable) {
     this.$emit('update:show', val)
     if (val) {
       this.domExist = val
-      await this.$nextTick()
+      await this.$nextTick()//  确保dom已经插入再进行显示
+      this.domReady = true
       this.setZIndex()
       manage.open(this)
       openOverlay()
     } else {
       manage.close(this)
     }
-    this.visible = val
+    // this.visible = val
   }
   protected beforeDestroy() {
     this.domExist = false
