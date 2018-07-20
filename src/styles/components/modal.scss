@@ -3,13 +3,13 @@
 $prefix:m-modal;
 .#{$prefix} {
  @include fullscreen();
- &--wrap {
+ &__wrap {
   @include fullscreen();
   background-color: rgba($color: #000000, $alpha: 0.3);
   transition: all .5s;
   transform-origin: 50% 50%;
  }
- &--content {
+ &__content {
   background-color: #ffffff;
   @include elevation(24);
   transition: all .5s;
@@ -23,25 +23,25 @@ $prefix:m-modal;
    height: 100vh;
    display: flex;
    flex-direction: column;
-   .#{$prefix}--body {
+   .#{$prefix}__body {
     flex: 1
    }
   }
  }
- &--body {
+ &__body {
   min-height: 100px;
  }
- &--footer {
+ &__footer {
   display: flex;
   justify-content: flex-end
  }
- .m-icon--close {
+ .m-icon__close {
   position: absolute;
   right: d(20);
   top: d(10);
   cursor: pointer
  }
- &--title {
+ &__title {
   height: d(30);
   display: flex;
   align-items: center;
@@ -51,10 +51,10 @@ $prefix:m-modal;
  $name:modal-transition;
  &.#{$name}-enter,
  &.#{$name}-leave-to {
-  .#{$prefix}--wrap {
+  .#{$prefix}__wrap {
    opacity: 0
   }
-  .#{$prefix}--content {
+  .#{$prefix}__content {
    transform: scale(0.2);
    opacity: 0
   }
@@ -67,7 +67,7 @@ $prefix:m-modal;
  $nameFullscreen:modal-fullscreen-transition;
  &.#{$nameFullscreen}-enter,
  &.#{$nameFullscreen}-leave-to {
-  .#{$prefix}--content {
+  .#{$prefix}__content {
    transform: translateY(100%);
   }
  }

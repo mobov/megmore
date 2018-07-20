@@ -36,7 +36,7 @@
                     title
                 </template>
                 <template>
-                     <m-popover>
+                     <m-popover placement="right">
                         <m-date-picker elevation=2></m-date-picker>
                         <m-button slot="ref">Popover</m-button>
                     </m-popover>
