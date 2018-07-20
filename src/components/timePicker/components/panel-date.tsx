@@ -1,16 +1,10 @@
-import {Component, Prop, Emit, Vue, Inject, Model} from 'vue-property-decorator'
+import {Component, Prop, Emit, Vue, Inject, Model, Provide, Watch} from 'vue-property-decorator'
 import MButton from '@/components/button'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
 const prefix = 'm-time-picker-panel-date'
-
-
-const Years: any =  []
-const Months: any = []
-const Weeks: any = []
-const Days: any = []
 
 @Component({ components: { MButton, MIcon }})
 
@@ -27,80 +21,66 @@ export default class MTimePickerPanelDate extends Vue {
     @Prop({ type: Number, default: 0 })
     private firstDayOfWeek!: number
 
-    @Model('change', { type: Number, default: new Date().getTime() })
-    private value: number
+    @Inject() DateStore!: any
 
-    viewValueStamp: number = this.value
-
-    get classes(): any {
-        return {
-            // [`color-${this.type}`]: this.type,
-        }
+    get year(): number {
+        return this.DateStore.dateValue.getFullYear()
     }
-
-    get propValue(): Date {
-        return new Date(this.value)
+    get month(): number {
+        return this.DateStore.dateValue.getMonth()
     }
-    get propYear(): number {
-        return this.propValue.getFullYear()
+    get date(): number {
+        return this.DateStore.dateValue.getDate()
     }
-    get propMonth(): number {
-        return this.propValue.getMonth()
+    viewValue: number = this.DateStore.value
+    get viewDateValue(): Date {
+        return new Date(this.viewValue)
     }
-    get propDate(): number {
-        return this.propValue.getDate()
-    }
-    get viewValue(): any {
-        return new Date(this.viewValueStamp)
-    }
-    set viewValue(val: any) {
-        this.viewValueStamp = val
+    set viewDateValue(val: any) {
+        this.viewValue = val
     }
     get viewYear(): number {
-        return this.viewValue.getFullYear()
+        return this.viewDateValue.getFullYear()
     }
     get viewMonth(): number {
-        return this.viewValue.getMonth()
+        return this.viewDateValue.getMonth()
     }
     get viewDate(): number {
-        return this.viewValue.getDate()
+        return this.viewDateValue.getDate()
     }
     public handleYearClick(): void {
 
     }
-    public handleMonthToggle(action: 'prev' | 'next'): void{
+    public handleMonthToggle(action: 'prev' | 'next'): void {
         const date = new Date(this.viewValue)
         const month = date.getMonth()
         date.setMonth( action === 'prev' ? month - 1 : month + 1)
         this.viewValue = date.getTime()
     }
 
-    @Emit('input')
     public handleDateClick(year: number, month: number, date: number): void {
-        if(year === this.propYear &&
-           month === this.propMonth &&
-           date === this.propDate) { return }
-        //        console.log(temp.getTime())
+        if(year === this.year &&
+           month === this.month &&
+           date === this.date) { return }
         const temp = new Date(this.viewValue)
-
-        if (year !== this.propYear) { temp.setFullYear(year) }
-        if (year !== this.propMonth) { temp.setMonth(month) }
-        if (year !== this.propDate) { temp.setDate(date) }
-        this.viewValue = temp.getTime()
+        if (year !== this.year) { temp.setFullYear(year) }
+        if (year !== this.month) { temp.setMonth(month) }
+        if (year !== this.date) { temp.setDate(date) }
+        this.DateStore.update(temp.getTime())
     }
 
     public render(): VNode {
 
-        const { propValue, propYear, propMonth, propDate,
-                viewValue, viewYear, viewMonth, viewDate,
-                classes, handleDateClick, handleMonthToggle } = this
+        const { DateStore, year, month, date,
+                viewDateValue, viewYear, viewMonth, viewDate,
+                handleDateClick, handleMonthToggle } = this
 
         const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
 
-        const viewMonthDays = viewValue.maxDayOfMonth()
-        const viewFirstWeekDay = viewValue.firstWeekDay()
+        const viewMonthDays = viewDateValue.maxDayOfMonth()
+        const viewFirstWeekDay = viewDateValue.firstWeekDay()
 
-        const isCurMonth = viewYear === propYear && viewMonth === propMonth
+        const isCurMonth = viewYear === year && viewMonth === month
         const RTableHead = () => {
             const Tds: any = []
             WeekMap.forEach(week => Tds.push(<td>{week}</td>))
@@ -113,10 +93,10 @@ export default class MTimePickerPanelDate extends Vue {
             for(let pre = 0; pre < viewFirstWeekDay; pre ++) {
                 Tds.push(<td> </td>)
             }
-            for (let date = 1; date <= viewMonthDays; date ++){
-                const isCurDate = isCurMonth && (date === propDate)
-                Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, date)} class="m--m-0 m--p-0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{date}</MButton></td>)
-                if((date + viewFirstWeekDay) %7 === 0 || date === viewMonthDays){
+            for (let tempDate = 1; tempDate <= viewMonthDays; tempDate ++){
+                const isCurDate = isCurMonth && (tempDate === date)
+                Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, tempDate)} class="m--m-0 m--p-0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{tempDate}</MButton></td>)
+                if((tempDate + viewFirstWeekDay) %7 === 0 || tempDate === viewMonthDays){
                     Trs.push(<tr>{Tds}</tr>)
                     Tds = []
                 }
@@ -126,7 +106,7 @@ export default class MTimePickerPanelDate extends Vue {
         }
 
         return (
-            <div staticClass={prefix} class={classes}>
+            <div staticClass={prefix}>
                 <div class={`${prefix}__header`}>
                     <div staticClass={`${prefix}__header-year`}>
                         <MButton variety="flat" type="legacy">{viewYear}</MButton>

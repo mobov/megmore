@@ -68,6 +68,9 @@ $--size-time-picker-header: 100;
         }
     }
     &__table {
+        thead {
+            font-weight: 600;
+        }
         td {
             > * {
                 margin: 0 auto;
