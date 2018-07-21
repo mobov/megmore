@@ -130,6 +130,7 @@ $--size-time-picker-clock: 200;
     &__list {
         flex:1;
         height: d($--size-time-picker-panel);
+        padding: d($--space-y / 2);
         @include scroller();
         @include scroll-bar-slim(y, 4px)
     }
