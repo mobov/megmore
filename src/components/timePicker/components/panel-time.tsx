@@ -22,10 +22,7 @@ export default class MTimePickerPanelTime extends Vue {
     private ampm!: boolean
 
     @Prop({ type: String, default: 'list' })
-    private displayType!: 'list' | 'clock'
-
-    @Prop({ type: String, default: 'time' })
-    private valueType!: DateTimeValueType
+    private timeSelectType!: 'list' | 'clock'
 
     @Inject() DateStore!: any
 
@@ -35,9 +32,9 @@ export default class MTimePickerPanelTime extends Vue {
 
     public render(): VNode {
 
-        const { handleClick, valueType, displayType } = this
+        const { handleClick, timeSelectType } = this
         
-        const { hours, minutes } = this.DateStore
+        const { hours, minutes, valueType } = this.DateStore
 
         const Result = []
 
@@ -59,7 +56,7 @@ export default class MTimePickerPanelTime extends Vue {
             return (<div staticClass={`${prefix}__list ${prefix}__list-${type}`}>{Temps}</div>)
         }
 
-        if(displayType === 'list') {
+        if(timeSelectType === 'list') {
             Result.push(RList('hours'))
             Result.push(RList('minutes'))
         }else{

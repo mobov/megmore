@@ -18,49 +18,85 @@ $--size-time-picker-clock: 200;
 };
 
 .m-time-picker-header {
-    color: white;
-    padding: d($--space-y) d($--space-x);
+    color: getColor(gray, 300);
+    padding: d($--space-y) d($--space-x / 1.5) d($--space-y / 2) d($--space-x / 1.5);
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: stretch;
     height: d($--size-time-picker-header);
+    transition: color .3s ease;
+
+    .m--datetime { }
+    &.m--date {
+        .m-time-picker-header__date {
+            //flex-grow: 1;
+            //
+            //display: flex;
+            //align-items: center;
+            //justify-content: flex-start;
+            //flex-direction: row;
+            //&-year {
+            //    font-size: d(36);
+            //    margin-right: d(30);
+            //    margin-bottom: 0;
+            //}
+            //&-date {
+            //    font-size: d(36);
+            //    margin-bottom: 0;
+            //}
+        }
+    }
     &__date {
         flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
         &-year {
             cursor: pointer;
-            font-size: d(14);
+            font-size: d(20);
             margin-bottom: d(4);
         }
         &-date {
             cursor: pointer;
-            font-size: d(24);
-            margin-bottom: d(5);
+            font-size: d(30);
+            margin-bottom: d(2);
+        }
+        &-weekDay{
+            margin-left: d(10);
         }
     }
     &__time {
         height: d(70);
         display: flex;
-        align-items: flex-end;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: right;
         &-hours {
             cursor: pointer;
             font-size: d(36)
         }
         &-ampm {
-            margin: d(8) 0 d(4) d(8);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-direction: row;
+            justify-content: flex-end;
             cursor: pointer;
-            font-size: d(14);
+            font-size: d(16);
+            > * {
+                margin-left: d(15);
+            }
             //> div {
             //    margin-top: d(5);
             //}
         }
     }
+    .m--active {
+        color: white;
+    }
 }
 
 .m-time-picker-panel-date {
     color: getColor(gray, A700);
+    padding: 0 d($--space-y / 2) d($--space-y / 2) d($--space-y / 2);
     &__header {
         display: flex;
         justify-content: space-between;
@@ -83,7 +119,6 @@ $--size-time-picker-clock: 200;
         border-spacing: 0;
         text-align: center;
         width: 100%;
-        padding-bottom: d($--space-y / 2);
     }
 }
 

@@ -1,5 +1,5 @@
 import {Component, Prop, Watch, Vue, Model, Provide} from 'vue-property-decorator'
-import { Color, DateValueFormat, DateValueType } from "@/types/model"
+import { Color, DateValueFormat, DateValueType, DatePickerType } from "@/types/model"
 
 @Component
 export default class TimePickerBase extends Vue {
@@ -24,6 +24,10 @@ export default class TimePickerBase extends Vue {
     @Provide()
     public DateStore: any = {
         value: this.value.getTime(),
+        valueType: 'date',
+        pickerType: 'date',
+        max: new Date(2050),
+        min: new Date(1900),
         get dateValue(): Date{
             return new Date(this.value)
         },
@@ -32,6 +36,9 @@ export default class TimePickerBase extends Vue {
         },
         get month(): number {
             return this.dateValue.getMonth()
+        },
+        get weekDay(): number {
+            return this.dateValue.getDay()
         },
         get date(): number {
             return this.dateValue.getDate()
@@ -42,7 +49,12 @@ export default class TimePickerBase extends Vue {
         get minutes(): number {
             return this.dateValue.getMinutes()
         },
-
+        SET_PICKER_TYPE(type: DatePickerType = 'date'){
+            this.pickerType = type
+        },
+        SET_VALUE_TYPE(type: DateValueType = 'date'){
+            this.valueType = type
+        },
         UPDATE(val: number, type: DateValueType = 'date'){
             const result = new Date(this.value)
 

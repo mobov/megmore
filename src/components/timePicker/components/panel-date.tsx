@@ -2,7 +2,7 @@ import { Component, Prop, Emit, Vue, Inject, Model, Provide, Watch } from 'vue-p
 import MButton from '@/components/button'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
-import { Color } from '@/types/model'
+import { Color, DateValueType } from '@/types/model'
 
 const prefix = 'm-time-picker-panel-date'
 const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
@@ -42,9 +42,6 @@ export default class MTimePickerPanelDate extends Vue {
         return this.viewDateValue.getDate()
     }
 
-    @Emit('yearClick')
-    public handleYearClick(e: MouseEvent): void { void(0) }
-
     public handleMonthToggle(action: 'prev' | 'next'): void {
         const date = new Date(this.viewValue)
         const month = date.getMonth()
@@ -72,7 +69,7 @@ export default class MTimePickerPanelDate extends Vue {
     public render(): VNode {
 
         const { viewDateValue, viewYear, viewMonth, viewDate,
-                handleDateClick, handleMonthToggle, handleYearClick } = this
+                handleDateClick, handleMonthToggle } = this
         
         const { year, month, date } = this.DateStore
 
@@ -111,7 +108,7 @@ export default class MTimePickerPanelDate extends Vue {
             <div staticClass={prefix}>
                 <div class={`${prefix}__header`}>
                     <div staticClass={`${prefix}__header-year`}>
-                        <MButton variety="flat" type="legacy" onClick={handleYearClick}>{viewYear}</MButton>
+                        <MButton variety="flat" type="legacy" onClick={()=>this.DateStore.SET_VALUE_TYPE('year')}>{viewYear}</MButton>
                     </div>
                     <div staticClass={`${prefix}__header-handler`}>
                         <MButton variety="flat" onClick={()=>handleMonthToggle('prev')} shape="circle" type="legacy"><MIcon name="navigate_before" /></MButton>

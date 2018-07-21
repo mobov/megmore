@@ -10,11 +10,10 @@ export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 
 // date
 export type DateValueFormat = 'timestamp' | 'date'
+export type DatePickerType = 'datetime' | 'date' | 'year' | 'month' | 'time' | 'hours' | 'minutes'
 export type DateValueType = 'year' | 'month' | 'week' | 'date' | 'time' | 'hours' | 'minutes'
 export type DateTimeValueType = 'time' | 'hours' | 'minutes'
-// export type DateWeekDay = 1 | 2 | 3 | 4 | 5 | 6 | 7
-// export type DateMonth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-// export type DateTime = 1 - 12 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+
 
 export interface ModalComponent extends Vue {// 模态框组件
     escPress: () => void,

@@ -20,7 +20,6 @@ export default class MTimePickerPanelMonth extends Vue {
     @Inject() DateStore!: any
 
     public handleClick(month: number): void {
-        console.log(month)
         this.DateStore.UPDATE(month, 'month')
     }
 

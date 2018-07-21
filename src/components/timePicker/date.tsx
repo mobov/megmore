@@ -5,22 +5,17 @@ import MTimePickerHeader from './components/header'
 import MTimePickerPanelDate from './components/panel-date'
 import MTimePickerPanelYear from './components/panel-year'
 import MTimePickerPanelMonth from './components/panel-month'
-import MTimePickerPanelTime from './components/panel-time'
 import { VNode } from 'vue'
 
-const prefix = 'm-datetime-picker'
+const prefix = 'm-date-picker'
 
 @Component({ components: {
         MTimePickerHeader,
         MTimePickerPanelDate,
         MTimePickerPanelYear,
-        MTimePickerPanelMonth,
-        MTimePickerPanelTime
+        MTimePickerPanelMonth
 }})
-export default class MDatetimePicker extends mixins(TimePickerBase) {
-
-    @Prop({ type: Boolean, default: false })
-    private ampm!: boolean
+export default class MDatePicker extends mixins(TimePickerBase) {
 
     @Prop({ type: Number, default: 0 })
     private firstDayOfWeek!: number
@@ -30,22 +25,20 @@ export default class MDatetimePicker extends mixins(TimePickerBase) {
     }
 
     public render(): VNode {
-        const { baseClasses, ampm, type, firstDayOfWeek, max, min } = this
+        const { baseClasses, type, firstDayOfWeek, max, min} = this
         const { valueType } = this.DateStore
 
         const RPanel = ()=>{
-            console.log(valueType)
             switch (valueType) {
                 case 'date':  return <MTimePickerPanelDate max={max} min={min} firstDayOfWeek={firstDayOfWeek} type={type} />;
                 case 'year':  return <MTimePickerPanelYear max={max} min={min} />;
                 case 'month': return <MTimePickerPanelMonth />;
-                default:  return <MTimePickerPanelTime ampm={ampm} type={type} />;
             }
         }
 
         return (
             <div staticClass={prefix} class={baseClasses}>
-                <MTimePickerHeader ampm={ampm} type={type} />
+                <MTimePickerHeader type={type} />
                 <transition>
                     <div class={`${prefix}__main`}>{RPanel()}</div>
                 </transition>
@@ -53,7 +46,7 @@ export default class MDatetimePicker extends mixins(TimePickerBase) {
         )
     }
     public created(){
-        this.DateStore.SET_PICKER_TYPE('datetime')
+        this.DateStore.SET_PICKER_TYPE('date')
         this.DateStore.SET_VALUE_TYPE('date')
     }
 }

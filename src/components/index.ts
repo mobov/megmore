@@ -1,7 +1,5 @@
 
 // 基础
-import MDateTimePicker from "@/components/timePicker/date-time";
-
 export { default as Megmore } from '@/components/megmore'
 export { default as MIcon } from '@/components/icon'
 export { default as MApp } from '@/components/app'
@@ -18,4 +16,4 @@ export { MForm, MFormItem } from '@/components/form'
 export { default as MPopover } from '@/components/popover';
 
 export { MContainer, MRow, MCol, MFlexFiller } from '@/components/layout'
-export { MDatetimePicker } from '@/components/timePicker'
+export { MDatetimePicker, MDatePicker } from '@/components/timePicker'

@@ -1,16 +1,20 @@
 <template>
     <m-container>
         <m-row space="xs">
-            <m-col :sm=3>
+            <m-col :sm=4>
+                <m-datetime-picker v-model="dateValue" :elevation=2 />
+            </m-col>
+            <m-col :sm=4>
+                <m-date-picker v-model="dateValue" :elevation=2 />
+            </m-col>
+            <m-col :sm=4>
+                <m-time-picker v-model="dateValue" :elevation=2 />
+            </m-col>
+            <m-col :sm=4>
                 <m-button type="primary" @click="modal=true">asd</m-button>
                 <m-button type="primary" @click="modal=true">asd</m-button>
             </m-col>
-            <m-col :sm=6>
-                <m-datetime-picker v-model="dateValue" :elevation=2>
-
-                </m-datetime-picker>
-            </m-col>
-            <m-col :sm=3>
+            <m-col :sm=4>
                 <m-button type="primary" shape="circle">C</m-button>
                 <m-button type="primary" variety="outline">outline</m-button>
                 <m-button type="primary" variety="outline" shape="round">round</m-button>
@@ -37,7 +41,7 @@
                 </template>
                 <template>
                      <m-popover placement="right">
-                        <m-date-picker elevation=2></m-date-picker>
+                        <m-date-picker v-model="dateValue" :elevation=2></m-date-picker>
                         <m-button slot="ref">Popover</m-button>
                     </m-popover>
                 </template>
