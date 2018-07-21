@@ -11,7 +11,9 @@ export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 // date
 export type DateValueFormat = 'timestamp' | 'date'
 export type DateValueType = 'year' | 'month' | 'week' | 'date' | 'time'
-export type FirstDayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7
+// export type DateWeekDay = 1 | 2 | 3 | 4 | 5 | 6 | 7
+// export type DateMonth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+// export type DateTime = 1 - 12 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 export interface ModalComponent extends Vue {// 模态框组件
     escPress: () => void,

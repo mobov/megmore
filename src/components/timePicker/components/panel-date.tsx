@@ -47,7 +47,7 @@ export default class MTimePickerPanelDate extends Vue {
     public handleMonthToggle(action: 'prev' | 'next'): void {
         const date = new Date(this.viewValue)
         const month = date.getMonth()
-        date.setMonth( action === 'prev' ? month - 1 : month + 1)
+        date.setMonth(action === 'prev' ? month - 1 : month + 1)
         this.viewValue = date.getTime()
     }
 
