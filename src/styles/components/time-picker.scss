@@ -89,15 +89,16 @@ $--size-time-picker-panel: 265;
 .m-time-picker-panel-year {
     max-height: d($--size-time-picker-panel);
     display: flex;
+    padding: d($--space-y / 2);
     flex-wrap: wrap;
     > * {
-        width: 33%;
+        width: 33.333333%;
     }
     @include scroller();
     @include scroll-bar-slim(y, 4px)
 }
 .m-time-picker-panel-month {
-    padding: d($--space-y) 0 ;
+    padding: d($--space-y / 2);
     min-height: d($--size-time-picker-panel);
     align-items: center;
     display: flex;
