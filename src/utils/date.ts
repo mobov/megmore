@@ -23,28 +23,25 @@ Date.prototype.firstWeekDay = function(){
     temp.setDate(1)
     return temp.getDay()
 }
-
 /**
- * 获取补零月份
+ * 补零
+ * @return {string}
  */
-Date.prototype.getZeroizeMonth = function(){
-    const value = this.getMonth().toString()
-    return value.length === 2 ? value : `0${value}`
+Number.prototype.dateZeroize = function () {
+    let value = this.toString()
+    return value.length > 1 ? value : `0${value}`
 }
-/**
- * 获取补零小时
- */
-Date.prototype.getZeroizeHours = function(){
-    const value = this.getHours().toString()
-    return value.length === 2 ? value : `0${value}`
-}
-/**
- * 获取补零分钟
- */
-Date.prototype.getZeroizeMinutes = function(){
-    const value = this.getMinutes().toString()
-    return value.length === 2 ? value : `0${value}`
-}
+// Date.prototype.getZeroize = function(type){
+//     let value = ''
+//     switch (type){
+//         case 'month': value = this.getMonth().toString(); break;
+//         case 'date': value = this.getDate().toString(); break;
+//         case 'hours': value = this.getHours().toString(); break;
+//         case 'minutes': value = this.getMinutes().toString(); break;
+//         case 'seconds': value = this.getSeconds().toString(); break;
+//     }
+//     return value.length === 2 ? value : `0${value}`
+// }
 
 
 

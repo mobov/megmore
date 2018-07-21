@@ -5,7 +5,8 @@ interface Date {
     isLeapYear(): boolean
     maxDayOfMonth(): number
     firstWeekDay(): number
-    getZeroizeMonth(): string | number
-    getZeroizeHours(): string | number
-    getZeroizeMinutes(): string | number
+    getZeroize(type: string): string
+}
+interface Number {
+    dateZeroize(): string
 }

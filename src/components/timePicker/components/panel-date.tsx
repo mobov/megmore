@@ -12,10 +12,10 @@ export default class MTimePickerPanelDate extends Vue {
     @Prop({ type: String, default: 'primary' })
     private type!: Color
 
-    @Prop({ type: Number, default: 1950 })
+    @Prop({ type: Number })
     private min!: number
 
-    @Prop({ type: Number, default: 2050 })
+    @Prop({ type: Number })
     private max!: number
 
     @Prop({ type: Number, default: 0 })
@@ -23,17 +23,9 @@ export default class MTimePickerPanelDate extends Vue {
 
     @Inject() DateStore!: any
 
-    get year(): number {
-        return this.DateStore.dateValue.getFullYear()
-    }
-    get month(): number {
-        return this.DateStore.dateValue.getMonth()
-    }
-    get date(): number {
-        return this.DateStore.dateValue.getDate()
-    }
     viewValue: number = this.DateStore.value
-    get viewDateValue(): Date {
+
+    get viewDateValue(): any {
         return new Date(this.viewValue)
     }
     set viewDateValue(val: any) {
@@ -48,9 +40,10 @@ export default class MTimePickerPanelDate extends Vue {
     get viewDate(): number {
         return this.viewDateValue.getDate()
     }
-    public handleYearClick(): void {
 
-    }
+    @Emit('yearClick')
+    public handleYearClick(e: MouseEvent): void { void(0) }
+
     public handleMonthToggle(action: 'prev' | 'next'): void {
         const date = new Date(this.viewValue)
         const month = date.getMonth()
@@ -58,22 +51,29 @@ export default class MTimePickerPanelDate extends Vue {
         this.viewValue = date.getTime()
     }
 
-    public handleDateClick(year: number, month: number, date: number): void {
-        if(year === this.year &&
-           month === this.month &&
-           date === this.date) { return }
+    public handleDateClick(yearVal: number, monthVal: number, dateVal: number): void {
+
+        const { year, month, date } = this.DateStore
+
+        if( yearVal === year &&
+            monthVal === month &&
+            dateVal === date ) { return }
+
         const temp = new Date(this.viewValue)
-        if (year !== this.year) { temp.setFullYear(year) }
-        if (year !== this.month) { temp.setMonth(month) }
-        if (year !== this.date) { temp.setDate(date) }
-        this.DateStore.update(temp.getTime())
+
+        if (yearVal !== year)   { temp.setFullYear(yearVal) }
+        if (monthVal !== month) { temp.setMonth(monthVal) }
+        if (dateVal !== date)   { temp.setDate(dateVal) }
+
+        this.DateStore.UPDATE(temp.getTime())
     }
 
     public render(): VNode {
 
-        const { DateStore, year, month, date,
-                viewDateValue, viewYear, viewMonth, viewDate,
-                handleDateClick, handleMonthToggle } = this
+        const { viewDateValue, viewYear, viewMonth, viewDate,
+                handleDateClick, handleMonthToggle, handleYearClick } = this
+        
+        const { year, month, date } = this.DateStore
 
         const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
 
@@ -90,6 +90,7 @@ export default class MTimePickerPanelDate extends Vue {
         const RTableBody = () => {
             const Trs: any = []
             let Tds: any = []
+
             for(let pre = 0; pre < viewFirstWeekDay; pre ++) {
                 Tds.push(<td> </td>)
             }
@@ -109,7 +110,7 @@ export default class MTimePickerPanelDate extends Vue {
             <div staticClass={prefix}>
                 <div class={`${prefix}__header`}>
                     <div staticClass={`${prefix}__header-year`}>
-                        <MButton variety="flat" type="legacy">{viewYear}</MButton>
+                        <MButton variety="flat" type="legacy" onClick={handleYearClick}>{viewYear}</MButton>
                     </div>
                     <div staticClass={`${prefix}__header-handler`}>
                         <MButton variety="flat" onClick={()=>handleMonthToggle('prev')} shape="circle" type="legacy"><MIcon name="navigate_before" /></MButton>

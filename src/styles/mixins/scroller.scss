@@ -1,0 +1,12 @@
+@mixin scroller($dir:y){
+  @if($dir == y){
+    overflow: auto;
+      //overflow-x: visible;
+    overflow-x: hidden;
+  } @else {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
+}

@@ -10,7 +10,7 @@ export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 
 // date
 export type DateValueFormat = 'timestamp' | 'date'
-export type DatePickerType = 'year' | 'month' | 'week' | 'date' | 'time'  | 'datetime'
+export type DateValueType = 'year' | 'month' | 'week' | 'date' | 'time'
 export type FirstDayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export interface ModalComponent extends Vue {// 模态框组件
