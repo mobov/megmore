@@ -5,6 +5,8 @@ import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
 const prefix = 'm-time-picker-panel-month'
+const MonthMap = ['一月', '二月', '三月', '四月', '五月', '六月',
+                  '七月', '八月', '九月', '十月', '十一月', '十二月']
 
 @Component({ components: { MButton }})
 
@@ -31,9 +33,9 @@ export default class MTimePickerPanelMonth extends Vue {
         const RCols = () => {
             const Cols: any = []
 
-            for (let tempValue = 1; tempValue <= 12; tempValue ++){
+            for (let tempValue = 0; tempValue <= 11; tempValue ++){
                 const isCurrent = tempValue === month
-                Cols.push(<MButton onClick={()=>handleClick(tempValue)} class="m--m-0 m--p-0" shape="square" variety={isCurrent ? 'normal' : 'flat'} type={isCurrent ? 'primary' : 'legacy'}>{tempValue}</MButton>)
+                Cols.push(<MButton onClick={()=>handleClick(tempValue)} class="m--m-0 m--p-0" shape="square" variety={isCurrent ? 'normal' : 'flat'} type={isCurrent ? 'primary' : 'legacy'}>{MonthMap[tempValue]}</MButton>)
             }
 
             return Cols

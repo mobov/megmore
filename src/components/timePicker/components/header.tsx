@@ -32,7 +32,7 @@ export default class MTimePickerHeader extends Vue {
             <div staticClass={`${prefix}`} class={classes}>
                 <div class={`${prefix}__date`}>
                     <div staticClass={`${prefix}__date-year`} >{year}</div>
-                    <div staticClass={`${prefix}__date-day`} >{month.dateZeroize()}-{date.dateZeroize()}</div>
+                    <div staticClass={`${prefix}__date-day`} >{(month + 1).dateZeroize()}-{date.dateZeroize()}</div>
                 </div>
                 <div class={`${prefix}__time`}>
                     <div staticClass={`${prefix}__time-hour`} >{hours.dateZeroize()}:{minutes.dateZeroize()}:{seconds.dateZeroize()}</div>
