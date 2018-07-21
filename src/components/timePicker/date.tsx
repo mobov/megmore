@@ -5,6 +5,7 @@ import MTimePickerHeader from './components/header'
 import MTimePickerPanelDate from './components/panel-date'
 import MTimePickerPanelYear from './components/panel-year'
 import MTimePickerPanelMonth from './components/panel-month'
+import MTimePickerPanelTime from './components/panel-time'
 import { VNode } from 'vue'
 
 const prefix = 'm-date-picker'
@@ -36,6 +37,7 @@ export default class MDatePicker extends mixins(TimePickerBase) {
                     <MTimePickerPanelDate max={max} min={min} firstDayOfWeek={firstDayOfWeek} type={type} onYearClick={handlePanelToggle}/>
                     <MTimePickerPanelYear max={max} min={min} />
                     <MTimePickerPanelMonth />
+                    <MTimePickerPanelTime type={type} valueType={'hours'}/>
                 </div>
             </div>
         )

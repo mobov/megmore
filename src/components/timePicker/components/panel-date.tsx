@@ -1,10 +1,11 @@
-import {Component, Prop, Emit, Vue, Inject, Model, Provide, Watch} from 'vue-property-decorator'
+import { Component, Prop, Emit, Vue, Inject, Model, Provide, Watch } from 'vue-property-decorator'
 import MButton from '@/components/button'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
 const prefix = 'm-time-picker-panel-date'
+const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
 
 @Component({ components: { MButton, MIcon }})
 
@@ -75,7 +76,7 @@ export default class MTimePickerPanelDate extends Vue {
         
         const { year, month, date } = this.DateStore
 
-        const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
+
 
         const viewMonthDays = viewDateValue.maxDayOfMonth()
         const viewFirstWeekDay = viewDateValue.firstWeekDay()

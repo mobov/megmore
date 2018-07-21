@@ -50,6 +50,7 @@ export default class MButton extends Vue {
     public handleClick(e: MouseEvent): void { void(0) }
 
     public render(): VNode {
+
         return (
             <button v-m-ripple
                 staticClass={`${prefix}`}

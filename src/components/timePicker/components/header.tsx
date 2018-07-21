@@ -1,7 +1,7 @@
 /**
  * 时间选择器头部显示板
  */
-import {Component, Prop, Emit, Vue, Inject} from 'vue-property-decorator'
+import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
 
@@ -35,7 +35,7 @@ export default class MTimePickerHeader extends Vue {
                     <div staticClass={`${prefix}__date-day`} >{(month + 1).dateZeroize()}-{date.dateZeroize()}</div>
                 </div>
                 <div class={`${prefix}__time`}>
-                    <div staticClass={`${prefix}__time-hour`} >{hours.dateZeroize()}:{minutes.dateZeroize()}:{seconds.dateZeroize()}</div>
+                    <div staticClass={`${prefix}__time-hour`} >{hours.dateZeroize()}:{minutes.dateZeroize()}</div>
                     {/*<div staticClass={`${prefix}__time-ampm`} >*/}
                         {/*<div>AM</div>*/}
                         {/*<div>PM</div>*/}

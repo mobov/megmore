@@ -2,6 +2,7 @@
 
 $--size-time-picker-header: 100;
 $--size-time-picker-panel: 265;
+$--size-time-picker-clock: 200;
 
 .m-datetime-picker,
 .m-date-picker,
@@ -106,4 +107,31 @@ $--size-time-picker-panel: 265;
     > * {
         width: 33%;
     }
+}
+.m-time-picker-panel-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: d($--size-time-picker-panel);
+    &__clock {
+        border-radius: 50%;
+        height: d($--size-time-picker-clock);
+        width: d($--size-time-picker-clock);
+        border-width: d(5);
+        border-style: solid;
+        border-color: slategray;
+        position: relative;
+        .m-button {
+            left: calc(50% - 1.075rem);
+            top:  calc(50% - 1.075rem);
+            position: absolute;
+        }
+    }
+    &__list {
+        flex:1;
+        height: d($--size-time-picker-panel);
+        @include scroller();
+        @include scroll-bar-slim(y, 4px)
+    }
+
 }

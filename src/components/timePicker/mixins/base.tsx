@@ -42,9 +42,6 @@ export default class TimePickerBase extends Vue {
         get minutes(): number {
             return this.dateValue.getMinutes()
         },
-        get seconds(): number {
-            return this.dateValue.getSeconds()
-        },
 
         UPDATE(val: number, type: DateValueType = 'date'){
 
