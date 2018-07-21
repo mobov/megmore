@@ -6,9 +6,9 @@
                 <m-button type="primary" @click="modal=true">asd</m-button>
             </m-col>
             <m-col :sm=6>
-                <m-date-picker v-model="dateValue" :elevation=2>
+                <m-datetime-picker v-model="dateValue" :elevation=2>
 
-                </m-date-picker>
+                </m-datetime-picker>
             </m-col>
             <m-col :sm=3>
                 <m-button type="primary" shape="circle">C</m-button>

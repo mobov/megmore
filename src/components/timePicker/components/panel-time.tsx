@@ -24,13 +24,13 @@ export default class MTimePickerPanelTime extends Vue {
     @Prop({ type: String, default: 'list' })
     private displayType!: 'list' | 'clock'
 
-    @Prop({ type: String, default: 'hours' })
+    @Prop({ type: String, default: 'time' })
     private valueType!: DateTimeValueType
 
     @Inject() DateStore!: any
 
     public handleClick(val: number, type: DateTimeValueType): void {
-
+        this.DateStore.UPDATE(val, type)
     }
 
     public render(): VNode {
@@ -51,12 +51,12 @@ export default class MTimePickerPanelTime extends Vue {
             for (let tempTime = min; tempTime <= max; tempTime ++){
                 const isCurrent = tempTime === time
                 Temps.push(<MButton onClick={()=>handleClick(tempTime, type)}
-                                    class="m--m-0 m--p-0 m--block" shape="square"
+                                    class="m--m-0 m--p-0 m--block" shape="round"
                                     variety={isCurrent ? 'normal' : 'flat'}
                                     type={isCurrent ? 'primary' : 'legacy'}>{tempTime}</MButton>)
             }
 
-            return (<div staticClass={`${prefix}__list`}>{Temps}</div>)
+            return (<div staticClass={`${prefix}__list ${prefix}__list-${type}`}>{Temps}</div>)
         }
 
         if(displayType === 'list') {

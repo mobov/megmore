@@ -31,7 +31,7 @@ $--size-time-picker-clock: 200;
             font-size: d(14);
             margin-bottom: d(4);
         }
-        &-day {
+        &-date {
             cursor: pointer;
             font-size: d(24);
             margin-bottom: d(5);
@@ -41,7 +41,7 @@ $--size-time-picker-clock: 200;
         height: d(70);
         display: flex;
         align-items: flex-end;
-        &-hour {
+        &-hours {
             cursor: pointer;
             font-size: d(36)
         }

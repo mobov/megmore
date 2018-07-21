@@ -1,9 +1,9 @@
 import '@/utils/date'
-import MDatePicker from './date'
+import MDatetimePicker from './datetime'
 /* istanbul ignore next */
-MDatePicker.install = function install(Vue: any) {
-    Vue.component(MDatePicker.name, MDatePicker)
+MDatetimePicker.install = function install(Vue: any) {
+    Vue.component(MDatetimePicker.name, MDatetimePicker)
 }
 export {
-    MDatePicker,
+    MDatetimePicker,
 }

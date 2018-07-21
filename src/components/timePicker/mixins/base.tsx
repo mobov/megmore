@@ -44,15 +44,21 @@ export default class TimePickerBase extends Vue {
         },
 
         UPDATE(val: number, type: DateValueType = 'date'){
-
             const result = new Date(this.value)
+
             if(type === 'year') {
                 result.setFullYear(val)
                 this.value = result.getTime()
             } else if(type === 'month') {
                 result.setMonth(val)
                 this.value = result.getTime()
-            }else {
+            } else if(type === 'hours') {
+                result.setHours(val)
+                this.value = result.getTime()
+            } else if(type === 'minutes') {
+                result.setMinutes(val)
+                this.value = result.getTime()
+            } else {
                 this.value = val
             }
         }

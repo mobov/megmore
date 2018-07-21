@@ -4,6 +4,7 @@
 import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
+import { DateValueType } from "@/types/model"
 
 const prefix = 'm-time-picker-header'
 
@@ -17,6 +18,8 @@ export default class MTimePickerHeader extends Vue {
 
     @Inject() DateStore!: any
 
+    @Emit('switch')
+    private handleSwitch(type: DateValueType): void{ console.log(type) }
     get classes(): any {
         return {
             [`m--bg-${this.type}`]: this.type,
@@ -24,18 +27,17 @@ export default class MTimePickerHeader extends Vue {
     }
 
     public render(): VNode {
-        const { classes } = this
-        console.log(this.DateStore)
+        const { classes, handleSwitch } = this
         const { year, month, date, hours, minutes, seconds } = this.DateStore
 
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 <div class={`${prefix}__date`}>
-                    <div staticClass={`${prefix}__date-year`} >{year}</div>
-                    <div staticClass={`${prefix}__date-day`} >{(month + 1).dateZeroize()}-{date.dateZeroize()}</div>
+                    <div staticClass={`${prefix}__date-year`} onClick={()=>{handleSwitch('year')}}>{year}</div>
+                    <div staticClass={`${prefix}__date-date`} onClick={()=>{handleSwitch('date')}}>{(month + 1).dateZeroize()}-{date.dateZeroize()}</div>
                 </div>
                 <div class={`${prefix}__time`}>
-                    <div staticClass={`${prefix}__time-hour`} >{hours.dateZeroize()}:{minutes.dateZeroize()}</div>
+                    <div staticClass={`${prefix}__time-hours`} onClick={()=>{handleSwitch('time')}}>{hours.dateZeroize()}:{minutes.dateZeroize()}</div>
                     {/*<div staticClass={`${prefix}__time-ampm`} >*/}
                         {/*<div>AM</div>*/}
                         {/*<div>PM</div>*/}

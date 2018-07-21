@@ -35,7 +35,7 @@ export default class MTimePickerPanelYear extends Vue {
 
             for (let tempYear = min; tempYear <= max; tempYear ++){
                 const isCurrent = tempYear === year
-                Cols.push(<MButton onClick={()=>handleClick(tempYear)} class="m--m-0 m--p-0" shape="square" variety={isCurrent ? 'normal' : 'flat'} type={isCurrent ? 'primary' : 'legacy'}>{tempYear}</MButton>)
+                Cols.push(<MButton onClick={()=>handleClick(tempYear)} class="m--m-0 m--p-0" shape="round" variety={isCurrent ? 'normal' : 'flat'} type={isCurrent ? 'primary' : 'legacy'}>{tempYear}</MButton>)
             }
 
             return Cols
