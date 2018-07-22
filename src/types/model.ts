@@ -10,7 +10,7 @@ export type Shape = 'square' | 'corner' | 'round' | 'circle' //  形状
 
 // date
 export type DateValueFormat = 'timestamp' | 'Date'
-export type DatePickerType = 'datetime' | 'date' | 'year' | 'month' | 'time' | 'hours' | 'minutes'
+export type DatePickerType = 'datetime' | 'date' | 'year' | 'month' | 'time'
 export type DateValueType = 'year' | 'month' | 'week' | 'date' | 'time' | 'hours' | 'minutes'
 export type DateTimeValueType = 'time' | 'hours' | 'minutes'
 

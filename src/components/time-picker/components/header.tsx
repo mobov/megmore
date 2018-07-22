@@ -34,7 +34,7 @@ export default class MTimePickerHeader extends Vue {
                 pickerType, activeType, ampm, am } = this.DateStore
 
         const RDate = () => {
-            return ['datetime', 'date'].includes(pickerType) ?
+            return ['datetime', 'date', 'year', 'month'].includes(pickerType) ?
             (<div class={`${prefix}__date`}>
                 <div class={{'m--active': activeType === 'year'}}
                      staticClass={`${prefix}__date-year`}>

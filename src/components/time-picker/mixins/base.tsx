@@ -68,10 +68,9 @@ export default class TimePickerBase extends Vue {
     @Watch('pickerType', { immediate: true })
     onPickerTypeChange(val: any, oldVal: any) {
         this.DateStore.SET_PICKER_TYPE(val)
-        if(['datetime', 'date'].includes(val)){
-            this.DateStore.SET_ACTIVE_TYPE('date')
-        } else {
-            this.DateStore.SET_ACTIVE_TYPE('time')
+        switch (val) {
+            case 'datetime' : this.DateStore.SET_ACTIVE_TYPE('date'); break;
+            default : this.DateStore.SET_ACTIVE_TYPE(val)
         }
     }
     @Provide()

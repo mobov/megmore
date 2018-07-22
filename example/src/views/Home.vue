@@ -11,6 +11,12 @@
                 <m-time-picker picker-type="time" value-format="Date" ampm v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
+                <m-time-picker picker-type="year" value-format="Date" ampm v-model="dateValue" :elevation=2 />
+            </m-col>
+            <m-col :sm=4>
+                <m-time-picker picker-type="month" value-format="Date" ampm v-model="dateValue" :elevation=2 />
+            </m-col>
+            <m-col :sm=4>
                 <m-button type="primary" @click="modal=true">asd</m-button>
                 <m-button type="primary" @click="modal=true">asd</m-button>
             </m-col>
