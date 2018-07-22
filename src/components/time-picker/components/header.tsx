@@ -6,6 +6,8 @@ import { VNode } from 'vue'
 import { Color } from '@/types/model'
 import { DatePickerType } from "@/types/model"
 const WeekMap = [ '星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六' ]
+const MonthMap = ['一月', '二月', '三月', '四月', '五月', '六月',
+    '七月', '八月', '九月', '十月', '十一月', '十二月']
 const prefix = 'm-time-picker-header'
 
 @Component
@@ -34,7 +36,7 @@ export default class MTimePickerHeader extends Vue {
                 pickerType, activeType, ampm, am } = this.DateStore
 
         const RDate = () => {
-            return ['datetime', 'date', 'year', 'month'].includes(pickerType) ?
+            return ['datetime', 'date'].includes(pickerType) ?
             (<div class={`${prefix}__date`}>
                 <div class={{'m--active': activeType === 'year'}}
                      staticClass={`${prefix}__date-year`}>
@@ -73,10 +75,26 @@ export default class MTimePickerHeader extends Vue {
             </div>) : <div/>
         }
 
+        const RYear = () => {
+            return 'year' === pickerType ?
+                <div class={`${prefix}__year`}>
+                    {year}
+                </div> : ''
+        }
+
+        const RMonth = () => {
+            return 'month' === pickerType ?
+                <div class={`${prefix}__month`}>
+                    {MonthMap[month]}
+                </div> : ''
+        }
+
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 {RDate()}
                 {RTime()}
+                {RYear()}
+                {RMonth()}
             </div>
         )
     }

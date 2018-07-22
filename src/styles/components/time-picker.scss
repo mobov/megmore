@@ -4,8 +4,6 @@ $--size-time-picker-header: 100;
 $--size-time-picker-panel: 265;
 $--size-time-picker-clock: 200;
 
-.m-datetime-picker,
-.m-date-picker,
 .m-time-picker {
     user-select: none;
     overflow: hidden;
@@ -17,6 +15,14 @@ $--size-time-picker-clock: 200;
     }
 };
 
+.m-time-picker {
+    &.m--datetime { }
+    &.m--date { }
+    &.m--month { }
+    &.m--year { }
+    &.m--time { }
+};
+
 .m-time-picker-header {
     color: getColor(gray, 300);
     padding: d($--space-y) d($--space-x / 1.5) d($--space-y / 2) d($--space-x / 1.5);
@@ -26,26 +32,6 @@ $--size-time-picker-clock: 200;
     height: d($--size-time-picker-header);
     transition: color .3s ease;
 
-    .m--datetime { }
-    &.m--date {
-        .m-time-picker-header__date {
-            //flex-grow: 1;
-            //
-            //display: flex;
-            //align-items: center;
-            //justify-content: flex-start;
-            //flex-direction: row;
-            //&-year {
-            //    font-size: d(36);
-            //    margin-right: d(30);
-            //    margin-bottom: 0;
-            //}
-            //&-date {
-            //    font-size: d(36);
-            //    margin-bottom: 0;
-            //}
-        }
-    }
     &__date {
         flex-grow: 1;
         display: flex;
@@ -64,6 +50,12 @@ $--size-time-picker-clock: 200;
         &-weekDay{
             margin-left: d(10);
         }
+    }
+    &__year,
+    &__month {
+        color: white;
+        flex-grow: 1;
+        font-size: d(40);
     }
     &__time {
         height: d(70);
