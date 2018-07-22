@@ -15,4 +15,4 @@ export { MExpansionPanel, MExpansionPanelContent } from '@/components/expansion-
 export { MForm, MFormItem } from '@/components/form'
 export { default as MPopover } from '@/components/popover'
 export { MContainer, MRow, MCol, MFlexFiller } from '@/components/layout'
-export { MDatetimePicker, MDatePicker, MTimePicker } from '@/components/time-picker'
+export { default as MTimePicker } from '@/components/time-picker'

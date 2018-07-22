@@ -4,7 +4,7 @@
 import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
-import { DateValueType } from "@/types/model"
+import { DatePickerType } from "@/types/model"
 const WeekMap = [ '星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六' ]
 const prefix = 'm-time-picker-header'
 
@@ -12,9 +12,6 @@ const prefix = 'm-time-picker-header'
 export default class MTimePickerHeader extends Vue {
     @Prop({ type: String, default: 'primary' })
     private type!: Color
-
-    @Prop({ type: Boolean })
-    private anpm!: boolean
 
     @Inject() DateStore!: any
 
@@ -26,46 +23,54 @@ export default class MTimePickerHeader extends Vue {
         }
     }
 
+    private handleAMToggle(val: boolean, oldVal: boolean){
+        if(val === oldVal) { return }
+        this.DateStore.SET_AM(val)
+    }
+
     public render(): VNode {
-        const { classes } = this
-        const { year, month, weekDay, date, hours, minutes, valueType, pickerType } = this.DateStore
+        const { classes, handleAMToggle } = this
+        const { year, month, weekDay, date, hours, minutes,
+                pickerType, activeType, ampm, am } = this.DateStore
 
         const RDate = () => {
-            return  ['datetime','date'].includes(pickerType) ?
+            return ['datetime', 'date'].includes(pickerType) ?
             (<div class={`${prefix}__date`}>
-                <div class={{'m--active': valueType === 'year'}}
+                <div class={{'m--active': activeType === 'year'}}
                      staticClass={`${prefix}__date-year`}>
-                    <a onClick={() => {this.DateStore.SET_VALUE_TYPE('year')}}>{year}</a>
+                    <a onClick={() => {this.DateStore.SET_ACTIVE_TYPE('year')}}>{year}</a>
                     <span staticClass={`${prefix}__date-weekDay`}>{WeekMap[weekDay]}</span>
                  </div>
                 <div staticClass={`${prefix}__date-date`}>
-                    <a class={{'m--active': valueType === 'month'}} onClick={() => {
-                        this.DateStore.SET_VALUE_TYPE('month')
+                    <a class={{'m--active': activeType === 'month'}} onClick={() => {
+                        this.DateStore.SET_ACTIVE_TYPE('month')
                     }}>{(month + 1).dateZeroize()}</a>-
-                    <a class={{'m--active': valueType === 'date'}} onClick={() => {
-                        this.DateStore.SET_VALUE_TYPE('date')
+                    <a class={{'m--active': activeType === 'date'}} onClick={() => {
+                        this.DateStore.SET_ACTIVE_TYPE('date')
                     }}>{date.dateZeroize()}</a>
 
                 </div>
-            </div>) : ''
+            </div>) : <div/>
         }
 
         const RTime = () => {
-            return ['datetime','time'].includes(pickerType) ?
+            return ['datetime', 'time'].includes(pickerType) ?
             (<div class={`${prefix}__time`}>
-                <div staticClass={`${prefix}__time-ampm`}>
-                    <a class={{'m--active': valueType === 'hours'}}>AM</a>
-                    <a class={{'m--active': valueType === 'hours'}}>PM</a>
-                </div>
+                { ampm ?
+                    <div staticClass={`${prefix}__time-ampm`}>
+                        <a class={{'m--active': am }} onClick={()=>{handleAMToggle(true, am)}}>AM</a>
+                        <a class={{'m--active': !am }} onClick={()=>{handleAMToggle(false, am)}}>PM</a>
+                    </div> : <div/>
+                }
                 <div staticClass={`${prefix}__time-hours`}>
-                    <a class={{'m--active': valueType === 'hours'}} onClick={() => {
-                        this.DateStore.SET_VALUE_TYPE('hours')
+                    <a class={{'m--active': activeType === 'hours'}} onClick={() => {
+                        this.DateStore.SET_ACTIVE_TYPE('hours')
                     }}>{hours.dateZeroize()}</a>:
-                    <a class={{'m--active': valueType === 'minutes'}} onClick={() => {
-                        this.DateStore.SET_VALUE_TYPE('minutes')
+                    <a class={{'m--active': activeType === 'minutes'}} onClick={() => {
+                        this.DateStore.SET_ACTIVE_TYPE('minutes')
                     }}>{minutes.dateZeroize()}</a>
                 </div>
-            </div>) : ''
+            </div>) : <div/>
         }
 
         return (

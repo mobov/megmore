@@ -18,34 +18,40 @@ export default class MTimePickerPanelTime extends Vue {
     @Prop({ type: String, default: 'primary' })
     private type!: Color
 
-    @Prop({ type: Boolean, default: false })
-    private ampm!: boolean
-
     @Prop({ type: String, default: 'list' })
     private timeSelectType!: 'list' | 'clock'
 
+    @Prop({ type: Number, default: 1 })
+    private hourStep!: number
+
+    @Prop({ type: Number, default: 1 })
+    private minuteStep!: number
+
     @Inject() DateStore!: any
 
+    @Emit('pick')
     public handleClick(val: number, type: DateTimeValueType): void {
-        this.DateStore.UPDATE(val, type)
+        this.DateStore.SET_ACTIVE_TYPE(type)
+        this.DateStore.UPDATE( (this.DateStore.ampm && !this.DateStore.am) ? val + 12 : val, type)
     }
 
     public render(): VNode {
 
-        const { handleClick, timeSelectType } = this
+        const { handleClick, timeSelectType, hourStep, minuteStep } = this
         
-        const { hours, minutes, valueType } = this.DateStore
+        const { ampm } = this.DateStore
 
         const Result = []
 
         const RList = (type: DateTimeValueType) => {
             const min = 0
-            const max = type === 'hours' ? this.ampm ? 11 : 23 : 59
+            const max = type === 'hours' ? ampm ? 11 : 23 : 59
+            const step =  type === 'hours' ? hourStep : minuteStep
             const time = this.DateStore[type]
 
             let Temps = []
 
-            for (let tempTime = min; tempTime <= max; tempTime ++){
+            for (let tempTime = min; tempTime <= max; tempTime += step){
                 const isCurrent = tempTime === time
                 Temps.push(<MButton onClick={()=>handleClick(tempTime, type)}
                                     class="m--m-0 m--p-0 m--block" shape="round"

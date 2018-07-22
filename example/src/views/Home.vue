@@ -2,13 +2,13 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm=4>
-                <m-datetime-picker v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
-                <m-date-picker v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="date" value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
-                <m-time-picker v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="time" value-format="Date" ampm v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
                 <m-button type="primary" @click="modal=true">asd</m-button>
@@ -78,6 +78,12 @@ export default {
       });
       console.log("confirm");
     }
-  }
+  },
+    mounted(){
+      // setInterval(()=>{
+      //     this.dateValue = new Date(1999)
+      //     console.log( this.dateValue)
+      // },1000)
+    }
 };
 </script>

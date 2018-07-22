@@ -49,6 +49,7 @@ export default class MTimePickerPanelDate extends Vue {
         this.viewValue = date.getTime()
     }
 
+    @Emit('pick')
     public handleDateClick(yearVal: number, monthVal: number, dateVal: number): void {
 
         const { year, month, date } = this.DateStore
@@ -68,12 +69,10 @@ export default class MTimePickerPanelDate extends Vue {
 
     public render(): VNode {
 
-        const { viewDateValue, viewYear, viewMonth, viewDate,
+        const { viewDateValue, viewYear, viewMonth,
                 handleDateClick, handleMonthToggle } = this
         
         const { year, month, date } = this.DateStore
-
-
 
         const viewMonthDays = viewDateValue.maxDayOfMonth()
         const viewFirstWeekDay = viewDateValue.firstWeekDay()

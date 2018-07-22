@@ -20,14 +20,14 @@ export default class MTimePickerPanelYear extends Vue {
 
     @Inject() DateStore!: any
 
+    @Emit('pick')
     public handleClick(year: number): void {
         this.DateStore.UPDATE(year, 'year')
     }
 
     public render(): VNode {
 
-        const { min, max,
-                handleClick } = this
+        const { min, max, handleClick } = this
         const { year } = this.DateStore
 
         const RCols = () => {

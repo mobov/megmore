@@ -1,13 +1,11 @@
-import {Component, Prop, Watch, Vue, Model, Provide} from 'vue-property-decorator'
+import { Component, Prop, Watch, Vue, Model, Provide } from 'vue-property-decorator'
 import { Color, DateValueFormat, DateValueType, DatePickerType } from "@/types/model"
 
 @Component
 export default class TimePickerBase extends Vue {
-    @Prop({ type: String, default: 'primary' })
-    public type!: Color
 
-    @Prop({ type: Number, default: 2 })
-    public elevation!: number
+    @Prop({ type: Boolean, default: true })
+    public sync!: boolean
 
     @Model('change', { type: [Date, Number, String], default: new Date().getTime() })
     public value!: any
@@ -15,20 +13,74 @@ export default class TimePickerBase extends Vue {
     @Prop({ type: String, default: 'timestamp' })
     public valueFormat!: DateValueFormat
 
+    @Prop({ type: Boolean, default: false })
+    public ampm!: boolean
+
+    @Prop({ type: Number, default: 1 })
+    public hourStep!: number
+
+    @Prop({ type: Number, default: 1 })
+    public minuteStep!: number
+
     @Prop({ type: [Date, Number, String], default: 2100 })
     public max!: any
 
     @Prop({ type: [Date, Number, String], default: 1900 })
     public min!: any
 
+    @Prop({ type: Number, default: 0 })
+    public firstDayOfWeek!: number
+
+    @Prop({ type: String, default: 'date' })
+    public pickerType!: DatePickerType
+
+    // 输入适配
+    valueInAdapt(val: any): number {
+        let result = 0
+        if (this.valueFormat === 'timestamp') {
+            result = typeof val === 'string' ? Number(val) : val
+        } else
+        if (this.valueFormat === 'Date') {
+            result = val.getTime()
+        }
+        return result
+    }
+    // 输出适配
+    valueOutAdapt(val: number): any {
+        let result = null
+        if (this.valueFormat === 'timestamp') {
+            result = val
+        } else
+        if (this.valueFormat === 'Date') {
+            result = new Date(val)
+        }
+        return result
+    }
+
+    @Watch('value', { immediate: true })
+    onValueUpdate(val: any, oldVal: any) {
+        this.DateStore.UPDATE(this.valueInAdapt(val))
+    }
+    @Watch('ampm', { immediate: true })
+    onAMPMUpdate(val: any, oldVal: any) {
+        this.DateStore.SET_AMPM(val)
+    }
+    @Watch('pickerType', { immediate: true })
+    onPickerTypeChange(val: any, oldVal: any) {
+        this.DateStore.SET_PICKER_TYPE(val)
+        if(['datetime', 'date'].includes(val)){
+            this.DateStore.SET_ACTIVE_TYPE('date')
+        } else {
+            this.DateStore.SET_ACTIVE_TYPE('time')
+        }
+    }
     @Provide()
     public DateStore: any = {
-        value: this.value.getTime(),
-        valueType: 'date',
-        pickerType: 'date',
-        max: new Date(2050),
-        min: new Date(1900),
-        get dateValue(): Date{
+        value: null,
+        pickerType: this.pickerType,
+        activeType: 'date',
+        ampm: false,
+        get dateValue(): Date {
             return new Date(this.value)
         },
         get year(): number {
@@ -44,16 +96,33 @@ export default class TimePickerBase extends Vue {
             return this.dateValue.getDate()
         },
         get hours(): number {
-            return this.dateValue.getHours()
+            let result = this.dateValue.getHours()
+            if (this.ampm && result >= 12) { result = result - 12 }
+            return result
         },
         get minutes(): number {
             return this.dateValue.getMinutes()
         },
-        SET_PICKER_TYPE(type: DatePickerType = 'date'){
+        get am(): boolean{
+            return this.dateValue.getHours() < 12
+        },
+        SET_ACTIVE_TYPE(type: DateValueType){
+            if(type === this.activeType) { return }
+            this.activeType = type
+        },
+        SET_PICKER_TYPE(type: DatePickerType){
+            if(type === this.pickerType) { return }
             this.pickerType = type
         },
-        SET_VALUE_TYPE(type: DateValueType = 'date'){
-            this.valueType = type
+        SET_AM(val: boolean){
+            if(val === this.am) { return }
+            const temp = new Date(this.value)
+            temp.setHours(val ? this.hours : this.hours + 12)
+            this.value = temp.getTime()
+        },
+        SET_AMPM(val: boolean){
+            if(val === this.ampm) { return }
+            this.ampm = val
         },
         UPDATE(val: number, type: DateValueType = 'date'){
             const result = new Date(this.value)
@@ -73,12 +142,6 @@ export default class TimePickerBase extends Vue {
             } else {
                 this.value = val
             }
-        }
-    }
-
-    get baseClasses(): any {
-        return{
-            [`m--elevation-${this.elevation}`]: this.elevation,
         }
     }
 }
