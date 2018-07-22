@@ -40,9 +40,9 @@ export default class MTimePickerPanelTime extends Vue {
 
         const RList = (type: DateTimeValueType) => {
             const min = 0
-            const max = type === 'hours' ? 23 : 59
+            const max = type === 'hours' ? this.ampm ? 11 : 23 : 59
             const time = this.DateStore[type]
-            console.log(time)
+
             let Temps = []
 
             for (let tempTime = min; tempTime <= max; tempTime ++){
