@@ -23,9 +23,9 @@ const Theme: any = {
             bgColor: Palettes.lightblue_A700,
             color: Palettes.grey_A100,
         },
-        'm-spin__path': {
+        'spin__path': {
             stroke: Palettes.lightblue_A700,
-        },
+        }
     },
 }
 /**
@@ -35,7 +35,7 @@ const Theme: any = {
  */
 function midlineCase(name: string): string {
     const SPECIAL_CHARS_REGEXP = /([A-Z])/g
-    const BE_REGEXP = /m(\-[A-z]+)+__[A-z]+/g
+    const BE_REGEXP = /([A-z]+)(\-[A-z]+)+__[A-z]+(\-[A-z]+)+/g
     if (BE_REGEXP.test(name)) {//   BEM原样输出
         return name
     }
@@ -130,18 +130,7 @@ function collectSelectorStyles(name: string, selector: string, attrData: any): s
 
     return tempText
 }
-/**
- * 修饰符样式构造
- */
-function collectModifyStyles(name: string) {
-    const { theme } = Theme[name]
-    let str = ''
-    Object.keys(theme).forEach(key => {
-        str += `.color--${key} \{color:${theme[key]}\}\n`
-        str += `.bg--${key} \{background-color:${theme[key]}\}\n`
-    })
-    return str
-}
+
 /**
  * 构造样式表
  * @param name
@@ -157,7 +146,6 @@ function collectStyles(name: string, data: any): string {
             } else {
                 context += collectSelectorStyles(name, selector, data[selector])
             }
-            context += collectModifyStyles(name)
             context += `\n`
         }
     })

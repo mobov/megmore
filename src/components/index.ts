@@ -14,5 +14,7 @@ export { default as MBottomSheet } from '@/components/bottom-sheet'
 export { MExpansionPanel, MExpansionPanelContent } from '@/components/expansion-panel'
 export { MForm, MFormItem } from '@/components/form'
 export { default as MPopover } from '@/components/popover'
+export { default as MInput } from '@/components/text-field'
+
 export { MContainer, MRow, MCol, MFlexFiller } from '@/components/layout'
 export { default as MTimePicker } from '@/components/time-picker'

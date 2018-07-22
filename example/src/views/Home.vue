@@ -33,7 +33,10 @@
         </m-modal>
         <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
-       
+        <div style="display: flex">
+            <m-text-field></m-text-field>
+            <m-text-field label-float></m-text-field>
+        </div>
         <MExpansionPanel style="width:500px;margin:0 auto">
             <MExpansionPanelContent v-for="item in 30">
                 <template slot="header">
