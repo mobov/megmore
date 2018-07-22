@@ -4,7 +4,6 @@
 import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import { VNode } from 'vue'
 import { Color } from '@/types/model'
-import { DatePickerType } from "@/types/model"
 const WeekMap = [ '星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六' ]
 const MonthMap = ['一月', '二月', '三月', '四月', '五月', '六月',
     '七月', '八月', '九月', '十月', '十一月', '十二月']
@@ -18,7 +17,6 @@ export default class MTimePickerHeader extends Vue {
     @Inject() DateStore!: any
 
     get classes(): any {
-
         return {
             [`m--bg-${this.type}`]: this.type,
             [`m--${this.DateStore.pickerType}`]: true,

@@ -93,7 +93,7 @@ export default class MTimePickerPanelDate extends Vue {
             }
             for (let tempDate = 1; tempDate <= viewMonthDays; tempDate ++){
                 const isCurDate = isCurMonth && (tempDate === date)
-                Tds.push(<td><MButton onClick={()=>handleDateClick(viewYear, viewMonth, tempDate)} class="m--m-0 m--p-0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{tempDate}</MButton></td>)
+                Tds.push(<td><MButton size={'sm'} onClick={()=>handleDateClick(viewYear, viewMonth, tempDate)} class="m--m-0 m--p-0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{tempDate}</MButton></td>)
                 if((tempDate + viewFirstWeekDay) %7 === 0 || tempDate === viewMonthDays){
                     Trs.push(<tr>{Tds}</tr>)
                     Tds = []

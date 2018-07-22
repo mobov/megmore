@@ -26,9 +26,13 @@ export default class MTimePicker extends mixins(TimePickerBase) {
     @Prop({ type: Number, default: 2 })
     private elevation!: number
 
+    @Prop({ type: Boolean, default: false })
+    private landscope!: boolean
+
     get classes(): any {
         return{
             [`m--elevation-${this.elevation}`]: this.elevation,
+            [`m--landscope`]: this.landscope
         }
     }
 

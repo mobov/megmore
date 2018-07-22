@@ -14,6 +14,7 @@
   $value in $--Size-button-height {
     &.m--#{$name} {
       @include flex-size(d($value), y);
+      font-size: d($value /2);
     }
   } // type
   &.m--normal {
