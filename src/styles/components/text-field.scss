@@ -1,22 +1,26 @@
 .m-text-field{
   $gray:getColor(grey, 400);
+  $inputHeight:32;
   position: relative;
   padding-top: d(28);
   padding-bottom:d(12);
-  display: inline-block;
   vertical-align:middle;
+  width: d(300);
+  display: flex;
+  align-items: center;
   &.m--disabled{
     cursor: not-allowed;
   }
   .m-icon{
     color:$gray ;
+    min-width: d(30);
   }
   &.m--has-icon{
     padding-left: d(35);
     >.m-icon{
-      position: absolute;
-      left: 0;
-      color:$gray ;
+      //position: absolute;
+      //left: 0;
+      //color:$gray ;
     }
   }
   .m-text-field__label{
@@ -27,34 +31,51 @@
     transform-origin: left top;
     transition: all .45s cubic-bezier(.23,1,.32,1);
     color:$gray;
-    transform: translateY(d(28)) scale(1);
+    transform: translateY(0) scale(1);
+    z-index: 1;
     &.m--label-float{
       &:not(.m--active){
-        transform: translateY(d(28)) scale(1);
+        transform: translateY(0) scale(1);
       }
       &.m--active{
-        transform: translateY(0) scale(.75);
+        transform: translateY(d(-20)) scale(.75);
       }
     }
     &:not(.m--label-float){
-      transform: translateY(0) scale(.75);
+      transform: translateY(d(-20)) scale(.75);
     }
+
   }
 
   .m-text-field__content{
     display: flex;
-    .m-text-field__input{
-      border: none;
-      height: d(32);
-      line-height: d(32);
-      &[disabled="disabled"]{
-        background-color: transparent;
-        cursor: not-allowed;
-      }
-      &.m--has-end-icon{
-        padding-right: d(5);
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1;
+    position: relative;
+    .m-text-field__input-wrap{
+      flex: 1;
+      display: flex;
+      line-height: d($inputHeight);
+      align-items: center;
+      width: 100%;
+      padding-right: d(5);//fixme 去掉此项 宽度会变为0
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      .m-text-field__input{
+        border: none;
+        @include scroll-bar-slim();
+        line-height: d($inputHeight);
+        resize: none;
+        width:100%;
+        &[disabled="disabled"]{
+          background-color: transparent;
+          cursor: not-allowed;
+        }
+
       }
     }
+
     .m-icon{
       &.m--focus{
 
@@ -63,6 +84,7 @@
 
   }
   .m-text-field__underline{
+    width: 100%;
     height: 1px;
     background-color:$gray ;
     .m-text-field__underline-content{
@@ -85,8 +107,10 @@
     font-size: d(map_get($--Size-font,sm));
     color: $gray;
     padding-top: d(5);
+    width: 100%;
   }
   .m-text-field__error-text{
+    width: 100%;
     font-size: d(map_get($--Size-font,sm));
     padding-top: d(5);
   }
