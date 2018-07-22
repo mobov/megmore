@@ -42,6 +42,6 @@ export default class MTimePicker extends mixins(TimePickerBase) {
     }
     public created(){
         this.DateStore.SET_PICKER_TYPE('time')
-        this.DateStore.SET_VALUE_TYPE('date')
+        this.DateStore.SET_VALUE_TYPE('time')
     }
 }

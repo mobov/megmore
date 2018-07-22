@@ -31,7 +31,8 @@ export default class MTimePickerHeader extends Vue {
         const { year, month, weekDay, date, hours, minutes, valueType, pickerType } = this.DateStore
 
         const RDate = () => {
-            return (<div class={`${prefix}__date`}>
+            return  ['datetime','date'].includes(pickerType) ?
+            (<div class={`${prefix}__date`}>
                 <div class={{'m--active': valueType === 'year'}}
                      staticClass={`${prefix}__date-year`}>
                     <a onClick={() => {this.DateStore.SET_VALUE_TYPE('year')}}>{year}</a>
@@ -46,11 +47,12 @@ export default class MTimePickerHeader extends Vue {
                     }}>{date.dateZeroize()}</a>
 
                 </div>
-            </div>)
+            </div>) : ''
         }
 
         const RTime = () => {
-            return pickerType === 'datetime' ? (<div class={`${prefix}__time`}>
+            return ['datetime','time'].includes(pickerType) ?
+            (<div class={`${prefix}__time`}>
                 <div staticClass={`${prefix}__time-ampm`}>
                     <a class={{'m--active': valueType === 'hours'}}>AM</a>
                     <a class={{'m--active': valueType === 'hours'}}>PM</a>
