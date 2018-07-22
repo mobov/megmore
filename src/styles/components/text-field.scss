@@ -1,0 +1,95 @@
+.m-text-field{
+  $gray:getColor(grey, 400);
+  position: relative;
+  padding-top: d(28);
+  padding-bottom:d(12);
+  display: inline-block;
+  vertical-align:middle;
+  &.m--disabled{
+    cursor: not-allowed;
+  }
+  .m-icon{
+    color:$gray ;
+  }
+  &.m--has-icon{
+    padding-left: d(35);
+    >.m-icon{
+      position: absolute;
+      left: 0;
+      color:$gray ;
+    }
+  }
+  .m-text-field__label{
+    font-size: d(map_get($--Size-font,md));
+    position: absolute;
+    line-height: d(20);
+    top:d(8);
+    transform-origin: left top;
+    transition: all .45s cubic-bezier(.23,1,.32,1);
+    color:$gray;
+    transform: translateY(d(28)) scale(1);
+    &.m--label-float{
+      &:not(.m--active){
+        transform: translateY(d(28)) scale(1);
+      }
+      &.m--active{
+        transform: translateY(0) scale(.75);
+      }
+    }
+    &:not(.m--label-float){
+      transform: translateY(0) scale(.75);
+    }
+  }
+
+  .m-text-field__content{
+    display: flex;
+    .m-text-field__input{
+      border: none;
+      height: d(32);
+      line-height: d(32);
+      &[disabled="disabled"]{
+        background-color: transparent;
+        cursor: not-allowed;
+      }
+      &.m--has-end-icon{
+        padding-right: d(5);
+      }
+    }
+    .m-icon{
+      &.m--focus{
+
+      }
+    }
+
+  }
+  .m-text-field__underline{
+    height: 1px;
+    background-color:$gray ;
+    .m-text-field__underline-content{
+      &:not(.m--bg-danger){
+
+      }
+      height: 2px;
+      transition: transform .45s cubic-bezier(.23,1,.32,1);
+      transform: scaleX(0);
+      &.m--focus{
+        transform: scaleX(1);
+      }
+    }
+    &.m--disabled{
+      background-color:transparent ;
+      border-bottom: 2px dotted $gray;
+    }
+  }
+  .m-text-field__help-text{
+    font-size: d(map_get($--Size-font,sm));
+    color: $gray;
+    padding-top: d(5);
+  }
+  .m-text-field__error-text{
+    font-size: d(map_get($--Size-font,sm));
+    padding-top: d(5);
+  }
+
+
+}
