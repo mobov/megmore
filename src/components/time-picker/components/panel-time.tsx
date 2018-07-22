@@ -32,7 +32,9 @@ export default class MTimePickerPanelTime extends Vue {
     @Emit('pick')
     public handleClick(val: number, type: DateTimeValueType): void {
         this.DateStore.SET_ACTIVE_TYPE(type)
-        this.DateStore.UPDATE( (this.DateStore.ampm && !this.DateStore.am) ? val + 12 : val, type)
+        this.DateStore.UPDATE(
+            (type === 'hours' && this.DateStore.ampm && !this.DateStore.am) ?
+                val + 12 : val, type)
     }
 
     public render(): VNode {
