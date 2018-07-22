@@ -1,6 +1,6 @@
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { FunctionalComponentOptions } from 'vue'
-import { Model } from '@/types';
+import * as Model from '@/types/model';
 @Component({
  functional: true,
 } as FunctionalComponentOptions)

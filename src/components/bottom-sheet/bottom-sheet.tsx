@@ -1,14 +1,10 @@
-import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import { VNode } from 'vue'
+import { Component } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
-import MIcon from '@/components/icon'
-import Render from '@/components/render'
-import { Model } from '@/types';
-import Overlay from '@/components/base/overlay'
+import * as Model from '@/types/model';
 @Component
 export default class MBottomSheet extends mixins(modalMixin) {
-  public render(h) {
+  public render(h:any) {
     return (
       this.domExist && (
         <transition name='m-bottom-sheet' onAfterLeave={this.afterLeave} >
