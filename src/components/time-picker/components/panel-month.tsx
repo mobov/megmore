@@ -28,7 +28,7 @@ export default class MTimePickerPanelMonth extends Vue {
 
         const { handleClick } = this
         const { month } = this.DateStore
-        console.log(month)
+
         const RCols = () => {
             const Cols: any = []
 

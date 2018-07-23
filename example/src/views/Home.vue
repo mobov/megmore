@@ -2,7 +2,7 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm=4>
-                <m-time-picker picker-type="datetime" :sync="false" value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" desync value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <!--<m-col :sm=4>-->
                 <!--<m-time-picker picker-type="date" value-format="Date" v-model="dateValue" :elevation=2 />-->

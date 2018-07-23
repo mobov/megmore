@@ -107,7 +107,7 @@ export default class MTimePickerPanelDate extends Vue {
             <div staticClass={prefix}>
                 <div class={`${prefix}__header`}>
                     <div staticClass={`${prefix}__header-year`}>
-                        <MButton variety="flat" type="legacy" onClick={()=>this.DateStore.SET_VALUE_TYPE('year')}>{viewYear}</MButton>
+                        <MButton variety="flat" type="legacy" onClick={()=>this.DateStore.SET_ACTIVE_TYPE('year')}>{viewYear}</MButton>
                     </div>
                     <div staticClass={`${prefix}__header-handler`}>
                         <MButton variety="flat" onClick={()=>handleMonthToggle('prev')} shape="circle" type="legacy"><MIcon name="navigate_before" /></MButton>

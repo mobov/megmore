@@ -1,13 +1,16 @@
-import { Component, Prop, Watch, Vue, Model, Provide } from 'vue-property-decorator'
+import { Component, Prop, Watch, Vue, Emit, Model, Provide } from 'vue-property-decorator'
 import { Color, DateValueFormat, DateValueType, DatePickerType } from "@/types/model"
 
 @Component
 export default class TimePickerBase extends Vue {
 
-    @Prop({ type: Boolean, default: true })
-    public sync!: boolean
+    @Prop({ type: Boolean, default: false })
+    public desync!: boolean
 
-    @Model('change', { type: [Date, Number, String], default: new Date().getTime() })
+    // @Model('change', { type: [Date, Number, String], default: new Date().getTime() })
+    // public value!: any
+
+    @Prop({ type: [Date, Number, String], default: new Date().getTime() })
     public value!: any
 
     @Prop({ type: String, default: 'timestamp' })
@@ -57,14 +60,21 @@ export default class TimePickerBase extends Vue {
         return result
     }
 
+    @Emit('input')
+    onInput(val: any) { console.log(val) }
+
     @Watch('value', { immediate: true })
     onValueUpdate(val: any, oldVal: any) {
+        if(val === oldVal) { return }
         this.DateStore.UPDATE(this.valueInAdapt(val))
     }
+
     @Watch('ampm', { immediate: true })
     onAMPMUpdate(val: any, oldVal: any) {
+        if(val === oldVal) { return }
         this.DateStore.SET_AMPM(val)
     }
+
     @Watch('pickerType', { immediate: true })
     onPickerTypeChange(val: any, oldVal: any) {
         this.DateStore.SET_PICKER_TYPE(val)
@@ -73,9 +83,10 @@ export default class TimePickerBase extends Vue {
             default : this.DateStore.SET_ACTIVE_TYPE(val)
         }
     }
+
     @Provide()
     public DateStore: any = {
-        value: null,
+        value: this.valueInAdapt(this.value),
         pickerType: this.pickerType,
         activeType: 'date',
         ampm: false,
@@ -123,24 +134,28 @@ export default class TimePickerBase extends Vue {
             if(val === this.ampm) { return }
             this.ampm = val
         },
-        UPDATE(val: number, type: DateValueType = 'date'){
-            const result = new Date(this.value)
-
+        UPDATE: (val: number, type: DateValueType = 'date') => {
+            const _this = this.DateStore
+            const result = new Date(_this.value)
             if(type === 'year') {
                 result.setFullYear(val)
-                this.value = result.getTime()
+                _this.value = result.getTime()
             } else if(type === 'month') {
                 result.setMonth(val)
-                this.value = result.getTime()
+                _this.value = result.getTime()
             } else if(type === 'hours') {
                 result.setHours(val)
-                this.value = result.getTime()
+                _this.value = result.getTime()
             } else if(type === 'minutes') {
                 result.setMinutes(val)
-                this.value = result.getTime()
+                _this.value = result.getTime()
             } else {
-                this.value = val
+                _this.value = val
             }
+            if (this.desync){ return }
+            if (this.valueInAdapt(this.value) === _this.value){ return }
+            const outValue = this.valueOutAdapt(_this.value)
+            this.onInput(outValue)
         }
     }
 }
