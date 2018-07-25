@@ -35,6 +35,7 @@
             <m-button @click="modalInner=true">modal</m-button>
             <m-button @click="drawer=true">drawer</m-button>
             <m-modal :width="300" :show.sync="modalInner"></m-modal>
+            <m-drawer :width="300" :show.sync="drawer"></m-drawer>
         </m-modal>
         <m-button color="primary" loading @click="fullscreenModal=true">fullscreen modal</m-button>
         <m-button color="primary" loading @click="bottomSheet=true">bottomSheet</m-button>
@@ -71,7 +72,7 @@ export default {
       modal: false,
       modalInner: false,
       fullscreenModal: false,
-      drawer: true,
+      drawer: false,
       bottomSheet: false,
       dateValue: new Date()
     };

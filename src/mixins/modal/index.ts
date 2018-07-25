@@ -25,20 +25,20 @@ export default class ModalMixin extends Mixins(toggleable) {
 
   public escPressClose!: boolean
 
-  public domExist = false//  添加或移除BODY层dom
 
 
   protected zIndex = getZIndex()
 
-  protected domReady = false//  标记dom是否已经插入
 
   get dom(): HTMLElement {
     return this.$el
   }
-
+  public beforeEnter() {
+    console.log(this.$el)
+    document.body.appendChild(this.$el);
+  }
   public afterLeave() {
-    this.domExist = false
-    this.domReady = false
+    this.$el.remove()
   }
   public setZIndex() {
     const dom = this.$el
@@ -64,9 +64,7 @@ export default class ModalMixin extends Mixins(toggleable) {
   public async visibleChangeHandle(val: boolean, oldVal: boolean) {
     this.$emit('update:show', val)
     if (val) {
-      this.domExist = val
       await this.$nextTick()//  确保dom已经插入再进行显示
-      this.domReady = true
       this.setZIndex()
       manage.open(this)
       openOverlay()
@@ -76,11 +74,10 @@ export default class ModalMixin extends Mixins(toggleable) {
     this.visible = val
   }
   protected beforeDestroy() {
-    this.domExist = false
     this.$el.remove()
   }
   private async mounted() {
-    document.body.appendChild(this.$el)
+    this.$el.remove()
   }
 
 

@@ -1,8 +1,7 @@
 import MModal from '@/components/modal'
 import { Component, Vue } from 'vue-property-decorator'
-import { ComponentOptions, VNode } from 'vue';
-import { Model } from '@/types'
-import { openOverlay, closeOverlay } from '@/methods/overlay'
+import {  VNode } from 'vue';
+import * as Model from '@/types/model'
 @Component
 class Confirm extends MModal {
   public resolve!: () => void

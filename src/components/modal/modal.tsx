@@ -3,7 +3,7 @@ import { VNode } from 'vue'
 import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
 import Render from '@/components/base/render'
-import * as Model  from '@/types/model';
+import * as Model from '@/types/model';
 import Overlay from '@/components/base/overlay'
 @Component
 export default class MModal extends mixins(modalMixin) {
@@ -54,9 +54,9 @@ export default class MModal extends mixins(modalMixin) {
     const contentClass = `${this.fullscreen ? 'full-screen' : ''}`
     const { content } = this
     return (
-      this.domExist && (
-        <transition name={this.transitionName} onAfterLeave={this.afterLeave}>
-          <div staticClass='m-modal' v-show={this.domReady && this.visible} onClick={this.closeLastModal}>
+       (
+        <transition name={this.transitionName} onBeforeEnter={this.beforeEnter} onAfterLeave={this.afterLeave}>
+          <div staticClass='m-modal' v-show={this.visible} onClick={this.closeLastModal}>
             <div staticClass='m-modal__content' class={contentClass} style={this.style} onClick={this.eveStop}>
               <div class='m-modal__title'>
                 {this.$slots.title || this.title}

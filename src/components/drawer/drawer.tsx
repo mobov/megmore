@@ -6,13 +6,11 @@ import modalMixin from '@/mixins/modal'
 export default class MDrawer extends mixins(modalMixin) {
   public render(h) {
     return (
-      this.domExist && (
-        <transition name='m-drawer' onAfterLeave={this.afterLeave} >
-          <div class='m-drawer__wrap' onClick={this.closeLastModal} v-show={this.visible} >
-            <div staticClass='m-drawer__content'onClick={this.eveStop}></div>
-          </div>
-        </transition>
-      )
+      <transition name='m-drawer' onBeforeEnter={this.beforeEnter} onAfterLeave={this.afterLeave} >
+        <div class='m-drawer__wrap' onClick={this.closeLastModal} v-show={this.visible} >
+          <div staticClass='m-drawer__content' onClick={this.eveStop}></div>
+        </div>
+      </transition>
     )
   }
 }
