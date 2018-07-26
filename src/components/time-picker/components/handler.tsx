@@ -22,19 +22,14 @@ export default class MTimePickerHandler extends Vue {
     public handleAction(): void{
 
     }
+
     public render(): VNode {
         const { classes, handleAction } = this
 
-        // const RHandler = () => {
-        //     return <div class="">
-        //             <div></div>
-        //            </div>
-        // }
-
         return (
             <div staticClass={`${prefix} m--p-sm`} class={classes}>
-                <MButton onClick={()=>handleAction} class="m--m-0 m--p-0" size={'md'} variety={'flat'} type={'primary'}>cancel</MButton>
-                <MButton onClick={()=>handleAction} class="m--m-0 m--p-0" size={'md'} variety={'flat'} type={'primary'}>ok</MButton>
+                <MButton onClick={()=>handleAction} class="m--m-0 m--p-0" size="md" variety="flat" type="primary">cancel</MButton>
+                <MButton onClick={()=>handleAction} class="m--m-0 m--p-0" size="md" variety="flat" type="primary">ok</MButton>
             </div>
         )
     }

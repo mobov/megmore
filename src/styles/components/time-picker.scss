@@ -5,8 +5,9 @@ $--size-time-picker-panel: 265;
 $--size-time-picker-clock: 200;
 $--width-time-picker: 290;
 $--width-time-picker-landscope: 450;
-$--height-time-picker-landscope: 320;
-$--size-time-picker-landscope-panel: 270;
+$--height-time-picker-landscope: 270;
+$--height-time-picker-landscope-confirm: 320;
+
 $--size-time-picker-landscope-header: 130;
 
 .m-time-picker {
@@ -18,8 +19,10 @@ $--size-time-picker-landscope-header: 130;
     &.m--landscope {
         display: flex;
         width: d($--width-time-picker-landscope);
-        height: d($--height-time-picker-landscope);
+        flex-direction: row;
+        flex-wrap: wrap;
         align-items: stretch;
+        height: d($--height-time-picker-landscope);
         .m-time-picker-header {
             width: d($--size-time-picker-landscope-header);
             height: 100%;
@@ -47,7 +50,10 @@ $--size-time-picker-landscope-header: 130;
             height: 100%;
         }
         .m-time-picker__panel {
-            height: d($--size-time-picker-landscope-panel);
+            height: d($--height-time-picker-landscope);
+        }
+        &.m--confirm {
+            height: d($--height-time-picker-landscope-confirm);
         }
     }
     .m-time-picker__panel {

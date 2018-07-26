@@ -19,6 +19,9 @@
             <m-col :sm=8>
                 <m-time-picker picker-type="datetime" confirm landscope value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
+            <m-col :sm=8>
+                <m-time-picker picker-type="datetime" landscope value-format="Date" v-model="dateValue" :elevation=2 />
+            </m-col>
             <m-col :sm=4>
                 <m-button type="primary" @click="modal=true">asd</m-button>
                 <m-button type="primary" @click="modal=true">asd</m-button>
