@@ -7,6 +7,7 @@ import MTimePickerPanelDate from './components/panel-date'
 import MTimePickerPanelYear from './components/panel-year'
 import MTimePickerPanelMonth from './components/panel-month'
 import MTimePickerPanelTime from './components/panel-time'
+import MTimePickerHandler from './components/handler'
 import { VNode } from 'vue'
 
 const prefix = 'm-time-picker'
@@ -16,7 +17,8 @@ const prefix = 'm-time-picker'
         MTimePickerPanelDate,
         MTimePickerPanelYear,
         MTimePickerPanelMonth,
-        MTimePickerPanelTime
+        MTimePickerPanelTime,
+        MTimePickerHandler,
 }})
 export default class MTimePicker extends mixins(TimePickerBase) {
 
@@ -35,7 +37,8 @@ export default class MTimePicker extends mixins(TimePickerBase) {
     get classes(): any {
         return{
             [`m--elevation-${this.elevation}`]: this.elevation,
-            [`m--landscope`]: this.landscope
+            [`m--landscope`]: this.landscope,
+            [`m--confirm`]: this.confirm,
         }
     }
 
@@ -46,10 +49,10 @@ export default class MTimePicker extends mixins(TimePickerBase) {
     }
 
     public render(): VNode {
-        const { classes, type, firstDayOfWeek, max, min, handleActive } = this
+        const { classes, type, firstDayOfWeek, max, min, handleActive, confirm } = this
         const { activeType, pickerType } = this.DateStore
 
-        const RPanel = ()=>{
+        const RPanel = ()=> {
             switch (activeType) {
                 case 'date':  return <MTimePickerPanelDate max={max} min={min} firstDayOfWeek={firstDayOfWeek} type={type} />;
                 case 'year':  return <MTimePickerPanelYear onPick={()=>{handleActive('date')}} max={max} min={min} />;
@@ -58,11 +61,18 @@ export default class MTimePicker extends mixins(TimePickerBase) {
             }
         }
 
+        const RHandler =()=> {
+            return confirm ? <MTimePickerHandler /> : ''
+        }
+
         return (
             <div staticClass={`${prefix} m--${pickerType}`} class={classes}>
                 <MTimePickerHeader type={type} />
                 <transition>
-                    <div class={`${prefix}__main`}>{RPanel()}</div>
+                    <div class={`${prefix}__main`}>
+                        <div class={`${prefix}__panel`}>{RPanel()}</div>
+                        {RHandler()}
+                    </div>
                 </transition>
             </div>
         )

@@ -7,9 +7,6 @@ export default class TimePickerBase extends Vue {
     @Prop({ type: Boolean, default: false })
     public desync!: boolean
 
-    // @Model('change', { type: [Date, Number, String], default: new Date().getTime() })
-    // public value!: any
-
     @Prop({ type: [Date, Number, String], default: new Date().getTime() })
     public value!: any
 
@@ -36,6 +33,9 @@ export default class TimePickerBase extends Vue {
 
     @Prop({ type: String, default: 'date' })
     public pickerType!: DatePickerType
+
+    @Prop({ type: Boolean, default: false })
+    public confirm!: boolean
 
     // 输入适配
     valueInAdapt(val: any): number {

@@ -2,7 +2,7 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm=4>
-                <m-time-picker picker-type="datetime" desync value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" desync confirm value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <!--<m-col :sm=4>-->
                 <!--<m-time-picker picker-type="date" value-format="Date" v-model="dateValue" :elevation=2 />-->
@@ -17,7 +17,7 @@
                 <m-time-picker picker-type="month" value-format="Date" ampm v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=8>
-                <m-time-picker picker-type="datetime" :sync="false" landscope value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" confirm landscope value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
                 <m-button type="primary" @click="modal=true">asd</m-button>

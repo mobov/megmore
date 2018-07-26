@@ -3,18 +3,18 @@
 $--size-time-picker-header: 100;
 $--size-time-picker-panel: 265;
 $--size-time-picker-clock: 200;
-$--width-time-picker-landscope: 500;
-$--height-time-picker-landscope: 280;
-$--size-time-picker-landscope-header: 150;
+$--width-time-picker: 290;
+$--width-time-picker-landscope: 450;
+$--height-time-picker-landscope: 320;
+$--size-time-picker-landscope-panel: 270;
+$--size-time-picker-landscope-header: 130;
+
 .m-time-picker {
     user-select: none;
     overflow: hidden;
     line-height: 1.2;
-    width: d($--size-time-picker-portrait);
     border-radius: d($--radius);
-};
-
-.m-time-picker {
+    width: d($--width-time-picker);
     &.m--landscope {
         display: flex;
         width: d($--width-time-picker-landscope);
@@ -46,12 +46,14 @@ $--size-time-picker-landscope-header: 150;
             flex: 1;
             height: 100%;
         }
+        .m-time-picker__panel {
+            height: d($--size-time-picker-landscope-panel);
+        }
     }
-    .m-time-picker__main {
+    .m-time-picker__panel {
         height: d($--size-time-picker-panel);
     }
 };
-
 
 .m-time-picker-header {
     color: getColor(gray, 300);
@@ -156,6 +158,7 @@ $--size-time-picker-landscope-header: 150;
     @include scroller();
     @include scroll-bar-slim(y, 4px)
 }
+
 .m-time-picker-panel-month {
     height: 100%;
     padding: d($--space-y / 2);
@@ -166,6 +169,7 @@ $--size-time-picker-landscope-header: 150;
         width: 33%;
     }
 }
+
 .m-time-picker-panel-time {
     display: flex;
     align-items: center;
@@ -193,4 +197,11 @@ $--size-time-picker-landscope-header: 150;
         @include scroll-bar-slim(y, 4px)
     }
 
+}
+
+.m-time-picker-handler {
+    border-top: $--border-base;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
