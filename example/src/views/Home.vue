@@ -2,7 +2,7 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm=4>
-                <m-time-picker picker-type="datetime" desync confirm value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" desync confirmation value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <!--<m-col :sm=4>-->
                 <!--<m-time-picker picker-type="date" value-format="Date" v-model="dateValue" :elevation=2 />-->
@@ -17,7 +17,7 @@
                 <m-time-picker picker-type="month" value-format="Date" ampm v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=8>
-                <m-time-picker picker-type="datetime" confirm landscope value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" confirmation landscope value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=8>
                 <m-time-picker picker-type="datetime" landscope value-format="Date" v-model="dateValue" :elevation=2 />
@@ -86,6 +86,7 @@ export default {
     handleAvatarClick() {},
     async confirm() {
       await this.$confirm({
+
         title: "dsa",
         content(h: any) {
           return <span>sssssssssssss</span>;

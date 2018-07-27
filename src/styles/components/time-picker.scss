@@ -52,7 +52,7 @@ $--size-time-picker-landscope-header: 130;
         .m-time-picker__panel {
             height: d($--height-time-picker-landscope);
         }
-        &.m--confirm {
+        &.m--confirmation {
             height: d($--height-time-picker-landscope-confirm);
         }
     }

@@ -38,7 +38,7 @@ export default class MTimePicker extends mixins(TimePickerBase) {
         return{
             [`m--elevation-${this.elevation}`]: this.elevation,
             [`m--landscope`]: this.landscope,
-            [`m--confirm`]: this.confirm,
+            [`m--confirmation`]: this.confirmation,
         }
     }
 
@@ -49,7 +49,7 @@ export default class MTimePicker extends mixins(TimePickerBase) {
     }
 
     public render(): VNode {
-        const { classes, type, firstDayOfWeek, max, min, handleActive, confirm } = this
+        const { classes, type, firstDayOfWeek, max, min, handleActive, confirmation, handleConfirm, handleCancel } = this
         const { activeType, pickerType } = this.DateStore
 
         const RPanel = ()=> {
@@ -62,7 +62,7 @@ export default class MTimePicker extends mixins(TimePickerBase) {
         }
 
         const RHandler =()=> {
-            return confirm ? <MTimePickerHandler /> : ''
+            return confirmation ? <MTimePickerHandler onConfirm={handleConfirm} onCancel={handleCancel} /> : ''
         }
 
         return (
