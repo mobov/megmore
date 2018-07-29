@@ -21,21 +21,24 @@ export default class MChip extends Vue {
     @Prop({ type: String, default: 'normal' })
     private variety!: Variety
 
-    @Prop({ type: String, default: 'square' })
+    @Prop({ type: String, default: 'circle' })
     private shape!: Shape
 
     @Prop({ type: Boolean, default: false })
     private closetoggle!: boolean
 
     @Emit('close')
-    handleClose(): void {
-
+    handleClose(e: MouseEvent): void {
+        e.stopPropagation()
     }
 
+    @Emit('click')
+    handleClick(e: MouseEvent): void { void(0) }
+
     get classes(): any {
-        const isNormal = this.variety === 'normal'
+        const isNormal  = this.variety === 'normal'
         const isOutline = this.variety === 'outline'
-// console.log(this)
+
         return{
             [`m--${this.size}`]: true,
             [`m--${this.variety}`]: true,
@@ -50,7 +53,7 @@ export default class MChip extends Vue {
     }
 
     public render(): VNode {
-        const { classes, $slots, $listeners, closetoggle, handleClose } = this
+        const { classes, $slots, $listeners, closetoggle, handleClose, handleClick } = this
 
         const RMedia = () => {
             return $slots.media ? <div staticClass={`${prefix}__media`}>
@@ -63,7 +66,7 @@ export default class MChip extends Vue {
         }
 
         return (
-            <div staticClass={prefix} class={classes}>
+            <div staticClass={prefix} class={classes} onClick={handleClick}>
                 {RMedia()}
                 <div staticClass={`${prefix}__content`}>
                     {$slots.default}
