@@ -1,7 +1,12 @@
 import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import * as iconLib from '../../icons'
-const presetIcons = ['menu', 'close', 'search', 'navigate_before', 'navigate_next', 'arrow_drop_down']// 预设注册Icon
+const presetIcons = [
+    'menu', 'close', 'search',
+    'navigate_before', 'navigate_next',
+    'arrow_drop_down', 'cancel'
+]
+// 预设注册Icon
 const name = 'MIcon'
 const prefix = 'm-icon'
 

@@ -74,9 +74,16 @@ $--Size-input:(
     lg: 40,
     xl: 44,
 );
+// chip
+$--Size-chip:(
+    xs: 20,
+    sm: 24,
+    md: 28,
+    lg: 32,
+    xl: 36,
+);
+
 $--size-button-min-width: 88;
-
-
 
 $--size-button-round-radius: 28;
 
@@ -92,6 +99,7 @@ $--Transitions: (
 $--transition-base:             all .2s ease-in-out !default;
 $--transition-fade:             opacity .15s linear !default;
 $--transition-collapse:         height .35s ease !default;
+$--transition-opacity-base:         opacity .35s ease !default;
 
 
 $--border-base: 1px solid getColor(gray, 300);

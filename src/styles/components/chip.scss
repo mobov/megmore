@@ -1,0 +1,49 @@
+@import "../import";
+
+// chip
+.m-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    .m-icon__cancel {
+        position: absolute;
+        right: 2px;
+    }
+    &__media {
+
+    }
+    &__content {
+        padding-left: .7em;
+        padding-right: .3em;
+        word-break: keep-all;
+    }
+    // size
+    @each $name, $value in $--Size-chip {
+        &.m--#{$name} {
+            height: d($value);
+            border-radius: d($value);
+            padding-right: d($value + 2);
+            font-size: d($value / 2);
+
+            .m-avatar {
+                border-radius: 50%;
+                img {
+                    border-radius: 50%;
+                }
+                @include flex-size(d($value));
+            }
+            .m-icon__cancel {
+                height: d($value - 4);
+                width:  d($value - 4);
+                &:hover {
+                    opacity: .7;
+                }
+                transition: $--transition-opacity-base;
+            }
+        }
+    }
+    background-color: lightgrey;
+}
