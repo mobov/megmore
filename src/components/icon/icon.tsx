@@ -4,7 +4,8 @@ import * as iconLib from '../../icons'
 const presetIcons = [
     'menu', 'close', 'search',
     'navigate_before', 'navigate_next',
-    'arrow_drop_down', 'cancel'
+    'arrow_drop_down', 'cancel',
+    'check_box', 'check_box_outline_blank',
 ]
 // 预设注册Icon
 const name = 'MIcon'
@@ -23,6 +24,7 @@ const Icons: any = {}
 presetIcons.forEach((icon) => {
     Icons[icon] = iconLib[`MIcon_${icon}`][icon]
 })
+
 @Component({
     name,
     functional: true,
@@ -61,7 +63,6 @@ export class MIcon extends Vue {
                 viewBox={icon.viewBox}
                 onClick={click}
             >
-
                 {icon.paths ? icon.paths.map((path: string) => <path d={path} />) : ''}
                 {icon.polygons ? icon.polygons.map((path: string) => <polygon points={path} />) : ''}
             </svg>

@@ -2,6 +2,13 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm="4">
+                <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
+                <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
+                <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
+                <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
+
+            </m-col>
+            <m-col :sm="4">
                 <div class="m--mb-md" style="display: flex;align-items: flex-end; flex-wrap: wrap">
                     <m-chip class="m--mr-sm" size="xs" closeable>
                         <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
@@ -143,7 +150,8 @@ export default {
       fullscreenModal: false,
       drawer: true,
       bottomSheet: false,
-      dateValue: new Date()
+      dateValue: new Date(),
+      checkbox: false
     };
   },
   methods: {

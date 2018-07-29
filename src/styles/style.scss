@@ -2,6 +2,7 @@
 @import 'utils/normalize';
 @import 'utils/font-base';
 @import 'utils/base';
+
 /*按需引入部分*/
 
 @import "./components/app";
@@ -17,6 +18,7 @@
 @import "./components/popover";
 @import "./components/text-field";
 @import "./components/chip";
+@import "./components/checkbox";
 @import "./components/base/overlay";
 @import "./directives/ripple";
 //@import "themes/default";
