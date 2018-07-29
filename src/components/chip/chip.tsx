@@ -18,19 +18,24 @@ export default class MChip extends Vue {
     @Prop({ type: Number, default: 2 })
     private elevation!: number
 
-    @Prop({ type: Boolean, default: true })
-    private closeable!: boolean
-
     @Prop({ type: String, default: 'normal' })
     private variety!: Variety
 
     @Prop({ type: String, default: 'square' })
     private shape!: Shape
 
+    @Prop({ type: Boolean, default: false })
+    private closetoggle!: boolean
+
+    @Emit('close')
+    handleClose(): void {
+
+    }
+
     get classes(): any {
         const isNormal = this.variety === 'normal'
         const isOutline = this.variety === 'outline'
-
+// console.log(this)
         return{
             [`m--${this.size}`]: true,
             [`m--${this.variety}`]: true,
@@ -39,27 +44,29 @@ export default class MChip extends Vue {
             [`m--border-${this.type}`]: isOutline,
             [`m--bg-${this.type}`]: isNormal,
             [`m--elevation-${this.elevation}`]: this.elevation,
+            [`m--closeable`]: this.$listeners.close,
+            [`m--closetoggle`]: this.closetoggle,
         }
     }
 
     public render(): VNode {
-        const { classes } = this
+        const { classes, $slots, $listeners, closetoggle, handleClose } = this
 
         const RMedia = () => {
-            return this.$slots.media ? <div staticClass={`${prefix}__media`}>
-                {this.$slots.media}
+            return $slots.media ? <div staticClass={`${prefix}__media`}>
+                {$slots.media}
             </div> : ''
         }
 
         const RClose = () => {
-            return <MIcon name='cancel' />
+            return $listeners.close || closetoggle ? <MIcon onClick={handleClose} name='cancel' /> : ''
         }
 
         return (
             <div staticClass={prefix} class={classes}>
                 {RMedia()}
                 <div staticClass={`${prefix}__content`}>
-                    {this.$slots.default}
+                    {$slots.default}
                 </div>
                 {RClose()}
             </div>

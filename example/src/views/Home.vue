@@ -3,19 +3,16 @@
         <m-row space="xs">
             <m-col :sm="4">
                 <div class="m--mb-md" style="display: flex;align-items: flex-end">
-                    <m-chip size="xs">
-                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532833210267&di=bc7c4f3ddd4c53f48a2eb36f10550fde&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fea85a9454e7e5e15cefca328.jpg">
-                        </m-avatar>
+                    <m-chip size="xs" closeable>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532833210267&di=bc7c4f3ddd4c53f48a2eb36f10550fde&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fea85a9454e7e5e15cefca328.jpg"></m-avatar>
                         <span>呵呵</span>
                     </m-chip>
-                    <m-chip size="sm" type="success">
-                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532833210267&di=bc7c4f3ddd4c53f48a2eb36f10550fde&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fea85a9454e7e5e15cefca328.jpg">
-                        </m-avatar>
+                    <m-chip size="sm" type="success" @close="">
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532833210267&di=bc7c4f3ddd4c53f48a2eb36f10550fde&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fea85a9454e7e5e15cefca328.jpg"></m-avatar>
                         <span>呵呵</span>
                     </m-chip>
-                    <m-chip size="md" type="warning">
-                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532833210267&di=bc7c4f3ddd4c53f48a2eb36f10550fde&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fea85a9454e7e5e15cefca328.jpg">
-                        </m-avatar>
+                    <m-chip size="md" type="warning" @close="" closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532833210267&di=bc7c4f3ddd4c53f48a2eb36f10550fde&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fea85a9454e7e5e15cefca328.jpg"></m-avatar>
                         <span>呵呵</span>
                     </m-chip>
                     <m-chip size="lg" type="danger">
