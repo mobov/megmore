@@ -20,26 +20,28 @@ export default class MCheckbox extends Vue {
     @Prop({ type: String, default: 'check_box_outline_blank' })
     private uncheckIcon!: string
 
-    get classes(): any {
-        return {
+    @Emit('input')
+    public handleClick(val: boolean | number): void { void(0) }
 
-        }
+    public changeStart(){
+        console.log('changeStart')
     }
 
-    @Emit('input')
-    public handleClick(val: boolean | number): void {
-
+    public changeEnd(){
+        console.log('changeEnd')
     }
 
     public render(): VNode {
-        const { $slots, checkedIcon, uncheckIcon, value, color, handleClick } = this
-
+        const { $slots, checkedIcon, uncheckIcon, value, color, handleClick, changeStart, changeEnd } = this
 
         const RCheckbox = ()=> {
             return <a staticClass={`${prefix}__checkbox`} class={value ? `m--color-${color}` : ''}>
                         <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
-                        <MIcon name={ value ? checkedIcon : uncheckIcon } />
-                   </a>
+                        <transition name="m--transition-scale" onAfterEnter={changeStart} onAfterLeave={changeEnd}>
+                            {value ? <MIcon class={`${prefix}__check-icon`} name={checkedIcon} /> : null }
+                        </transition>
+                        <MIcon name={uncheckIcon} />
+                    </a>
         }
 
         return (

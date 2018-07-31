@@ -6,7 +6,6 @@
                 <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
                 <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
                 <m-checkbox v-model="checkbox">萌萌啊</m-checkbox>
-
             </m-col>
             <m-col :sm="4">
                 <div class="m--mb-md" style="display: flex;align-items: flex-end; flex-wrap: wrap">
@@ -151,7 +150,8 @@ export default {
       drawer: true,
       bottomSheet: false,
       dateValue: new Date(),
-      checkbox: false
+      checkbox: false,
+      radio: 1
     };
   },
   methods: {
