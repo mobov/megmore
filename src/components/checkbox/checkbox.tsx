@@ -36,6 +36,8 @@ export default class MCheckbox extends Vue {
 
     private isArrayLabel: boolean = false
 
+    private isBoolean: boolean = false
+
     get classes(): any {
         return {
             [`m--disabled`]: this.disabled,
@@ -43,29 +45,32 @@ export default class MCheckbox extends Vue {
     }
 
     private handleClick(isCheck: boolean): void {
-        if(this.disabled) { return }
+        const { disabled, isBoolean, isArrayValue, isArrayLabel, label, value, handleInput} = this
+        if(disabled) { return }
 
-        if (this.isArrayValue && this.isArrayLabel){
+        if (isArrayValue && isArrayLabel){
             if(isCheck){
-                this.handleInput([])
+                handleInput([])
             } else {
-                this.handleInput(this.label)
+                handleInput(label)
             }
         } else if (this.isArrayValue) {
-            let result: any[] = [].concat(this.value)
+            let result: any[] = [].concat(value)
             if(isCheck){
-                const index = result.findIndex(item => item === this.label)
+                const index = result.findIndex(item => item === label)
                 result.splice(index, 1)
-                this.handleInput(result)
+                handleInput(result)
             } else {
-                result.push(this.label)
-                this.handleInput(result)
+                result.push(label)
+                handleInput(result)
             }
+        } else if(isBoolean) {
+            handleInput(!value)
         } else {
             if(isCheck) {
-                this.handleInput(null)
+                handleInput(null)
             } else {
-                this.handleInput(this.label)
+                handleInput(label)
             }
         }
     }
@@ -75,6 +80,8 @@ export default class MCheckbox extends Vue {
                 checkedIcon, uncheckIcon, incheckIcon, value, label, color, handleClick } = this
         this.isArrayValue =  value instanceof Array
         this.isArrayLabel =  label instanceof Array
+        // boolean模式下等价于switch
+        this.isBoolean =  value instanceof Boolean
 
         let isCheck = false
         let checkIcon = checkedIcon
