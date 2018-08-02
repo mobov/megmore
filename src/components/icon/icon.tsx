@@ -1,7 +1,14 @@
 import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import * as iconLib from '../../icons'
-const presetIcons = ['menu', 'close', 'search', 'navigate_before', 'navigate_next', 'arrow_drop_down']// 预设注册Icon
+const presetIcons = [
+    'menu', 'close', 'search',
+    'navigate_before', 'navigate_next',
+    'arrow_drop_down', 'cancel',
+    'check_box', 'check_box_outline_blank', 'indeterminate_check_box',
+    'radio_button_checked', 'radio_button_unchecked'
+]
+// 预设注册Icon
 const name = 'MIcon'
 const prefix = 'm-icon'
 
@@ -18,6 +25,7 @@ const Icons: any = {}
 presetIcons.forEach((icon) => {
     Icons[icon] = iconLib[`MIcon_${icon}`][icon]
 })
+
 @Component({
     name,
     functional: true,
@@ -56,7 +64,6 @@ export class MIcon extends Vue {
                 viewBox={icon.viewBox}
                 onClick={click}
             >
-
                 {icon.paths ? icon.paths.map((path: string) => <path d={path} />) : ''}
                 {icon.polygons ? icon.polygons.map((path: string) => <polygon points={path} />) : ''}
             </svg>

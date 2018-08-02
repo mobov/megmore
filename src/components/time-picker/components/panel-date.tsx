@@ -74,9 +74,11 @@ export default class MTimePickerPanelDate extends Vue {
         
         const { year, month, date } = this.DateStore
 
+        const nowValue = new Date()
+        const isNowDate = nowValue.getFullYear() === viewYear && nowValue.getMonth() === viewMonth
+        const nowDate = nowValue.getDate()
         const viewMonthDays = viewDateValue.maxDayOfMonth()
         const viewFirstWeekDay = viewDateValue.firstWeekDay()
-
         const isCurMonth = viewYear === year && viewMonth === month
         const RTableHead = () => {
             const Tds: any = []
@@ -93,7 +95,12 @@ export default class MTimePickerPanelDate extends Vue {
             }
             for (let tempDate = 1; tempDate <= viewMonthDays; tempDate ++){
                 const isCurDate = isCurMonth && (tempDate === date)
-                Tds.push(<td><MButton size={'sm'} onClick={()=>handleDateClick(viewYear, viewMonth, tempDate)} class="m--m-0 m--p-0" shape="circle" variety={isCurDate ? 'normal' : 'flat'} type={isCurDate ? 'primary' : 'legacy'}>{tempDate}</MButton></td>)
+                const isToday =  isNowDate && (tempDate === nowDate)
+
+                Tds.push(<td><MButton class="m--m-0 m--p-0" size="sm" shape="circle"
+                                      variety={isCurDate ? 'normal' : isToday ? 'outline' : 'flat'}
+                                      type={isCurDate || isToday ? 'primary' : 'legacy'}
+                                      onClick={()=>handleDateClick(viewYear, viewMonth, tempDate)}>{tempDate}</MButton></td>)
                 if((tempDate + viewFirstWeekDay) %7 === 0 || tempDate === viewMonthDays){
                     Trs.push(<tr>{Tds}</tr>)
                     Tds = []

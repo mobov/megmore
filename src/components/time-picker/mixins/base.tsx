@@ -7,9 +7,6 @@ export default class TimePickerBase extends Vue {
     @Prop({ type: Boolean, default: false })
     public desync!: boolean
 
-    // @Model('change', { type: [Date, Number, String], default: new Date().getTime() })
-    // public value!: any
-
     @Prop({ type: [Date, Number, String], default: new Date().getTime() })
     public value!: any
 
@@ -37,6 +34,9 @@ export default class TimePickerBase extends Vue {
     @Prop({ type: String, default: 'date' })
     public pickerType!: DatePickerType
 
+    @Prop({ type: Boolean, default: false })
+    public confirmation!: boolean
+
     // 输入适配
     valueInAdapt(val: any): number {
         let result = 0
@@ -60,8 +60,16 @@ export default class TimePickerBase extends Vue {
         return result
     }
 
+    @Emit('confirm')
+    handleConfirm(){
+        this.DateStore.emitInput()
+    }
+
+    @Emit('cancel')
+    handleCancel(){ }
+
     @Emit('input')
-    onInput(val: any) { console.log(val) }
+    onInput(val: any) {  }
 
     @Watch('value', { immediate: true })
     onValueUpdate(val: any, oldVal: any) {
@@ -152,8 +160,13 @@ export default class TimePickerBase extends Vue {
             } else {
                 _this.value = val
             }
-            if (this.desync){ return }
-            if (this.valueInAdapt(this.value) === _this.value){ return }
+            if (this.desync) { return }
+            if (this.confirmation) { return }
+            if (this.valueInAdapt(this.value) === _this.value) { return }
+            _this.emitInput()
+        },
+        emitInput: () => {
+            const _this = this.DateStore
             const outValue = this.valueOutAdapt(_this.value)
             this.onInput(outValue)
         }

@@ -1,0 +1,85 @@
+@import "../import";
+
+// chip
+.m-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    .m-icon__cancel {
+        position: absolute;
+        right: 2px;
+    }
+
+    word-break: keep-all;
+    &.m--outline {
+        border-style: solid;
+        border-width: 1px;
+    }
+    // size
+    @each $name, $value in $--Size-chip {
+        $--space-chip-x: $value  / 2 * .7;
+
+        &.m--#{$name} {
+            padding: 0 d($--space-chip-x);
+            height: d($value);
+            font-size: d($value / 2);
+            .m-chip__media {
+                border-radius: inherit;
+                @include flex-size(d($value));
+                margin-left: d(- $--space-chip-x);
+                margin-right: d($--space-chip-x / 2);
+            }
+            .m-avatar {
+                border-radius: inherit;
+                @include flex-size(inherit);
+            }
+            .m-icon__cancel {
+                height: d($value - 4);
+                width:  d($value - 4);
+                &:hover {
+                    opacity: .7 !important;
+                }
+                transition: opacity $--transition-effect-base;
+            }
+            // close
+            &.m--closeable {
+                padding-right: d($value + 2);
+            }
+            &.m--closetoggle {
+                padding-right: d($--space-chip-x);
+                .m-icon__cancel {
+                    opacity: 0;
+                }
+                &:hover {
+                    padding-right: d($value + 2);
+                    .m-icon__cancel {
+                        opacity: 1;
+                    }
+                }
+                transition: padding-right $--transition-effect-base;
+            }
+
+            // varity
+            &.m--outline {
+                .m-chip__media {
+                    @include flex-size(d($value - 2));
+                }
+            }
+
+            // shape
+            &.m--circle {
+                border-radius: d($value);
+            }
+            &.m--square {
+                border-radius: 0
+            }
+            &.m--corner {
+                border-radius: d(map-get($--Radius, corner))
+            }
+        }
+    }
+}

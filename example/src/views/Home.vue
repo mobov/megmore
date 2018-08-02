@@ -1,8 +1,83 @@
 <template>
     <m-container>
         <m-row space="xs">
+            <m-col :sm="4">
+                <m-checkbox v-model="checkbox" :label="checkAll">所有</m-checkbox>
+                <m-checkbox v-model="checkbox" label="check1">check1</m-checkbox>
+                <m-checkbox v-model="checkbox" label="check2">check2</m-checkbox>
+                <m-checkbox v-model="checkbox" label="check3">check3</m-checkbox>
+                <m-checkbox v-model="checkbox" label="check4">check4</m-checkbox>
+                <m-radio v-model="radio"  label="radio1">萌萌啊</m-radio>
+            </m-col>
+            <m-col :sm="4">
+                <div class="m--mb-md" style="display: flex;align-items: flex-end; flex-wrap: wrap">
+                    <m-chip class="m--mr-sm" size="xs" closeable>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="sm" type="success" @close="">
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="warning" @close="" closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="default" @close="" closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="pure" @close="" closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="legacy" @close="" closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="lg" type="danger">
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="xl" type="info">
+                        <span>呵呵</span>
+                    </m-chip>
+                </div>
+                <div class="m--mb-md" style="display: flex;align-items: flex-end; flex-wrap: wrap">
+                    <m-chip class="m--mr-sm" size="xs" variety="outline" closeable>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="sm" type="success" variety="outline"  @close="">
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="warning" @close="" variety="outline"  closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="default" @close="" variety="outline"  closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="pure" @close="" variety="outline"  closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="md" type="legacy" @close="" variety="outline"  closetoggle>
+                        <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg"></m-avatar>
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="lg" type="danger" variety="outline" >
+                        <span>呵呵</span>
+                    </m-chip>
+                    <m-chip class="m--mr-sm" size="xl" type="info" variety="outline" >
+                        <span>呵呵</span>
+                    </m-chip>
+                </div>
+
+            </m-col>
             <m-col :sm=4>
-                <m-time-picker picker-type="datetime" desync value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" desync confirmation value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <!--<m-col :sm=4>-->
                 <!--<m-time-picker picker-type="date" value-format="Date" v-model="dateValue" :elevation=2 />-->
@@ -17,7 +92,10 @@
                 <m-time-picker picker-type="month" value-format="Date" ampm v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=8>
-                <m-time-picker picker-type="datetime" :sync="false" landscope value-format="Date" v-model="dateValue" :elevation=2 />
+                <m-time-picker picker-type="datetime" confirmation landscope value-format="Date" v-model="dateValue" :elevation=2 />
+            </m-col>
+            <m-col :sm=8>
+                <m-time-picker picker-type="datetime" landscope value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
                 <m-button type="primary" @click="modal=true">asd</m-button>
@@ -74,7 +152,10 @@ export default {
       fullscreenModal: false,
       drawer: false,
       bottomSheet: false,
-      dateValue: new Date()
+      dateValue: new Date(),
+      checkbox: [],
+      checkAll: ['check1', 'check2', 'check3', 'check4'],
+      radio: 1
     };
   },
   methods: {
@@ -84,6 +165,7 @@ export default {
     handleAvatarClick() {},
     async confirm() {
       await this.$confirm({
+
         title: "dsa",
         content(h: any) {
           return <span>sssssssssssss</span>;

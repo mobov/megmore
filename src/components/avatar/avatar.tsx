@@ -1,27 +1,27 @@
 import { Component, Prop, Vue} from 'vue-property-decorator'
+import { Size, Color, Variety, Shape } from '@/types/model'
 import { isHexColor, isStyleUnit } from 'es-treasure'
-import { Model } from '@/types'
 
-const name = 'MAvatar'
+
 const prefix = 'm-avatar'
 
-@Component({ name })
+@Component
 export default class MAvatar extends Vue {
 
   @Prop({ type: String, default: 'sm' })
-  private size!: Model.Size | string
+  private size!: Size | string
 
   @Prop({ type: Number, default: 0 })
   private elevation!: number
 
   @Prop({ type: String, default: 'primary' })
-  private type!: Model.Color
+  private type!: Color
 
   @Prop({ type: String, default: 'normal' })
-  private variety!: Model.Variety
+  private variety!: Variety
 
   @Prop({ type: String, default: 'square' })
-  private shape!: Model.Shape
+  private shape!: Shape
 
   @Prop({ type: String, default: '' })
   private src!: string
@@ -30,28 +30,34 @@ export default class MAvatar extends Vue {
 
   get classes(): any {
     return {
-        [`${this.size}`]: true,
-        [`${this.variety}`]: true,
-        [`${this.shape}`]: true,
-        [`color-${this.type}`]: this.variety !== 'normal' && !isHexColor(this.type),
-        [`bg-${this.type}`]: this.variety === 'normal' && !isHexColor(this.type),
-        [`border-${this.type}`]: this.variety === 'outline' && !isHexColor(this.type),
-        [`elevation-${this.elevation}`]: this.elevation,
+        [`m--${this.size}`]: true,
+        [`m--${this.variety}`]: true,
+        [`m--${this.shape}`]: true,
+        [`m--color-${this.type}`]: this.variety !== 'normal',
+        [`m--bg-${this.type}`]: this.variety === 'normal',
+        [`m--border-${this.type}`]: this.variety === 'outline',
+        [`m--elevation-${this.elevation}`]: this.elevation,
     }
   }
+
   get imgClasses(): any {
     return this.loaded ? 'loaded' : ''
   }
+
   public onLoad(): void {
     this.loaded = true
   }
+
   public render(h: any) {
       const { src, classes, imgClasses, onLoad } = this
 
       return (
           <div staticClass={prefix}
                class={classes}>
-               <img onLoad={onLoad} class={imgClasses} src={src} />
+               {this.$slots.default}
+               <img onLoad={onLoad}
+                    class={imgClasses}
+                    src={src} />
           </div>
       )
   }

@@ -33,6 +33,7 @@ export default class MButton extends Vue {
     get classes(): any {
         const isNormal = this.variety === 'normal'
         const isOutline = this.variety === 'outline'
+
         return {
             [`m--${this.size}`]: true,
             [`m--${this.variety}`]: true,

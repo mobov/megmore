@@ -15,8 +15,8 @@ const Theme: any = {
             default: Palettes.grey_A100,
             primary: Palettes.lightblue_A700,
             danger: Palettes.red_300,
-            warning: Palettes.red_300,
-            success: Palettes.orange_700,
+            warning: Palettes.orange_700,
+            success: Palettes.green_500,
             info: Palettes.cyan_400,
         },
         appBar: {

@@ -31,6 +31,55 @@
 .m--p-0 {
     padding: 0;
 }
+//  阴影
+@each $key, $space in $--Space {
+    .m--m-#{$key} {
+        margin: d($space);
+    }
+    .m--mx-#{$key} {
+        margin-left: d($space);
+        margin-right: d($space);
+    }
+    .m--my-#{$key} {
+        margin-top: d($space);
+        margin-bottom: d($space);
+    }
+    .m--ml-#{$key} {
+        margin-left: d($space);
+    }
+    .m--mr-#{$key} {
+        margin-right: d($space);
+    }
+    .m--mt-#{$key} {
+        margin-top: d($space);
+    }
+    .m--mb-#{$key} {
+        margin-bottom: d($space);
+    }
+    .m--p-#{$key} {
+        padding: d($space);
+    }
+    .m--px-#{$key} {
+        padding-left: d($space);
+        padding-right: d($space);
+    }
+    .m--py-#{$key} {
+        padding-top: d($space);
+        padding-bottom: d($space);
+    }
+    .m--pl-#{$key} {
+        padding-left: d($space);
+    }
+    .m--pr-#{$key} {
+        padding-right: d($space);
+    }
+    .m--pt-#{$key} {
+        padding-top: d($space);
+    }
+    .m--pb-#{$key} {
+        padding-bottom: d($space);
+    }
+}
 
 //size 尺寸
 .m--block {

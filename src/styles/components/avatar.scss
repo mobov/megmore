@@ -1,10 +1,4 @@
 @import "../import";
-@mixin size-avatar($size){
-    min-width: $size;
-    min-height: $size;
-    height: $size;
-    width: $size;
-}
 
 .m-avatar {
     display: flex;
@@ -17,37 +11,30 @@
         min-height: 100%;
         max-width: 100%;
         max-height: 100%;
+        border-radius: inherit;
     }
-    //尺寸
+
+    // size
     @each $name, $value in $--Size-avatar {
-        &.#{$name} {
-            @include size-avatar(d($value));
+        &.m--#{$name} {
+            @include flex-size(d($value));
         }
     }
     // shape
-    &.circle {
+    &.m--circle {
         border-radius: map-get($map: $--Radius, $key: circle);
-        > img {
-            border-radius: map-get($map: $--Radius, $key: circle);
-        }
     }
-    &.round {
+    &.m--round {
         border-radius: map-get($map: $--Radius, $key: round);
-        > img {
-            border-radius: map-get($map: $--Radius, $key: round);
-        }
     }
-    &.corner {
+    &.m--corner {
         border-radius: map-get($map: $--Radius, $key: corner);
-        > img {
-            border-radius: map-get($map: $--Radius, $key: corner);
-        }
     }
-    &.square {
+    &.m--square {
         border-radius: 0;
     }
     // variety 
-    &.outline {
+    &.m--outline {
         border-width: 2px;
         border-style: solid;
     }
