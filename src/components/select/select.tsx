@@ -80,7 +80,7 @@ export default class MSelect extends Vue {
       renderContent = this.selectedOptions.map(i => {
         return (
           <span>
-            <MChip closetoggle variety="outline" closeable class='m--mr-md m--mb-md' onClose={() => this.select(i)}>
+            <MChip closetoggle variety="outline" closeable class='m--mr-md m--mb-xs' onClose={() => this.select(i)}>
               {i.$slots.default}
             </MChip>
           </span>
@@ -90,7 +90,7 @@ export default class MSelect extends Vue {
     } else if (this.chips && !this.multiple) {
       renderContent = (
         <span>
-          <MChip closetoggle variety="outline" closeable class='m--mr-md m--mb-md' onClose={() => this.select(selectedOptions)}>
+          <MChip closetoggle variety="outline" closeable class='m--mr-md m--mb-xs' onClose={() => this.select(selectedOptions)}>
             {selectedOptions.$slots.default}
           </MChip>
         </span>
@@ -104,7 +104,7 @@ export default class MSelect extends Vue {
           <MInput value={this.inputVal} read-only={true} end-icon='arrow_drop_down' slot='ref'>
             {renderContent}
             {/* 搜索框 */}
-            {this.filerable && <input onInput={()=>{this.showPopover=true}} v-model={this.searchVal} staticClass='m--mr-md m--mb-md' type="text" />}
+            {this.filerable && <input onInput={()=>{this.showPopover=true}} v-model={this.searchVal} staticClass='m--mr-md m--mb-xs' type="text" />}
           </MInput>
           <div class='m__select-list'>
             {this.$slots.default}
