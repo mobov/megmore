@@ -1,5 +1,6 @@
 <template>
     <m-container>
+        <m-select inherit-width placement-x="right-start"></m-select>
         <m-row space="xs">
             <m-col :sm="4">
                 <m-checkbox v-model="checkbox" :label="checkAll">所有</m-checkbox>
@@ -122,8 +123,8 @@
         <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
         <div style="display: flex">
-            <m-text-field></m-text-field>
-            <m-text-field label-float></m-text-field>
+            <m-text-field  label="label"></m-text-field>
+            <m-text-field  label="label" label-float></m-text-field>
         </div>
         <MExpansionPanel style="width:500px;margin:0 auto">
             <MExpansionPanelContent v-for="item in 30">
@@ -131,8 +132,8 @@
                     title
                 </template>
                 <template>
-                     <m-popover placement="right">
-                        <m-date-picker v-model="dateValue" :elevation=2></m-date-picker>
+                     <m-popover  placement-x="right-start">
+                        <m-time-picker v-model="dateValue" :elevation=2></m-time-picker >
                         <m-button slot="ref">Popover</m-button>
                     </m-popover>
                 </template>

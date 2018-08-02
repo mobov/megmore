@@ -3,8 +3,6 @@ import { VNode } from 'vue'
 import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
 import Render from '@/components/base/render'
-import * as Model from '@/types/model';
-import Overlay from '@/components/base/overlay'
 @Component
 export default class MModal extends mixins(modalMixin) {
   public static options: any

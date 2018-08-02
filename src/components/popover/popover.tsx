@@ -15,12 +15,21 @@ const SuperCls = Mixins(toggleable)
 export default class MPopover extends SuperCls {
   private style: any = {}
   private content!: HTMLDivElement
+  @Prop({ type: Boolean })
+  private inheritWidth!: boolean //  使用ref的宽度
 
   @Prop({
     type: String,
-    default: 'top-start',
+    default: 'bottom-end',
   })
-  private placement: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start ' | 'right-end'
+  private placementY!: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
+
+
+  @Prop({
+    type: String,
+    default: 'right-start',
+  })
+  private placementX!: 'left' | 'left-start' | 'left-end' | 'right' | 'right-start ' | 'right-end'
 
   @Watch('visible')
   public async visibleChangeHandle(val: boolean, before: boolean) {
@@ -71,7 +80,7 @@ export default class MPopover extends SuperCls {
     return left
   }
   private getPositionLeft() {
-    const { placement } = this
+    const { placementX: placement } = this
 
     let position: string// 位置以及位置修饰符
     let positionModify: string
@@ -86,9 +95,21 @@ export default class MPopover extends SuperCls {
     const rect = this.refRect()
     const { left, width } = rect
     const { offsetWidth } = this.content
-    let contentPositionLeft = left
-    if (position === 'right') {
-      contentPositionLeft = left - (offsetWidth - width)
+    let contentPositionLeft = left - offsetWidth
+    if (position === 'left') {
+      if (positionModify === 'start') {
+
+      } else if (positionModify === 'end') {
+        contentPositionLeft += width
+      }
+    }
+    else if (position === 'right') {
+      contentPositionLeft = left
+      if (positionModify === 'start') {
+
+      } else if (positionModify === 'end') {
+        contentPositionLeft += width
+      }
     }
     if (contentPositionLeft <= 0) {
       contentPositionLeft = 0
@@ -98,7 +119,7 @@ export default class MPopover extends SuperCls {
     return contentPositionLeft
   }
   private getPositionTop() {
-    const { placement } = this
+    const { placementY: placement } = this
 
     let position: string// 位置以及位置修饰符
     let positionModify: string
@@ -113,9 +134,21 @@ export default class MPopover extends SuperCls {
     const rect = this.refRect()
     const { height, top } = rect
     const { scrollHeight } = this.content
-    let contentPositionTop = top
-    if (position === 'bottom') {
-      contentPositionTop = top - (scrollHeight - height)
+    let contentPositionTop = top - scrollHeight  //  弹窗底部对准内容头部 ，默认情况
+    if (position === 'top') {// 弹窗在内容之上
+      if (positionModify === 'start') {
+        // contentPositionTop = top
+      } else if (positionModify === 'end') {//  弹窗底部对准内容底部
+        contentPositionTop += height
+      }
+    }
+    else if (position === 'bottom') {
+      contentPositionTop = top//  弹窗顶部对准内容头部
+      if (positionModify === 'start') {// 默认情况
+
+      } else if (positionModify === 'end') {//  弹窗顶部对准内容底部
+        contentPositionTop = contentPositionTop + height
+      }
     }
     if (contentPositionTop <= 0) {
       contentPositionTop = 0
@@ -143,10 +176,15 @@ export default class MPopover extends SuperCls {
     style.height = null
     style.boxShadow = null
     style.overflow = null
+    let width:string = 'auto'
+    if (this.inheritWidth) {
+      width = rect.width+'px'
+    }
     this.style = {
       left: `${contentPositionLeft}px`,
       top: `${contentPositionTop}px`,
       zIndex: getZIndex(),
+      width,
     }
 
   }
