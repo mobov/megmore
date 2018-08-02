@@ -11,6 +11,9 @@ $--size-checkbox__wrapper: 45;
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
+    &.m--disabled {
+        opacity: .5;
+    }
     .m-icon {
         height: d($--size-checkbox);
         width:  d($--size-checkbox);

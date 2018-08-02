@@ -23,11 +23,25 @@ export default class MRadio extends Vue {
     @Prop({ type: String, default: 'radio_button_unchecked' })
     private uncheckIcon!: string
 
+    @Prop({ type: Boolean, default: false })
+    private disabled!: boolean
+
+    get classes(): any {
+        return {
+            [`m--disabled`]: this.disabled,
+        }
+    }
+
     @Emit('input')
-    public handleClick(val: any): void { void(0) }
+    private handleInput(val: any): void { void(0) }
+
+    private handleClick(val: any): void {
+        if(this.disabled) { return }
+        this.handleInput(val)
+    }
 
     public render(): VNode {
-        const { $slots, checkedIcon, uncheckIcon, value, label, color, handleClick } = this
+        const { $slots, classes, checkedIcon, uncheckIcon, value, label, color, handleClick } = this
         const isCheck = label === value
 
         const RRadio = ()=> {
@@ -41,7 +55,7 @@ export default class MRadio extends Vue {
         }
 
         return (
-            <div staticClass={`${prefix}`} onClick={()=>handleClick(label)}>
+            <div staticClass={`${prefix}`} class={classes} onClick={()=>handleClick(label)}>
                 {RRadio()}
                 {$slots.default}
             </div>
