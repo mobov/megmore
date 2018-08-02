@@ -1,7 +1,5 @@
 
 // 基础
-import MCheckbox from "@/components/checkbox/checkbox";
-
 export { default as Megmore } from '@/components/megmore'
 export { default as MIcon } from '@/components/icon'
 export { default as MApp } from '@/components/app'
@@ -21,4 +19,4 @@ export { default as MChip } from '@/components/chip'
 export { MContainer, MRow, MCol, MFlexFiller } from '@/components/layout'
 export { default as MTimePicker } from '@/components/time-picker'
 export { default as MCheckbox } from '@/components/checkbox'
-
+export { default as MRadio } from '@/components/radio'
