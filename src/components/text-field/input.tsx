@@ -105,7 +105,11 @@ export default class MTextField extends Vue {
             return
         }
         if (!this.isFocus) {
-            (this.$refs.input as HTMLFormElement).focus()
+            try {
+                (this.$refs.input as HTMLFormElement).focus()
+            } catch (error) {
+                
+            }
         }
         this.isFocus = true
     }
@@ -166,11 +170,11 @@ export default class MTextField extends Vue {
         iconCls = iconCls.join(' ')
         console.log(iconCls)
         return (
-            <div staticClass='m-text-field' class={wrapCls}>
+            <div staticClass='m-text-field' class={wrapCls} onClick={this.handleFocus}>
                 {this.hasIcon && (<MIcon name={this.icon} />)}
 
                 <div staticClass='m-text-field__content' class={contenCls}>
-                    <div staticClass='m-text-field__label' class={labelCls} onClick={this.handleFocus}>
+                    <div staticClass='m-text-field__label' class={labelCls} >
                         {this.label}
                     </div>
                     <div staticClass='m-text-field__input-wrap' class={inputWrapCls}>
@@ -180,7 +184,7 @@ export default class MTextField extends Vue {
                                 v-show={this.isFocus || this.hasText}>{this.prefix}</span>)
                         }
 
-                        {!this.multiLine ?
+                        {this.$slots.default || (!this.multiLine ?
                             (
                                 <input
                                     readOnly={this.readOnly}
@@ -199,7 +203,7 @@ export default class MTextField extends Vue {
                                     onBlur={this.handleBlur}
                                     staticClass='m-text-field__input'
                                     rows={this.rows} />
-                            )}
+                            ))}
 
                         {this.hasSuffix && (<span staticClass='m-text-field__suffix'>{this.suffix}</span>)}
                     </div>

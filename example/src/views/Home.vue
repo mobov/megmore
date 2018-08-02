@@ -1,7 +1,9 @@
 <template>
-    <m-container>
-        <m-select inherit-width placement-x="right-start">
-            <m-option value="zzzzzz"></m-option>
+    <m-container style="padding:20px">
+        <m-select filerable multiple chips    placement-x="right-start" v-model="select">
+            <m-option :label="'编号'+item" :value="item" v-for="item in 10" :key="item">
+                编号{{item}}
+            </m-option>
         </m-select>
         <m-row space="xs">
             <m-col :sm="4">
@@ -165,7 +167,8 @@ export default {
       dateValue: new Date(),
       checkbox: [],
       checkAll: ['check1', 'check2', 'check3', 'check4'],
-      radio: 1
+      radio: 1,
+      select:[]
     };
   },
   methods: {

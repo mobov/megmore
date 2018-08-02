@@ -70,7 +70,7 @@ export default class MCheckbox extends Vue {
         }
     }
 
-    public render(): VNode {
+    private render(): VNode {
         const { $slots, classes,
                 checkedIcon, uncheckIcon, incheckIcon, value, label, color, handleClick } = this
         this.isArrayValue =  value instanceof Array
@@ -82,8 +82,6 @@ export default class MCheckbox extends Vue {
         if ( this.isArrayValue && this.isArrayLabel) {
             // Allcheck下value是数组, label也是数组
             if(value.length > 0) { isCheck = true }
-            console.log(label.length > value.length)
-            console.log(isCheck)
             if(label.length > value.length && isCheck ){
                 checkIcon = incheckIcon
                 console.log(checkIcon)

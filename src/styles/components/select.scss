@@ -1,5 +1,10 @@
 .m__select{
-  
+  line-height: d(32);
+  input{
+    line-height: inherit;
+    border: none;
+    width: 40%;
+  }
 }
 .m__select-list{
   // max-width: d(200);
@@ -10,9 +15,11 @@
   cursor: pointer;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   &:hover{
+    background-color:$--hover-bg-gray
+  }
+  &.m--active{
     background-color:$--hover-bg-gray
   }
 }

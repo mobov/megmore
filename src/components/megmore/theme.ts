@@ -23,8 +23,11 @@ const Theme: any = {
             bgColor: Palettes.lightblue_A700,
             color: Palettes.grey_A100,
         },
-        'spin__path': {
+        spin__path: {
             stroke: Palettes.lightblue_A700,
+        },
+        option:{
+            color: Palettes.grey_A100,
         }
     },
 }
