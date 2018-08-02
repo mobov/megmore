@@ -101,7 +101,7 @@ export default class MSelect extends Vue {
     return (
       <div class='m__select'>
         <MPopover ref="popover" inherit-width={true} placement='top-end' {...eventMap} show={this.showPopover}>
-          <MInput value={this.inputVal} read-only={true} end-icon='arrow_drop_down' slot='ref'>
+          <MInput value={this.inputVal} read-only={true} end-icon='arrow_drop_down' slot='ref' onClear={()=>{this.searchVal=''}}>
             {renderContent}
             {/* 搜索框 */}
             {this.filerable && <input onInput={()=>{this.showPopover=true}} v-model={this.searchVal} staticClass='m--mr-md m--mb-xs' type="text" />}

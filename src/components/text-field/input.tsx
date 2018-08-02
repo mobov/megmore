@@ -67,6 +67,11 @@ export default class MTextField extends Vue {
     })
     private readOnly!: boolean
 
+    @Prop({
+        type: Boolean,
+    })
+    private cleable!: boolean
+
     private isFocus: boolean = false
 
 
@@ -114,7 +119,11 @@ export default class MTextField extends Vue {
         this.isFocus = true
     }
 
-
+    @Emit()
+    private clear(){
+        this.$emit('input','')
+        this.$emit('clear')
+    }
     private handleBlur() {
         this.isFocus = false
     }
@@ -207,6 +216,7 @@ export default class MTextField extends Vue {
 
                         {this.hasSuffix && (<span staticClass='m-text-field__suffix'>{this.suffix}</span>)}
                     </div>
+                    <MIcon staticClass='pointer' onClick={this.clear} name='close' />
                     {this.hasEndIcon && (<MIcon class={iconCls} name={this.endIcon} />)}
                     <div staticClass='m-text-field__underline' class={underlineCls}>
                         <div
