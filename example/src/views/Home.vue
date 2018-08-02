@@ -2,12 +2,19 @@
     <m-container>
         <m-row space="xs">
             <m-col :sm="4">
-                <m-checkbox v-model="checkbox" :label="checkAll">所有</m-checkbox>
-                <m-checkbox v-model="checkbox" label="check1">check1</m-checkbox>
-                <m-checkbox v-model="checkbox" label="check2">check2</m-checkbox>
-                <m-checkbox v-model="checkbox" label="check3">check3</m-checkbox>
-                <m-checkbox v-model="checkbox" label="check4">check4</m-checkbox>
-                <m-radio v-model="radio"  label="radio1">萌萌啊</m-radio>
+                <div>
+                    <m-checkbox v-model="checkbox" :label="checkAll">所有</m-checkbox>
+                    <m-checkbox v-model="checkbox" disabled label="check1">check1</m-checkbox>
+                    <m-checkbox v-model="checkbox" label="check2">check2</m-checkbox>
+                    <m-checkbox v-model="checkbox" label="check3">check3</m-checkbox>
+                    <m-checkbox v-model="checkbox" label="check4">check4</m-checkbox>
+                </div>
+                <div>
+                    <m-radio v-model="radio" disabled label="radio1">萌萌啊</m-radio>
+                    <m-radio v-model="radio" label="radio2">萌萌啊</m-radio>
+                    <m-radio v-model="radio" label="radio3">萌萌啊</m-radio>
+                    <m-radio v-model="radio" label="radio4">萌萌啊</m-radio>
+                </div>
             </m-col>
             <m-col :sm="4">
                 <div class="m--mb-md" style="display: flex;align-items: flex-end; flex-wrap: wrap">

@@ -26,6 +26,9 @@ export default class MCheckbox extends Vue {
     @Prop({ type: String, default: 'indeterminate_check_box' })
     private incheckIcon!: string
 
+    @Prop({ type: Boolean, default: false })
+    private disabled!: boolean
+
     @Emit('input')
     private handleInput(val: any): any { void(0) }
 
@@ -33,7 +36,15 @@ export default class MCheckbox extends Vue {
 
     private isArrayLabel: boolean = false
 
+    get classes(): any {
+        return {
+            [`m--disabled`]: this.disabled,
+        }
+    }
+
     private handleClick(isCheck: boolean): void {
+        if(this.disabled) { return }
+
         if (this.isArrayValue && this.isArrayLabel){
             if(isCheck){
                 this.handleInput([])
@@ -47,7 +58,6 @@ export default class MCheckbox extends Vue {
                 result.splice(index, 1)
                 this.handleInput(result)
             } else {
-
                 result.push(this.label)
                 this.handleInput(result)
             }
@@ -61,7 +71,8 @@ export default class MCheckbox extends Vue {
     }
 
     public render(): VNode {
-        const { $slots, checkedIcon, uncheckIcon, incheckIcon, value, label, color, handleClick } = this
+        const { $slots, classes,
+                checkedIcon, uncheckIcon, incheckIcon, value, label, color, handleClick } = this
         this.isArrayValue =  value instanceof Array
         this.isArrayLabel =  label instanceof Array
 
@@ -96,7 +107,7 @@ export default class MCheckbox extends Vue {
 
 
         return (
-            <div staticClass={`${prefix}`} onClick={()=>handleClick(isCheck)}>
+            <div staticClass={`${prefix}`} class={classes} onClick={()=>handleClick(isCheck)}>
                 {RCheckbox()}
                 {$slots.default}
             </div>
