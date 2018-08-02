@@ -10,7 +10,7 @@
                     <m-checkbox v-model="checkbox" label="check4">check4</m-checkbox>
                 </div>
                 <div>
-                    <m-checkbox v-model="checkboolean" label="check4">boolean</m-checkbox>
+                    <m-checkbox v-model="checkboolean" :label="true">boolean</m-checkbox>
                 </div>
                 <div>
                     <m-radio v-model="radio" disabled label="radio1">萌萌啊</m-radio>
