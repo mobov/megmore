@@ -7,7 +7,7 @@ export default class ModalMixin extends Vue {
   @Prop({
     default: false,
   })
-  public show!: boolean// 控制显示隐藏
+  public show=false// 控制显示隐藏
 
   public visible = false// 组件内部的显示隐藏状态
   public hide() {
@@ -17,12 +17,12 @@ export default class ModalMixin extends Vue {
     this.visible = !this.visible
   }
 
-  @Watch('show', { immediate: true })
   @Watch('visible', { immediate: true })
+  @Watch('show', { immediate: true })
   public async visibleChangeHandle(val: any, oldVal: boolean) {
-   if((val as boolean) instanceof Boolean){
-    this.$emit('update:show', val)
-    this.visible = val
-   }
+    if (typeof val === 'boolean') {
+      this.$emit('update:show', val)
+      this.visible = val
+    }
   }
 }

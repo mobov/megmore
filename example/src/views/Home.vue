@@ -1,6 +1,8 @@
 <template>
     <m-container>
-        <m-select inherit-width placement-x="right-start"></m-select>
+        <m-select inherit-width placement-x="right-start">
+            <m-option value="zzzzzz"></m-option>
+        </m-select>
         <m-row space="xs">
             <m-col :sm="4">
                 <m-checkbox v-model="checkbox" :label="checkAll">所有</m-checkbox>

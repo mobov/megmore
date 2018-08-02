@@ -6,7 +6,7 @@ const presetIcons = [
     'navigate_before', 'navigate_next',
     'arrow_drop_down', 'cancel',
     'check_box', 'check_box_outline_blank', 'indeterminate_check_box',
-    'radio_button_checked', 'radio_button_unchecked','arrow_drop_down'
+    'radio_button_checked', 'radio_button_unchecked','arrow_drop_down','check'
 ]
 // 预设注册Icon
 const name = 'MIcon'

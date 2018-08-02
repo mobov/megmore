@@ -32,8 +32,9 @@ export default class MPopover extends SuperCls {
   private placementX!: 'left' | 'left-start' | 'left-end' | 'right' | 'right-start ' | 'right-end'
 
   @Watch('visible')
+  @Watch('show')
   public async visibleChangeHandle(val: boolean, before: boolean) {
-    SuperCls.options.methods.visibleChangeHandle.call(this)
+    SuperCls.options.methods.visibleChangeHandle.call(this,val,before)
     await this.$nextTick()
     this.content = this.$refs.content as HTMLDivElement
     if (val) {
@@ -176,9 +177,9 @@ export default class MPopover extends SuperCls {
     style.height = null
     style.boxShadow = null
     style.overflow = null
-    let width:string = 'auto'
+    let width: string = 'auto'
     if (this.inheritWidth) {
-      width = rect.width+'px'
+      width = rect.width + 'px'
     }
     this.style = {
       left: `${contentPositionLeft}px`,

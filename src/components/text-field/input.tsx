@@ -1,6 +1,6 @@
-import {Component, Vue, Prop, Emit, Watch} from 'vue-property-decorator'
+import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
-import {FormatInputPathObject} from 'path';
+import { FormatInputPathObject } from 'path';
 
 @Component
 export default class MTextField extends Vue {
@@ -10,57 +10,62 @@ export default class MTextField extends Vue {
     })
     private value!: string
     @Prop({
-        default: ''
+        default: '',
     })
     private label!: string
 
     @Prop({
-        default: ''
+        default: '',
     })
     private icon!: string
     @Prop({
-        default: ''
+        default: '',
     })
     private endIcon!: string
     @Prop({
         default: false,
-        type: Boolean
+        type: Boolean,
     })
     private labelFloat!: boolean
     @Prop({
-        default: ''
+        default: '',
     })
     private helpText!: string
     @Prop({
-        default: ''
+        default: '',
     })
     private errorText!: string
     @Prop({
         default: false,
-        type: Boolean
+        type: Boolean,
     })
     private disabled!: boolean
     @Prop({
         default: '',
-        type: String
+        type: String,
     })
     private prefix!: string
 
     @Prop({
         default: '',
-        type: String
+        type: String,
     })
     private suffix!: string
     @Prop({
         default: false,
-        type: Boolean
+        type: Boolean,
     })
     private multiLine!: boolean
     @Prop({
         default: 3,
-        type: Number
+        type: Number,
     })
     private rows!: number
+
+    @Prop({
+        type: Boolean,
+    })
+    private readOnly!: boolean
 
     private isFocus: boolean = false
 
@@ -110,11 +115,16 @@ export default class MTextField extends Vue {
         this.isFocus = false
     }
 
+
     @Watch('text', {
+        immediate: true
+    })
+    @Watch('value', {
         immediate: true
     })
     private handleInput(val: string) {
         this.$emit('input', val)
+        this.text = val
     }
 
     private render(h: any) {
@@ -157,29 +167,30 @@ export default class MTextField extends Vue {
         console.log(iconCls)
         return (
             <div staticClass='m-text-field' class={wrapCls}>
-                {this.hasIcon && (<MIcon name={this.icon}/>)}
+                {this.hasIcon && (<MIcon name={this.icon} />)}
 
                 <div staticClass='m-text-field__content' class={contenCls}>
-                    <div   staticClass='m-text-field__label' class={labelCls} onClick={this.handleFocus}>
+                    <div staticClass='m-text-field__label' class={labelCls} onClick={this.handleFocus}>
                         {this.label}
                     </div>
                     <div staticClass='m-text-field__input-wrap' class={inputWrapCls}>
                         {
                             this.hasPrefix &&
                             (<span staticClass='m-text-field__suffix'
-                                   v-show={this.isFocus || this.hasText}>{this.prefix}</span>)
+                                v-show={this.isFocus || this.hasText}>{this.prefix}</span>)
                         }
 
                         {!this.multiLine ?
                             (
                                 <input
+                                    readOnly={this.readOnly}
                                     disabled={this.disabled}
                                     ref="input"
                                     v-model={this.text}
                                     type="text"
                                     staticClass='m-text-field__input'
                                     onFocus={this.handleFocus}
-                                    onBlur={this.handleBlur}/>
+                                    onBlur={this.handleBlur} />
                             ) : (
                                 <textarea
                                     ref="input"
@@ -187,16 +198,16 @@ export default class MTextField extends Vue {
                                     onFocus={this.handleFocus}
                                     onBlur={this.handleBlur}
                                     staticClass='m-text-field__input'
-                                    rows={this.rows}/>
+                                    rows={this.rows} />
                             )}
 
                         {this.hasSuffix && (<span staticClass='m-text-field__suffix'>{this.suffix}</span>)}
                     </div>
-                    {this.hasEndIcon && (<MIcon class={iconCls} name={this.endIcon}/>)}
+                    {this.hasEndIcon && (<MIcon class={iconCls} name={this.endIcon} />)}
                     <div staticClass='m-text-field__underline' class={underlineCls}>
                         <div
                             staticClass='m-text-field__underline-content m--bg-m-text-field__underline-content'
-                            class={underlineContentCls}/>
+                            class={underlineContentCls} />
                     </div>
                     {!this.hasErrorText && this.hasHelpText && (
                         <div class='m-text-field__help-text'>

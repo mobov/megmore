@@ -1510,6 +1510,10 @@ babel-plugin-jest-hoist@^23.0.1:
   version "23.0.1"
   resolved "http://r.cnpmjs.org/babel-plugin-jest-hoist/download/babel-plugin-jest-hoist-23.0.1.tgz#eaa11c964563aea9c21becef2bdf7853f7f3c148"
 
+babel-plugin-jsx-event-modifiers@^2.0.5:
+  version "2.0.5"
+  resolved "http://registry.npm.taobao.org/babel-plugin-jsx-event-modifiers/download/babel-plugin-jsx-event-modifiers-2.0.5.tgz#93e6ebb5d7553bb08f9fedbf7a0bee3af09a0472"
+
 babel-plugin-jsx-v-model@^2.0.3:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/babel-plugin-jsx-v-model/download/babel-plugin-jsx-v-model-2.0.3.tgz#c396416b99cb1af782087315ae1d3e62e070f47d"
