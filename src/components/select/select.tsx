@@ -79,7 +79,7 @@ export default class MSelect extends Vue {
     try {
       this.$refs.popover.setStyle()
     } catch (error) {
-      
+
     }
   }
 
@@ -131,6 +131,7 @@ export default class MSelect extends Vue {
       <div class='m__select'>
         <MPopover ref="popover" inherit-width={true} placement='top-end' {...eventMap} show={this.showPopover}>
           <MInput
+            label="select"
             value={this.inputVal}
             read-only={true}
             end-icon='arrow_drop_down'

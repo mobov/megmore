@@ -6,7 +6,7 @@ import { FormatInputPathObject } from 'path';
 export default class MTextField extends Vue {
     @Prop({
         default: '',
-        type: [String,Number],
+        type: [String, Number],
     })
     private value!: string | number
     @Prop({
@@ -119,7 +119,7 @@ export default class MTextField extends Vue {
         this.isFocus = true
     }
 
-    private clear(e:MouseEvent) {
+    private clear(e: MouseEvent) {
         e.stopPropagation()
         this.$emit('input', '')
         this.$emit('clear')
@@ -179,7 +179,11 @@ export default class MTextField extends Vue {
         iconCls = iconCls.join(' ')
         console.log(iconCls)
         return (
-            <div staticClass='m-text-field' class={wrapCls} onClick={this.handleFocus}>
+            <div
+                staticClass='m-text-field'
+                class={wrapCls}
+                onClick={this.handleFocus}
+                v-m-click-outside={this.handleBlur}>
                 {this.hasIcon && (<MIcon name={this.icon} />)}
 
                 <div staticClass='m-text-field__content' class={contenCls}>
