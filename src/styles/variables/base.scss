@@ -2,7 +2,7 @@
 @import "elevations";
 
 $--relative-base: 16 !default;
-
+$--Breakpoints: (xs sm md lg xl);
 //space
 $--Space: (
     xs: 3,
@@ -11,6 +11,7 @@ $--Space: (
     lg: 24,
     xl: 48,
 );
+
 //avatar
 $--Size-avatar: (
     xs: 30,
@@ -42,16 +43,9 @@ $--space-appBar-inset-x: 15;
 //toolbar size
 $--size-toolbar: 90;
 
-//button height size
-$--Size-button-height:(
-    xs: 24,
-    sm: 30,
-    md: 36,
-    lg: 44,
-    xl: 50,
-);
 
-$--Size-spin:( xs:15, sm:20, md:25, lg:30, xl:35);
+
+
 
 $--Radius: (
     square: 0,
@@ -59,7 +53,26 @@ $--Radius: (
     round: 28,
     circle: 50%
 );
+// spin
+$--Size-spin:(
+    xs:15,
+    sm:20,
+    md:25,
+    lg:30,
+    xl:35
+);
+// button height
+$--Size-button-height:(
+    xs: 24,
+    sm: 30,
+    md: 36,
+    lg: 44,
+    xl: 50,
+);
+$--size-button-min-width: 88;
+$--size-button-round-radius: 28;
 
+// font
 $--Size-font:(
     xs: 12,
     sm: 14,
@@ -67,6 +80,7 @@ $--Size-font:(
     lg: 18,
     xl: 20,
 );
+// input
 $--Size-input:(
     xs: 28,
     sm: 32,
@@ -83,11 +97,23 @@ $--Size-chip:(
     xl: 36,
 );
 
+$--Space-table-cell-x: (
+    xs: 8,
+    sm: 16,
+    md: 24,
+    lg: 32,
+    xl: 40,
+);
+$--Space-table-cell-y: (
+    xs: 5,
+    sm: 10,
+    md: 15,
+    lg: 20,
+    xl: 25,
+);
 
 
-$--size-button-min-width: 88;
 
-$--size-button-round-radius: 28;
 
 $--Transitions: (
     fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),

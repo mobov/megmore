@@ -6,10 +6,17 @@
             </m-option>
         </m-select>
         <m-row space="xs">
+            <m-col>
+                <m-table>
+
+                </m-table>
+            </m-col>
+        </m-row>
+        <m-row space="xs">
             <m-col :sm="4">
                 <div>
                     <m-checkbox v-model="checkbox" :label="checkAll">所有</m-checkbox>
-                    <m-checkbox v-model="checkbox" disabled label="check1">check1</m-checkbox>
+                    <m-checkbox v-model="checkbox" label="check1">check1</m-checkbox>
                     <m-checkbox v-model="checkbox" label="check2">check2</m-checkbox>
                     <m-checkbox v-model="checkbox" label="check3">check3</m-checkbox>
                     <m-checkbox v-model="checkbox" label="check4">check4</m-checkbox>

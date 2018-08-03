@@ -1,7 +1,7 @@
-import MRadio from '@/components/radio/radio'
+import MTable from '@/components/table/table'
 
 /* istanbul ignore next */
-MRadio.install = function install(Vue: any) {
-    Vue.component(MRadio.name, MRadio)
+MTable.install = function install(Vue: any) {
+    Vue.component(MTable.name, MTable)
 }
-export default MRadio
+export default MTable

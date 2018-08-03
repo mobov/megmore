@@ -1,0 +1,27 @@
+.m-table {
+    border-radius: $--radius;
+    table {
+        width: 100%;
+        thead {
+
+        }
+        tbody {
+
+        }
+    }
+
+
+    // size
+    @each $breakpoint in $--Breakpoints {
+        $font-size: map_get($--Size-font, $breakpoint);
+        $space-table-cell-x: map_get($--Space-table-cell-x, $breakpoint);
+        $space-table-cell-y: map_get($--Space-table-cell-y, $breakpoint);
+
+        &.m--#{$breakpoint} {
+            font-size: d($font-size);
+            td {
+                padding: d($space-table-cell-y) d($space-table-cell-x);
+            }
+        }
+    }
+}

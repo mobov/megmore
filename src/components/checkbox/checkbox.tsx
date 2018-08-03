@@ -2,7 +2,6 @@ import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
 import { Size, Color } from '@/types/model'
-import { deepClone } from '@/utils'
 const prefix = 'm-checkbox'
 
 @Component({ components: { MIcon } })
@@ -32,7 +31,7 @@ export default class MCheckbox extends Vue {
     @Emit('input')
     private handleInput(val: any): any { void(0) }
 
-    private isArrayValue: boolean = false
+        private isArrayValue: boolean = false
 
     private isArrayLabel: boolean = false
 
