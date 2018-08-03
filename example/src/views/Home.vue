@@ -1,6 +1,6 @@
 <template>
     <m-container style="padding:20px">
-        <m-select filerable multiple chips    placement-x="right-start" v-model="select">
+        <m-select filerable  chips    placement-x="right-start" v-model="select">
             <m-option :label="'编号'+item" :value="item" v-for="item in 10" :key="item">
                 编号{{item}}
             </m-option>

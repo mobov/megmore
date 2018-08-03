@@ -31,10 +31,42 @@ export default class MPopover extends SuperCls {
   })
   private placementX!: 'left' | 'left-start' | 'left-end' | 'right' | 'right-start ' | 'right-end'
 
+  public setStyle() {
+    const rect = this.refRect()
+    if (rect.top < -rect.height || rect.top > window.innerHeight) {// ref元素滑到屏幕之外时
+      this.hide()
+    }
+
+    const { style } = this.content
+    // 隐藏元素
+    style.height = '0'
+    style.boxShadow = 'none'
+    style.overflow = 'hidden'
+    // 计算位置
+    const { scrollHeight, offsetWidth } = this.content
+    const contentPositionTop = this.getPositionTop()
+    const contentPositionLeft = this.getPositionLeft()
+    // 将元素显示
+    style.height = null
+    style.boxShadow = null
+    style.overflow = null
+    let width: string = 'auto'
+    if (this.inheritWidth) {
+      width = rect.width + 'px'
+    }
+    this.style = {
+      left: `${contentPositionLeft}px`,
+      top: `${contentPositionTop}px`,
+      zIndex: getZIndex(),
+      width,
+    }
+
+  }
+
   @Watch('visible')
   @Watch('show')
   public async visibleChangeHandle(val: boolean, before: boolean) {
-    SuperCls.options.methods.visibleChangeHandle.call(this,val,before)
+    SuperCls.options.methods.visibleChangeHandle.call(this, val, before)
     await this.$nextTick()
     this.content = this.$refs.content as HTMLDivElement
     if (val) {
@@ -46,15 +78,15 @@ export default class MPopover extends SuperCls {
 
   private mounted() {
     this.showContent()
-    on(this.ref, 'click', this.toggle)
+    on(this.refElement, 'click', this.toggle)
   }
 
   private beforeDestory() {
-    off(this.ref, 'click', this.toggle)
+    off(this.refElement, 'click', this.toggle)
     off(this.scoller, 'scroll', this.setStyle)
   }
 
-  private get ref() {
+  private get refElement() {
     const ref = this.$slots.ref[0]
     let dom
     if (ref.context && ref.context._isVue) {
@@ -66,10 +98,10 @@ export default class MPopover extends SuperCls {
   }
 
   private get scoller() {
-    return getScrollEventTarget(this.ref)
+    return getScrollEventTarget(this.refElement)
   }
   private refRect() {
-    const rect = this.ref.getBoundingClientRect()
+    const rect = this.refElement.getBoundingClientRect()
     return rect
   }
   private getTop() {
@@ -158,37 +190,7 @@ export default class MPopover extends SuperCls {
     }
     return contentPositionTop
   }
-  private setStyle() {
-    const rect = this.refRect()
-    if (rect.top < -rect.height || rect.top > window.innerHeight) {// ref元素滑到屏幕之外时
-      this.hide()
-    }
 
-    const { style } = this.content
-    // 隐藏元素
-    style.height = '0'
-    style.boxShadow = 'none'
-    style.overflow = 'hidden'
-    // 计算位置
-    const { scrollHeight, offsetWidth } = this.content
-    const contentPositionTop = this.getPositionTop()
-    const contentPositionLeft = this.getPositionLeft()
-    // 将元素显示
-    style.height = null
-    style.boxShadow = null
-    style.overflow = null
-    let width: string = 'auto'
-    if (this.inheritWidth) {
-      width = rect.width + 'px'
-    }
-    this.style = {
-      left: `${contentPositionLeft}px`,
-      top: `${contentPositionTop}px`,
-      zIndex: getZIndex(),
-      width,
-    }
-
-  }
 
 
 
@@ -214,4 +216,5 @@ export default class MPopover extends SuperCls {
       </div>
     )
   }
+
 }

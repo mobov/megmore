@@ -6,9 +6,9 @@ import { FormatInputPathObject } from 'path';
 export default class MTextField extends Vue {
     @Prop({
         default: '',
-        type: String
+        type: [String,Number],
     })
-    private value!: string
+    private value!: string | number
     @Prop({
         default: '',
     })
@@ -113,15 +113,15 @@ export default class MTextField extends Vue {
             try {
                 (this.$refs.input as HTMLFormElement).focus()
             } catch (error) {
-                
+
             }
         }
         this.isFocus = true
     }
 
-    @Emit()
-    private clear(){
-        this.$emit('input','')
+    private clear(e:MouseEvent) {
+        e.stopPropagation()
+        this.$emit('input', '')
         this.$emit('clear')
     }
     private handleBlur() {
@@ -216,7 +216,7 @@ export default class MTextField extends Vue {
 
                         {this.hasSuffix && (<span staticClass='m-text-field__suffix'>{this.suffix}</span>)}
                     </div>
-                    <MIcon staticClass='pointer' onClick={this.clear} name='close' />
+                    <MIcon staticClass='m--pointer' onClick={this.clear} name='close' />
                     {this.hasEndIcon && (<MIcon class={iconCls} name={this.endIcon} />)}
                     <div staticClass='m-text-field__underline' class={underlineCls}>
                         <div

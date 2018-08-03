@@ -1,12 +1,17 @@
 import { Component, Vue, Prop, Emit, Inject } from 'vue-property-decorator'
 import MCheckbox from '@/components/checkbox'
 import MSelect from './select'
+
+let id = 0  //  option唯一标识id
+
 @Component
 export default class MOption extends Vue {
   @Prop({
     required: true,
   })
   public value!: any
+
+  public id = id++
 
   @Prop({
     default: '',
@@ -38,9 +43,8 @@ export default class MOption extends Vue {
   }
 
   private get show() {
-    console.log(this.label,this.root.searchVal)
     if (this.root.filerable) {
-      return String(this.label).indexOf(this.root.searchVal) !== -1
+      return String(this.label).indexOf(this.searchVal) !== -1
     } else {
       return true
     }
@@ -51,6 +55,12 @@ export default class MOption extends Vue {
     console.log(this.selected)
   }
 
+  private mounted() {
+    // this.root.addOption(this)
+  }
+  private beforeDestroy() {
+    // this.root.removeOption(this)
+  }
   private render() {
     const cls = {
       'm--color-primary': this.checked,

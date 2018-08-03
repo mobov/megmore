@@ -1,4 +1,4 @@
-import { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions, ComponentOptions, RenderContext, VNode } from 'vue'
+import {PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions, ComponentOptions, RenderContext, VNode } from 'vue'
 
 declare module '*.vue' {
   import Vue from 'vue'
@@ -14,7 +14,8 @@ declare module 'vue/types/vue' {
   interface Vue {
     options:any,
     $confirm: () => Promise<any>,
-    _isVue:boolean
+    _isVue:boolean,
+    ref:any,
   }
 }
 declare global {

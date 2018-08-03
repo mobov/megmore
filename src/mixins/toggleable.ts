@@ -3,11 +3,11 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
  * 可切换显示隐藏组件mixin
  */
 @Component
-export default class ModalMixin extends Vue {
+export default class ToggleAble extends Vue {
   @Prop({
     default: false,
   })
-  public show=false// 控制显示隐藏
+  public show = false// 控制显示隐藏
 
   public visible = false// 组件内部的显示隐藏状态
   public hide() {

@@ -3,7 +3,6 @@
  */
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { FunctionalComponentOptions, RenderContext, VNode } from 'vue'
-import { Model } from '@/types';
 import { mixins } from 'vue-class-component'
 import modalMixin from '@/mixins/modal'
 import modalManage from '@/mixins/modal/modalManage'
@@ -15,7 +14,7 @@ export default class Overlay extends Vue {
   public beforeDestroy() {
     this.$el.remove()
   }
-  public render(h, context: RenderContext) {
+  public render(h: any, context: RenderContext) {
     return (
       <transition name='overlay' onAfterLeave={this.hide}>
         <div v-show={this.show} class='m-overlay' onClick={modalManage.closeLast}></div>
