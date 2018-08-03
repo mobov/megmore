@@ -15,6 +15,9 @@
                     <m-checkbox v-model="checkbox" label="check4">check4</m-checkbox>
                 </div>
                 <div>
+                    <m-checkbox v-model="checkboolean" :label="true">boolean</m-checkbox>
+                </div>
+                <div>
                     <m-radio v-model="radio" disabled label="radio1">萌萌啊</m-radio>
                     <m-radio v-model="radio" label="radio2">萌萌啊</m-radio>
                     <m-radio v-model="radio" label="radio3">萌萌啊</m-radio>
@@ -166,6 +169,7 @@ export default {
       bottomSheet: false,
       dateValue: new Date(),
       checkbox: [],
+      checkboolean: false,
       checkAll: ['check1', 'check2', 'check3', 'check4'],
       radio: 1,
       select:[]
