@@ -1,15 +1,25 @@
+$--color-table-border: getColor(gray, 300);
+
 .m-table {
-    border-radius: $--radius;
+    border-radius: d($--radius);
     table {
         width: 100%;
-        thead {
-
+        border-collapse: collapse;
+        tbody{
+            tr:first-child{
+                td {
+                    border-top: none;
+                }
+            }
         }
-        tbody {
-
+        tr {
+            td {
+                border-width: 1px;
+                border-style: solid;
+                border-color: transparent;
+            }
         }
     }
-
 
     // size
     @each $breakpoint in $--Breakpoints {
@@ -21,6 +31,22 @@
             font-size: d($font-size);
             td {
                 padding: d($space-table-cell-y) d($space-table-cell-x);
+            }
+        }
+    }
+
+    // border
+    table {
+        tr {
+            td {
+                border-color: $--color-table-border;
+            }
+        }
+    }
+    &.m--border {
+        table {
+            td {
+                border-color: $--color-table-border;
             }
         }
     }

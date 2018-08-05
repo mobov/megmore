@@ -31,7 +31,6 @@
 .m--p-0 {
     padding: 0;
 }
-//  阴影
 @each $key, $space in $--Space {
     .m--m-#{$key} {
         margin: d($space);
@@ -81,10 +80,21 @@
     }
 }
 
-//size 尺寸
+// size 尺寸
 .m--block {
     width: 100%;
 }
+// align
+.m--align-left {
+    text-align: left;
+}
+.m--aligh-center {
+    text-align: center;
+}
+.m--aligh-right {
+    text-align: right;
+}
+
 .m--pointer{
     cursor: pointer;
 }
