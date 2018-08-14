@@ -10,14 +10,12 @@ export default class TBody extends Vue {
         const RTds = ()=>{
             const result: any = []
             data.forEach(item => {
-                console.log(item)
                 result.push(<tr>{$scopedSlots.default(item)}</tr>)
             })
 
             return result
         }
 
-       console.log( RTds())
         return (
             <table>
                 <tbody>{RTds()}</tbody>

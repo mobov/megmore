@@ -1,0 +1,29 @@
+.m-message{
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: d(10) d(40);
+  border-radius: d(2);
+  display: flex;
+  align-items: center;
+  transition: all 0.15s linear;
+  min-height: d(40);
+  box-sizing: border-box;
+  &.message-enter,&.message-leave-to{
+    transform: translate3d(-50%,50%,0);
+    opacity: 0.2;
+  }
+  &>.m-icon.m-icon__close{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: d(20);
+  }
+  .m-message__content{
+  }
+  &.m--default{
+    background-color: rgba(0,0,0,0.9);
+  }
+}

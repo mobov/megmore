@@ -5,6 +5,7 @@
                 编号{{item}}
             </m-option>
         </m-select>
+        <m-button @click="$toast('啊啊啊啊啊啊啊啊啊啊')">openToast</m-button>
         <m-row space="xs">
             <m-col>
                 <m-table :data="tableData" >
@@ -151,6 +152,7 @@
             <m-text-field  label="label"></m-text-field>
             <m-text-field  label="label" label-float></m-text-field>
         </div>
+        <m-toast ref="toast"></m-toast>
         <MExpansionPanel style="width:500px;margin:0 auto">
             <MExpansionPanelContent v-for="item in 30">
                 <template slot="header">
@@ -164,7 +166,7 @@
                 </template>
             </MExpansionPanelContent>
         </MExpansionPanel>
-        
+
     </m-container>
 </template>
 
@@ -272,6 +274,9 @@ export default {
     handleAvatarClose() {
 
     },
+      openToast(){
+        this.$refs.toast.visible=true
+      },
     handleAvatarClick() {},
     async confirm() {
       await this.$confirm({

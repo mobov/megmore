@@ -16,6 +16,7 @@ declare module 'vue/types/vue' {
     $confirm: () => Promise<any>,
     _isVue:boolean,
     ref:any,
+    componentOptions:any
   }
 }
 declare global {
