@@ -6,6 +6,7 @@
             </m-option>
         </m-select>
         <m-button @click="$toast('啊啊啊啊啊啊啊啊啊啊',{type:'warning'})">openToast</m-button>
+        <MProgressCircle></MProgressCircle>
         <m-row space="xs">
             <m-col>
                 <m-table :data="tableData" >

@@ -1,17 +1,17 @@
-import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator'
-import { VNode } from 'vue'
-import { mixins } from 'vue-class-component'
-import modalMixin from '@/mixins/modal';
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import { getZIndex } from '@/utils';
 import * as Model from '@/types/model'
 import Icon from '../icon'
-
-const typeIconMap = {//   类型图标对照表
+type ITypeIconMap = {
+    [K in Model.Color]: string
+}
+const typeIconMap: ITypeIconMap = {//   类型图标对照表
     default: '',
     success: 'check',
     info: 'info_outline',
     warning: 'warning',
-    error: 'error',
+    danger: 'error',
+    primary: '',
 }
 
 @Component
@@ -32,6 +32,13 @@ export default class MToast extends Vue {
         if (this.visible) {
             document.body.appendChild(this.$el)
         }
+    }
+
+    private get wrapStyle() {
+        const style = {
+            zIndex: getZIndex(),
+        }
+        return style
     }
 
     private get contentCls() {
@@ -68,7 +75,7 @@ export default class MToast extends Vue {
         console.log(this.iconName)
         return (
             <transition onAfterLeave={this.afterLeave} name='message'>
-                <div v-show={this.visible} staticClass='m-message' class={this.contentCls}>
+                <div v-show={this.visible} staticClass='m-message' class={this.contentCls} style={this.wrapStyle}>
                     {this.iconName && (
                         <Icon
                             onClick={this.close}
