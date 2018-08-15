@@ -11,6 +11,8 @@
   transition: all 0.15s linear;
   min-height: d(40);
   box-sizing: border-box;
+  min-width: d(300);
+  border-radius: 2px;
   &.message-enter,&.message-leave-to{
     transform: translate3d(-50%,50%,0);
     opacity: 0.2;

@@ -2,10 +2,12 @@ import Vue from 'vue'
 import MToast from '@/components/toast'
 import * as Model from '@/types/model'
 interface IToastoptions {
-    type?: Model.Color
+    type?: Model.Color,
+    timeout: number,
 }
 const defaultOptions: IToastoptions = {
     type: 'default',
+    timeout: 3000,
 }
 const instaceList: MToast[] = []
 
@@ -16,13 +18,14 @@ class Toast extends MToast {
     public message: string
     public constructor(msg: string, options: IToastoptions) {
         super()
-        console.log(msg)
         this.message = msg
-        this.type = options.type as string
+        this.type = options.type as Model.Color
+        // setTimeout(() => {
+        //     this.visible = false
+        // }, options.timeout);
     }
 
     public afterLeave() {
-        console.log(MToast.componentOptions.Ctor.options)
         MToast.componentOptions.Ctor.options.methods.afterLeave.call(this)
         const index = instaceList.findIndex(i => i === this)
         instaceList.splice(index, 1)
@@ -30,15 +33,13 @@ class Toast extends MToast {
 }
 export default async (msg = '啊啊啊啊啊啊啊啊啊啊', options: IToastoptions = defaultOptions) => {
     const o = Object.assign({
-        ...options,
         ...defaultOptions,
+        ...options,
     })
-
-    const instance = new Toast(msg, options)
+    console.log(o)
+    const instance = new Toast(msg, o)
     instaceList.push(instance)
     instance.$mount()
     await Vue.nextTick()
-    console.log(instance)
     instance.visible = true
-
 }

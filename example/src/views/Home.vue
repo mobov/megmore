@@ -5,7 +5,7 @@
                 编号{{item}}
             </m-option>
         </m-select>
-        <m-button @click="$toast('啊啊啊啊啊啊啊啊啊啊')">openToast</m-button>
+        <m-button @click="$toast('啊啊啊啊啊啊啊啊啊啊',{type:'warning'})">openToast</m-button>
         <m-row space="xs">
             <m-col>
                 <m-table :data="tableData" >
