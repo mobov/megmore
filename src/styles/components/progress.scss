@@ -1,0 +1,24 @@
+.m-progress-circle {
+  width: 30px;
+  height: 30px;
+  @keyframes progress-circular-dash {
+    0% {
+      stroke-dasharray: 1, 83; // color: red;
+      // stroke-dashoffset: 0
+    }
+    50% {
+      stroke-dasharray: 82, 2;
+      stroke-dashoffset: -42
+    }
+    100% {
+      stroke-dasharray: 1, 82;
+      stroke-dashoffset: -84
+    }
+  }
+  .m-progress-circle__inner {
+    stroke: currentColor;
+    z-index: 2;
+    transition: all 0.6s linear;
+    animation: progress-circular-dash 2s infinite
+  }
+}

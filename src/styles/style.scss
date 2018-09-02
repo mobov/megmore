@@ -3,7 +3,6 @@
 @import 'utils/font-base';
 @import 'utils/base';
 @import 'utils/transition';
-
 /*按需引入部分*/
 
 @import "./components/app";
@@ -23,6 +22,8 @@
 @import "./components/radio";
 @import "./components/select";
 @import "./components/table";
+@import "./components/toast";
+@import "./components/progress";
 @import "./components/base/overlay";
 @import "./directives/ripple";
 //@import "themes/default";

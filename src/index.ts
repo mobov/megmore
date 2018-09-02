@@ -4,7 +4,7 @@ import directives from '@/directives'
 import Vue, { VueConstructor } from 'vue'
 import { Megmore as MegmorePlugin, MegmoreUseOptions } from '@/types'
 import methods from '@/methods'
-
+console.log(components.MToast)
 const Megmore: MegmorePlugin = {
     install(Vue: VueConstructor, args?: MegmoreUseOptions): void {
         const MegmoreComponent: MegmorePlugin = components.Megmore

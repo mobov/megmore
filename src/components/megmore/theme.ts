@@ -18,6 +18,7 @@ const Theme: any = {
             warning: Palettes.orange_700,
             success: Palettes.green_500,
             info: Palettes.cyan_400,
+            error: Palettes.red_500,
         },
         appBar: {
             bgColor: Palettes.lightblue_A700,
@@ -168,7 +169,7 @@ export function useTheme(name: string): void {
         $themeStyle.appendChild($themeText)
         document.head.appendChild($themeStyle)
     }
-    document.body.dataset.megmoreTheme = name
+    document.querySelector('html').dataset.megmoreTheme = name
 }
 /**
  * 主题注册

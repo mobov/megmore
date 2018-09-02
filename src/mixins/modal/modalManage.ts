@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Model } from '@/types';
+import * as Model from '@/types/model';
 import { openOverlay, closeOverlay } from '@/methods/overlay'
 interface PopupManager {
   instances: Model.ModalComponent[],
