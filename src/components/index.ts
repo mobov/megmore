@@ -1,5 +1,7 @@
 
 // 基础
+import MTableColumn from "@/components/table/table-column";
+
 export { default as Megmore } from '@/components/megmore'
 export { default as MIcon } from '@/components/icon'
 export { default as MApp } from '@/components/app'
@@ -20,5 +22,5 @@ export { MContainer, MRow, MCol, MFlexFiller } from '@/components/layout'
 export { default as MTimePicker } from '@/components/time-picker'
 export { default as MCheckbox } from '@/components/checkbox'
 export { default as MRadio } from '@/components/radio'
-export { default as MTable } from '@/components/table'
+export { MTable, MTableColumn } from '@/components/table'
 export { MSelect, MOption } from '@/components/select'

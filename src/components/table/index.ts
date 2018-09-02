@@ -1,7 +1,15 @@
-import MTable from '@/components/table/table'
+import MTable from './table'
+import MTableColumn from './table-column'
 
 /* istanbul ignore next */
 MTable.install = function install(Vue: any) {
     Vue.component(MTable.name, MTable)
 }
-export default MTable
+MTableColumn.install = function install(Vue: any) {
+    Vue.component(MTableColumn.name, MTableColumn)
+}
+
+export {
+    MTable,
+    MTableColumn
+}

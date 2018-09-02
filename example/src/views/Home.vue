@@ -7,15 +7,12 @@
         </m-select>
         <m-row space="xs">
             <m-col>
-                <m-table :data="tableData" >
-                    <template slot-scope="row">
-                        <td>{{row.name}}</td>
-                        <td>{{row.calories}}</td>
-                        <td>{{row.fat}}</td>
-                        <td>{{row.carbs}}</td>
-                        <td>{{row.protein}}</td>
-                        <td>{{row.iron}}%</td>
-                    </template>
+                <m-table :data="tableData">
+                    <m-table-column type="checkbox" />
+                    <m-table-column type="radio" />
+                    <m-table-column field="name" />
+                    <m-table-column field="calories" />
+                    <m-table-column field="protein" />
                 </m-table>
             </m-col>
         </m-row>
@@ -148,8 +145,8 @@
         <m-bottom-sheet :show.sync="bottomSheet"></m-bottom-sheet>
         <m-spin size="xs"></m-spin>
         <div style="display: flex">
-            <m-text-field  label="label"></m-text-field>
-            <m-text-field  label="label" label-float></m-text-field>
+            <m-text-field label="label"></m-text-field>
+            <m-text-field label="label" label-float></m-text-field>
         </div>
         <MExpansionPanel style="width:500px;margin:0 auto">
             <MExpansionPanelContent v-for="item in 30">
@@ -158,7 +155,7 @@
                 </template>
                 <template>
                      <m-popover  placement-x="right-start">
-                        <m-time-picker v-model="dateValue" :elevation=2></m-time-picker >
+                        <m-time-picker v-model="dateValue" :elevation=2></m-time-picker>
                         <m-button slot="ref">Popover</m-button>
                     </m-popover>
                 </template>
@@ -184,6 +181,13 @@ export default {
       checkAll: ['check1', 'check2', 'check3', 'check4'],
       radio: 1,
       select:[],
+      columns: [{
+
+      }, {
+
+      }, {
+
+      }],
       tableData:  [
           {
               name: 'Frozen Yogurt',
