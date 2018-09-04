@@ -9,8 +9,7 @@ const presetIcons = [
     'radio_button_checked', 'radio_button_unchecked', 'arrow_drop_down', 'check',
     'info_outline', 'warning', 'error',
 ]
-// 预设注册Icon
-const name = 'MIcon'
+
 const prefix = 'm-icon'
 
 const sizeMap: any = {
@@ -27,10 +26,7 @@ presetIcons.forEach((icon) => {
     Icons[icon] = iconLib[`MIcon_${icon}`][icon]
 })
 
-@Component({
-    name,
-    functional: true,
-} as FunctionalComponentOptions)
+@Component({ functional: true } as FunctionalComponentOptions)
 export class MIcon extends Vue {
     @Prop({ type: String })
     private name!: string

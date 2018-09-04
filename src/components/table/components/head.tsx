@@ -6,8 +6,16 @@ import { VNode } from 'vue'
 @Component
 export default class TableHead extends Vue {
     @Inject() TableData!: any
+    @Inject() TableCols!: any
 
     private get headers(): any{
+        const { TableCols } = this
+        const result: any = []
+
+        TableCols.forEach((item: any) =>{
+            result.push(<td>{ typeof item === 'string' ? data[item] : item }</td>)
+        })
+
         return [1,2,3,4,5]
     }
     private RTds(): VNode {

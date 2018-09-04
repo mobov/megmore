@@ -1,21 +1,46 @@
 import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
+import MCheckbox from '@/components/checkbox'
+import MRadio from '@/components/radio'
 import { VNode } from 'vue'
-import {type} from "os";
 
-@Component
+@Component({ components: { MCheckbox, MRadio }})
 export default class TableBody extends Vue {
     @Inject() TableData!: any
     @Inject() TableCols!: any
 
+
     private RCols(data: any): VNode{
+        console.log(data)
         const { TableCols } = this
         const result: any = []
+        const RContent = (item: any): VNode => {
+            let _node: any = []
+            const type = item.data.attrs ? item.data.attrs.type : undefined
+            const children = item.componentOptions.children
 
-        TableCols.forEach((item: any) =>{
-           console.log(typeof item)
-            result.push(<td>{ typeof item === 'string' ? data[item] : item }</td>)
-        })
+            if(type === 'radio'){
+                _node = <MRadio />
+            } else if(type === 'checkbox'){
+                _node = <MCheckbox />
+            } else if(children){
+                _node = children
+            } else {
+                // todo:错误处理
+                _node = data[item.componentOptions.propsData.field]
+            }
+
+            return _node
+        }
+
+        const RCell = (item: any): VNode => {
+            const width = item.componentOptions.propsData.width ||
+                          item.componentOptions.Ctor.options.props.width.default
+            return <td width={width}>{RContent(item)}</td>
+        }
+
+
+        TableCols.forEach((item: any) => { result.push(RCell(item)) })
 
         return result
     }
@@ -24,9 +49,7 @@ export default class TableBody extends Vue {
         const { TableData, RCols } = this
         const result: any = []
 
-        TableData.forEach((item: any) =>{
-            result.push(<tr>{RCols(item)}</tr>)
-        })
+        TableData.forEach((item: any) => { result.push(<tr>{RCols(item)}</tr>) })
 
         return result
     }

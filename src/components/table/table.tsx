@@ -1,7 +1,5 @@
 import {Component, Prop, Emit, Vue, Provide} from 'vue-property-decorator'
 import MIcon from '@/components/icon'
-import MCheckbox from '@/components/checkbox'
-import MRadio from '@/components/radio'
 import { VNode } from 'vue'
 import {Size, Color, DateValueType, DatePickerType} from '@/types/model'
 import TableHead from './components/head'
@@ -10,7 +8,7 @@ import TableBody from './components/body'
 const prefix = 'm-table'
 
 @Component({ components: {
-    TableHead, MCheckbox, MRadio
+    TableHead
 }})
 export default class MTable extends Vue {
 
@@ -23,35 +21,39 @@ export default class MTable extends Vue {
     @Prop({ type: String, default: 'md' })
     private size!: string
 
-    private genCol(item: any): any{
-        const { attrs } = item.data
-        let result = null
-        //type特殊col内容渲染
-        if(attrs.type){
-            if(attrs.type === 'checkbox'){
-                result = <MCheckbox />
-            }else if(attrs.type === 'radio'){
-                result = <MRadio />
-            }
-        }else if(attrs.field){
-            result = attrs.field
-        }else{
-
-        }
-
-        return result
-    }
+    // private genCol(item: any): any{
+    //     const { attrs } = item.data
+    //
+    //     let result = null
+    //     console.log(item)
+    //     //type特殊col内容渲染
+    //     if(attrs.type){
+    //         if(attrs.type === 'checkbox'){
+    //             result = <MCheckbox />
+    //         }else if(attrs.type === 'radio'){
+    //             result = <MRadio />
+    //         }
+    //     }else if(attrs.field){
+    //         result = {
+    //             field: attrs.field
+    //         }
+    //     }else{
+    //
+    //     }
+    //
+    //     return result
+    // }
 
     @Provide()
     public TableData: any = this.data
 
     @Provide()
     public get TableCols(): any{
-        const { $slots, genCol } = this
+        const { $slots } = this
         const result: any = []
         // 声明渲染
         $slots.default.forEach((item: any)=>{
-            result.push(genCol(item))
+            result.push(item)
         })
 
         return result
