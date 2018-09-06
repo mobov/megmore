@@ -5,41 +5,28 @@ import { VNode } from 'vue'
 
 @Component
 export default class TableHead extends Vue {
-    @Inject() TableData!: any
     @Inject() TableCols!: any
 
-    private get headers(): any{
+    private RHead(): VNode {
         const { TableCols } = this
         const result: any = []
 
-        TableCols.forEach((item: any) =>{
-            result.push(<td>{ typeof item === 'string' ? data[item] : item }</td>)
+        TableCols.forEach((item: any) => {
+            const width = item.componentOptions.propsData.width ||
+                item.componentOptions.Ctor.options.props.width.default
+            result.push(<td width={width}>{item.data.attrs.title}</td>)
         })
 
-        return [1,2,3,4,5]
-    }
-    private RTds(): VNode {
-        const { headers } = this
-        const result: any = []
-
-        headers.forEach((item: any) =>{
-            result.push(<td>{item}</td>)
-        })
-
-        return result
+        return <tr>{result}</tr>
     }
 
     public render(): VNode {
 
-        const { data, $scopedSlots, RTds } = this
+        const { $scopedSlots, RHead } = this
+
         return (
             <table>
-                <thead>
-                    <tr>
-                        {RTds()}
-                        {/*{$scopedSlots.default(item)}*/}
-                    </tr>
-                </thead>
+                <thead>{RHead()}</thead>
             </table>
         )
     }

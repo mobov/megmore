@@ -10,11 +10,11 @@
         <m-row space="xs">
             <m-col>
                 <m-table :data="tableData">
-                    <m-table-column type="checkbox" width="40px"/>
-                    <m-table-column type="radio"  width="40px"/>
-                    <m-table-column field="name" />
-                    <m-table-column field="calories" />
-                    <m-table-column>
+                    <m-table-column title="checkbox" type="checkbox" width="40px"/>
+                    <m-table-column title="radio" type="radio"  width="40px"/>
+                    <m-table-column title="name" field="name" />
+                    <m-table-column title="calories" field="calories" />
+                    <m-table-column title="custom">
                         <span style="color:red">213</span>
                     </m-table-column>
                 </m-table>

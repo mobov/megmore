@@ -36,7 +36,7 @@ export default class TableBody extends Vue {
         const RCell = (item: any): VNode => {
             const width = item.componentOptions.propsData.width ||
                           item.componentOptions.Ctor.options.props.width.default
-            return <td width={width}>{RContent(item)}</td>
+                return <td width={width}>{RContent(item)}</td>
         }
 
 
@@ -55,7 +55,7 @@ export default class TableBody extends Vue {
     }
 
     public render(): VNode {
-        const { data, $scopedSlots, RRows, TableData } = this
+        const { $scopedSlots, RRows, TableData } = this
         console.log(TableData)
         return (
             <table>
