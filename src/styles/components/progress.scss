@@ -2,6 +2,7 @@
   width: 30px;
   height: 30px;
   position: relative;
+  overflow: hidden;
   @keyframes progress-circular-dash {
     0% {
       stroke-dasharray: 1, 200;
@@ -69,8 +70,6 @@
     }
   }
   .m-progress-linear__wrap {
-    &.m-progress-linear__wrap--with-bg {
-      opacity: 0.4;
-    }
+    opacity: 0.4;
   }
 }

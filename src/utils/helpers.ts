@@ -1,7 +1,7 @@
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
-export { isColor } from 'is-color-stop'
+import { isColor } from 'is-color-stop'
 
-
+export { isColor }
 // KeyboardEvent.keyCode aliases
 export const keyCodes = Object.freeze({
   enter: 13,
@@ -22,6 +22,30 @@ export const keyCodes = Object.freeze({
   pagedown: 34
 })
 
+/**
+ * @description 判断color是预设值关键字还是色值
+ */
+export const colorDetermine = (color: string, styleField: 'bg' | 'color') => {
+  type clsMap = {
+    [key: string]: boolean | string
+  }
+  const cls: clsMap = {}
+  const style: clsMap = {}
+  const styleKeyMap = {
+    bg: 'backgroundColor',
+    color: 'color',
+  }
+  if (!isColor(color)) {
+    cls[`m--${styleField}-${color}`] = true
+  } else {
+    const styleKey = styleKeyMap[styleField]
+    style[styleKey] = color
+  }
+  return {
+    class: cls,
+    style,
+  }
+}
 
 // //十六进制颜色值的正则表达式
 // const colorReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/

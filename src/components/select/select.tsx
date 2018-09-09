@@ -10,7 +10,7 @@ export default class MSelect extends Vue {
   }
 
   @Provide()
-  private get root() {
+  private get _select() {
     return this
   }
 

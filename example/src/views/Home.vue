@@ -8,6 +8,11 @@
         <m-button @click="$toast('啊啊啊啊啊啊啊啊啊啊',{type:'warning'})">openToast</m-button>
         <MProgressLinear></MProgressLinear>
         <MProgressCircle></MProgressCircle>
+        <MTab>
+            <MTabItem v-for="item in 3" :key="item" :label="`label${item}`" :name="`label${item}`">
+                ssssssssssss
+            </MTabItem>
+        </MTab>
         <m-row space="xs">
             <m-col>
                 <m-table :data="tableData">

@@ -1,4 +1,5 @@
 import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
+import { isColor, colorDetermine } from '@/utils/helpers'
 import * as Model from '@/types/model'
 @Component
 class MProgressCircle extends Vue {
@@ -22,7 +23,7 @@ class MProgressCircle extends Vue {
 
   @Prop({
     type: String,
-    default: 'danger',
+    default: '#f1f1f1',
   })
   private color!: Model.Color
 
@@ -65,9 +66,13 @@ class MProgressCircle extends Vue {
     return {
       height: `${this.size}px`,
       width: `${this.size}px`,
+      ...this.colorData.style,
     }
   }
 
+  private get colorData() {
+    return colorDetermine(this.color, 'color')
+  }
   private genCircle(name: string, offset: number = 5) {
     const cls = `m-progress-circle__${name}`
     return (
@@ -86,10 +91,10 @@ class MProgressCircle extends Vue {
   private render() {
     const cls = {
       'm-process-circle--animate': this.animate,
-      [`m--color-${this.color}`]: true,
+      ...this.colorData.class,
     }
     return (
-      <div staticClass='m-progress-circle' class={cls} style={this.wrapStyle}>
+      <div staticClass='m-progress-circle' class={cls} style={{ ...this.wrapStyle }}>
         {this.value && (
           <div staticClass='m-progress-circle__value'>
             {this.value}
