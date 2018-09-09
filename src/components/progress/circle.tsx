@@ -1,7 +1,5 @@
 import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
-import { getZIndex } from '@/utils';
 import * as Model from '@/types/model'
-import Icon from '../icon'
 @Component
 class MProgressCircle extends Vue {
   @Prop({
