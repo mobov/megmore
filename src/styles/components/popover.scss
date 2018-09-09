@@ -10,6 +10,7 @@
  max-width: 80%;
  overflow: auto;
  box-shadow: getElevation(10);
+  opacity: 1;
  
  &.#{$name}-enter-active,&.#{$name}-leave-active{
   transition: all .3s

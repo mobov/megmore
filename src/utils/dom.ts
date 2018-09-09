@@ -26,3 +26,11 @@ export function getScrollEventTarget(el: Element) {
  }
  return window;
 }
+export function addOnceEventListener(el: EventTarget, event: string, cb: () => void): void {
+  const once = () => {
+    cb()
+    el.removeEventListener(event, once, false)
+  }
+
+  el.addEventListener(event, once, false)
+}

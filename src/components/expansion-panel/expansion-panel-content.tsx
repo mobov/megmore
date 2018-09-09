@@ -1,7 +1,7 @@
 import { Component, Vue, Prop, Emit, Inject } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import toggleable from '@/mixins/toggleable'
-import { addOnceEventListener } from '@/utils/helpers'
+import { addOnceEventListener } from '@/utils/dom'
 import Icon from '@/components/icon'
 @Component
 export default class MExpansionPanelContent extends mixins(toggleable) {
