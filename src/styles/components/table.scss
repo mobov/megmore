@@ -2,9 +2,11 @@ $--color-table-border: getColor(gray, 300);
 
 .m-table {
     border-radius: d($--radius);
+    position: relative;
     table {
         width: 100%;
         border-collapse: collapse;
+        position: relative;
         tbody{
             tr:first-child{
                 td {
@@ -18,6 +20,19 @@ $--color-table-border: getColor(gray, 300);
                 border-style: solid;
                 border-color: transparent;
             }
+        }
+    }
+    .m-table-head {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .m-table-body {
+        width: 100%;
+        thead {
+            pointer-events: none;
+            visibility: hidden;
         }
     }
 
@@ -48,6 +63,14 @@ $--color-table-border: getColor(gray, 300);
             td {
                 border-color: $--color-table-border;
             }
+        }
+    }
+
+    // header
+    &.m--scroll-y {
+        .m-table-body {
+            @include scroller(y);
+            @include scroll-bar-slim(y);
         }
     }
 }

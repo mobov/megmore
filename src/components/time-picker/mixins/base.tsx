@@ -98,7 +98,7 @@ export default class TimePickerBase extends Vue {
         pickerType: this.pickerType,
         activeType: 'date',
         ampm: false,
-        get dateValue(): Date {
+        get dateValue(): DateD {
             return new Date(this.value)
         },
         get year(): number {

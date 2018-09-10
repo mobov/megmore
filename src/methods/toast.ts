@@ -9,7 +9,7 @@ const defaultOptions: IToastoptions = {
     type: 'default',
     timeout: 3000,
 }
-const instaceList: MToast[] = []
+const instanceList: MToast[] = []
 
 class Toast extends MToast {
     public el = document.createElement('div')
@@ -27,8 +27,8 @@ class Toast extends MToast {
 
     public afterLeave() {
         MToast.componentOptions.Ctor.options.methods.afterLeave.call(this)
-        const index = instaceList.findIndex(i => i === this)
-        instaceList.splice(index, 1)
+        const index = instanceList.findIndex(i => i === this)
+        instanceList.splice(index, 1)
     }
 }
 export default async (msg = '啊啊啊啊啊啊啊啊啊啊', options: IToastoptions = defaultOptions) => {
@@ -38,7 +38,7 @@ export default async (msg = '啊啊啊啊啊啊啊啊啊啊', options: IToastopt
     })
     console.log(o)
     const instance = new Toast(msg, o)
-    instaceList.push(instance)
+    instanceList.push(instance)
     instance.$mount()
     await Vue.nextTick()
     instance.visible = true

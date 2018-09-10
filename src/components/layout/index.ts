@@ -6,7 +6,7 @@ import MFlexFiller from '@/components/layout/flex-filler'
 
 /* istanbul ignore next */
 MContainer.install = function install(Vue: any): void {
-  Vue.component(MContainer.name, MContainer)
+    Vue.component(MContainer.name, MContainer)
 }
 MRow.install = function install(Vue: any): void {
     Vue.component(MRow.name, MRow)

@@ -11,5 +11,5 @@ MTableColumn.install = function install(Vue: any) {
 
 export {
     MTable,
-    MTableColumn
+    MTableColumn,
 }

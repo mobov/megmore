@@ -10,5 +10,7 @@ export default class MTableColumn extends Vue {
     @Prop({ type: String })
     private field!: string
 
+    @Prop({ type: Boolean, default: false})
+    private height!: boolean
 }
 

@@ -4,41 +4,81 @@ import MCheckbox from '@/components/checkbox'
 import MRadio from '@/components/radio'
 import { VNode } from 'vue'
 
+const prefix = 'm-table-body'
+
 @Component({ components: { MCheckbox, MRadio }})
 export default class TableBody extends Vue {
-    @Inject() TableData!: any
-    @Inject() TableCols!: any
+    @Prop({ type: String })
+    public height!: string
+    @Inject()
+    public TableData!: any
+    @Inject()
+    public TableCols!: any
 
-
-    private RCols(data: any): VNode{
-        console.log(data)
+    private RShadowHead(): VNode {
         const { TableCols } = this
         const result: any = []
+
+        const RCell = (item: any): VNode => {
+            const RContent = (): VNode => {
+                let content: any = null
+                const type = item.data.attrs ? item.data.attrs.type : undefined
+                const children = item.componentOptions.children
+
+                if (type === 'radio') {
+                    content = <MRadio />
+                } else if (type === 'checkbox') {
+                    content = <MCheckbox />
+                } else if (children) {
+                    content = children
+                } else {
+                    // todo:错误处理
+                    content = item.data.attrs.title
+                }
+
+                return content
+            }
+            const width = item.componentOptions.propsData.width ||
+                item.componentOptions.Ctor.options.props.width.default
+
+            return <td width={width}>{RContent()}</td>
+        }
+        TableCols.forEach((item: any) => {
+            result.push(RCell(item))
+        })
+        return (
+            <thead>{result}</thead>
+        )
+    }
+
+    private RCols(data: any): VNode {
+        const { TableCols } = this
+        const result: any = []
+
         const RContent = (item: any): VNode => {
-            let _node: any = []
+            let content: any = []
             const type = item.data.attrs ? item.data.attrs.type : undefined
             const children = item.componentOptions.children
 
-            if(type === 'radio'){
-                _node = <MRadio />
-            } else if(type === 'checkbox'){
-                _node = <MCheckbox />
-            } else if(children){
-                _node = children
+            if (type === 'radio') {
+                content = <MRadio />
+            } else if (type === 'checkbox') {
+                content = <MCheckbox />
+            } else if (children) {
+                content = children
             } else {
                 // todo:错误处理
-                _node = data[item.componentOptions.propsData.field]
+                content = data[item.componentOptions.propsData.field]
             }
 
-            return _node
+            return content
         }
 
         const RCell = (item: any): VNode => {
             const width = item.componentOptions.propsData.width ||
-                          item.componentOptions.Ctor.options.props.width.default
-                return <td width={width}>{RContent(item)}</td>
+                item.componentOptions.Ctor.options.props.width.default
+            return <td width={width}>{RContent(item)}</td>
         }
-
 
         TableCols.forEach((item: any) => { result.push(RCell(item)) })
 
@@ -53,15 +93,20 @@ export default class TableBody extends Vue {
 
         return result
     }
-
-    public render(): VNode {
-        const { $scopedSlots, RRows, TableData } = this
+    private mounted(): void {
+        console.log(this.$el)
+        console.log('table mounted')
+    }
+    private updated(): void {
+        console.log('table update')
+    }
+    private render(): VNode {
+        const { $scopedSlots, height, RShadowHead, RRows, TableData } = this
         console.log(TableData)
         return (
-            <table>
-                <tbody>
-                    {RRows()}
-                </tbody>
+            <table staticClass={prefix}>
+                {RShadowHead()}
+                <tbody>{RRows()}</tbody>
             </table>
         )
     }

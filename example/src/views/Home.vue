@@ -10,8 +10,8 @@
         <m-row space="xs">
             <m-col>
                 <m-table :data="tableData">
-                    <m-table-column title="checkbox" type="checkbox" width="40px"/>
-                    <m-table-column title="radio" type="radio"  width="40px"/>
+                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="40px"/>
+                    <!--<m-table-column title="radio" type="radio"  width="40px"/>-->
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
                     <m-table-column title="custom">
