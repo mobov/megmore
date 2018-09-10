@@ -1,20 +1,30 @@
 import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
-import { getZIndex } from '@/utils';
 import * as Model from '@/types/model'
-import Icon from '../icon'
 @Component
 class MProgressCircle extends Vue {
   @Prop({
     type: Number,
-    default: 32,
+    default: 82,
   })
   private size!: number
 
-  // @Prop({
-  //   type: Number,
-  //   default: 40,
-  // })
-  private value: number=40
+  @Prop({
+    type: Number,
+    default: 80,
+  })
+  private value!: number
+
+  @Prop({
+    type: Boolean,
+    default: true,
+  })
+  private animate!: boolean
+
+  @Prop({
+    type: String,
+    default: 'danger',
+  })
+  private color!: Model.Color
 
   private circleWidth: number = 5
 
@@ -69,14 +79,23 @@ class MProgressCircle extends Vue {
         stroke-width={this.circleWidth}
         cx={this.center}
         cy={this.center} >
-
       </circle>
     )
   }
 
   private render() {
+    const cls = {
+      'm-process-circle--animate': this.animate,
+      [`m--color-${this.color}`]: true,
+    }
     return (
-      <div class='m-progress-circle' style={this.wrapStyle}>
+      <div staticClass='m-progress-circle' class={cls} style={this.wrapStyle}>
+        {this.value && (
+          <div staticClass='m-progress-circle__value'>
+            {this.value}
+          </div>
+        )}
+
         <svg>
           {this.genCircle('inner')}
         </svg>
