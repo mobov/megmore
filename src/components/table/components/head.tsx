@@ -8,9 +8,10 @@ const prefix = 'm-table-head'
 
 @Component
 export default class TableHead extends Vue {
+    private widthMap: any = []
     @Inject()
     private TableCols!: any
-    private RCell(item: any): VNode {
+    private RCell(item: any, index: number): VNode {
         const RContent = (): VNode => {
             let content: any = null
             const type = item.data.attrs ? item.data.attrs.type : undefined
@@ -30,8 +31,8 @@ export default class TableHead extends Vue {
             return content
         }
 
-
-        const width = item.componentOptions.propsData.width ||
+        const width = this.widthMap[index] ||
+            item.componentOptions.propsData.width ||
             item.componentOptions.Ctor.options.props.width.default
 
         return <td width={width}>{RContent()}</td>
@@ -40,11 +41,14 @@ export default class TableHead extends Vue {
         const { TableCols, RCell } = this
         const result: any = []
 
-        TableCols.forEach((item: any) => {
-            result.push(RCell(item))
+        TableCols.forEach((item: any, index: number) => {
+            result.push(RCell(item, index))
         })
 
         return <tr>{result}</tr>
+    }
+    public updateSize(widthMap: any): void {
+      this.widthMap = widthMap
     }
     private render(): VNode {
         const { $scopedSlots, RHead } = this

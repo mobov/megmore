@@ -49,7 +49,7 @@ export default class MTable extends Vue {
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 <TableHead />
-                <TableBody height={height}/>
+                <TableBody height={height} />
             </div>
         )
     }

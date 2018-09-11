@@ -93,12 +93,22 @@ export default class TableBody extends Vue {
 
         return result
     }
+
     private mounted(): void {
-        console.log(this.$el)
-        console.log('table mounted')
+        this.onDomUpdate()
     }
     private updated(): void {
-        console.log('table update')
+        this.onDomUpdate()
+    }
+    private onDomUpdate(): void {
+        const widthMap: any = []
+        const $headCells = this.$el.children[0].children
+        const vmTableHead = this.$parent.$children[0]
+        let cellCount = $headCells.length
+        while (cellCount --) {
+            widthMap.unshift($headCells[cellCount].clientWidth)
+        }
+        vmTableHead.updateSize(widthMap)
     }
     private render(): VNode {
         const { $scopedSlots, height, RShadowHead, RRows, TableData } = this

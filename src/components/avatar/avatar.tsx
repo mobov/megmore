@@ -57,6 +57,7 @@ export default class MAvatar extends Vue {
                {this.$slots.default}
                <img onLoad={onLoad}
                     class={imgClasses}
+                    alt=''
                     src={src} />
           </div>
       )
