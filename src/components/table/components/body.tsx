@@ -3,6 +3,7 @@ import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import MRadio from '@/components/radio'
 import { VNode } from 'vue'
+import { on, off } from '@/utils/dom'
 
 const prefix = 'm-table-body'
 
@@ -93,12 +94,15 @@ export default class TableBody extends Vue {
 
         return result
     }
-
     private mounted(): void {
         this.onDomUpdate()
+        on(window, 'resize', this.onDomUpdate)
     }
     private updated(): void {
         this.onDomUpdate()
+    }
+    private beforeDestroy(): void {
+        off(window, 'resize', this.onDomUpdate)
     }
     private onDomUpdate(): void {
         const widthMap: any = []

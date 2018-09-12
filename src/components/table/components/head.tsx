@@ -3,6 +3,7 @@ import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import MRadio from '@/components/radio'
 import { VNode } from 'vue'
+import { isStyleUnit } from 'es-treasure'
 
 const prefix = 'm-table-head'
 
@@ -31,11 +32,14 @@ export default class TableHead extends Vue {
             return content
         }
 
-        const width = this.widthMap[index] ||
+        let width = this.widthMap[index] ||
             item.componentOptions.propsData.width ||
             item.componentOptions.Ctor.options.props.width.default
-
-        return <td width={width}>{RContent()}</td>
+        console.log(width)
+        console.log(isStyleUnit(width))
+        width = isStyleUnit(width) ? width : `${width}px`
+        const styles = { width, minWidth: width, maxWidth: width }
+        return <td style={styles}>{RContent()}</td>
     }
     private RHead(): VNode {
         const { TableCols, RCell } = this
@@ -47,7 +51,7 @@ export default class TableHead extends Vue {
 
         return <tr>{result}</tr>
     }
-    public updateSize(widthMap: any): void {
+    private updateSize(widthMap: any): void {
       this.widthMap = widthMap
     }
     private render(): VNode {

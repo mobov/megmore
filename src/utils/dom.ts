@@ -34,3 +34,10 @@ export function addOnceEventListener(el: EventTarget, event: string, cb: () => v
 
   el.addEventListener(event, once, false)
 }
+
+export default {
+    on,
+    off,
+    getScrollEventTarget,
+    addOnceEventListener,
+}

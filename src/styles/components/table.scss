@@ -24,12 +24,17 @@ $--color-table-border: getColor(gray, 300);
     }
     .m-table-head {
         position: absolute;
+        z-index: 1;
         left: 0;
         top: 0;
         width: 100%;
+        thead {
+            width: 100%;
+        }
     }
     .m-table-body {
         width: 100%;
+        z-index: 0;
         thead {
             pointer-events: none;
             visibility: hidden;
