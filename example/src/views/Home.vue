@@ -10,7 +10,7 @@
         <MProgressCircle></MProgressCircle>
         <m-row space="xs">
             <m-col>
-                <m-table :data="tableData">
+                <m-table :data="tableData" height="300px">
                     <m-table-column title="checkbox" field="isCheck" type="checkbox" width="40px"/>
                     <!--<m-table-column title="radio" type="radio"  width="40px"/>-->
                     <m-table-column title="name" field="name" />

@@ -28,6 +28,7 @@ $--color-table-border: getColor(gray, 300);
         left: 0;
         top: 0;
         width: 100%;
+        background-color: white;
         thead {
             width: 100%;
         }
@@ -38,6 +39,7 @@ $--color-table-border: getColor(gray, 300);
         thead {
             pointer-events: none;
             visibility: hidden;
+            @include absSize(0, y)
         }
     }
 

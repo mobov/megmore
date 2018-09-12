@@ -47,9 +47,8 @@ export default class TableBody extends Vue {
         TableCols.forEach((item: any) => {
             result.push(RCell(item))
         })
-        return (
-            <thead>{result}</thead>
-        )
+
+        return result
     }
 
     private RCols(data: any): VNode {
@@ -106,8 +105,8 @@ export default class TableBody extends Vue {
     }
     private onDomUpdate(): void {
         const widthMap: any = []
-        const $headCells = this.$el.children[0].children
-        const vmTableHead = this.$parent.$children[0]
+        const $headCells: any = this.$el.children[0].children[0].children
+        const vmTableHead: any = this.$parent.$children[0]
         let cellCount = $headCells.length
         while (cellCount --) {
             widthMap.unshift($headCells[cellCount].clientWidth)
@@ -117,11 +116,17 @@ export default class TableBody extends Vue {
     private render(): VNode {
         const { $scopedSlots, height, RShadowHead, RRows, TableData } = this
         console.log(TableData)
+        const styles = {
+            ['height']: height ? height : false,
+        }
+        console.log(styles)
         return (
-            <table staticClass={prefix}>
-                {RShadowHead()}
-                <tbody>{RRows()}</tbody>
-            </table>
+            <div staticClass={prefix} style={styles}>
+                <table>
+                    <thead>{RShadowHead()}</thead>
+                    <tbody>{RRows()}</tbody>
+                </table>
+            </div>
         )
     }
 }

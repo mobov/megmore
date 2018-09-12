@@ -1,0 +1,21 @@
+@mixin absSize(
+    $size,
+    $dir: y
+){
+    @if ($dir == y) {
+        height: $size;
+        min-height: $size;
+        max-height: $size;
+    } @else if($dir == x) {
+        width: $size;
+        min-width: $size;
+        max-width: $size;
+    } @else {
+        height: $size;
+        min-height: $size;
+        max-height: $size;
+        width: $size;
+        min-width: $size;
+        max-width: $size;
+    }
+}
