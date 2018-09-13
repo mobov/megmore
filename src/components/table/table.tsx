@@ -22,6 +22,9 @@ export default class MTable extends Vue {
     @Prop({ type: [String, Number], default: 'auto' })
     public height?: string | number
 
+    @Prop({ type: Boolean, default: false })
+    public border?: boolean
+
     @Provide()
     public TableData: any = this.data
 
@@ -37,10 +40,11 @@ export default class MTable extends Vue {
         return result
     }
     private render(): VNode {
-        const { height } = this
+        const { height, border } = this
         const classes = {
             [`m--elevation-${this.elevation}`]: true,
             [`m--${this.size}`]: true,
+            'm--border': border,
             'm--scroll-y': height !== 'auto ',
         }
 

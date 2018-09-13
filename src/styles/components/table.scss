@@ -7,7 +7,11 @@ $--color-table-border: getColor(gray, 300);
         width: 100%;
         border-collapse: collapse;
         position: relative;
+        thead {
+            width: inherit;
+        }
         tbody{
+            width: inherit;
             tr:first-child{
                 td {
                     border-top: none;
@@ -15,32 +19,15 @@ $--color-table-border: getColor(gray, 300);
             }
         }
         tr {
-            td {
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-            }
+            border-width: 1px;
+            border-style: solid;
+            border-color: $--color-table-border;
+
         }
     }
     .m-table-head {
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background-color: white;
-        thead {
-            width: 100%;
-        }
     }
     .m-table-body {
-        width: 100%;
-        z-index: 0;
-        thead {
-            pointer-events: none;
-            visibility: hidden;
-            @include absSize(0, y)
-        }
     }
 
     // size
@@ -58,22 +45,17 @@ $--color-table-border: getColor(gray, 300);
     }
 
     // border
-    table {
-        tr {
-            td {
-                border-color: $--color-table-border;
-            }
-        }
-    }
     &.m--border {
         table {
             td {
+                border-width: 1px;
+                border-style: solid;
                 border-color: $--color-table-border;
             }
         }
     }
 
-    // header
+    // scroll-header
     &.m--scroll-y {
         .m-table-body {
             @include scroller(y);
