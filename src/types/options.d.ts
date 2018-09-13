@@ -12,5 +12,6 @@ declare module 'vue/types/options' {
         size?: string
         // table
         height?: string | number
+        border?: boolean
     }
 }

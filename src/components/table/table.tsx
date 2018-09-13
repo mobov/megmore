@@ -48,12 +48,12 @@ export default class MTable extends Vue {
             'm--scroll-y': height !== 'auto ',
         }
 
-        console.log(height)
+
 
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 <TableHead />
-                <TableBody height={height} />
+                <TableBody height={height} border={border} />
             </div>
         )
     }

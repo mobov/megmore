@@ -12,14 +12,20 @@ const prefix = 'm-table-body'
 export default class TableBody extends Vue {
     @Prop({ type: String })
     public height!: string
+
+    @Prop({ type: Boolean })
+    public border!: boolean
+
     @Inject()
     public TableData!: any
+
     @Inject()
     public TableCols!: any
+
     get isScrollY(): boolean {
-        console.log(this.height)
-        return true
+        return this.height !== 'auto'
     }
+
     private RCols(data: any): VNode {
         const { TableCols } = this
         const result: any = []
@@ -53,7 +59,6 @@ export default class TableBody extends Vue {
 
         return result
     }
-
     private RRows(): VNode {
         const { TableData, RCols } = this
         const result: any = []
@@ -73,16 +78,17 @@ export default class TableBody extends Vue {
         off(window, 'resize', this.onDomUpdate)
     }
     private onDomUpdate(): void {
-        const { isScrollY } = this
+        const { isScrollY, border } = this
         const $tableBody: any = this.$el.querySelector('tbody')
 
+        console.log(border)
         if ($tableBody.children && $tableBody.children.length) {
             const widthMap: any = []
             const $headCells: any = $tableBody.children[0].children
             const vmTableHead: any = this.$parent.$children[0]
             let cellCount = $headCells.length
             while (cellCount --) {
-                widthMap.unshift($headCells[cellCount].clientWidth + 1) // +1px消去边框对宽度影响
+                widthMap.unshift($headCells[cellCount].clientWidth + (border ? 1 : 0)) // +1px消去边框对宽度影响
             }
             console.log(isScrollY)
             console.log(widthMap)
@@ -92,6 +98,7 @@ export default class TableBody extends Vue {
             vmTableHead.updateSize(widthMap)
         }
     }
+
     private render(): VNode {
         const { $scopedSlots, isScrollY, height, RRows, TableData } = this
         const styles = {
