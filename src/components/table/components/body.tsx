@@ -5,6 +5,7 @@ import MRadio from '@/components/radio'
 import { VNode } from 'vue'
 import { on, off } from '@/utils/event'
 import { getScrollbarSize } from '@/utils/dom'
+import {isStyleUnit} from "es-treasure";
 
 const prefix = 'm-table-body'
 
@@ -52,7 +53,11 @@ export default class TableBody extends Vue {
         const RCell = (item: any): VNode => {
             const width = item.componentOptions.propsData.width ||
                 item.componentOptions.Ctor.options.props.width.default
-            return <td width={width}>{RContent(item)}</td>
+            const align = item.componentOptions.align ||
+                item.componentOptions.Ctor.options.props.align.default
+            const styles = { width, minWidth: width, maxWidth: width }
+
+            return <td width={width} align={align} style={styles}>{RContent(item)}</td>
         }
 
         TableCols.forEach((item: any) => { result.push(RCell(item)) })
@@ -81,7 +86,6 @@ export default class TableBody extends Vue {
         const { isScrollY, border } = this
         const $tableBody: any = this.$el.querySelector('tbody')
 
-        console.log(border)
         if ($tableBody.children && $tableBody.children.length) {
             const widthMap: any = []
             const $headCells: any = $tableBody.children[0].children
@@ -90,8 +94,7 @@ export default class TableBody extends Vue {
             while (cellCount --) {
                 widthMap.unshift($headCells[cellCount].clientWidth + (border ? 1 : 0)) // +1px消去边框对宽度影响
             }
-            console.log(isScrollY)
-            console.log(widthMap)
+
             if (isScrollY && widthMap.length > 1) {
                 widthMap[widthMap.length - 1] += getScrollbarSize(this.$el)
             }

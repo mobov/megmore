@@ -11,7 +11,7 @@
         <m-row space="xs">
             <m-col>
                 <m-table class="m--mb-lg" :data="tableData" height="300px" border>
-                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="40px"/>
+                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="90"/>
                     <!--<m-table-column title="radio" type="radio"  width="40px"/>-->
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
@@ -20,9 +20,9 @@
                     </m-table-column>
                 </m-table>
                 <m-table :data="tableData">
-                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="40px"/>
+                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="90"/>
                     <!--<m-table-column title="radio" type="radio"  width="40px"/>-->
-                    <m-table-column title="name" field="name" />
+                    <m-table-column title="name" field="name" align="left"/>
                     <m-table-column title="calories" field="calories" />
                     <m-table-column title="custom">
                         <span style="color:red">213</span>

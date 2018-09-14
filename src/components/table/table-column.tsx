@@ -12,5 +12,8 @@ export default class MTableColumn extends Vue {
 
     @Prop({ type: Boolean, default: false})
     private height!: boolean
+
+    @Prop({ type: String, default: 'center'})
+    private align!: 'left' | 'center' | 'right'
 }
 

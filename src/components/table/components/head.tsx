@@ -35,11 +35,13 @@ export default class TableHead extends Vue {
         let width = this.widthMap[index] ||
             item.componentOptions.propsData.width ||
             item.componentOptions.Ctor.options.props.width.default
-        console.log(width)
-        console.log(isStyleUnit(width))
+        console.log(item.componentOptions)
+        // console.log(isStyleUnit(width))
         width = isStyleUnit(width) ? width : `${width}px`
+        const align = item.componentOptions.align ||
+            item.componentOptions.Ctor.options.props.align.default
         const styles = { width, minWidth: width, maxWidth: width }
-        return <td style={styles}>{RContent()}</td>
+        return <td style={styles} align={align}>{RContent()}</td>
     }
     private RHead(): VNode {
         const { TableCols, RCell } = this
