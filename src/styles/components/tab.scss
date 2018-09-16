@@ -1,0 +1,26 @@
+.m-tab {
+  .m-tab__labels {
+    display: flex;
+    height: d(48);
+    position: relative;
+  }
+  .m-tab__label {
+    padding: d(6) d(12);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: rgba(255,255,255,0.87);
+    &.m--active{
+      color: #fff;
+    }
+  }
+  .m-tab__label-underline{
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    transition: all 0.3s;
+  }
+  .m-tab-item {
+    // display:inline-flex;
+  }
+}
