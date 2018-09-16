@@ -3,6 +3,10 @@ import Vue from 'vue'
 
 declare module 'vue/types/options' {
     interface ComponentOptions<V extends Vue> {
+        // default
+        staticClass?: any
+        class?: any
+        style?: any
         // lifecycle
         updated?: (() => void) | undefined
         created?: (() => void) | undefined
@@ -10,8 +14,14 @@ declare module 'vue/types/options' {
         // base
         elevation?: number
         size?: string
+        value?: any
         // table
         height?: string | number
         border?: boolean
+        checkType?: 'multi' | 'single'
+        checkField?: string
+        // checkbox & radio
+        label?: boolean | string | number
+        // onInput?: (() => any)
     }
 }

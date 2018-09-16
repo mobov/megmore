@@ -97,7 +97,7 @@ $--Size-chip:(
     lg: 32,
     xl: 36,
 );
-
+// table-size-space-x
 $--Space-table-cell-x: (
     xs: 8,
     sm: 16,
@@ -105,6 +105,7 @@ $--Space-table-cell-x: (
     lg: 32,
     xl: 40,
 );
+// table-size-space-y
 $--Space-table-cell-y: (
     xs: 5,
     sm: 10,
@@ -112,9 +113,6 @@ $--Space-table-cell-y: (
     lg: 20,
     xl: 25,
 );
-
-
-
 
 $--Transitions: (
     fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),
@@ -130,8 +128,8 @@ $--transition-fade:             opacity .15s linear !default;
 $--transition-collapse:         height .35s ease !default;
 $--transition-effect-base:     .35s ease !default;
 
-
-$--border-base: 1px solid getColor(gray, 300);
+$--color-border-base: getColor(gray, 300);
+$--border-base: 1px solid $--color-border-base;
 
 $--hover-bg-gray:getColor(gray, 300);
 

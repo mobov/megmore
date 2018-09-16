@@ -10,18 +10,21 @@
         <MProgressCircle></MProgressCircle>
         <m-row space="xs">
             <m-col>
-                <m-table class="m--mb-lg" :data="tableData" height="300px" border>
-                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="90"/>
-                    <!--<m-table-column title="radio" type="radio"  width="40px"/>-->
+                <m-table class="m--mb-lg"
+                         :data="tableData"
+                         height="300px"
+                         border>
+                    <m-table-column field="isCheck" type="radio" width="80"/>
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
                     <m-table-column title="custom">
                         <span style="color:red">213</span>
                     </m-table-column>
                 </m-table>
-                <m-table :data="tableData">
-                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="90"/>
-                    <!--<m-table-column title="radio" type="radio"  width="40px"/>-->
+                <m-table :data="tableData"
+                         check-type="multi"
+                >
+                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="80"/>
                     <m-table-column title="name" field="name" align="left"/>
                     <m-table-column title="calories" field="calories" />
                     <m-table-column title="custom">
@@ -205,6 +208,7 @@ export default {
       }],
       tableData:  [
           {
+              isCheck: false,
               name: 'Frozen Yogurt',
               calories: 159,
               fat: 6.0,
@@ -213,6 +217,7 @@ export default {
               iron: 1
           },
           {
+              isCheck: false,
               name: 'Ice cream sandwich',
               calories: 237,
               fat: 9.0,
@@ -221,6 +226,7 @@ export default {
               iron: 1
           },
           {
+              isCheck: false,
               name: 'Eclair',
               calories: 262,
               fat: 16.0,
@@ -229,6 +235,7 @@ export default {
               iron: 7
           },
           {
+              isCheck: false,
               name: 'Cupcake',
               calories: 305,
               fat: 3.7,
@@ -237,6 +244,7 @@ export default {
               iron: 8
           },
           {
+              isCheck: false,
               name: 'Gingerbread',
               calories: 356,
               fat: 16.0,
@@ -245,6 +253,7 @@ export default {
               iron: 16
           },
           {
+              isCheck: false,
               name: 'Jelly bean',
               calories: 375,
               fat: 0.0,
@@ -253,6 +262,7 @@ export default {
               iron: 0
           },
           {
+              isCheck: true,
               name: 'Lollipop',
               calories: 392,
               fat: 0.2,
@@ -261,6 +271,7 @@ export default {
               iron: 2
           },
           {
+              isCheck: false,
               name: 'Honeycomb',
               calories: 408,
               fat: 3.2,
@@ -269,6 +280,7 @@ export default {
               iron: 45
           },
           {
+              isCheck: false,
               name: 'Donut',
               calories: 452,
               fat: 25.0,

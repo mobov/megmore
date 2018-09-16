@@ -5,7 +5,7 @@ import MRadio from '@/components/radio'
 import { VNode } from 'vue'
 import { on, off } from '@/utils/event'
 import { getScrollbarSize } from '@/utils/dom'
-import {isStyleUnit} from "es-treasure";
+import { isStyleUnit } from 'es-treasure'
 
 const prefix = 'm-table-body'
 
@@ -23,28 +23,41 @@ export default class TableBody extends Vue {
     @Inject()
     public TableCols!: any
 
+    @Inject()
+    public updateTableRow!: any
+
     get isScrollY(): boolean {
         return this.height !== 'auto'
     }
 
-    private RCols(data: any): VNode {
-        const { TableCols } = this
+    private handleCheck(field: string, value: any, index: number): void {
+        this.updateTableRow(field, value, index)
+    }
+
+    private RCols(data: any, index: number): VNode {
+        const { TableCols, handleCheck } = this
         const result: any = []
 
         const RContent = (item: any): VNode => {
             let content: any = []
+            // todo:错误处理
             const type = item.data.attrs ? item.data.attrs.type : undefined
             const children = item.componentOptions.children
+            const field = item.componentOptions.propsData.field
 
+            // console.log(item)
             if (type === 'radio') {
-                content = <MRadio />
+               // console.log(data[field])
+                const value = !!data[field]
+                content = <MRadio value={value} />
             } else if (type === 'checkbox') {
-                content = <MCheckbox />
+              //  console.log(data[field])
+                const value = !!data[field]
+                content = <MCheckbox value={value} onInput={(value) => handleCheck(field, value, index)} />
             } else if (children) {
                 content = children
             } else {
-                // todo:错误处理
-                content = data[item.componentOptions.propsData.field]
+                content = data[field]
             }
 
             return content
@@ -68,7 +81,7 @@ export default class TableBody extends Vue {
         const { TableData, RCols } = this
         const result: any = []
 
-        TableData.forEach((item: any) => { result.push(<tr>{RCols(item)}</tr>) })
+        TableData.forEach((item: any, index: number) => { result.push(<tr>{RCols(item, index)}</tr>) })
 
         return result
     }
@@ -86,7 +99,7 @@ export default class TableBody extends Vue {
         const { isScrollY, border } = this
         const $tableBody: any = this.$el.querySelector('tbody')
 
-        if ($tableBody.children && $tableBody.children.length) {
+        if (!!$tableBody.children.length) {
             const widthMap: any = []
             const $headCells: any = $tableBody.children[0].children
             const vmTableHead: any = this.$parent.$children[0]

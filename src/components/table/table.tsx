@@ -13,7 +13,7 @@ export default class MTable extends Vue {
     @Prop({ type: Array, default: [] })
     public data!: any
 
-    @Prop({ type: Number, default: 1 })
+    @Prop({ type: Number, default: 2 })
     public elevation!: number
 
     @Prop({ type: String, default: 'md' })
@@ -39,6 +39,16 @@ export default class MTable extends Vue {
 
         return result
     }
+
+    @Provide()
+    public updateTableRow(field: string, value: any, index: number = -1): void {
+        if (index === -1) {
+            this.TableData.forEach((row: any) => row[field] = value)
+        } else {
+            this.TableData[index][field] = value
+        }
+    }
+
     private render(): VNode {
         const { height, border } = this
         const classes = {
@@ -47,8 +57,6 @@ export default class MTable extends Vue {
             'm--border': border,
             'm--scroll-y': height !== 'auto ',
         }
-
-
 
         return (
             <div staticClass={`${prefix}`} class={classes}>

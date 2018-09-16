@@ -10,7 +10,7 @@ export default class MCheckbox extends Vue {
     @Prop({ type: [Array, Number, String, Boolean], default: false })
     private value!: any
 
-    @Prop({ type: [Array, Number, String, Boolean ], default: false })
+    @Prop({ type: [Array, Number, String, Boolean ], default: true })
     private label!: any
 
     @Prop({ type: String, default: 'primary' })
@@ -28,14 +28,11 @@ export default class MCheckbox extends Vue {
     @Prop({ type: Boolean, default: false })
     private disabled!: boolean
 
-    @Emit('input')
-    private handleInput(val: any): any { void(0) }
-
-        private isArrayValue: boolean = false
+    private isArrayValue: boolean = false
 
     private isArrayLabel: boolean = false
 
-    private isBoolean: boolean = false
+    private isBooleanValue: boolean = false
 
     get classes(): any {
         return {
@@ -43,75 +40,76 @@ export default class MCheckbox extends Vue {
         }
     }
 
-    private handleClick(isCheck: boolean): void {
-        const { disabled, isBoolean, isArrayValue, isArrayLabel, label, value, handleInput} = this
-        if(disabled) { return }
+    @Emit('input')
+    private onInput(val: any): void { return }
 
-        if (isArrayValue && isArrayLabel){
-            if(isCheck){
-                handleInput([])
+    private handleClick(isCheck: boolean): void {
+        const { disabled, isBooleanValue, isArrayValue, isArrayLabel, label, value, onInput } = this
+        if (disabled) { return }
+
+        if (isArrayValue && isArrayLabel) {
+            if (isCheck) {
+                onInput([])
             } else {
-                handleInput(label)
+                onInput(label)
             }
         } else if (this.isArrayValue) {
-            let result: any[] = [].concat(value)
-            if(isCheck){
+            const result: any[] = [].concat(value)
+            if (isCheck) {
                 const index = result.findIndex(item => item === label)
                 result.splice(index, 1)
-                handleInput(result)
+                onInput(result)
             } else {
                 result.push(label)
-                handleInput(result)
+                onInput(result)
             }
-        } else if(isBoolean) {
-            handleInput(!value)
+        } else if (isBooleanValue) {
+            onInput(!value)
         } else {
-            if(isCheck) {
-                handleInput(null)
+            if (isCheck) {
+                onInput(null)
             } else {
-                handleInput(label)
+                onInput(label)
             }
         }
     }
 
     private render(): VNode {
-        const { $slots, classes,
-                checkedIcon, uncheckIcon, incheckIcon, value, label, color, handleClick } = this
+        const { $slots, classes, color, checkedIcon, uncheckIcon, incheckIcon,
+                value, label, handleClick } = this
         this.isArrayValue =  value instanceof Array
         this.isArrayLabel =  label instanceof Array
         // boolean模式下等价于switch
-        this.isBoolean =  value instanceof Boolean
-
+        this.isBooleanValue = typeof value === 'boolean'
         let isCheck = false
         let checkIcon = checkedIcon
 
         if ( this.isArrayValue && this.isArrayLabel) {
             // Allcheck下value是数组, label也是数组
-            if(value.length > 0) { isCheck = true }
-            if(label.length > value.length && isCheck ){
+            if (value.length > 0) { isCheck = true }
+            if (label.length > value.length && isCheck ) {
                 checkIcon = incheckIcon
-                console.log(checkIcon)
             }
         } else if (this.isArrayValue) {
             // value是数组, label单值
-            if(value.includes(label)) { isCheck = true }
+            if (value.includes(label)) { isCheck = true }
         } else {
-            if(value === label) { isCheck = true }
+            if (value === label) { isCheck = true }
         }
 
-        const RCheckbox = ()=> {
-            return <a staticClass={`${prefix}__checkbox`} class={isCheck ? `m--color-${color}` : ''}>
-                      <transition name="m--transition-scale">
-                         {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkIcon} /> : null }
-                      </transition>
-                      <MIcon name={uncheckIcon} />
-                      <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
-                   </a>
-        }
+        const RCheckbox = () => (
+            <a staticClass={`${prefix}__checkbox`} class={isCheck ? `m--color-${color}` : ''}>
+                <transition name='m--transition-scale'>
+                    {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkIcon} /> : null }
+                </transition>
+                <MIcon name={uncheckIcon} />
+                <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
+            </a>
+        )
 
 
         return (
-            <div staticClass={`${prefix}`} class={classes} onClick={()=>handleClick(isCheck)}>
+            <div staticClass={`${prefix}`} class={classes} onClick={() => handleClick(isCheck)}>
                 {RCheckbox()}
                 {$slots.default}
             </div>

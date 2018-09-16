@@ -1,4 +1,3 @@
-$--color-table-border: getColor(gray, 300);
 
 .m-table {
     border-radius: d($--radius);
@@ -19,15 +18,24 @@ $--color-table-border: getColor(gray, 300);
             }
         }
         tr {
-            border-width: 1px;
+            border-width: 0;
             border-style: solid;
-            border-color: $--color-table-border;
-
+            border-color: $--color-border-base;
         }
     }
     .m-table-head {
+        tr {
+            border-bottom-width: 1px;
+        }
     }
     .m-table-body {
+        tr {
+            border-bottom-width: 1px;
+            &:last-child {
+                border-bottom-width: 0;
+            }
+        }
+
     }
 
     // size
@@ -50,7 +58,7 @@ $--color-table-border: getColor(gray, 300);
             td {
                 border-width: 1px;
                 border-style: solid;
-                border-color: $--color-table-border;
+                border-color: $--color-border-base;
             }
         }
     }

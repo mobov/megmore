@@ -11,7 +11,7 @@ export default class MRadio extends Vue {
     @Prop({ type: [Boolean, Number, String], default: false })
     private value!: boolean | number | string
 
-    @Prop({ type: [Boolean, Number, String], default: false })
+    @Prop({ type: [Boolean, Number, String], default: true })
     private label!: boolean | number | string
 
     @Prop({ type: String, default: 'primary' })
@@ -33,29 +33,29 @@ export default class MRadio extends Vue {
     }
 
     @Emit('input')
-    private handleInput(val: any): void { void(0) }
+    private onInput(val: any): void { return }
 
     private handleClick(val: any): void {
-        if(this.disabled) { return }
-        this.handleInput(val)
+        if (this.disabled) { return }
+        this.onInput(val)
     }
 
-    public render(): VNode {
+    private render(): VNode {
         const { $slots, classes, checkedIcon, uncheckIcon, value, label, color, handleClick } = this
         const isCheck = label === value
 
-        const RRadio = ()=> {
-            return <a staticClass={`${prefix}__checkbox`} class={isCheck ? `m--color-${color}` : ''}>
-                        <transition name="m--transition-scale">
-                            {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkedIcon} /> : null }
-                        </transition>
-                        <MIcon name={uncheckIcon} />
-                        <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
-                    </a>
-        }
+        const RRadio = () => (
+            <a staticClass={`${prefix}__checkbox`} class={isCheck ? `m--color-${color}` : ''}>
+                <transition name='m--transition-scale'>
+                    {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkedIcon} /> : null }
+                </transition>
+                <MIcon name={uncheckIcon} />
+                <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
+            </a>
+        )
 
         return (
-            <div staticClass={`${prefix}`} class={classes} onClick={()=>handleClick(label)}>
+            <div staticClass={`${prefix}`} class={classes} onClick={() => handleClick(label)}>
                 {RRadio()}
                 {$slots.default}
             </div>
