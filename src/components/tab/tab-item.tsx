@@ -25,11 +25,9 @@ class MTabItem extends Vue {
 
     private render() {
         return (
-            <transition name={this.tab.tabAnimationName}>
-                <div staticClass='m-tab-item' v-show={this.tab.curTabName === this.name}>
-                    {this.$slots.default}
-                </div>
-            </transition>
+            <div staticClass='m-tab-item' >
+                {this.$slots.default}
+            </div>
         )
     }
 }

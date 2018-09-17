@@ -9,7 +9,7 @@
         <MProgressLinear></MProgressLinear>
         <MProgressCircle></MProgressCircle>
         <MTab>
-            <MTabItem v-for="item in 3" :key="item" :label="`label${item}`" :name="`label${item}`">
+            <MTabItem v-for="item in 3" :key="item" :label="renderTabLabel" :name="`label${item}`">
                 {{item}}
             </MTabItem>
         </MTab>
@@ -284,6 +284,13 @@ export default {
     };
   },
   methods: {
+      renderTabLabel(h) {
+          return (
+              <div>
+                  render
+              </div>
+          )
+      },
     handleAvatarClose() {
 
     },

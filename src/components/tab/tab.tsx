@@ -1,6 +1,7 @@
 import {Component, Vue, Watch, Prop, Provide} from 'vue-property-decorator';
 import * as Model from '@/types/model';
 import {colorDetermine} from '@/utils/helpers';
+import Render from '@/components/base/render'
 import TabItem from './tab-item';
 
 @Component
@@ -72,6 +73,13 @@ class MTab extends Vue {
         return this.tabItems.findIndex(item => item.name === this.curTabName)
     }
 
+    private get tabsContainerStyle() {
+        const offset = (this.curIndex) * 100
+        return {
+            transform: `translate3d(-${offset}%,0,0)`
+        }
+    }
+
     private setUnderlineStyle() {
         if (this.$el) {
             const dom = this.$el.querySelector(`[data-tab-name=${this.curTabName}]`)
@@ -86,8 +94,7 @@ class MTab extends Vue {
         }
     }
 
-    private setCurTab(name: string, index: number) {
-        this.tabAnimationName = (this.curIndex < index ? 'right-to-left' : 'left-to-right')
+    private setCurTab(name: string) {
         this.curTabName = name
     }
 
@@ -98,7 +105,6 @@ class MTab extends Vue {
         const underLineCls = {
             ...this.underLineColorData.class
         }
-        console.log(this.underlineStyle)
         return (
             <div staticClass='m-tab'>
                 <div staticClass='m-tab__labels' class={labelsCls}>
@@ -107,19 +113,21 @@ class MTab extends Vue {
                         const cls = {
                             ['m--active']: item.name === this.curTabName
                         }
+                        const label = (typeof item.label === 'function') ? (
+                            <Render content={item.label}></Render>) : item.label
                         return (
                             <div
                                 data-tab-name={item.name}
                                 class={cls}
                                 staticClass='m-tab__label m--pointer'
-                                onClick={() => this.setCurTab(item.name, index)}>
-                                {item.label}
+                                onClick={() => this.setCurTab(item.name)}>
+                                {label}
                             </div>
                         )
                     })}
                 </div>
-                <div staticClass='m-tab__content'>
-                       {this.$slots.default}
+                <div staticClass='m-tab__content' style={this.tabsContainerStyle}>
+                    {this.$slots.default}
                 </div>
             </div>
         );

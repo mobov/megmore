@@ -9,27 +9,25 @@
     height: 100%;
     display: flex;
     align-items: center;
-    color: rgba(255,255,255,0.87);
-    &.m--active{
+    color: rgba(255, 255, 255, 0.87);
+    &.m--active {
       color: #fff;
     }
   }
-  .m-tab__label-underline{
+  .m-tab__label-underline {
     position: absolute;
     bottom: 0;
     height: 3px;
     transition: all 0.3s;
   }
+  .m-tab__content{
+    display: flex;
+    width: 100%;
+    transition: all .3s;
+  }
   .m-tab-item {
     // display:inline-flex;
-    $animateName1:right-to-left;
-    &.#{$animateName1}-list-enter-active,  &.#{$animateName1}-list-leave-active {
-      transition: all 1s;
-    }
-    &.#{$animateName1}-list-enter, &.#{$animateName1}-list-leave-to
-      /* .list-leave-active for below version 2.1.8 */ {
-      opacity: 0;
-      transform: translateY(30px);
-    }
+    width: 100%;
+    flex-shrink: 0;
   }
 }
