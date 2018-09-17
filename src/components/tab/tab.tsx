@@ -7,8 +7,9 @@ import TabItem from './tab-item';
 class MTab extends Vue {
     public tabItems: TabItem[] = [];
     public curTabName: string = '';
+    public tabAnimationName: string = ''
 
-    public setTabItem(item: TabItem) {
+    public setTabItemList(item: TabItem) {//
         if (this.tabItems.length === 0) {
             this.curTabName = item.name
         }
@@ -58,9 +59,6 @@ class MTab extends Vue {
         return colorDetermine(this.lineColor, 'bg');
     }
 
-    private get() {
-
-    }
 
     private get _tabItems() {
         return this.tabItems.map(item => ({
@@ -69,21 +67,27 @@ class MTab extends Vue {
         }));
     }
 
+
+    private get curIndex() {
+        return this.tabItems.findIndex(item => item.name === this.curTabName)
+    }
+
     private setUnderlineStyle() {
         if (this.$el) {
             const dom = this.$el.querySelector(`[data-tab-name=${this.curTabName}]`)
-            const wrapDom=this.$el.querySelector('.m-tab__labels')
+            const wrapDom = this.$el.querySelector('.m-tab__labels')
             const rect = (dom as HTMLElement).getBoundingClientRect()
             const wrapRect = (wrapDom as HTMLElement).getBoundingClientRect()
-            const left=rect.left-wrapRect.left
+            const left = rect.left - wrapRect.left
             this.underlineStyle = {
                 width: `${rect.width}px`,
-                left:`${left}px`,
+                left: `${left}px`,
             }
         }
     }
 
-    private setCurTab(name: string) {
+    private setCurTab(name: string, index: number) {
+        this.tabAnimationName = (this.curIndex < index ? 'right-to-left' : 'left-to-right')
         this.curTabName = name
     }
 
@@ -99,7 +103,7 @@ class MTab extends Vue {
             <div staticClass='m-tab'>
                 <div staticClass='m-tab__labels' class={labelsCls}>
                     <div staticClass='m-tab__label-underline' class={underLineCls} style={this.underlineStyle}></div>
-                    {this._tabItems.map(item => {
+                    {this._tabItems.map((item, index) => {
                         const cls = {
                             ['m--active']: item.name === this.curTabName
                         }
@@ -108,13 +112,15 @@ class MTab extends Vue {
                                 data-tab-name={item.name}
                                 class={cls}
                                 staticClass='m-tab__label m--pointer'
-                                onClick={() => this.setCurTab(item.name)}>
+                                onClick={() => this.setCurTab(item.name, index)}>
                                 {item.label}
                             </div>
                         )
                     })}
                 </div>
-                <div staticClass='m-tab__content'>{this.$slots.default}</div>
+                <div staticClass='m-tab__content'>
+                       {this.$slots.default}
+                </div>
             </div>
         );
     }

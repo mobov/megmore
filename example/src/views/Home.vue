@@ -10,7 +10,7 @@
         <MProgressCircle></MProgressCircle>
         <MTab>
             <MTabItem v-for="item in 3" :key="item" :label="`label${item}`" :name="`label${item}`">
-                ssssssssssss
+                {{item}}
             </MTabItem>
         </MTab>
         <m-row space="xs">

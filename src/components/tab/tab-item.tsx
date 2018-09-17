@@ -19,15 +19,17 @@ class MTabItem extends Vue {
 
     private mounted() {
         if (!this.tab.tabItems.includes(this)) {
-            this.tab.setTabItem(this)
+            this.tab.setTabItemList(this)
         }
     }
 
     private render() {
         return (
-            <div staticClass='m-tab-item'>
-                {this.$slots.default}
-            </div>
+            <transition name={this.tab.tabAnimationName}>
+                <div staticClass='m-tab-item' v-show={this.tab.curTabName === this.name}>
+                    {this.$slots.default}
+                </div>
+            </transition>
         )
     }
 }
