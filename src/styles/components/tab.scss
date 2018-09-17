@@ -3,13 +3,29 @@
     display: flex;
     height: d(48);
     position: relative;
+    overflow-x: hidden;
+  }
+  .m-tab__labels-container{
+    display: flex;
+    height: inherit;
+    overflow-x: visible;
+
+  }
+  .m-tab__labels-bg{
+    height: inherit;
+    max-width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    &.m-tab__labels--scollable{
+      margin: 0 d(20);
+    }
   }
   .m-tab__label {
     padding: d(6) d(12);
     height: 100%;
-    display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.87);
+    display: inline-flex;
     &.m--active {
       color: #fff;
     }
@@ -29,5 +45,10 @@
     // display:inline-flex;
     width: 100%;
     flex-shrink: 0;
+  }
+  .m-tab__scroll-arrow{
+    width: d(20);
+    height: 100%;
+    position: absolute;
   }
 }

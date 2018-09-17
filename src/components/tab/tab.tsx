@@ -9,16 +9,9 @@ class MTab extends Vue {
     public tabItems: TabItem[] = [];
     public curTabName: string = '';
     public tabAnimationName: string = ''
-
-    public setTabItemList(item: TabItem) {//
-        if (this.tabItems.length === 0) {
-            this.curTabName = item.name
-        }
-        this.tabItems.push(item);
-    }
-
-
     private underlineStyle = {}
+    private
+
 
     @Provide()
     private get tab() {
@@ -43,6 +36,15 @@ class MTab extends Vue {
     })
     private value!: string;
 
+    private scrollable: boolean = false
+
+    public setTabItemList(item: TabItem) {//
+        if (this.tabItems.length === 0) {
+            this.curTabName = item.name
+        }
+        this.tabItems.push(item);
+    }
+
     @Watch('curTabName', {immediate: true})
     @Watch('value', {immediate: true})
     private async onNameChange(name: string) {
@@ -50,6 +52,7 @@ class MTab extends Vue {
         this.curTabName = name
         await this.$nextTick()
         this.setUnderlineStyle()
+        this.scrollable = (this.totalWidth > this.$el.getBoundingClientRect().width)
     }
 
     private get labelsColorData() {
@@ -73,12 +76,23 @@ class MTab extends Vue {
         return this.tabItems.findIndex(item => item.name === this.curTabName)
     }
 
-    private get tabsContainerStyle() {
+    private get tabPanelContainerStyle() {
         const offset = (this.curIndex) * 100
         return {
             transform: `translate3d(-${offset}%,0,0)`
         }
     }
+
+    private get totalWidth() {
+        if (this.$el) {
+            const widths: number[] = [...this.$el.querySelectorAll('.m-tab__label')].map(el => {
+                return el.getBoundingClientRect().width
+            })
+            return widths.reduce((a, b) => a + b)
+        }
+        return 0
+    }
+
 
     private setUnderlineStyle() {
         if (this.$el) {
@@ -86,7 +100,7 @@ class MTab extends Vue {
             const wrapDom = this.$el.querySelector('.m-tab__labels')
             const rect = (dom as HTMLElement).getBoundingClientRect()
             const wrapRect = (wrapDom as HTMLElement).getBoundingClientRect()
-            const left = rect.left - wrapRect.left
+            let left = rect.left - wrapRect.left
             this.underlineStyle = {
                 width: `${rect.width}px`,
                 left: `${left}px`,
@@ -100,33 +114,45 @@ class MTab extends Vue {
 
     private render() {
         const labelsCls = {
-            ...this.labelsColorData.class
+            ...this.labelsColorData.class,
         }
         const underLineCls = {
             ...this.underLineColorData.class
+        }
+        const labelContainerCls = {}
+        const bgCls = {
+            'm-tab__labels--scollable': this.scrollable,
         }
         return (
             <div staticClass='m-tab'>
                 <div staticClass='m-tab__labels' class={labelsCls}>
                     <div staticClass='m-tab__label-underline' class={underLineCls} style={this.underlineStyle}></div>
-                    {this._tabItems.map((item, index) => {
-                        const cls = {
-                            ['m--active']: item.name === this.curTabName
-                        }
-                        const label = (typeof item.label === 'function') ? (
-                            <Render content={item.label}></Render>) : item.label
-                        return (
-                            <div
-                                data-tab-name={item.name}
-                                class={cls}
-                                staticClass='m-tab__label m--pointer'
-                                onClick={() => this.setCurTab(item.name)}>
-                                {label}
-                            </div>
-                        )
-                    })}
+                    {this.scrollable && [
+                        (<div staticClass='m-tab__scroll-arrow m-tab__scroll-arrow--left'></div>),
+                        (<div staticClass='m-tab__scroll-arrow m-tab__scroll-arrow--right'></div>),
+                    ]}
+                    <div staticClass='m-tab__labels-bg' class={bgCls}>
+                        <div staticClass='m-tab__labels-container' class={labelContainerCls}>
+                            {this._tabItems.map((item, index) => {
+                                const cls = {
+                                    ['m--active']: item.name === this.curTabName
+                                }
+                                const label = (typeof item.label === 'function') ? (
+                                    <Render content={item.label}></Render>) : item.label
+                                return (
+                                    <div
+                                        data-tab-name={item.name}
+                                        class={cls}
+                                        staticClass='m-tab__label m--pointer'
+                                        onClick={() => this.setCurTab(item.name)}>
+                                        {label}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
                 </div>
-                <div staticClass='m-tab__content' style={this.tabsContainerStyle}>
+                <div staticClass='m-tab__content' style={this.tabPanelContainerStyle}>
                     {this.$slots.default}
                 </div>
             </div>

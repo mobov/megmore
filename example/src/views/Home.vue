@@ -9,7 +9,7 @@
         <MProgressLinear></MProgressLinear>
         <MProgressCircle></MProgressCircle>
         <MTab>
-            <MTabItem v-for="item in 3" :key="item" :label="renderTabLabel" :name="`label${item}`">
+            <MTabItem v-for="item in 20" :key="item" :label="renderTabLabel" :name="`label${item}`">
                 {{item}}
             </MTabItem>
         </MTab>
