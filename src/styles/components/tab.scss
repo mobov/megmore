@@ -9,7 +9,7 @@
     display: flex;
     height: inherit;
     overflow-x: visible;
-
+    transition: all .3s;
   }
   .m-tab__labels-bg{
     height: inherit;
@@ -50,5 +50,12 @@
     width: d(20);
     height: 100%;
     position: absolute;
+    top: 0;
+    &.m-tab__scroll-arrow--left{
+      left: 0;
+    }
+    &.m-tab__scroll-arrow--right{
+      right: 0;
+    }
   }
 }

@@ -10,8 +10,8 @@ class MTab extends Vue {
     public curTabName: string = '';
     public tabAnimationName: string = ''
     private underlineStyle = {}
-    private
-
+    private containerOffset: number = 0
+    private labelContainerStyle = {}
 
     @Provide()
     private get tab() {
@@ -83,6 +83,62 @@ class MTab extends Vue {
         }
     }
 
+    private setLabelContainerStyle(direction: string) {
+        if (!this.$el) {
+            return this.labelContainerStyle = {}
+        }
+        const labels = [...this.$el.querySelectorAll('.m-tab__label')]
+
+        //  偏移的tablabel数量
+        const containerOffset = direction === 'left' ? this.containerOffset - 1 : this.containerOffset + 1
+        //  偏移的label宽度总量
+        let offset = labels.filter((t, i) => i < containerOffset).map(tab => {
+            try {
+                return tab.getBoundingClientRect().width
+            } catch (e) {
+                return 0
+            }
+        }, 0).reduce((a, b) => a + b, 0)
+
+        const bgEl = this.$el.querySelector('.m-tab__labels-bg')
+        const bgElRect = bgEl.getBoundingClientRect()
+
+        const container = this.$el.querySelector('.m-tab__labels-container')
+        const containerRect = container.getBoundingClientRect()
+
+        const margin = bgEl.style.marginLeft
+        const leftLimit = bgElRect.left + margin
+        const rightLimit = bgElRect.right + margin
+        //  最👈rect边界
+        const attachLeftLimit = containerRect.left + offset >= leftLimit
+        //  最👉rect边界
+        const attachRightLimit = containerRect.right - offset <= rightLimit
+        if (direction === 'left') {
+            if (attachLeftLimit) {
+                //  到达边界不再进行偏移
+                return this.labelContainerStyle = {}
+            } else {
+                //  偏移标记数-1
+                this.containerOffset--
+            }
+        }
+        if (direction === 'right') {
+            if (attachRightLimit) {
+                //  最👉偏移量
+                return this.labelContainerStyle = {
+                    transform: `translate3d(-${offset}px,0,0)`
+                }
+            } else {
+                //  偏移标记数+1
+                this.containerOffset++
+            }
+        }
+        this.labelContainerStyle = {
+            transform: `translate3d(-${offset}px,0,0)`
+        }
+
+    }
+
     private get totalWidth() {
         if (this.$el) {
             const widths: number[] = [...this.$el.querySelectorAll('.m-tab__label')].map(el => {
@@ -112,6 +168,17 @@ class MTab extends Vue {
         this.curTabName = name
     }
 
+    private async scrollTo(direction: string) {
+        if (direction === 'left') {
+            this.containerOffset !== 0 && this.containerOffset--
+        } else {
+            this.containerOffset !== (this.tabItems.length - 1) && this.containerOffset++
+        }
+        this.setLabelContainerStyle(direction)
+        await this.$nextTick()
+        // this.setUnderlineStyle()
+    }
+
     private render() {
         const labelsCls = {
             ...this.labelsColorData.class,
@@ -120,6 +187,7 @@ class MTab extends Vue {
             ...this.underLineColorData.class
         }
         const labelContainerCls = {}
+
         const bgCls = {
             'm-tab__labels--scollable': this.scrollable,
         }
@@ -128,11 +196,14 @@ class MTab extends Vue {
                 <div staticClass='m-tab__labels' class={labelsCls}>
                     <div staticClass='m-tab__label-underline' class={underLineCls} style={this.underlineStyle}></div>
                     {this.scrollable && [
-                        (<div staticClass='m-tab__scroll-arrow m-tab__scroll-arrow--left'></div>),
-                        (<div staticClass='m-tab__scroll-arrow m-tab__scroll-arrow--right'></div>),
+                        (<div staticClass='m-tab__scroll-arrow m-tab__scroll-arrow--left m--pointer'
+                              onClick={() => this.setLabelContainerStyle('left')}></div>),
+                        (<div staticClass='m-tab__scroll-arrow m-tab__scroll-arrow--right m--pointer'
+                              onClick={() => this.setLabelContainerStyle('right')}></div>),
                     ]}
                     <div staticClass='m-tab__labels-bg' class={bgCls}>
-                        <div staticClass='m-tab__labels-container' class={labelContainerCls}>
+                        <div staticClass='m-tab__labels-container' class={labelContainerCls}
+                             style={this.labelContainerStyle}>
                             {this._tabItems.map((item, index) => {
                                 const cls = {
                                     ['m--active']: item.name === this.curTabName
