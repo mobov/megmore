@@ -289,6 +289,7 @@ export default {
               iron: 22
           },
           {
+              isCheck: false,
               name: 'KitKat',
               calories: 518,
               fat: 26.0,
