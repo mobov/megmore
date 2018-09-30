@@ -9,18 +9,40 @@ const prefix = 'm-table-head'
 @Component
 export default class TableHead extends Vue {
     private widthMap: any = []
-    @Inject()
 
+    @Inject()
     private TableCols!: any
 
+    @Inject()
+    private TableData!: any
+
     private RCell(item: any, index: number): VNode {
+        const { TableData } = this
         const RContent = (): VNode => {
             let content: any = null
             const type = item.data.attrs ? item.data.attrs.type : undefined
             const children = item.componentOptions.children
-
+            const field = item.componentOptions.propsData.field
             if (type === 'checkbox') {
-                content = <MCheckbox />
+                let trueCount = 0
+                TableData.forEach((rowData: any) => {
+                    if (rowData[field]) { trueCount ++ }
+                })
+                const checkVal = trueCount === 0 ? [] : trueCount === TableData.length ? [0, 1] : [0]
+                const checkAll: any = [0, 1]
+
+                const HandleCheck = () => {
+                    if (checkVal.length > 0) {
+                        TableData.forEach((rowData: any) => {
+                            rowData[field] = false
+                        })
+                    } else {
+                        TableData.forEach((rowData: any) => {
+                            rowData[field] = true
+                        })
+                    }
+                }
+                content = <MCheckbox nativeOnClick={HandleCheck} value={checkVal} label={checkAll}/>
             } else if (children) {
                 content = children
             } else {

@@ -10,21 +10,21 @@
         <MProgressCircle></MProgressCircle>
         <m-row space="xs">
             <m-col>
-                <m-table class="m--mb-lg"
+                <m-table ref="dataTable"
+                         class="m--mb-lg"
                          :data="tableData"
                          height="300px"
+                         row-check
                          border>
-                    <m-table-column field="isCheck" type="radio" width="80"/>
+                    <m-table-column type="radio" field="isCheck" width="80"/>
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
                     <m-table-column title="custom">
                         <span style="color:red">213</span>
                     </m-table-column>
                 </m-table>
-                <m-table :data="tableData"
-                         check-type="multi"
-                >
-                    <m-table-column title="checkbox" field="isCheck" type="checkbox" width="80"/>
+                <m-table :data="tableData" row-check>
+                    <m-table-column type="checkbox" field="isCheck" width="80"/>
                     <m-table-column title="name" field="name" align="left"/>
                     <m-table-column title="calories" field="calories" />
                     <m-table-column title="custom">

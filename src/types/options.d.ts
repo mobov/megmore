@@ -11,6 +11,9 @@ declare module 'vue/types/options' {
         updated?: (() => void) | undefined
         created?: (() => void) | undefined
         mounted?: (() => void) | undefined
+        // events
+        onClick?: (() => void) | undefined
+        nativeOnClick?: (() => void) | undefined
         // base
         elevation?: number
         size?: string
@@ -23,5 +26,6 @@ declare module 'vue/types/options' {
         // checkbox & radio
         label?: boolean | string | number
         // onInput?: (() => any)
+
     }
 }

@@ -1,7 +1,7 @@
 import { Component, Prop, Emit, Vue, Provide } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
-import {Size, Color, DateValueType, DatePickerType} from '@/types/model'
+import { Size, Color, DateValueType, DatePickerType } from '@/types/model'
 import TableHead from './components/head'
 import TableBody from './components/body'
 
@@ -13,11 +13,14 @@ export default class MTable extends Vue {
     @Prop({ type: Array, default: [] })
     public data!: any
 
+    @Prop({ type: String, default: 'primary' })
+    public color?: Color
+
     @Prop({ type: Number, default: 2 })
-    public elevation!: number
+    public elevation?: number
 
     @Prop({ type: String, default: 'md' })
-    public size!: Size
+    public size?: Size
 
     @Prop({ type: [String, Number], default: 'auto' })
     public height?: string | number
@@ -43,9 +46,19 @@ export default class MTable extends Vue {
     @Provide()
     public updateTableRow(field: string, value: any, index: number = -1): void {
         if (index === -1) {
-            this.TableData.forEach((row: any) => row[field] = value)
+            this.TableData.forEach((row: any) => {
+                if (row[field] !== undefined) {
+                    row[field] = value
+                } else {
+                    this.$set(row[field], field, value)
+                }
+            })
         } else {
-            this.TableData[index][field] = value
+            if (this.TableData[index][field] !== undefined) {
+                this.TableData[index][field] = value
+            } else {
+                this.$set(this.TableData[index], field, value)
+            }
         }
     }
 

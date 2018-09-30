@@ -45,13 +45,10 @@ export default class TableBody extends Vue {
             const children = item.componentOptions.children
             const field = item.componentOptions.propsData.field
 
-            // console.log(item)
             if (type === 'radio') {
-               // console.log(data[field])
                 const value = !!data[field]
                 content = <MRadio value={value} />
             } else if (type === 'checkbox') {
-              //  console.log(data[field])
                 const value = !!data[field]
                 content = <MCheckbox value={value} onInput={(value) => handleCheck(field, value, index)} />
             } else if (children) {
