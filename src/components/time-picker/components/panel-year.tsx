@@ -13,12 +13,13 @@ export default class MTimePickerPanelYear extends Vue {
     private type!: Color
 
     @Prop({ type: Number, default: 2100 })
-    public max!: number
+    private max!: number
 
     @Prop({ type: Number, default: 1900 })
-    public min!: number
+    private min!: number
 
-    @Inject() DateStore!: any
+    @Inject()
+    private DateStore!: any
 
     @Emit('pick')
     public handleClick(year: number): void {
@@ -33,9 +34,16 @@ export default class MTimePickerPanelYear extends Vue {
         const RCols = () => {
             const Cols: any = []
 
-            for (let tempYear = min; tempYear <= max; tempYear ++){
+            for (let tempYear = min; tempYear <= max; tempYear ++) {
                 const isCurrent = tempYear === year
-                Cols.push(<MButton onClick={()=>handleClick(tempYear)} size="sm" class="m--m-0 m--p-0" shape="round" variety={isCurrent ? 'normal' : 'flat'} type={isCurrent ? 'primary' : 'legacy'}>{tempYear}</MButton>)
+                Cols.push(<MButton size="sm"
+                                   class="m--m-0 m--p-0"
+                                   shape="round"
+                                   variety={isCurrent ? 'normal' : 'flat'}
+                                   color={isCurrent ? 'primary' : 'legacy'}
+                                   onClick={() => handleClick(tempYear)} >
+                            {tempYear}
+                          </MButton>)
             }
 
             return Cols

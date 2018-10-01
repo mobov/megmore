@@ -17,7 +17,8 @@ export default class MTimePickerPanelMonth extends Vue {
     @Prop({ type: Array })
     public disabledValue!: number
 
-    @Inject() DateStore!: any
+    @Inject()
+    private DateStore!: any
 
     @Emit('pick')
     public handleClick(month: number): void {
@@ -32,9 +33,14 @@ export default class MTimePickerPanelMonth extends Vue {
         const RCols = () => {
             const Cols: any = []
 
-            for (let tempValue = 0; tempValue <= 11; tempValue ++){
+            for (let tempValue = 0; tempValue <= 11; tempValue ++) {
                 const isCurrent = tempValue === month
-                Cols.push(<MButton onClick={()=>handleClick(tempValue)} size="sm" class="m--m-0 m--p-0" shape="round" variety={isCurrent ? 'normal' : 'flat'} type={isCurrent ? 'primary' : 'legacy'}>{MonthMap[tempValue]}</MButton>)
+                Cols.push(<MButton size="sm"
+                                   class="m--m-0 m--p-0"
+                                   shape="round"
+                                   variety={isCurrent ? 'normal' : 'flat'}
+                                   color={isCurrent ? 'primary' : 'legacy'}
+                                   onClick={() => handleClick(tempValue)}>{MonthMap[tempValue]}</MButton>)
             }
 
             return Cols

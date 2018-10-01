@@ -28,6 +28,12 @@ export default class MTable extends Vue {
     @Prop({ type: Boolean, default: false })
     public border?: boolean
 
+    @Prop({ type: Boolean, default: false })
+    public noHeader?: boolean
+
+    @Prop({ type: Boolean, default: false })
+    public rowCheck?: boolean
+
     @Provide()
     public TableData: any = this.data
 
@@ -63,7 +69,7 @@ export default class MTable extends Vue {
     }
 
     private render(): VNode {
-        const { height, border } = this
+        const { height, border, noHeader, rowCheck } = this
         const classes = {
             [`m--elevation-${this.elevation}`]: true,
             [`m--${this.size}`]: true,
@@ -73,8 +79,8 @@ export default class MTable extends Vue {
 
         return (
             <div staticClass={`${prefix}`} class={classes}>
-                <TableHead />
-                <TableBody height={height} border={border} />
+                { noHeader ? '' : <TableHead />}
+                <TableBody height={height} border={border} rowCheck={rowCheck} />
             </div>
         )
     }

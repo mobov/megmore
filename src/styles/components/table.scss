@@ -31,6 +31,7 @@
     .m-table-body {
         tr {
             border-bottom-width: 1px;
+            cursor: pointer;
             &:last-child {
                 border-bottom-width: 0;
             }

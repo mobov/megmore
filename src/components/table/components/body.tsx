@@ -17,6 +17,9 @@ export default class TableBody extends Vue {
     @Prop({ type: Boolean })
     public border!: boolean
 
+    @Prop({ type: Boolean })
+    public rowCheck!: boolean
+
     @Inject()
     public TableData!: any
 
@@ -28,6 +31,11 @@ export default class TableBody extends Vue {
 
     get isScrollY(): boolean {
         return this.height !== 'auto'
+    }
+
+    @Emit
+    private handleRowClick(row: any, index: number): void {
+        this.updateTableRow(field, value, index)
     }
 
     private handleCheck(field: string, value: any, index: number): void {
@@ -75,10 +83,12 @@ export default class TableBody extends Vue {
         return result
     }
     private RRows(): VNode {
-        const { TableData, RCols } = this
+        const { TableData, RCols, rowCheck } = this
         const result: any = []
 
-        TableData.forEach((item: any, index: number) => { result.push(<tr>{RCols(item, index)}</tr>) })
+        TableData.forEach((item: any, index: number) => {
+            result.push(<tr>{RCols(item, index)}</tr>)
+        })
 
         return result
     }

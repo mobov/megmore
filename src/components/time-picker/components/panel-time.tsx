@@ -10,7 +10,7 @@ const baseFont: any = getStyle(document.documentElement, 'font-size')
 const clockSize = 12 * Number(baseFont.substring(0, baseFont.length - 2))
 const clockStyle = {
     height: `${clockSize}px`,
-    width:  `${clockSize}px`
+    width:  `${clockSize}px`,
 }
 
 @Component({ components: { MButton, MIcon }})
@@ -27,7 +27,8 @@ export default class MTimePickerPanelTime extends Vue {
     @Prop({ type: Number, default: 1 })
     private minuteStep!: number
 
-    @Inject() DateStore!: any
+    @Inject()
+    private DateStore!: any
 
     @Emit('pick')
     public handleClick(val: number, type: DateTimeValueType): void {
@@ -38,11 +39,8 @@ export default class MTimePickerPanelTime extends Vue {
     }
 
     public render(): VNode {
-
         const { handleClick, timeSelectType, hourStep, minuteStep } = this
-        
         const { ampm } = this.DateStore
-
         const Result = []
 
         const RList = (type: DateTimeValueType) => {
@@ -50,26 +48,25 @@ export default class MTimePickerPanelTime extends Vue {
             const max = type === 'hours' ? ampm ? 11 : 23 : 59
             const step =  type === 'hours' ? hourStep : minuteStep
             const time = this.DateStore[type]
+            const Temps = []
 
-            let Temps = []
-
-            for (let tempTime = min; tempTime <= max; tempTime += step){
+            for (let tempTime = min; tempTime <= max; tempTime += step) {
                 const isCurrent = tempTime === time
-                Temps.push(<MButton onClick={()=>handleClick(tempTime, type)}
+                Temps.push(<MButton onClick={ () => handleClick(tempTime, type)}
                                     size="sm"
                                     class="m--m-0 m--p-0 m--block" shape="round"
                                     variety={isCurrent ? 'normal' : 'flat'}
-                                    type={isCurrent ? 'primary' : 'legacy'}>{tempTime}</MButton>)
+                                    color={isCurrent ? 'primary' : 'legacy'}>{tempTime}</MButton>)
             }
 
             return (<div staticClass={`${prefix}__list ${prefix}__list-${type}`}>{Temps}</div>)
         }
 
-        if(timeSelectType === 'list') {
+        if (timeSelectType === 'list') {
             Result.push(RList('hours'))
             Result.push(RList('minutes'))
-        }else{
-
+        } else {
+            // todo
         }
 
         return (

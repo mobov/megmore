@@ -12,29 +12,35 @@ const prefix = 'm-time-picker-handler'
 @Component({ components: { MButton, MFlexFiller }})
 export default class MTimePickerHandler extends Vue {
     @Prop({ type: String, default: 'primary' })
-    private type!: Color
+    private color!: Color
 
     get classes(): any {
         return {
-            [`m--color-${this.type}`]: this.type,
+            [`m--color-${this.color}`]: this.color,
         }
     }
 
     @Emit('confirm')
-    public handleConfirm(): void { void(0) }
+    public handleConfirm(): void { return }
 
     @Emit('cancel')
-    public handleCancel(): void { void(0) }
+    public handleCancel(): void { return }
 
     public render(): VNode {
         const { classes, handleConfirm, handleCancel } = this
 
         return (
             <div staticClass={`${prefix} m--p-sm`} class={classes}>
-                <MButton onClick={handleCancel}
-                         class="m--m-0 m--p-0" size="md" variety="flat" type="primary">cancel</MButton>
-                <MButton onClick={handleConfirm}
-                         class="m--m-0 m--p-0" size="md" variety="flat" type="primary">ok</MButton>
+                <MButton class="m--m-0 m--p-0"
+                         size="md"
+                         variety="flat"
+                         color="primary"
+                         onClick={handleCancel}>cancel</MButton>
+                <MButton class="m--m-0 m--p-0"
+                         size="md"
+                         variety="flat"
+                         color="primary"
+                         onClick={handleConfirm}>ok</MButton>
             </div>
         )
     }

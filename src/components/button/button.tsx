@@ -13,7 +13,7 @@ export default class MButton extends Vue {
     private size!: Size
 
     @Prop({ type: String, default: 'default' })
-    private type!: Color
+    private color!: Color
 
     @Prop({ type: String, default: 'normal' })
     private variety!: Variety
@@ -31,24 +31,25 @@ export default class MButton extends Vue {
     private elevation!: number
 
     get classes(): any {
+        const { size, color, variety, shape, block, elevation } = this
         const isNormal = this.variety === 'normal'
         const isOutline = this.variety === 'outline'
 
         return {
-            [`m--${this.size}`]: true,
-            [`m--${this.variety}`]: true,
-            [`m--${this.shape}`]: true,
-            [`m--${this.block}`]: this.block,
-            [`m--color-${this.type}`]: !isNormal,
-            [`m--border-${this.type}`]: isOutline,
-            [`m--bg-${this.type}`]: isNormal,
-            [`m--bg-${this.type}-hover`]: isNormal,
-            [`m--elevation-${this.elevation}`]: true,
+            [`m--${size}`]: true,
+            [`m--${variety}`]: true,
+            [`m--${shape}`]: true,
+            [`m--${block}`]: this.block,
+            [`m--color-${color}`]: !isNormal,
+            [`m--border-${color}`]: isOutline,
+            [`m--bg-${color}`]: isNormal,
+            [`m--bg-${color}-hover`]: isNormal,
+            [`m--elevation-${elevation}`]: true,
         }
     }
 
     @Emit('click')
-    public handleClick(e: MouseEvent): void { void(0) }
+    public handleClick(e: MouseEvent): void { return }
 
     public render(): VNode {
 
@@ -57,7 +58,7 @@ export default class MButton extends Vue {
                 staticClass={`${prefix}`}
                 class={this.classes}
                 onClick={this.handleClick}>
-                {this.loading && (this.$slots.spinner || <MSpin/>)}
+                {this.loading && (this.$slots.spinner || <MSpin />)}
                 {this.$slots.default}
             </button>
         )

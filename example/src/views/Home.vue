@@ -138,13 +138,13 @@
                 <m-time-picker picker-type="datetime" landscope value-format="Date" v-model="dateValue" :elevation=2 />
             </m-col>
             <m-col :sm=4>
-                <m-button type="primary" @click="modal=true">asd</m-button>
-                <m-button type="primary" @click="modal=true">asd</m-button>
+                <m-button color="primary" @click="modal=true">asd</m-button>
+                <m-button color="primary" @click="modal=true">asd</m-button>
             </m-col>
             <m-col :sm=4>
-                <m-button type="primary" shape="circle">C</m-button>
-                <m-button type="primary" variety="outline">outline</m-button>
-                <m-button type="primary" variety="outline" shape="round">round</m-button>
+                <m-button color="primary" shape="circle">C</m-button>
+                <m-button color="primary" variety="outline">outline</m-button>
+                <m-button color="primary" variety="outline" shape="round">round</m-button>
             </m-col>
         </m-row>
         <m-button @click="modal=true">modal</m-button>

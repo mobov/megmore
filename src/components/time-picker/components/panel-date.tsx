@@ -22,9 +22,10 @@ export default class MTimePickerPanelDate extends Vue {
     @Prop({ type: Number, default: 0 })
     private firstDayOfWeek!: number
 
-    @Inject() DateStore!: any
+    @Inject()
+    private DateStore!: any
 
-    viewValue: number = this.DateStore.value
+    private viewValue: number = this.DateStore.value
 
     get viewDateValue(): any {
         return new Date(this.viewValue)
@@ -54,7 +55,7 @@ export default class MTimePickerPanelDate extends Vue {
 
         const { year, month, date } = this.DateStore
 
-        if( yearVal === year &&
+        if (yearVal === year &&
             monthVal === month &&
             dateVal === date ) { return }
 
@@ -71,9 +72,7 @@ export default class MTimePickerPanelDate extends Vue {
 
         const { viewDateValue, viewYear, viewMonth,
                 handleDateClick, handleMonthToggle } = this
-        
         const { year, month, date } = this.DateStore
-
         const nowValue = new Date()
         const isNowDate = nowValue.getFullYear() === viewYear && nowValue.getMonth() === viewMonth
         const nowDate = nowValue.getDate()
@@ -90,18 +89,22 @@ export default class MTimePickerPanelDate extends Vue {
             const Trs: any = []
             let Tds: any = []
 
-            for(let pre = 0; pre < viewFirstWeekDay; pre ++) {
+            for (let pre = 0; pre < viewFirstWeekDay; pre ++) {
                 Tds.push(<td> </td>)
             }
-            for (let tempDate = 1; tempDate <= viewMonthDays; tempDate ++){
+            for (let tempDate = 1; tempDate <= viewMonthDays; tempDate ++) {
                 const isCurDate = isCurMonth && (tempDate === date)
                 const isToday =  isNowDate && (tempDate === nowDate)
 
-                Tds.push(<td><MButton class="m--m-0 m--p-0" size="sm" shape="circle"
+                Tds.push(<td><MButton class='m--m-0 m--p-0'
+                                      size='sm'
+                                      shape='circle'
                                       variety={isCurDate ? 'normal' : isToday ? 'outline' : 'flat'}
-                                      type={isCurDate || isToday ? 'primary' : 'legacy'}
-                                      onClick={()=>handleDateClick(viewYear, viewMonth, tempDate)}>{tempDate}</MButton></td>)
-                if((tempDate + viewFirstWeekDay) %7 === 0 || tempDate === viewMonthDays){
+                                      color={isCurDate || isToday ? 'primary' : 'legacy'}
+                                      onClick={() => handleDateClick(viewYear, viewMonth, tempDate)}>
+                                {tempDate}
+                             </MButton></td>)
+                if ((tempDate + viewFirstWeekDay) % 7 === 0 || tempDate === viewMonthDays) {
                     Trs.push(<tr>{Tds}</tr>)
                     Tds = []
                 }
@@ -114,16 +117,24 @@ export default class MTimePickerPanelDate extends Vue {
             <div staticClass={prefix}>
                 <div class={`${prefix}__header`}>
                     <div staticClass={`${prefix}__header-year`}>
-                        <MButton variety="flat" type="legacy" onClick={()=>this.DateStore.SET_ACTIVE_TYPE('year')}>
+                        <MButton variety='flat'
+                                 color='legacy'
+                                 onClick={() => this.DateStore.SET_ACTIVE_TYPE('year')}>
                             {viewYear}
                         </MButton>
                     </div>
                     <div staticClass={`${prefix}__header-handler`}>
-                        <MButton variety="flat" onClick={()=>handleMonthToggle('prev')} shape="circle" type="legacy">
-                            <MIcon name="navigate_before" />
+                        <MButton variety='flat'
+                                 shape='circle'
+                                 color='legacy'
+                                 onClick={() => handleMonthToggle('prev')}>
+                            <MIcon name='navigate_before' />
                         </MButton>
-                        <MButton variety="flat" onClick={()=>handleMonthToggle('next')} shape="circle" type="legacy">
-                            <MIcon name="navigate_next" />
+                        <MButton variety='flat'
+                                 shape='circle'
+                                 color='legacy'
+                                 onClick={() => handleMonthToggle('next')} >
+                            <MIcon name='navigate_next' />
                         </MButton>
                     </div>
                  </div>

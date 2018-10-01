@@ -12,13 +12,14 @@ const prefix = 'm-time-picker-header'
 @Component
 export default class MTimePickerHeader extends Vue {
     @Prop({ type: String, default: 'primary' })
-    private type!: Color
+    private color!: Color
 
-    @Inject() DateStore!: any
+    @Inject()
+    private DateStore!: any
 
     get classes(): any {
         return {
-            [`m--bg-${this.type}`]: this.type,
+            [`m--bg-${this.color}`]: this.color,
             [`m--${this.DateStore.pickerType}`]: true,
         }
     }
@@ -28,7 +29,7 @@ export default class MTimePickerHeader extends Vue {
         this.DateStore.SET_AM(val)
     }
 
-    public render(): VNode {
+    private render(): VNode {
         const { classes, handleAMToggle } = this
         const { year, month, weekDay, date, hours, minutes,
                 pickerType, activeType, ampm, am } = this.DateStore
@@ -58,8 +59,8 @@ export default class MTimePickerHeader extends Vue {
             (<div class={`${prefix}__time`}>
                 { ampm ?
                     <div staticClass={`${prefix}__time-ampm`}>
-                        <a class={{'m--active': am }} onClick={()=>{handleAMToggle(true, am)}}>AM</a>
-                        <a class={{'m--active': !am }} onClick={()=>{handleAMToggle(false, am)}}>PM</a>
+                        <a class={{'m--active': am }} onClick={() => {handleAMToggle(true, am)}}>AM</a>
+                        <a class={{'m--active': !am }} onClick={() => {handleAMToggle(false, am)}}>PM</a>
                     </div> : <div/>
                 }
                 <div staticClass={`${prefix}__time-hours`}>

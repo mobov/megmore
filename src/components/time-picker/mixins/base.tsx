@@ -98,7 +98,7 @@ export default class TimePickerBase extends Vue {
         pickerType: this.pickerType,
         activeType: 'date',
         ampm: false,
-        get dateValue(): DateD {
+        get dateValue(): Date {
             return new Date(this.value)
         },
         get year(): number {
@@ -125,15 +125,15 @@ export default class TimePickerBase extends Vue {
             return this.dateValue.getHours() < 12
         },
         SET_ACTIVE_TYPE(type: DateValueType){
-            if(type === this.activeType) { return }
+            if (type === this.activeType) { return }
             this.activeType = type
         },
         SET_PICKER_TYPE(type: DatePickerType){
-            if(type === this.pickerType) { return }
+            if (type === this.pickerType) { return }
             this.pickerType = type
         },
         SET_AM(val: boolean){
-            if(val === this.am) { return }
+            if (val === this.am) { return }
             const temp = new Date(this.value)
             temp.setHours(val ? this.hours : this.hours + 12)
             this.value = temp.getTime()
@@ -143,32 +143,32 @@ export default class TimePickerBase extends Vue {
             this.ampm = val
         },
         UPDATE: (val: number, type: DateValueType = 'date') => {
-            const _this = this.DateStore
-            const result = new Date(_this.value)
-            if(type === 'year') {
+            const self = this.DateStore
+            const result = new Date(self.value)
+            if (type === 'year') {
                 result.setFullYear(val)
-                _this.value = result.getTime()
-            } else if(type === 'month') {
+                self.value = result.getTime()
+            } else if (type === 'month') {
                 result.setMonth(val)
-                _this.value = result.getTime()
-            } else if(type === 'hours') {
+                self.value = result.getTime()
+            } else if (type === 'hours') {
                 result.setHours(val)
-                _this.value = result.getTime()
-            } else if(type === 'minutes') {
+                self.value = result.getTime()
+            } else if (type === 'minutes') {
                 result.setMinutes(val)
-                _this.value = result.getTime()
+                self.value = result.getTime()
             } else {
-                _this.value = val
+                self.value = val
             }
             if (this.desync) { return }
             if (this.confirmation) { return }
-            if (this.valueInAdapt(this.value) === _this.value) { return }
-            _this.emitInput()
+            if (this.valueInAdapt(this.value) === self.value) { return }
+            self.emitInput()
         },
         emitInput: () => {
-            const _this = this.DateStore
-            const outValue = this.valueOutAdapt(_this.value)
+            const self = this.DateStore
+            const outValue = this.valueOutAdapt(self.value)
             this.onInput(outValue)
-        }
+        },
     }
 }
