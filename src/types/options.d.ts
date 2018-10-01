@@ -28,6 +28,7 @@ declare module 'vue/types/options' {
         checkField?: string
         noHeader?: boolean
         rowCheck?: boolean
+        onRowClick?: (() => void) | undefined
         // timePicker
         max?: any
         min?: any

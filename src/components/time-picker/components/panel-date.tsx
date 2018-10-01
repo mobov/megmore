@@ -2,7 +2,7 @@ import { Component, Prop, Emit, Vue, Inject, Model, Provide, Watch } from 'vue-p
 import MButton from '@/components/button'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
-import { Color, DateValueType } from '@/types/model'
+import { Color } from '@/types/model'
 
 const prefix = 'm-time-picker-panel-date'
 const WeekMap = ['日', '一', '二', '三', '四', '五', '六']
@@ -52,7 +52,6 @@ export default class MTimePickerPanelDate extends Vue {
 
     @Emit('pick')
     public handleDateClick(yearVal: number, monthVal: number, dateVal: number): void {
-
         const { year, month, date } = this.DateStore
 
         if (yearVal === year &&
@@ -69,7 +68,6 @@ export default class MTimePickerPanelDate extends Vue {
     }
 
     public render(): VNode {
-
         const { viewDateValue, viewYear, viewMonth,
                 handleDateClick, handleMonthToggle } = this
         const { year, month, date } = this.DateStore

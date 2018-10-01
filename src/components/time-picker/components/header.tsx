@@ -25,7 +25,7 @@ export default class MTimePickerHeader extends Vue {
     }
 
     private handleAMToggle(val: boolean, oldVal: boolean){
-        if(val === oldVal) { return }
+        if (val === oldVal) { return }
         this.DateStore.SET_AM(val)
     }
 
@@ -43,12 +43,14 @@ export default class MTimePickerHeader extends Vue {
                     <span staticClass={`${prefix}__date-weekDay`}>{WeekMap[weekDay]}</span>
                  </div>
                 <div staticClass={`${prefix}__date-date`}>
-                    <a class={{'m--active': activeType === 'month'}} onClick={() => {
-                        this.DateStore.SET_ACTIVE_TYPE('month')
-                    }}>{(month + 1).dateZeroize()}</a>-
-                    <a class={{'m--active': activeType === 'date'}} onClick={() => {
-                        this.DateStore.SET_ACTIVE_TYPE('date')
-                    }}>{date.dateZeroize()}</a>
+                    <a class={{'m--active': activeType === 'month'}}
+                       onClick={() => {this.DateStore.SET_ACTIVE_TYPE('month')}}>
+                        {(month + 1).dateZeroize()}
+                    </a>-
+                    <a class={{'m--active': activeType === 'date'}}
+                       onClick={() => {this.DateStore.SET_ACTIVE_TYPE('date')}}>
+                        {date.dateZeroize()}
+                    </a>
 
                 </div>
             </div>) : <div/>
