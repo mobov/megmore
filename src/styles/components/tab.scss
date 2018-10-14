@@ -36,6 +36,10 @@
     height: 3px;
     transition: all 0.3s;
   }
+  .m-tab__content-container{
+    overflow: hidden;
+    height: 100%;
+  }
   .m-tab__content{
     display: flex;
     width: 100%;

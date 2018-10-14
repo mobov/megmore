@@ -9,8 +9,26 @@
         <MProgressLinear></MProgressLinear>
         <MProgressCircle></MProgressCircle>
         <MTab>
-            <MTabItem v-for="item in 20" :key="item" :label="renderTabLabel" :name="`label${item}`">
-                {{item}}
+            <MTabItem v-for="item in 20" :key="item" :label="renderTabLabel(item)" :name="`label${item}`">
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+
+                <div>
+                    {{item}}
+                </div>
             </MTabItem>
         </MTab>
         <m-row space="xs">
@@ -284,12 +302,24 @@ export default {
     };
   },
   methods: {
-      renderTabLabel(h) {
-          return (
+      renderTabLabel(num:number) {
+         const arr=[]
+         for(let i=0;i<=num;i++){
+            arr.push('render')
+         }
+         return (h)=>{
+            return (
               <div>
-                  render
+                {arr.map(number=>{
+                    return (
+                        <span>
+                            'render'
+                        </span>
+                    )
+                })}
               </div>
-          )
+            )
+         }
       },
     handleAvatarClose() {
 
