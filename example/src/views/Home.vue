@@ -8,6 +8,29 @@
         <m-button @click="$toast('啊啊啊啊啊啊啊啊啊啊',{type:'warning'})">openToast</m-button>
         <MProgressLinear></MProgressLinear>
         <MProgressCircle></MProgressCircle>
+        <MTab>
+            <MTabItem v-for="item in 20" :key="item" :label="renderTabLabel(item)" :name="`label${item}`">
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+                <div>
+                    {{item}}
+                </div>
+
+                <div>
+                    {{item}}
+                </div>
+            </MTabItem>
+        </MTab>
         <m-row space="xs">
             <m-col>
                 <m-table ref="dataTable"
@@ -301,6 +324,25 @@ export default {
     };
   },
   methods: {
+      renderTabLabel(num:number) {
+         const arr=[]
+         for(let i=0;i<=num;i++){
+            arr.push('render')
+         }
+         return (h)=>{
+            return (
+              <div>
+                {arr.map(number=>{
+                    return (
+                        <span>
+                            'render'
+                        </span>
+                    )
+                })}
+              </div>
+            )
+         }
+      },
     handleAvatarClose() {
 
     },

@@ -18,11 +18,13 @@ export default class MOption extends Vue {
   })
   public label!: any
 
-  @Inject()
-  private root!: MSelect
+  @Inject({
+    from: '_select',
+  })
+  private select!: MSelect
 
   private get checked() {
-    const { value } = this.root
+    const { value } = this.select
     if (Array.isArray(value)) {
       return value.includes(this.value)
     } else {
@@ -31,19 +33,19 @@ export default class MOption extends Vue {
   }
 
   private get multiple() {
-    return this.root.multiple
+    return this.select.multiple
   }
 
   private get selected() {
-    return this.root.value
+    return this.select.value
   }
 
   private get searchVal() {
-    return this.root.searchVal
+    return this.select.searchVal
   }
 
   private get show() {
-    if (this.root.filerable) {
+    if (this.select.filerable) {
       return String(this.label).indexOf(this.searchVal) !== -1
     } else {
       return true
@@ -51,7 +53,7 @@ export default class MOption extends Vue {
   }
 
   private clickHandle = () => {
-    this.root.select(this)
+    this.select.select(this)
     console.log(this.selected)
   }
 

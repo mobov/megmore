@@ -2,7 +2,7 @@ import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
 import { getZIndex } from '@/utils';
 import * as Model from '@/types/model'
 import Icon from '../icon'
-import { isColor } from '@/utils/helpers'
+import { isColor, colorDetermine } from '@/utils/helpers'
 @Component
 class MProgressLinear extends Vue {
 
@@ -36,22 +36,28 @@ class MProgressLinear extends Vue {
   })
   private indeterminate!: boolean
 
-
+  private get wrapColorData() {
+    return colorDetermine(this.backgroundColor, 'bg')
+  }
+  private get innerColorData() {
+    return colorDetermine(this.color, 'bg')
+  }
   private render() {
     const wrapCls = {
-      [isColor(this.backgroundColor) ? `` : `m--bg-${this.backgroundColor} m-progress-linear__wrap--with-bg`]: true,
+      ...this.wrapColorData.class,
+      // [isColor(this.backgroundColor) ? `` : `m--bg-${this.backgroundColor} m-progress-linear__wrap--with-bg`]: true,
     }
     const innerCls = {
-      [isColor(this.color) ? `` : `m--bg-${this.color}`]: true,
+      ...this.innerColorData.class,
       'm-progress-linear__inner--indeterminate': this.indeterminate,
     }
     const wrapStyle = {
       height: `${this.height}px`,
-      backgroundColor: isColor(this.backgroundColor) ? `${this.backgroundColor}` : '',
+      ...this.wrapColorData.style,
     }
     const innerStyle = {
       width: `${this.value}%`,
-      backgroundColor: isColor(this.color) ? `${this.color}` : '',
+      ...this.innerColorData.style,
     }
     return (
       <div staticClass='m-progress-linear' style={wrapStyle}>
