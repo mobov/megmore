@@ -6,11 +6,14 @@ import { VNode } from 'vue'
 import { on, off } from '@/utils/event'
 import { getScrollbarSize } from '@/utils/dom'
 import { isStyleUnit } from 'es-treasure'
+import { mixins } from 'vue-class-component'
+import TableBase from "@/components/table/mixins";
+
 
 const prefix = 'm-table-body'
 
 @Component({ components: { MCheckbox, MRadio }})
-export default class TableBody extends Vue {
+export default class TableBody extends  mixins(TableBase) {
     @Prop({ type: String })
     private height!: string
 
@@ -20,14 +23,8 @@ export default class TableBody extends Vue {
     @Prop({ type: Boolean })
     private rowCheck!: boolean
 
-    @Prop({ type: String })
-    private checkField?: string
-
-    @Inject()
-    private TableData!: any
-
-    @Inject()
-    private TableCols!: any
+    @Prop({ type: Boolean })
+    private noHeader!: boolean
 
     @Inject()
     private updateTableRow!: any
@@ -49,7 +46,21 @@ export default class TableBody extends Vue {
         this.updateTableRow(field, !value, index)
     }
 
-
+    // private RColGroup(): VNode {
+    //     const { TableCols } = this
+    //     const result: any = []
+    //
+    //     const RCol = (item: any): VNode => {
+    //         const width = item.componentOptions.propsData.width
+    //             || item.componentOptions.Ctor.options.props.width.default
+    //         const styles = { width: width + 'px', minWidth: width + 'px', maxWidth: width + 'px' }
+    //         return <col style={styles}/>
+    //     }
+    //
+    //     TableCols.forEach((item: any) => { result.push(RCol(item)) })
+    //
+    //     return result
+    // }
 
     private RCols(data: any, index: number): VNode {
         const { TableCols, onCheck, checkField } = this
@@ -79,16 +90,16 @@ export default class TableBody extends Vue {
         }
 
         const RCell = (item: any): VNode => {
-            const width = item.componentOptions.propsData.width ||
-                item.componentOptions.Ctor.options.props.width.default
-            const align = item.componentOptions.align ||
-                item.componentOptions.Ctor.options.props.align.default
-            const styles = { width, minWidth: width, maxWidth: width }
+            const width = item.componentOptions.propsData.width
+            const styles = { width: width + 'px',
+                             minWidth: width + 'px',
+                             maxWidth: width + 'px' }
+            const align = item.componentOptions.align
+                || item.componentOptions.Ctor.options.props.align.default
 
             return <td staticClass={`${prefix}__cell`}
-                       width={width}
-                       align={align}
-                       style={styles}>
+                       style={styles}
+                       align={align}>
                       {RContent(item)}
                    </td>
         }
@@ -98,11 +109,15 @@ export default class TableBody extends Vue {
         return result
     }
     private RRows(): VNode {
-        const { TableData, RCols, handleRowClick } = this
+        const { TableData, RCols, handleRowClick, checkField } = this
         const result: any = []
 
         TableData.forEach((item: any, index: number) => {
+            const classes = {
+                'm--checked': checkField ? TableData[index][checkField] : false,
+            }
             result.push(<tr staticClass={`${prefix}__row`}
+                            class={classes}
                             onClick={() => handleRowClick(item, index)}>
                             {RCols(item, index)}
                         </tr>)
@@ -121,35 +136,33 @@ export default class TableBody extends Vue {
         off(window, 'resize', this.onDomUpdate)
     }
     private onDomUpdate(): void {
-        const { isScrollY, border } = this
+        const { noHeader, border } = this
         const $tableBody: any = this.$el.querySelector('tbody')
 
-        if (!!$tableBody.children.length) {
+        if (!!$tableBody.children.length && !noHeader) {
             const widthMap: any = []
             const $headCells: any = $tableBody.children[0].children
-            const vmTableHead: any = this.$parent.$children[0]
+            const vmTableHead: any = this.$parent.$refs.head
             let cellCount = $headCells.length
             while (cellCount --) {
                 widthMap.unshift($headCells[cellCount].clientWidth + (border ? 1 : 0)) // +1px消去边框对宽度影响
             }
 
-            if (isScrollY && widthMap.length > 1) {
-                widthMap[widthMap.length - 1] += getScrollbarSize(this.$el)
-            }
             vmTableHead.updateSize(widthMap)
         }
     }
 
     private render(): VNode {
-        const { $scopedSlots, isScrollY, height, RRows, TableData,
-                handleRowClick } = this
+        const { $scopedSlots, isScrollY, height, RRows,
+                TableData, handleRowClick } = this
         const styles = {
-            ['height']: isScrollY ? height : false,
+            height: isScrollY ? height : false,
         }
 
         return (
             <div staticClass={prefix} style={styles}>
                 <table>
+                    {/*<colgroup>{RColGroup()}</colgroup>*/}
                     <tbody>{RRows()}</tbody>
                 </table>
             </div>

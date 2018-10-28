@@ -32,7 +32,7 @@
   &::-webkit-scrollbar-track {
     background-color: getColor(gray, 300);
   }
-  @if($direction == y){
+  @if ($direction == y) {
     &::-webkit-scrollbar {
       width: $size;
     }
@@ -42,8 +42,7 @@
     &l::-webkit-scrollbar-track {
       border-left: 2px solid transparent;
     }
-  }
-  @else{
+  } @else if ($direction == x) {
     &::-webkit-scrollbar {
       height: $size;
     }
@@ -51,6 +50,19 @@
       border-top: 2px solid transparent;
     }
     &::-webkit-scrollbar-track {
+      border-top: 2px solid transparent;
+    }
+  } @else {
+    &::-webkit-scrollbar {
+      width: $size;
+      height: $size;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-left: 2px solid transparent;
+      border-top: 2px solid transparent;
+    }
+    &l::-webkit-scrollbar-track {
+      border-left: 2px solid transparent;
       border-top: 2px solid transparent;
     }
   }

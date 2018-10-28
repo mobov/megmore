@@ -121,6 +121,7 @@ $--Transitions: (
 $--transition:                  all .2s ease-in-out !default;
 $--transition-fade:             opacity .15s linear !default;
 $--transition-collapse:         height .35s ease !default;
+
 $--transition-effect-base:     .35s ease !default;
 
 $--color-border: getColor(gray, 300);

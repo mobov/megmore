@@ -32,6 +32,9 @@ export default class MTable extends Vue {
     private noHeader?: boolean
 
     @Prop({ type: Boolean, default: false })
+    private stickyHeader?: boolean
+
+    @Prop({ type: Boolean, default: false })
     private rowCheck?: boolean
 
     @Prop({ type: Boolean, default: false })
@@ -88,24 +91,30 @@ export default class MTable extends Vue {
     private onCheck(row: any, index: number): void { return }
 
     private render(): VNode {
-        const { height, border, noHeader, rowCheck, checkField,
+        const { height, border, noHeader, stickyHeader, rowCheck, checkField,
                 onRowClick, onCheck, rowHover, cellHover } = this
         const classes = {
             [`m--elevation-${this.elevation}`]: true,
             [`m--${this.size}`]: true,
             'm--border': border,
-            'm--scroll-y': height !== 'auto ',
+            'm--sticky-header': stickyHeader,
             'm--row-hover': rowHover,
             'm--cell-hover': cellHover,
         }
 
         return (
             <div staticClass={`${prefix}`} class={classes}>
-                { noHeader ? '' : <TableHead checkField={checkField} />}
-                <TableBody height={height}
-                           border={border}
-                           rowCheck={rowCheck}
-                           checkField={checkField} />
+                <div staticClass={`${prefix}__wrapper`}>
+                    { noHeader ? ''
+                        : <TableHead ref={'head'}
+                                     checkField={checkField} />}
+                    <TableBody ref={'body'}
+                               height={height}
+                               border={border}
+                               rowCheck={rowCheck}
+                               noHeader={noHeader}
+                               checkField={checkField} />
+                </div>
             </div>
         )
     }

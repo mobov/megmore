@@ -38,6 +38,7 @@
                          :data="tableData"
                          height="300px"
                          check-field="isCheck"
+                         sticky-header
                          row-check
                          border>
                     <m-table-column type="radio" width="80"/>
@@ -47,12 +48,19 @@
                         <span style="color:red">213</span>
                     </m-table-column>
                 </m-table>
-                <m-table :data="tableData" row-check check-field="isCheck" row-hover>
+                <m-table class="m--mb-lg"
+                         :data="tableData" row-check check-field="isCheck" row-hover>
                     <m-table-column type="checkbox" width="80"/>
-                    <m-table-column type="isCheck" width="80"/>
-                    <m-table-column title="name" field="name" align="left"/>
-                    <m-table-column title="calories" field="calories" />
-                    <m-table-column title="custom">
+                    <m-table-column title="name" field="name" width="300" align="left"/>
+                    <m-table-column title="calories" width="300"  field="calories" />
+                    <m-table-column title="custom" width="300" >
+                        <span style="color:red">213</span>
+                    </m-table-column>
+                </m-table>
+                <m-table :data="tableData" row-hover>
+                    <m-table-column title="name" field="name" width="300" align="left"/>
+                    <m-table-column title="calories" width="300"  field="calories" />
+                    <m-table-column title="custom" width="300" >
                         <span style="color:red">213</span>
                     </m-table-column>
                 </m-table>

@@ -8,6 +8,7 @@ declare module 'vue/types/options' {
         staticClass?: any
         class?: any
         style?: any
+        ref?: string
         // lifecycle
         updated?: (() => void) | undefined
         created?: (() => void) | undefined
@@ -30,6 +31,7 @@ declare module 'vue/types/options' {
         rowCheck?: boolean
         onRowClick?: (() => void) | undefined
         onCheck?: (() => void) | undefined
+        updateSize?: (() => void) | undefined
         // timePicker
         max?: any
         min?: any

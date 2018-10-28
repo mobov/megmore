@@ -3,21 +3,14 @@ import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import { VNode } from 'vue'
 import { isStyleUnit } from 'es-treasure'
+import { mixins } from 'vue-class-component'
+import TableBase from "@/components/table/mixins";
 
 const prefix = 'm-table-head'
 
-@Component
-export default class TableHead extends Vue {
+@Component({ components: { MCheckbox }})
+export default class TableHead extends  mixins(TableBase) {
     private widthMap: any = []
-
-    @Prop({ type: String })
-    private checkField?: string
-
-    @Inject()
-    private TableCols!: any
-
-    @Inject()
-    private TableData!: any
 
     private RCell(item: any, index: number): VNode {
         const { TableData, checkField } = this

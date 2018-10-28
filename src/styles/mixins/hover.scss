@@ -7,13 +7,13 @@
 ) {
     @if $with-class {
         .#{$class-name} {
-            transition: background-color ease .3s;
+            transition: background-color $--transition-effect-base;
             &:hover {
                 background-color: $--color-hover-bg;
             }
         }
     } @else {
-        transition: background-color ease .3s;
+        transition: background-color $--transition-effect-base;
         &:hover {
             background-color: $--color-hover-bg;
         }

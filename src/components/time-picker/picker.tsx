@@ -1,7 +1,7 @@
 import { Component, Prop, Emit, Model, Provide, Vue } from 'vue-property-decorator'
 import {Color, DatePickerType} from "@/types/model"
 import { mixins } from 'vue-class-component'
-import TimePickerBase from './mixins/base'
+import TimePickerBase from './mixins'
 import MTimePickerHeader from './components/header'
 import MTimePickerPanelDate from './components/panel-date'
 import MTimePickerPanelYear from './components/panel-year'
