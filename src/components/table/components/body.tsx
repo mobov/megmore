@@ -12,38 +12,47 @@ const prefix = 'm-table-body'
 @Component({ components: { MCheckbox, MRadio }})
 export default class TableBody extends Vue {
     @Prop({ type: String })
-    public height!: string
+    private height!: string
 
     @Prop({ type: Boolean })
-    public border!: boolean
+    private border!: boolean
 
     @Prop({ type: Boolean })
-    public rowCheck!: boolean
+    private rowCheck!: boolean
+
+    @Prop({ type: String })
+    private checkField?: string
 
     @Inject()
-    public TableData!: any
+    private TableData!: any
 
     @Inject()
-    public TableCols!: any
+    private TableCols!: any
 
     @Inject()
-    public updateTableRow!: any
+    private updateTableRow!: any
 
     get isScrollY(): boolean {
         return this.height !== 'auto'
     }
 
-    @Emit
-    private handleRowClick(row: any, index: number): void {
-        this.updateTableRow(field, value, index)
+    private handleRowClick(item: any, index: number): void {
+        const { rowCheck, checkField } = this
+
+        if (rowCheck) {
+            this.onCheck(checkField, item[checkField], index)
+        }
     }
 
-    private handleCheck(field: string, value: any, index: number): void {
-        this.updateTableRow(field, value, index)
+    @Emit('check')
+    private onCheck(field: string, value: any, index: number): void {
+        this.updateTableRow(field, !value, index)
     }
+
+
 
     private RCols(data: any, index: number): VNode {
-        const { TableCols, handleCheck } = this
+        const { TableCols, onCheck, checkField } = this
         const result: any = []
 
         const RContent = (item: any): VNode => {
@@ -54,11 +63,12 @@ export default class TableBody extends Vue {
             const field = item.componentOptions.propsData.field
 
             if (type === 'radio') {
-                const value = !!data[field]
+                const value = !!data[checkField]
                 content = <MRadio value={value} />
             } else if (type === 'checkbox') {
-                const value = !!data[field]
-                content = <MCheckbox value={value} onInput={(value) => handleCheck(field, value, index)} />
+                const value = !!data[checkField]
+                content = <MCheckbox value={value}
+                                     onInput={(value: any) => onCheck(checkField, value, index)} />
             } else if (children) {
                 content = children
             } else {
@@ -75,7 +85,12 @@ export default class TableBody extends Vue {
                 item.componentOptions.Ctor.options.props.align.default
             const styles = { width, minWidth: width, maxWidth: width }
 
-            return <td width={width} align={align} style={styles}>{RContent(item)}</td>
+            return <td staticClass={`${prefix}__cell`}
+                       width={width}
+                       align={align}
+                       style={styles}>
+                      {RContent(item)}
+                   </td>
         }
 
         TableCols.forEach((item: any) => { result.push(RCell(item)) })
@@ -83,11 +98,14 @@ export default class TableBody extends Vue {
         return result
     }
     private RRows(): VNode {
-        const { TableData, RCols, rowCheck } = this
+        const { TableData, RCols, handleRowClick } = this
         const result: any = []
 
         TableData.forEach((item: any, index: number) => {
-            result.push(<tr>{RCols(item, index)}</tr>)
+            result.push(<tr staticClass={`${prefix}__row`}
+                            onClick={() => handleRowClick(item, index)}>
+                            {RCols(item, index)}
+                        </tr>)
         })
 
         return result
@@ -123,10 +141,12 @@ export default class TableBody extends Vue {
     }
 
     private render(): VNode {
-        const { $scopedSlots, isScrollY, height, RRows, TableData } = this
+        const { $scopedSlots, isScrollY, height, RRows, TableData,
+                handleRowClick } = this
         const styles = {
             ['height']: isScrollY ? height : false,
         }
+
         return (
             <div staticClass={prefix} style={styles}>
                 <table>

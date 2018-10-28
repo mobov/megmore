@@ -1,6 +1,9 @@
-@mixin absSize(
+/**
+ * 绝对尺寸
+ */
+@mixin size-abs(
     $size,
-    $dir: y
+    $dir: xy
 ){
     @if ($dir == y) {
         height: $size;

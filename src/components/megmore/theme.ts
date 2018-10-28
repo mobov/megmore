@@ -10,10 +10,10 @@ const currentTheme = 'unicon'
 const Theme: any = {
     unicon: {
         theme: {
+            primary: Palettes.lightblue_A700,
             pure: Palettes.grey_A100,
             legacy: Palettes.grey_A700,
             default: Palettes.grey_A100,
-            primary: Palettes.lightblue_A700,
             danger: Palettes.red_300,
             warning: Palettes.orange_700,
             success: Palettes.green_500,
@@ -27,9 +27,9 @@ const Theme: any = {
         spin__path: {
             stroke: Palettes.lightblue_A700,
         },
-        option:{
+        option: {
             color: Palettes.grey_A100,
-        }
+        },
     },
 }
 /**
@@ -42,8 +42,7 @@ function midlineCase(name: string): string {
     const BE_REGEXP = /([A-z]+)(\-[A-z]+)+__[A-z]+(\-[A-z]+)+/g
     if (BE_REGEXP.test(name)) {//   BEM原样输出
         return name
-    }
-    else {
+    } else {
         return name.replace(SPECIAL_CHARS_REGEXP, (_, separator, letter, offset) => {
             return offset ? '-' + separator.toLowerCase() : letter
         })
@@ -103,11 +102,7 @@ function collectSpecialStyles(name: string, selector: string, attrData: any): st
                     background-color: ${colorObj.darken(.2)}
                 }\n`
         }
-
-
     })
-
-
     return tempText
 }
 /**

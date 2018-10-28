@@ -17,7 +17,7 @@
     // size
     @each $name, $value in $--Size-avatar {
         &.m--#{$name} {
-            @include flex-size(d($value));
+            @include size-abs(d($value), xy);
         }
     }
     // shape

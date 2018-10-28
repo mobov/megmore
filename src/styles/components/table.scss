@@ -1,4 +1,3 @@
-
 .m-table {
     border-radius: d($--radius);
     position: relative;
@@ -20,7 +19,7 @@
         tr {
             border-width: 0;
             border-style: solid;
-            border-color: $--color-border-base;
+            border-color: $--color-border;
         }
     }
     .m-table-head {
@@ -36,7 +35,6 @@
                 border-bottom-width: 0;
             }
         }
-
     }
 
     // size
@@ -59,7 +57,7 @@
             td {
                 border-width: 1px;
                 border-style: solid;
-                border-color: $--color-border-base;
+                border-color: $--color-border;
             }
         }
     }
@@ -69,6 +67,18 @@
         .m-table-body {
             @include scroller(y);
             @include scroll-bar-slim(y);
+        }
+    }
+
+    // hover
+    &.m--row-hover {
+        .m-table-body__row {
+            @include hover-bg();
+        }
+    }
+    &.m--cell-hover {
+        .m-table-body__cell {
+            @include hover-bg();
         }
     }
 }

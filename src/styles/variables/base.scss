@@ -1,8 +1,7 @@
 @import "palettes";
 @import "elevations";
 
-
-$--relative-base: 16 !default;
+$--relative: 16 !default;
 $--Breakpoints: (xs sm md lg xl);
 //space
 $--Space: (
@@ -43,10 +42,6 @@ $--space-appBar-inset-y: 20;
 $--space-appBar-inset-x: 15;
 //toolbar size
 $--size-toolbar: 90;
-
-
-
-
 
 $--Radius: (
     square: 0,
@@ -123,15 +118,15 @@ $--Transitions: (
     swing: cubic-bezier(.25,.8,.50,1)
 );
 
-$--transition-base:             all .2s ease-in-out !default;
+$--transition:                  all .2s ease-in-out !default;
 $--transition-fade:             opacity .15s linear !default;
 $--transition-collapse:         height .35s ease !default;
 $--transition-effect-base:     .35s ease !default;
 
-$--color-border-base: getColor(gray, 300);
-$--border-base: 1px solid $--color-border-base;
+$--color-border: getColor(gray, 300);
+$--color-hover-bg: getColor(gray, 200);
+$--border: 1px solid $--color-border;
 
-$--hover-bg-gray:getColor(gray, 300);
 
 
 

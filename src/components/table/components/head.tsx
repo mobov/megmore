@@ -10,6 +10,9 @@ const prefix = 'm-table-head'
 export default class TableHead extends Vue {
     private widthMap: any = []
 
+    @Prop({ type: String })
+    private checkField?: string
+
     @Inject()
     private TableCols!: any
 
@@ -17,32 +20,38 @@ export default class TableHead extends Vue {
     private TableData!: any
 
     private RCell(item: any, index: number): VNode {
-        const { TableData } = this
+        const { TableData, checkField } = this
         const RContent = (): VNode => {
             let content: any = null
             const type = item.data.attrs ? item.data.attrs.type : undefined
             const children = item.componentOptions.children
-            const field = item.componentOptions.propsData.field
+            // const field = item.componentOptions.propsData.field
             if (type === 'checkbox') {
                 let trueCount = 0
                 TableData.forEach((rowData: any) => {
-                    if (rowData[field]) { trueCount ++ }
+                    if (rowData[checkField]) { trueCount ++ }
                 })
-                const checkVal = trueCount === 0 ? [] : trueCount === TableData.length ? [0, 1] : [0]
+                const checkVal = trueCount === 0
+                    ? []
+                    : trueCount === TableData.length
+                        ? [0, 1]
+                        : [0]
                 const checkAll: any = [0, 1]
 
                 const HandleCheck = () => {
                     if (checkVal.length > 0) {
                         TableData.forEach((rowData: any) => {
-                            rowData[field] = false
+                            rowData[checkField] = false
                         })
                     } else {
                         TableData.forEach((rowData: any) => {
-                            rowData[field] = true
+                            rowData[checkField] = true
                         })
                     }
                 }
-                content = <MCheckbox nativeOnClick={HandleCheck} value={checkVal} label={checkAll}/>
+                content = <MCheckbox nativeOnClick={HandleCheck}
+                                     value={checkVal}
+                                     label={checkAll}/>
             } else if (children) {
                 content = children
             } else {
@@ -53,15 +62,17 @@ export default class TableHead extends Vue {
             return content
         }
 
-        let width = this.widthMap[index] ||
-            item.componentOptions.propsData.width ||
-            item.componentOptions.Ctor.options.props.width.default
+        let width = this.widthMap[index]
+            || item.componentOptions.propsData.width
+            || item.componentOptions.Ctor.options.props.width.default
         width = isStyleUnit(width) ? width : `${width}px`
-        const align = item.componentOptions.align ||
-            item.componentOptions.Ctor.options.props.align.default
+        const align = item.componentOptions.align
+            || item.componentOptions.Ctor.options.props.align.default
         const styles = { width, minWidth: width, maxWidth: width }
 
-        return <td style={styles} align={align}>{RContent()}</td>
+        return <td staticClass={`${prefix}__cell`}
+                   style={styles}
+                   align={align}>{RContent()}</td>
     }
     private RHead(): VNode {
         const { TableCols, RCell } = this
@@ -71,7 +82,7 @@ export default class TableHead extends Vue {
             result.push(RCell(item, index))
         })
 
-        return <tr>{result}</tr>
+        return <tr staticClass={`${prefix}__row`}>{result}</tr>
     }
     private updateSize(widthMap: any): void {
       this.widthMap = widthMap

@@ -1,7 +1,7 @@
 @import "../import";
 .m-app-bar {
     width: 100%;
-    @include flex-size(d($--size-appBar), y);
+    @include size-abs(d($--size-appBar), y);
     display: flex;
     align-items: center;
     padding: 0 d($--space-appBar-inset-x);

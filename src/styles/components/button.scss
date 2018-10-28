@@ -13,7 +13,7 @@
   @each $name,
   $value in $--Size-button-height {
     &.m--#{$name} {
-      @include flex-size(d($value), y);
+      @include size-abs(d($value), y);
       font-size: d($value /2);
     }
   } // type
@@ -38,7 +38,7 @@
     @each $name,
     $value in $--Size-button-height {
       &.m--#{$name} {
-        @include flex-size(d($value), x);
+        @include size-abs(d($value), x);
       }
     }
   }

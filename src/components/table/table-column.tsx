@@ -10,8 +10,8 @@ export default class MTableColumn extends Vue {
     @Prop({ type: String })
     private field!: string
 
-    @Prop({ type: Boolean, default: false })
-    private rowCheck?: boolean
+    @Prop({ type: String })
+    private disabledField!: string
 
     @Prop({ type: String, default: 'center' })
     private align?: Align

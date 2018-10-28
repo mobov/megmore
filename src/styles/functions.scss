@@ -2,7 +2,7 @@
  * 获取rem单位值
  */
 @function d($value) {
- @return #{$value/ $--relative-base}rem;
+ @return #{$value/ $--relative}rem;
 }
 
 /**

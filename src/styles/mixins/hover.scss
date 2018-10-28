@@ -1,0 +1,21 @@
+/**
+ * hover背景效果
+ */
+@mixin hover-bg(
+    $with-class: false,
+    $class-name: m--hover-bg
+) {
+    @if $with-class {
+        .#{$class-name} {
+            transition: background-color ease .3s;
+            &:hover {
+                background-color: $--color-hover-bg;
+            }
+        }
+    } @else {
+        transition: background-color ease .3s;
+        &:hover {
+            background-color: $--color-hover-bg;
+        }
+    }
+}

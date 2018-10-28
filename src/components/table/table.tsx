@@ -11,28 +11,37 @@ const prefix = 'm-table'
 export default class MTable extends Vue {
 
     @Prop({ type: Array, default: [] })
-    public data!: any
+    private data!: any
 
     @Prop({ type: String, default: 'primary' })
-    public color?: Color
+    private color?: Color
 
     @Prop({ type: Number, default: 2 })
-    public elevation?: number
+    private elevation?: number
 
     @Prop({ type: String, default: 'md' })
-    public size?: Size
+    private size?: Size
 
     @Prop({ type: [String, Number], default: 'auto' })
-    public height?: string | number
+    private height?: string | number
 
     @Prop({ type: Boolean, default: false })
-    public border?: boolean
+    private border?: boolean
 
     @Prop({ type: Boolean, default: false })
-    public noHeader?: boolean
+    private noHeader?: boolean
 
     @Prop({ type: Boolean, default: false })
-    public rowCheck?: boolean
+    private rowCheck?: boolean
+
+    @Prop({ type: Boolean, default: false })
+    private rowHover?: boolean
+
+    @Prop({ type: Boolean, default: false })
+    private cellHover?: boolean
+
+    @Prop({ type: String })
+    private checkField?: string
 
     @Provide()
     public TableData: any = this.data
@@ -51,36 +60,52 @@ export default class MTable extends Vue {
 
     @Provide()
     public updateTableRow(field: string, value: any, index: number = -1): void {
+
         if (index === -1) {
             this.TableData.forEach((row: any) => {
                 if (row[field] !== undefined) {
                     row[field] = value
                 } else {
-                    this.$set(row[field], field, value)
+                    this.$set(row, field, value)
                 }
             })
         } else {
+            console.log(this.TableData)
             if (this.TableData[index][field] !== undefined) {
+                console.log(field, value, index)
                 this.TableData[index][field] = value
             } else {
-                this.$set(this.TableData[index], field, value)
+                console.log(44)
+               // this.$set(this.TableData[index], field, value)
             }
         }
     }
 
+    @Emit('rowClick')
+    private onRowClick(row: any, index: number): void { return }
+
+    @Emit('check')
+    private onCheck(row: any, index: number): void { return }
+
     private render(): VNode {
-        const { height, border, noHeader, rowCheck } = this
+        const { height, border, noHeader, rowCheck, checkField,
+                onRowClick, onCheck, rowHover, cellHover } = this
         const classes = {
             [`m--elevation-${this.elevation}`]: true,
             [`m--${this.size}`]: true,
             'm--border': border,
             'm--scroll-y': height !== 'auto ',
+            'm--row-hover': rowHover,
+            'm--cell-hover': cellHover,
         }
 
         return (
             <div staticClass={`${prefix}`} class={classes}>
-                { noHeader ? '' : <TableHead />}
-                <TableBody height={height} border={border} rowCheck={rowCheck} />
+                { noHeader ? '' : <TableHead checkField={checkField} />}
+                <TableBody height={height}
+                           border={border}
+                           rowCheck={rowCheck}
+                           checkField={checkField} />
             </div>
         )
     }

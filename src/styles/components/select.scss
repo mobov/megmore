@@ -15,11 +15,8 @@
   cursor: pointer;
   width: 100%;
   display: flex;
-  align-items: center;
-  &:hover{
-    background-color:$--hover-bg-gray
-  }
+  @include hover-bg();
   &.m--active{
-    background-color:$--hover-bg-gray
+    background-color: $--color-hover-bg;
   }
 }

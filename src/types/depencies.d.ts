@@ -10,11 +10,12 @@ declare module 'es-treasure' {
 
 declare module 'color' {
  export default function(colorValue: string): {
-    isDark(): boolean
-    lighten(percent: number): boolean
-    darken(percent: number): boolean
+    isDark(): boolean,
+    lighten(percent: number): boolean,
+    darken(percent: number): boolean,
   }
 }
-declare module 'is-color-stop'{
-  export function isColor(str:string):boolean
+
+declare module 'is-color-stop' {
+  export function isColor(str: string): boolean
 }
