@@ -11,7 +11,9 @@ const prefix = 'm-table-head'
 @Component({ components: { MCheckbox }})
 export default class TableHead extends  mixins(TableBase) {
     private widthMap: any = []
-
+    private updateSize(widthMap: any): void {
+        this.widthMap = widthMap
+    }
     private RCell(item: any, index: number): VNode {
         const { TableData, checkField } = this
         const children = item.componentOptions.children
@@ -80,15 +82,44 @@ export default class TableHead extends  mixins(TableBase) {
 
         return <tr staticClass={`${prefix}__row`}>{result}</tr>
     }
-    private updateSize(widthMap: any): void {
-      this.widthMap = widthMap
+    private RSlotHeadPre(): any {
+        const { TableCols } = this
+        const $slotHeadPre = this.$parent.$slots['head-pre']
+
+        return $slotHeadPre
+            ? <tr staticClass={`${prefix}__row`}>
+                <td colspan={TableCols.length}>{$slotHeadPre}</td>
+              </tr>
+            : null
+    }
+    private RSlotHeadSuf(): any {
+        const { TableCols } = this
+        const $slotHeadSuf = this.$parent.$slots['head-suf']
+
+        return $slotHeadSuf
+            ? <tr staticClass={`${prefix}__row`}>
+                <td colspan={TableCols.length}>{$slotHeadSuf}</td>
+            </tr>
+            : null
+    }
+    private RSlotHeadCom(): any {
+        const $slotHeadCom = this.$parent.$slots['head-com']
+
+        return $slotHeadCom
+            ? $slotHeadCom
+            : null
     }
     private render(): VNode {
-        const { $scopedSlots, RHead } = this
-        console.log($scopedSlots)
+        const { RHead, RSlotHeadPre, RSlotHeadSuf, RSlotHeadCom } = this
+
         return (
             <table staticClass={prefix}>
-                <thead>{RHead()}</thead>
+                <thead>
+                    {RSlotHeadPre()}
+                    {RSlotHeadCom()}
+                    {RHead()}
+                    {RSlotHeadSuf()}
+                </thead>
             </table>
         )
     }

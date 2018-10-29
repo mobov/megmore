@@ -54,10 +54,11 @@ export default class MTable extends Vue {
     public get TableCols(): any {
         const { $slots } = this
         const result: any = []
+        console.log($slots)
         // 声明渲染
         $slots.default.forEach((item: any) => {
-            const $children = item.componentOptions.children
-
+            // 多级表头处理
+            // const $children = item.componentOptions.children
             // if (
             //     $children
             //     && $children.length > 1
@@ -66,7 +67,6 @@ export default class MTable extends Vue {
             //     console.log(item.componentOptions.children[0].componentOptions.tag)
             //     console.log(tableColTagName)
             // }
-            // 多级表头处理
             result.push(item)
         })
 
