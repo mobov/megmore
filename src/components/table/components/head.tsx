@@ -14,10 +14,13 @@ export default class TableHead extends  mixins(TableBase) {
 
     private RCell(item: any, index: number): VNode {
         const { TableData, checkField } = this
+        const children = item.componentOptions.children
+        const propsData = item.componentOptions.propsData
+        const propsDefault = item.componentOptions.Ctor.options.props
         const RContent = (): VNode => {
             let content: any = null
             const type = item.data.attrs ? item.data.attrs.type : undefined
-            const children = item.componentOptions.children
+
             // const field = item.componentOptions.propsData.field
             if (type === 'checkbox') {
                 let trueCount = 0
@@ -49,18 +52,18 @@ export default class TableHead extends  mixins(TableBase) {
                 content = children
             } else {
                 // todo:错误处理
-                content = item.data.attrs.title || null
+                content = propsData.title || null
             }
 
             return content
         }
 
         let width = this.widthMap[index]
-            || item.componentOptions.propsData.width
-            || item.componentOptions.Ctor.options.props.width.default
+            || propsData.width
+            || propsDefault.width.default
         width = isStyleUnit(width) ? width : `${width}px`
         const align = item.componentOptions.align
-            || item.componentOptions.Ctor.options.props.align.default
+            || propsDefault.align.default
         const styles = { width, minWidth: width, maxWidth: width }
 
         return <td staticClass={`${prefix}__cell`}
@@ -82,7 +85,7 @@ export default class TableHead extends  mixins(TableBase) {
     }
     private render(): VNode {
         const { $scopedSlots, RHead } = this
-
+        console.log($scopedSlots)
         return (
             <table staticClass={prefix}>
                 <thead>{RHead()}</thead>

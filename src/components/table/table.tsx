@@ -4,6 +4,7 @@ import { VNode } from 'vue'
 import { Size, Color, DateValueType, DatePickerType } from '@/types/model'
 import TableHead from './components/head'
 import TableBody from './components/body'
+import { prefix as tableColTagName } from './table-column'
 
 const prefix = 'm-table'
 
@@ -55,6 +56,17 @@ export default class MTable extends Vue {
         const result: any = []
         // 声明渲染
         $slots.default.forEach((item: any) => {
+            const $children = item.componentOptions.children
+
+            // if (
+            //     $children
+            //     && $children.length > 1
+            //     && $children[0].componentOptions.tag === tableColTagName
+            // ) {
+            //     console.log(item.componentOptions.children[0].componentOptions.tag)
+            //     console.log(tableColTagName)
+            // }
+            // 多级表头处理
             result.push(item)
         })
 
@@ -73,13 +85,11 @@ export default class MTable extends Vue {
                 }
             })
         } else {
-            console.log(this.TableData)
             if (this.TableData[index][field] !== undefined) {
-                console.log(field, value, index)
                 this.TableData[index][field] = value
             } else {
-                console.log(44)
-               // this.$set(this.TableData[index], field, value)
+                console.log(field, value, index)
+                this.$set(this.TableData[index], field, value)
             }
         }
     }

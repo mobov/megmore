@@ -70,9 +70,9 @@ export default class TableBody extends  mixins(TableBase) {
             let content: any = []
             // todo:错误处理
             const type = item.data.attrs ? item.data.attrs.type : undefined
-            const children = item.componentOptions.children
+            const scopedSlots = item.data.scopedSlots
             const field = item.componentOptions.propsData.field
-
+            console.log(item)
             if (type === 'radio') {
                 const value = !!data[checkField]
                 content = <MRadio value={value} />
@@ -80,8 +80,9 @@ export default class TableBody extends  mixins(TableBase) {
                 const value = !!data[checkField]
                 content = <MCheckbox value={value}
                                      onInput={(value: any) => onCheck(checkField, value, index)} />
-            } else if (children) {
-                content = children
+            } else if (scopedSlots) {
+                // 自定模板
+                content = scopedSlots.default(data)
             } else {
                 content = data[field]
             }
