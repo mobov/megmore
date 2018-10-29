@@ -1,5 +1,67 @@
 <template>
     <m-container style="padding:20px">
+        <m-row space="xs">
+            <m-col>
+                <m-table class="m--mb-lg"
+                         :data="tableData"
+                         border
+                         row-check
+                         check-field="isCheck"
+                         row-hover>
+                    <m-table-column title="name" field="name" width="300" align="left"/>
+                    <m-table-column title="calories" width="300" field="calories" />
+                    <m-table-column width="auto">
+                        <div>自定义标题</div>
+                        <template slot-scope="scope">
+                            自定义内容{{scope.name}}
+                        </template>
+                    </m-table-column>
+                    <template slot="head-com">
+                        <tr>
+                            <td rowspan="2">店铺哦及</td>
+                            <td colspan="2">sad</td>
+                        </tr>
+                        <tr>
+                            <td>店铺哦及</td>
+                            <td>sad</td>
+                        </tr>
+                    </template>
+                </m-table>
+                <m-table ref="dataTable"
+                    class="m--mb-lg"
+                    :data="tableData"
+                    height="300px"
+                    check-field="isCheck"
+                    sticky-header
+                    row-check
+                    border>
+                    <m-table-column type="radio" width="80"/>
+                    <m-table-column title="name" field="name" />
+                    <m-table-column title="calories" field="calories" />
+                </m-table>
+                <m-table class="m--mb-lg"
+                         :data="tableData"
+                         row-check
+                         check-field="isCheck"
+                         row-hover>
+                    <m-table-column type="checkbox" width="80"/>
+                    <m-table-column title="name" field="name" width="300" align="left"/>
+                    <m-table-column title="calories" width="300" field="calories" />
+                    <m-table-column width="auto">
+                        <div>自定义标题</div>
+                        <template slot-scope="scope">
+                            自定义内容{{scope.name}}
+                        </template>
+                    </m-table-column>
+                    <template slot="head-pre">
+                        表头前置内容
+                    </template>
+                    <template slot="head-suf">
+                        表头后置内容
+                    </template>
+                </m-table>
+            </m-col>
+        </m-row>
         <m-select filerable  chips    placement-x="right-start" v-model="select">
             <m-option :label="'编号'+item" :value="item" v-for="item in 10" :key="item">
                 编号{{item}}
@@ -31,74 +93,6 @@
                 </div>
             </MTabItem>
         </MTab>
-        <m-row space="xs">
-            <m-col>
-                <!--<m-table ref="dataTable"-->
-                         <!--class="m&#45;&#45;mb-lg"-->
-                         <!--:data="tableData"-->
-                         <!--height="300px"-->
-                         <!--check-field="isCheck"-->
-                         <!--sticky-header-->
-                         <!--row-check-->
-                         <!--border>-->
-                    <!--<m-table-column type="radio" width="80"/>-->
-                    <!--<m-table-column title="name" field="name" />-->
-                    <!--<m-table-column title="calories" field="calories" />-->
-                    <!--<m-table-column title="custom">-->
-                        <!--<template slot-scope="scope">-->
-                            <!--{{scope}}-->
-                            <!--<span style="color:red">213</span>-->
-                        <!--</template>-->
-                    <!--</m-table-column>-->
-                <!--</m-table>-->
-                <m-table class="m--mb-lg"
-                         :data="tableData"
-                         border
-                         row-check
-                         check-field="isCheck"
-                         row-hover>
-                    <m-table-column title="name" field="name" width="300" align="left"/>
-                    <m-table-column title="calories" width="300" field="calories" />
-                    <m-table-column width="auto">
-                        <div>自定义标题</div>
-                        <template slot-scope="scope">
-                            自定义内容{{scope.name}}
-                        </template>
-                    </m-table-column>
-                    <template slot="head-com">
-                        <tr>
-                            <td rowspan="2">店铺哦及</td>
-                            <td colspan="2">sad</td>
-                        </tr>
-                        <tr>
-                            <td>店铺哦及</td>
-                            <td>sad</td>
-                        </tr>
-                    </template>
-                </m-table>
-                <m-table class="m--mb-lg"
-                         :data="tableData"
-                         row-check
-                         check-field="isCheck"
-                         row-hover>
-                    <m-table-column type="checkbox" width="80"/>
-                    <m-table-column title="name" field="name" width="300" align="left"/>
-                    <m-table-column title="calories" width="300" field="calories" />
-                    <m-table-column width="auto">
-                        <div>自定义标题</div>
-                        <template slot-scope="scope">
-                            自定义内容{{scope.name}}
-                        </template>
-                    </m-table-column>
-                    <template slot="head-pre">
-                        表头前置内容
-                    </template>
-                    <template slot="head-suf">
-                        表头后置内容
-                    </template>
-                </m-table>
-            </m-col>
-        </m-row>
         <m-row space="xs">
             <m-col :sm="4">
                 <div>
