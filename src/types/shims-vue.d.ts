@@ -8,7 +8,7 @@ declare module '*.vue' {
 declare module 'vue/types/vue' {
   interface VueConstructor {
     register(data: any): void,
-    install (vue: typeof Vue): void
+    install(vue: typeof Vue): void
     render(h: any, context: any): VNode
   }
   interface Vue {

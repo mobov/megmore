@@ -57,9 +57,9 @@ export default class MExpansionPanelContent extends mixins(toggleable) {
     console.log(el.style)
   }
   private render(h) {
-    const iconcls = this.visible ?
-      'm-expansion-panel-content__header-icon--active' :
-      ''
+    const iconcls = this.visible
+        ? 'm-expansion-panel-content__header-icon--active'
+        : ''
     return (
       <div class='m-expansion-panel-content'   >
         <div v-m-ripple class='m-expansion-panel-content__header' onClick={this.toggle}>

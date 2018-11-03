@@ -1,30 +1,69 @@
 /**
- *
- * @param el 事件绑定
- * @param e
- * @param cb
+ * 事件绑定
+ * @param element
+ * @param event
+ * @param handler
  * @param propgation
  */
-export function on(
-    el: Element | Document | Window, e: string,
-    cb: () => any = (): void => void(0),
-    propgation: boolean = false,
-): void {
- el.addEventListener(e, cb, propgation)
-}
-
-export function off(
-    el: Element | Document | Window, e: string,
-    cb: () => any = (): void => void(0),
-): void {
- el.removeEventListener(e, cb)
-}
-
-export function once(el: EventTarget, event: string, cb: () => void): void {
-    const run = () => {
-        cb()
-        el.removeEventListener(event, run, false)
+export const on = (() => {
+        if (document.addEventListener) {
+            return (
+                element: Element | Document | Window,
+                event: string,
+                handler: () => any = (): void => void(0),
+                propagation: boolean = false,
+            ) => {
+                if (element && event && handler) {
+                    element.addEventListener(event, handler, propagation);
+                }
+            }
+        } else {
+            return (
+                element: Element | Document | Window,
+                event: string,
+                handler: () => any = (): void => void(0),
+            ) => {
+                if (element && event && handler) {
+                    element.attachEvent('on' + event, handler);
+                }
+            }
+        }
     }
+)()
 
-    el.addEventListener(event, run, false)
+export const off = (() => {
+        if (document.addEventListener) {
+            return (
+                element: Element | Document | Window,
+                event: string,
+                handler: () => any = (): void => void(0),
+                propagation: boolean = false,
+            ) => {
+                if (element && event) {
+                    element.removeEventListener(event, handler, propagation);
+                }
+            }
+        } else {
+            return (
+                element: Element | Document | Window,
+                event: string,
+                handler: () => any = (): void => void(0),
+            ) => {
+                if (element && event) {
+                    element.detachEvent('on' + event, handler);
+                }
+            }
+        }
+    }
+)()
+
+export function once(
+    element: Element | Document | Window,
+    event: string,
+    handler: () => void): void {
+    const run = () => {
+        handler()
+        off(element, event, run, false)
+    }
+    on(element, event, run, false)
 }

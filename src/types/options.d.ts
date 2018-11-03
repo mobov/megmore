@@ -25,10 +25,9 @@ declare module 'vue/types/options' {
         // table
         height?: string | number
         border?: boolean
-        checkType?: 'multi' | 'single'
-        checkField?: string
-        noHeader?: boolean
-        rowCheck?: boolean
+        keyField?: string
+        noHeader?: string
+        rowSelect?: boolean
         onRowClick?: (() => void) | undefined
         onCheck?: (() => void) | undefined
         updateSize?: (() => void) | undefined

@@ -5,13 +5,11 @@ import {VNode} from "vue";
  */
 @Component
 export default class Mixins extends Vue {
-    @Prop({ type: String })
-    public checkField?: string
 
     @Inject()
     public TableCols!: any
 
     @Inject()
-    public TableData!: any
+    public TableStore!: any
 
 }

@@ -8,6 +8,11 @@ declare module 'es-treasure' {
   export function getStyle(dom: HTMLElement, attr: string): string
 }
 
+
+
+
+
+
 declare module 'color' {
  export default function(colorValue: string): {
     isDark(): boolean,

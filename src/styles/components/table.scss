@@ -50,6 +50,9 @@
     .m-table-body__row {
         transition: background-color $--transition-effect-base;
     }
+    .m-table-body__expand {
+        width: 100%;
+    }
 
     // size
     @each $breakpoint in $--Breakpoints {
@@ -105,9 +108,9 @@
         }
     }
 
-    // row checked
+    // row selected
     .m-table-body__row {
-        &.m--checked {
+        &.m--selected {
             background-color: $--color-hover-bg;
         }
     }

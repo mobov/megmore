@@ -62,7 +62,7 @@ export default class MTimePicker extends mixins(TimePickerBase) {
                                                            firstDayOfWeek={firstDayOfWeek} />;
                 case 'year':  return <MTimePickerPanelYear max={max}
                                                            min={min}
-                                                           onPick={() => {handleActive('date')}} />;
+                                                           onPick={() => {handleActive('date')}}/>;
                 case 'month': return <MTimePickerPanelMonth onPick={() => {handleActive('date')}} />;
                 default:  return <MTimePickerPanelTime color={color}
                                                        onPick={() => {handleActive('date')}} />;

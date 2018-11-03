@@ -4,19 +4,29 @@
             <m-col>
                 <m-table class="m--mb-lg"
                          :data="tableData"
+                         key-field="name"
+                         select="multi"
+                         row-select
+                         :selected-data.sync="selectedData"
+                         :no-select-data="disSelectData"
+                         expand="multi"
+                         :expanded-data.sync="expandedData"
+                         row-expand
+                         height="300px"
+                         header="sticky"
+                         hover="row"
                          border
-                         row-check
-                         check-field="isCheck"
-                         row-hover>
+                      >
                     <m-table-column title="name" field="name" width="300" align="left"/>
                     <m-table-column title="calories" width="300" field="calories" />
-                    <m-table-column width="auto">
+                    <m-table-column width="300">
                         <div>自定义标题</div>
                         <template slot-scope="scope">
                             自定义内容{{scope.name}}
                         </template>
                     </m-table-column>
-                    <template slot="head-com">
+                    <!--多级表头追加-->
+                    <template slot="head-extra">
                         <tr>
                             <td rowspan="2">店铺哦及</td>
                             <td colspan="2">sad</td>
@@ -30,36 +40,41 @@
                 <m-table ref="dataTable"
                     class="m--mb-lg"
                     :data="tableData"
+                    key-field="name"
+                    select="multi"
+                    row-select
+                    :selected-data.sync="selectedData"
                     height="300px"
-                    check-field="isCheck"
-                    sticky-header
-                    row-check
+                    hover="row"
                     border>
-                    <m-table-column type="radio" width="80"/>
+                    <m-table-column type="checkbox" width="80"/>
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
                 </m-table>
-                <m-table class="m--mb-lg"
-                         :data="tableData"
-                         row-check
-                         check-field="isCheck"
-                         row-hover>
-                    <m-table-column type="checkbox" width="80"/>
-                    <m-table-column title="name" field="name" width="300" align="left"/>
-                    <m-table-column title="calories" width="300" field="calories" />
-                    <m-table-column width="auto">
-                        <div>自定义标题</div>
-                        <template slot-scope="scope">
-                            自定义内容{{scope.name}}
-                        </template>
-                    </m-table-column>
-                    <template slot="head-pre">
-                        表头前置内容
-                    </template>
-                    <template slot="head-suf">
-                        表头后置内容
-                    </template>
-                </m-table>
+                <!--<m-table class="m&#45;&#45;mb-lg"-->
+                         <!--:data="tableData"-->
+                         <!--row-check-->
+                         <!--check-field="isCheck"-->
+                         <!--hover="row">-->
+                    <!--<m-table-column type="checkbox" width="80"/>-->
+                    <!--<m-table-column title="name" field="name" width="300" align="left"/>-->
+                    <!--<m-table-column title="calories" width="300" field="calories" />-->
+                    <!--<m-table-column width="auto">-->
+                        <!--<div>自定义标题</div>-->
+                        <!--<template slot-scope="scope">-->
+                            <!--自定义内容{{scope.name}}-->
+                        <!--</template>-->
+                    <!--</m-table-column>-->
+                    <!--<template slot="expand" slot-scope="scope">-->
+                        <!--表格expand内容{{scope}}-->
+                    <!--</template>-->
+                    <!--<template slot="head-prepend">-->
+                        <!--表头前置内容-->
+                    <!--</template>-->
+                    <!--<template slot="head-append">-->
+                        <!--表头后置内容-->
+                    <!--</template>-->
+                <!--</m-table>-->
             </m-col>
         </m-row>
         <m-select filerable  chips    placement-x="right-start" v-model="select">
@@ -87,7 +102,6 @@
                 <div>
                     {{item}}
                 </div>
-
                 <div>
                     {{item}}
                 </div>
@@ -259,13 +273,9 @@ export default {
       checkAll: ['check1', 'check2', 'check3', 'check4'],
       radio: 1,
       select:[],
-      columns: [{
-
-      }, {
-
-      }, {
-
-      }],
+      selectedData: ['Eclair'],
+      disSelectData: ['Cupcake'],
+      expandedData: ['Lollipop'],
       tableData:  [
           {
               isCheck: true,

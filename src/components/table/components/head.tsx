@@ -3,19 +3,24 @@ import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import { VNode } from 'vue'
 import { isStyleUnit } from 'es-treasure'
-import { mixins } from 'vue-class-component'
-import TableBase from "@/components/table/mixins";
 
 const prefix = 'm-table-head'
 
 @Component({ components: { MCheckbox }})
-export default class TableHead extends  mixins(TableBase) {
+export default class TableHead extends Vue {
+    @Inject()
+    private TableCols!: any
+
+    @Inject()
+    private TableStore!: any
+
     private widthMap: any = []
     private updateSize(widthMap: any): void {
         this.widthMap = widthMap
     }
     private RCell(item: any, index: number): VNode {
-        const { TableData, checkField } = this
+        const { TableStore } = this
+        const { Data, keyField, keyIndex } = TableStore
         const children = item.componentOptions.children
         const propsData = item.componentOptions.propsData
         const propsDefault = item.componentOptions.Ctor.options.props
@@ -25,31 +30,31 @@ export default class TableHead extends  mixins(TableBase) {
 
             // const field = item.componentOptions.propsData.field
             if (type === 'checkbox') {
-                let trueCount = 0
-                TableData.forEach((rowData: any) => {
-                    if (rowData[checkField]) { trueCount ++ }
-                })
-                const checkVal = trueCount === 0
-                    ? []
-                    : trueCount === TableData.length
-                        ? [0, 1]
-                        : [0]
-                const checkAll: any = [0, 1]
-
-                const HandleCheck = () => {
-                    if (checkVal.length > 0) {
-                        TableData.forEach((rowData: any) => {
-                            rowData[checkField] = false
-                        })
-                    } else {
-                        TableData.forEach((rowData: any) => {
-                            rowData[checkField] = true
-                        })
-                    }
-                }
-                content = <MCheckbox nativeOnClick={HandleCheck}
-                                     value={checkVal}
-                                     label={checkAll}/>
+                // let trueCount = 0
+                // Data.forEach((rowData: any) => {
+                //     if (rowData[dataKey]) { trueCount ++ }
+                // })
+                // const checkVal = trueCount === 0
+                //     ? []
+                //     : trueCount === Data.length
+                //         ? [0, 1]
+                //         : [0]
+                // const checkAll: any = [0, 1]
+                //
+                // const HandleCheck = () => {
+                //     if (checkVal.length > 0) {
+                //         TableData.forEach((rowData: any) => {
+                //             //rowData[checkField] = false
+                //         })
+                //     } else {
+                //         TableData.forEach((rowData: any) => {
+                //             //rowData[checkField] = true
+                //         })
+                //     }
+                // }
+                // content = <MCheckbox nativeOnClick={HandleCheck}
+                //                      value={checkVal}
+                //                      label={checkAll}/>
             } else if (children) {
                 content = children
             } else {
@@ -82,43 +87,39 @@ export default class TableHead extends  mixins(TableBase) {
 
         return <tr staticClass={`${prefix}__row`}>{result}</tr>
     }
-    private RSlotHeadPre(): any {
+    private RSlotHeadPrepend(): VNode | null {
         const { TableCols } = this
-        const $slotHeadPre = this.$parent.$slots['head-pre']
+        const $slotHeadPrepend = this.$parent.$slots['head-prepend']
 
-        return $slotHeadPre
+        return $slotHeadPrepend
             ? <tr staticClass={`${prefix}__row`}>
-                <td colspan={TableCols.length}>{$slotHeadPre}</td>
-              </tr>
-            : null
+                <td colspan={TableCols.length}>{$slotHeadPrepend}</td>
+            </tr> : null
     }
-    private RSlotHeadSuf(): any {
+    private RSlotHeadAppend(): VNode | null {
         const { TableCols } = this
-        const $slotHeadSuf = this.$parent.$slots['head-suf']
+        const $slotHeadAppend = this.$parent.$slots['head-append']
 
-        return $slotHeadSuf
+        return $slotHeadAppend
             ? <tr staticClass={`${prefix}__row`}>
-                <td colspan={TableCols.length}>{$slotHeadSuf}</td>
-            </tr>
-            : null
+                <td colspan={TableCols.length}>{$slotHeadAppend}</td>
+            </tr> : null
     }
-    private RSlotHeadCom(): any {
-        const $slotHeadCom = this.$parent.$slots['head-com']
+    private RSlotHeadExtra(): any {
+        const $slotHeadExtra = this.$parent.$slots['head-extra']
 
-        return $slotHeadCom
-            ? $slotHeadCom
-            : null
+        return $slotHeadExtra ? $slotHeadExtra : null
     }
     private render(): VNode {
-        const { RHead, RSlotHeadPre, RSlotHeadSuf, RSlotHeadCom } = this
+        const { RHead, RSlotHeadPrepend, RSlotHeadAppend, RSlotHeadExtra } = this
 
         return (
             <table staticClass={prefix}>
                 <thead>
-                    {RSlotHeadPre()}
-                    {RSlotHeadCom()}
+                    {RSlotHeadPrepend()}
+                    {RSlotHeadExtra()}
                     {RHead()}
-                    {RSlotHeadSuf()}
+                    {RSlotHeadAppend()}
                 </thead>
             </table>
         )

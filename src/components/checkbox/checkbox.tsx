@@ -98,7 +98,8 @@ export default class MCheckbox extends Vue {
         }
 
         const RCheckbox = () => (
-            <a staticClass={`${prefix}__checkbox`} class={isCheck ? `m--color-${color}` : ''}>
+            <a staticClass={`${prefix}__checkbox`}
+               class={isCheck ? `m--color-${color}` : ''}>
                 <transition name='m--transition-scale'>
                     {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkIcon} /> : null }
                 </transition>
@@ -109,7 +110,9 @@ export default class MCheckbox extends Vue {
 
 
         return (
-            <div staticClass={`${prefix}`} class={classes} onClick={() => handleClick(isCheck)}>
+            <div staticClass={`${prefix}`}
+                 class={classes}
+                 onClick={() => handleClick(isCheck)}>
                 {RCheckbox()}
                 {$slots.default}
             </div>

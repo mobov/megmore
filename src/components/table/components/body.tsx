@@ -2,18 +2,14 @@ import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import MRadio from '@/components/radio'
-import { VNode } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
+import { toAbsStyleSize } from '@/utils/helpers'
 import { on, off } from '@/utils/event'
-import { getScrollbarSize } from '@/utils/dom'
-import { isStyleUnit } from 'es-treasure'
-import { mixins } from 'vue-class-component'
-import TableBase from "@/components/table/mixins";
-
 
 const prefix = 'm-table-body'
 
 @Component({ components: { MCheckbox, MRadio }})
-export default class TableBody extends  mixins(TableBase) {
+export default class TableBody extends Vue {
     @Prop({ type: String })
     private height!: string
 
@@ -21,49 +17,50 @@ export default class TableBody extends  mixins(TableBase) {
     private border!: boolean
 
     @Prop({ type: Boolean })
-    private rowCheck!: boolean
+    private rowSelect!: boolean
 
     @Prop({ type: Boolean })
     private noHeader!: boolean
 
+    @Prop({ type: String})
+    private select!: 'none' | 'single' | 'multi'
+
+    @Prop({ type: String})
+    private expand!: 'none' | 'single' | 'multi'
+
     @Inject()
-    private updateTableRow!: any
+    private TableCols!: any
 
-    get isScrollY(): boolean {
-        return this.height !== 'auto'
+    @Inject()
+    private TableStore!: any
+
+    private get selectable(): boolean {
+        return this.select !== 'none'
     }
+    private get expandable(): boolean {
+        return this.expand !== 'none'
+    }
+    private get styles(): any {
+        const { height } = this
 
-    private handleRowClick(item: any, index: number): void {
-        const { rowCheck, checkField } = this
-
-        if (rowCheck) {
-            this.onCheck(checkField, item[checkField], index)
+        return {
+            height: height !== 'auto' ? height : false,
         }
     }
 
-    @Emit('check')
-    private onCheck(field: string, value: any, index: number): void {
-        this.updateTableRow(field, !value, index)
+    private handleRowClick(row: any, index: number): void {
+        const { selectable } = this
+
+        if (selectable) {
+            this.handleRowSelect(row, index)
+        }
     }
 
-    // private RColGroup(): VNode {
-    //     const { TableCols } = this
-    //     const result: any = []
-    //
-    //     const RCol = (item: any): VNode => {
-    //         const width = item.componentOptions.propsData.width
-    //             || item.componentOptions.Ctor.options.props.width.default
-    //         const styles = { width: width + 'px', minWidth: width + 'px', maxWidth: width + 'px' }
-    //         return <col style={styles}/>
-    //     }
-    //
-    //     TableCols.forEach((item: any) => { result.push(RCol(item)) })
-    //
-    //     return result
-    // }
-
-    private RCols(data: any, index: number): VNode {
-        const { TableCols, onCheck, checkField } = this
+    private handleRowSelect(row: any, index: number): void {
+        this.TableStore.SET_SELECTED(index)
+    }
+    private RCols(row: any, index: number, isSelected: boolean): VNode {
+        const { TableCols, selectable, handleRowSelect } = this
         const result: any = []
 
         const RContent = (item: any): VNode => {
@@ -72,29 +69,35 @@ export default class TableBody extends  mixins(TableBase) {
             const type = item.data.attrs ? item.data.attrs.type : undefined
             const scopedSlots = item.data.scopedSlots
             const field = item.componentOptions.propsData.field
-            console.log(item)
-            if (type === 'radio') {
-                const value = !!data[checkField]
-                content = <MRadio value={value} />
-            } else if (type === 'checkbox') {
-                const value = !!data[checkField]
-                content = <MCheckbox value={value}
-                                     onInput={(value: any) => onCheck(checkField, value, index)} />
+
+            if (type === 'radio' && selectable) {
+                content = <MRadio value={isSelected}
+                                  nativeOnClick={(event: Event) => { event.stopPropagation()}}
+                                  onInput={() => handleRowSelect(row, index)} />
+            } else if (type === 'checkbox' && selectable) {
+                content = <MCheckbox value={isSelected}
+                                     nativeOnClick={(event: Event) => { event.stopPropagation()}}
+                                     onInput={() => handleRowSelect(row, index)} />
             } else if (scopedSlots) {
                 // 自定模板
-                content = scopedSlots.default(data)
+                content = scopedSlots.default(row)
             } else {
-                content = data[field]
+                content = row[field]
             }
 
             return content
         }
 
         const RCell = (item: any): VNode => {
-            const width = item.componentOptions.propsData.width
-            const styles = { width: width + 'px',
-                             minWidth: width + 'px',
-                             maxWidth: width + 'px' }
+            const width = toAbsStyleSize(
+                item.componentOptions.propsData.width,
+            )
+
+            const styles = {
+                width,
+                minWidth: width,
+                maxWidth: width,
+            }
             const align = item.componentOptions.align
                 || item.componentOptions.Ctor.options.props.align.default
 
@@ -109,22 +112,45 @@ export default class TableBody extends  mixins(TableBase) {
 
         return result
     }
-    private RRows(): VNode {
-        const { TableData, RCols, handleRowClick, checkField } = this
+    private RRow(row: any, index: number): VNode {
+        const { TableStore, RCols, handleRowClick, selectable } = this
+        const { Selected, keyField } = TableStore
+        const isSelected = Selected.includes(row[keyField])
+        const classes = {
+            'm--selected': selectable ? isSelected : false,
+        }
+
+        return  <tr staticClass={`${prefix}__row`}
+                    class={classes}
+                    onClick={() => handleRowClick(row, index)}>
+                    {RCols(row, index, isSelected)}
+                </tr>
+    }
+    private RExpand(row: any, index: number): VNode | null {
+        if (!this.$parent.$scopedSlots.expand) { return null }
+
+        const { TableStore, TableCols } = this
+        const { keyField } = TableStore
+
+        return  <tr staticClass={`${prefix}__expand`}
+                    key={keyField}>
+                    <td colspan={TableCols.length}>
+                        {this.$parent.$scopedSlots.expand(row)}
+                    </td>
+                </tr>
+    }
+    private RTBody(): VNode {
+        const { TableStore, RRow, RExpand, expandable } = this
         const result: any = []
 
-        TableData.forEach((item: any, index: number) => {
-            const classes = {
-                'm--checked': checkField ? TableData[index][checkField] : false,
+        TableStore.Data.forEach((row: any, index: number) => {
+            result.push(RRow(row, index))
+            if (expandable) {
+                result.push(RExpand(row, index))
             }
-            result.push(<tr staticClass={`${prefix}__row`}
-                            class={classes}
-                            onClick={() => handleRowClick(item, index)}>
-                            {RCols(item, index)}
-                        </tr>)
         })
 
-        return result
+        return <tbody>{result}</tbody>
     }
     private mounted(): void {
         this.onDomUpdate()
@@ -154,19 +180,11 @@ export default class TableBody extends  mixins(TableBase) {
     }
 
     private render(): VNode {
-        const { $scopedSlots, isScrollY, height, RRows,
-                TableData, handleRowClick } = this
-        const styles = {
-            height: isScrollY ? height : false,
-        }
+        const { styles, RTBody } = this
 
-        return (
-            <div staticClass={prefix} style={styles}>
-                <table>
-                    {/*<colgroup>{RColGroup()}</colgroup>*/}
-                    <tbody>{RRows()}</tbody>
-                </table>
-            </div>
-        )
+        return  <div staticClass={prefix} style={styles}>
+                    <table>{RTBody()}</table>
+                </div>
     }
 }
+

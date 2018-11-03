@@ -27,11 +27,3 @@ export function getTouchRect(
     }
 }
 
-/**
- * 对象深拷贝
- * @param obj
- * @return {any}
- */
-export function deepClone(obj: any): any {
-    return JSON.parse(JSON.stringify(obj));
-}
