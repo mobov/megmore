@@ -10,3 +10,19 @@
     transform: scale(0);
     opacity: 0;
 }
+
+
+.m--transition-expansion-enter,
+.m--transition-expansion-leave-active {
+    transition: max-height .3s ease;
+    //backface-visibility: hidden;
+    max-height: 50px;
+    height: 100px;
+}
+
+.m--transition-expansion-enter,
+.m--transition-expansion-leave-active {
+    max-height: 0;
+    height: 0;
+    //opacity: 0;
+}

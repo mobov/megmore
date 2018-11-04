@@ -17,10 +17,13 @@ export default class TableBody extends Vue {
     private border!: boolean
 
     @Prop({ type: Boolean })
+    private noHeader!: boolean
+
+    @Prop({ type: Boolean })
     private rowSelect!: boolean
 
     @Prop({ type: Boolean })
-    private noHeader!: boolean
+    private rowExpand!: boolean
 
     @Prop({ type: String})
     private select!: 'none' | 'single' | 'multi'
@@ -49,14 +52,21 @@ export default class TableBody extends Vue {
     }
 
     private handleRowClick(row: any, index: number): void {
-        const { selectable } = this
-
-        if (selectable) {
+        const { selectable, rowSelect, expandable, rowExpand } = this
+        console.log(rowExpand)
+        console.log(expandable)
+        if (selectable && rowSelect) {
             this.handleRowSelect(row, index)
+        }
+        if (expandable && rowExpand) {
+            this.handleRowExpand(row, index)
         }
     }
     private handleRowSelect(row: any, index: number): void {
         this.TableStore.SET_SELECTED(index)
+    }
+    private handleRowExpand(row: any, index: number): void {
+        this.TableStore.SET_EXPANDED(index)
     }
     private RCols(row: any, index: number, isSelected: boolean): VNode {
         const { TableCols, selectable, handleRowSelect } = this
@@ -64,8 +74,9 @@ export default class TableBody extends Vue {
 
         const RContent = (item: any): VNode => {
             let content: any = []
+
             // todo:错误处理
-            const type = item.data.attrs ? item.data.attrs.type : undefined
+            const type = item.componentOptions.propsData.type
             const scopedSlots = item.data.scopedSlots
             const field = item.componentOptions.propsData.field
 
@@ -128,15 +139,25 @@ export default class TableBody extends Vue {
     private RExpand(row: any, index: number): VNode | null {
         if (!this.$parent.$scopedSlots.expand) { return null }
 
-        const { TableStore, TableCols } = this
-        const { keyField } = TableStore
+        const { TableStore, TableCols, expandable } = this
+        const { Expanded, keyField } = TableStore
 
-        return  <tr staticClass={`${prefix}__expand`}
-                    key={keyField}>
-                    <td colspan={TableCols.length}>
-                        {this.$parent.$scopedSlots.expand(row)}
+        if (!expandable) { return null }
+
+        const isExpanded = Expanded.includes(row[keyField])
+
+        return <tr staticClass={`${prefix}__expand`}>
+                    <td colSpan={TableCols.length}>
+                        <transition name='m--transition-expansion'>
+                            <div staticClass={`${prefix}__expand-content`}>
+                                { isExpanded
+                                    ? this.$parent.$scopedSlots.expand(row)
+                                    : null
+                                }
+                            </div>
+                        </transition>
                     </td>
-                </tr>
+               </tr>
     }
     private RTBody(): VNode {
         const { TableStore, RRow, RExpand, expandable } = this
@@ -161,7 +182,7 @@ export default class TableBody extends Vue {
             const vmTableHead: any = this.$parent.$refs.head
             let cellCount = $headCells.length
             while (cellCount --) {
-                widthMap.unshift($headCells[cellCount].clientWidth + (border ? 1 : 0)) // +1px消去边框对宽度影响
+                widthMap.unshift($headCells[cellCount].clientWidth + (border ? 0 : 0)) // +1px消去边框对宽度影响
             }
 
             vmTableHead.updateSize(widthMap)

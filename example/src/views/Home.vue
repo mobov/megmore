@@ -8,23 +8,25 @@
                          :selected="selectedData"
                          key-field="name"
                          select="multi"
-                         row-select
                          expand="multi"
+                         :expanded="expandedData"
                          row-expand
                          height="300px"
                          header="sticky"
                          hover="row"
-                         border
-                      >
+                         border>
                     <m-table-column type="checkbox" width="80"/>
                     <m-table-column title="name" field="name" width="300" align="left"/>
                     <m-table-column title="calories" width="300" field="calories" />
                     <m-table-column width="300">
-                        <div>自定义标题</div>
+                        <span>自定义标题吼吼</span>
                         <template slot-scope="scope">
                             自定义内容{{scope.name}}
                         </template>
                     </m-table-column>
+                    <div slot="expand"  slot-scope="scope">
+                        表格expand内容{{scope}}
+                    </div>
                     <!--多级表头追加-->
                     <template slot="head-extra">
                         <tr>
@@ -45,12 +47,16 @@
                     key-field="name"
                     select="multi"
                     row-select
+                    row-expand
                     height="300px"
                     hover="row"
                     border>
                     <m-table-column type="checkbox" width="80"/>
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
+                    <template slot="expand" slot-scope="scope">
+                        表格expand内容{{scope}}
+                    </template>
                 </m-table>
                 <!--<m-table class="m&#45;&#45;mb-lg"-->
                          <!--:data="tableData"-->

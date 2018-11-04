@@ -29,7 +29,7 @@ export default class TableHead extends Vue {
         const propsDefault = item.componentOptions.Ctor.options.props
         const RContent = (): VNode => {
             let content: any = null
-            const type = item.data.attrs ? item.data.attrs.type : undefined
+            const type = item.componentOptions.propsData.type
 
             if (type === 'checkbox') {
                 const selectedLength = Selected.length

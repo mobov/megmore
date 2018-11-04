@@ -6,23 +6,45 @@
         min-width: 100%;
         border-collapse: collapse;
         position: relative;
-        thead {
+        border-spacing: 0;
+        > thead {
             width: inherit;
         }
-        tbody{
+        > tbody{
             width: inherit;
-            tr:first-child{
-                td {
-                    border-top: none;
-                }
-            }
         }
         tr {
-            border-width: 0;
-            border-style: solid;
-            border-color: $--color-border;
+            border: none;
+        }
+        td {
+            border: none;
+            position: relative;
+            &:last-child {
+                &:before {
+                    width: 0;
+                }
+            }
+            &:before {
+                content: ' ';
+                position: absolute;
+                height: 100%;
+                width: 1px;
+                background-color: $--color-border;
+                top: 0;
+                right: 0;
+            }
+            &:after {
+                content: ' ';
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                background-color: $--color-border;
+                right: 0;
+                bottom: 0;
+            }
         }
     }
+
     .m-table__wrapper {
         overflow: auto;
         background-color: inherit;
@@ -32,19 +54,12 @@
     .m-table-head {
         min-width: 100%;
         background-color: inherit;
-        tr {
-            border-bottom-width: 1px;
-        }
     }
     .m-table-body {
         width: 100%;
         background-color: inherit;
         tr {
-            border-bottom-width: 1px;
             cursor: pointer;
-            &:last-child {
-                border-bottom-width: 0;
-            }
         }
     }
     .m-table-body__row {
@@ -70,22 +85,9 @@
 
     // border
     &.m--border {
-        table {
-            td {
-                border-width: 1px;
-                border-style: solid;
-                border-color: $--color-border;
-            }
-        }
+
     }
 
-    // scroll-header
-    //&.m--scroll-y {
-    //    .m-table-body {
-    //        overflow-y: auto;
-    //        @include scroll-bar-slim(y);
-    //    }
-    //}
     // sticky-header
     &.m--sticky-header {
         .m-table-head {
@@ -112,6 +114,16 @@
     .m-table-body__row {
         &.m--selected {
             background-color: $--color-hover-bg;
+        }
+    }
+
+    // expand
+    .m-table-body__expand {
+        > td {
+            padding: 0;
+            > * {
+                transition: all ease .3s;
+            }
         }
     }
 }

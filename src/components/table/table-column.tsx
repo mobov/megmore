@@ -7,6 +7,9 @@ export const prefix = 'm-table-column'
 export default class MTableColumn extends Vue {
 
     @Prop({ type: String })
+    private type?: 'checkbox' | 'radio' | 'expander'
+
+    @Prop({ type: String })
     private title?: string
 
     @Prop({ type: [ String, Number ], default: 'auto' })

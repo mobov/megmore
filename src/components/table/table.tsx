@@ -99,9 +99,16 @@ export default class MTable extends Vue {
     private handleSelectedUpdate(val: any): void {
         this.TableStore.Selected = deepCopy(val)
     }
+    @Watch('expanded', { immediate: true })
+    private handleExpandedUpdate(val: any): void {
+        this.TableStore.Expanded = deepCopy(val)
+    }
 
     @Emit('update:selected')
     private syncSelected(data: any): void { return void(0) }
+
+    @Emit('update:expanded')
+    private syncExpanded(data: any): void { return void(0) }
 
     @Emit('expand')
     private onExpand(row: any, index: number): void { return void(0) }
@@ -127,7 +134,7 @@ export default class MTable extends Vue {
         keyField: this.keyField,
         Selected: [],
         NoSelect: this.noSelect,
-        Expanded: JSON.parse(JSON.stringify(this.expanded)),
+        Expanded: [],
         SET_DATA(field: string, value: any, index: number = -1): void {
             const { Data } = this
 
@@ -169,8 +176,17 @@ export default class MTable extends Vue {
             }
             this.syncSelected(this.TableStore.Selected)
         },
-        SET_EXPANDED(keyValue: string | number, value: boolean): void {
-            return void(0)
+        SET_EXPANDED: (index: number): void => {
+            const { Data, Expanded, keyField } = this.TableStore
+            const keyValue = Data[index][keyField]
+            const targetIndex = Expanded.indexOf(keyValue)
+
+            if (targetIndex === -1) {
+                Expanded.push(keyValue)
+            } else {
+                Expanded.splice(targetIndex, 1)
+            }
+            this.syncExpanded(Expanded)
         },
     }
 
@@ -196,11 +212,9 @@ export default class MTable extends Vue {
 
         return result
     }
-    private beforeCreate(): void {
-        console.log(this)
-    }
+
     private render(): VNode {
-        const { height, border, header, rowSelect, classes, select, expand } = this
+        const { height, border, header, classes, select, expand, rowSelect, rowExpand } = this
         const noHeader = header === 'none'
 
         return (
@@ -214,6 +228,7 @@ export default class MTable extends Vue {
                                select={select}
                                expand={expand}
                                rowSelect={rowSelect}
+                               rowExpand={rowExpand}
                                noHeader={noHeader} />
                 </div>
             </div>
