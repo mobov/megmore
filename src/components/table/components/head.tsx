@@ -2,7 +2,7 @@ import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import { VNode } from 'vue'
-import { isStyleUnit } from 'es-treasure'
+import { toAbsStyleSize } from '@/utils/helpers'
 
 const prefix = 'm-table-head'
 
@@ -18,9 +18,12 @@ export default class TableHead extends Vue {
     private updateSize(widthMap: any): void {
         this.widthMap = widthMap
     }
+    private handleSelectAll(): void {
+        this.TableStore.SET_SELECTED_ALL()
+    }
     private RCell(item: any, index: number): VNode {
-        const { TableStore } = this
-        const { Data, keyField, keyIndex } = TableStore
+        const { TableStore, handleSelectAll } = this
+        const { Data, keyField, Selected } = TableStore
         const children = item.componentOptions.children
         const propsData = item.componentOptions.propsData
         const propsDefault = item.componentOptions.Ctor.options.props
@@ -28,33 +31,21 @@ export default class TableHead extends Vue {
             let content: any = null
             const type = item.data.attrs ? item.data.attrs.type : undefined
 
-            // const field = item.componentOptions.propsData.field
             if (type === 'checkbox') {
-                // let trueCount = 0
-                // Data.forEach((rowData: any) => {
-                //     if (rowData[dataKey]) { trueCount ++ }
-                // })
-                // const checkVal = trueCount === 0
-                //     ? []
-                //     : trueCount === Data.length
-                //         ? [0, 1]
-                //         : [0]
-                // const checkAll: any = [0, 1]
-                //
-                // const HandleCheck = () => {
-                //     if (checkVal.length > 0) {
-                //         TableData.forEach((rowData: any) => {
-                //             //rowData[checkField] = false
-                //         })
-                //     } else {
-                //         TableData.forEach((rowData: any) => {
-                //             //rowData[checkField] = true
-                //         })
-                //     }
-                // }
-                // content = <MCheckbox nativeOnClick={HandleCheck}
-                //                      value={checkVal}
-                //                      label={checkAll}/>
+                const selectedLength = Selected.length
+                const dataLength = Data.length
+
+                const checkVal = selectedLength === 0
+                    ? []
+                    : dataLength === selectedLength
+                        ? [0, 1]
+                        : [0]
+                const checkAll: any = [0, 1]
+
+                content = <MCheckbox onInput={() => { handleSelectAll() }}
+                                     value={checkVal}
+                                     label={checkAll}/>
+
             } else if (children) {
                 content = children
             } else {
@@ -65,10 +56,11 @@ export default class TableHead extends Vue {
             return content
         }
 
-        let width = this.widthMap[index]
+        const width = toAbsStyleSize(
+            this.widthMap[index]
             || propsData.width
-            || propsDefault.width.default
-        width = isStyleUnit(width) ? width : `${width}px`
+            || propsDefault.width.default,
+        )
         const align = item.componentOptions.align
             || propsDefault.align.default
         const styles = { width, minWidth: width, maxWidth: width }

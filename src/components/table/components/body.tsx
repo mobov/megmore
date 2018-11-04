@@ -55,7 +55,6 @@ export default class TableBody extends Vue {
             this.handleRowSelect(row, index)
         }
     }
-
     private handleRowSelect(row: any, index: number): void {
         this.TableStore.SET_SELECTED(index)
     }
@@ -152,16 +151,6 @@ export default class TableBody extends Vue {
 
         return <tbody>{result}</tbody>
     }
-    private mounted(): void {
-        this.onDomUpdate()
-        on(window, 'resize', this.onDomUpdate)
-    }
-    private updated(): void {
-        this.onDomUpdate()
-    }
-    private beforeDestroy(): void {
-        off(window, 'resize', this.onDomUpdate)
-    }
     private onDomUpdate(): void {
         const { noHeader, border } = this
         const $tableBody: any = this.$el.querySelector('tbody')
@@ -178,8 +167,18 @@ export default class TableBody extends Vue {
             vmTableHead.updateSize(widthMap)
         }
     }
-
+    private mounted(): void {
+        this.onDomUpdate()
+        on(window, 'resize', this.onDomUpdate)
+    }
+    private updated(): void {
+        this.onDomUpdate()
+    }
+    private beforeDestroy(): void {
+        off(window, 'resize', this.onDomUpdate)
+    }
     private render(): VNode {
+
         const { styles, RTBody } = this
 
         return  <div staticClass={prefix} style={styles}>

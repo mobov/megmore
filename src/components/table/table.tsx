@@ -1,14 +1,16 @@
-import { Component, Prop, Emit, Vue, Provide } from 'vue-property-decorator'
+import { Component, Prop, Emit, Vue, Provide, Watch } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
+import { deepCopy } from '@megmore/es-helper'
 import { Size, Color } from '@/types/model'
 import TableHead from './components/head'
 import TableBody from './components/body'
+import {watch} from "fs";
 
 const prefix = 'm-table'
-const keyField = '_table-key'
-const selectField = '_table-select'
-const expandField = '_table-expand'
+const selfKeyField = '_table-key'
+const selfSelectField = '_table-select'
+const selfExpandField = '_table-expand'
 
 @Component({ components: { TableHead, TableBody }})
 export default class MTable extends Vue {
@@ -16,7 +18,7 @@ export default class MTable extends Vue {
     @Prop({ type: Array, default: () => []  })
     private data!: any
 
-    @Prop({ type: String, default: keyField })
+    @Prop({ type: String, default: selfKeyField })
     private keyField?: string
 
     @Prop({ type: String, default: 'primary' })
@@ -47,10 +49,10 @@ export default class MTable extends Vue {
     private select?: 'none' | 'single' | 'multi'
 
     @Prop({ type: Array, default: () => [] })
-    private selectedData?: any
+    private selected?: any
 
     @Prop({ type: Array, default: () => [] })
-    private noSelectData?: any
+    private noSelect?: any
 
     @Prop({ type: Boolean, default: false })
     private rowExpand?: boolean
@@ -59,7 +61,7 @@ export default class MTable extends Vue {
     private expand?: 'none' | 'single' | 'multi'
 
     @Prop({ type: Array, default: () => []  })
-    private expandedData?: any
+    private expanded?: any
 
     @Prop({ type: String })
     private filter?: any
@@ -76,6 +78,100 @@ export default class MTable extends Vue {
             ['m--sticky-header']: header === 'sticky',
             [`m--${hover}-hover`]: hover !== 'none',
         }
+    }
+    // 数据输入适配
+    private dataAdaptI(val: any): any {
+        const { keyField } = this
+        const temp = deepCopy(val)
+        if (keyField === selfKeyField) {
+            temp.forEach((item: any, index: number) => {
+                item[keyField] = index
+            })
+        }
+
+        return temp
+    }
+    @Watch('data', { immediate: true, deep: true })
+    private handleDataUpdate(val: any): void {
+        this.TableStore.Data = this.dataAdaptI(val)
+    }
+    @Watch('selected', { immediate: true })
+    private handleSelectedUpdate(val: any): void {
+        this.TableStore.Selected = deepCopy(val)
+    }
+
+    @Emit('update:selected')
+    private syncSelected(data: any): void { return void(0) }
+
+    @Emit('expand')
+    private onExpand(row: any, index: number): void { return void(0) }
+
+    @Emit('expandAll')
+    private onExpandAll(row: any, index: number): void { return void(0) }
+
+    @Emit('select')
+    private onSelect(row: any, index: number): void { return void(0) }
+
+    @Emit('selectAll')
+    private onSelectAll(row: any, index: number): void { return void(0) }
+
+    @Emit('rowClick')
+    private onRowClick(row: any, index: number): void { return void(0) }
+
+    @Emit('rowDblclick')
+    private onRowDblclick(row: any, index: number): void { return void(0) }
+
+    @Provide()
+    private TableStore: any = {
+        Data: [],
+        keyField: this.keyField,
+        Selected: [],
+        NoSelect: this.noSelect,
+        Expanded: JSON.parse(JSON.stringify(this.expanded)),
+        SET_DATA(field: string, value: any, index: number = -1): void {
+            const { Data } = this
+
+            if (index === -1) {
+                Data.forEach((row: any) => {
+                    if (row[field] !== undefined) {
+                        row[field] = value
+                    } else {
+                        this.$set(row, field, value)
+                    }
+                })
+            } else {
+                if (Data[index][field] !== undefined) {
+                    Data[index][field] = value
+                } else {
+                    console.log(field, value, index)
+                    //this.$set(Data[index], field, value)
+                }
+            }
+        },
+        SET_SELECTED: (index: number): void => {
+            const { Data, Selected, keyField } = this.TableStore
+            const keyValue = Data[index][keyField]
+            const targetIndex = Selected.indexOf(keyValue)
+
+            if (targetIndex === -1) {
+                Selected.push(keyValue)
+            } else {
+                Selected.splice(targetIndex, 1)
+            }
+            this.syncSelected(Selected)
+        },
+        SET_SELECTED_ALL: (): void => {
+            const { Data, Selected, keyField } = this.TableStore
+            if (Selected.length === 0) {
+                this.TableStore.Selected = Data.map((row: any) => row[keyField])
+            } else {
+                this.TableStore.Selected = []
+            }
+            this.syncSelected(this.TableStore.Selected)
+        },
+        SET_EXPANDED(keyValue: string | number, value: boolean): void {
+            return void(0)
+        },
     }
 
     @Provide()
@@ -100,62 +196,9 @@ export default class MTable extends Vue {
 
         return result
     }
-    // 数据输入适配
-    private dataAdaptI(data: any): any {
-        if (this.keyField === keyField) {
-            data.forEach((item: any, index: number) => {
-                item[keyField] = index
-            })
-        }
-
-        return data
+    private beforeCreate(): void {
+        console.log(this)
     }
-
-    @Provide()
-    private TableStore: any = {
-        Data: this.dataAdaptI(this.data),
-        keyField: this.keyField,
-        Selected: this.selectedData,
-        NoSelect: this.noSelectData,
-        Expanded: this.expandedData,
-        SET_DATA(field: string, value: any, index: number = -1): void {
-            if (index === -1) {
-                this.Data.forEach((row: any) => {
-                    if (row[field] !== undefined) {
-                        row[field] = value
-                    } else {
-                        this.$set(row, field, value)
-                    }
-                })
-            } else {
-                if (this.Data[index][field] !== undefined) {
-                    this.Data[index][field] = value
-                } else {
-                    console.log(field, value, index)
-                    this.$set(this.Data[index], field, value)
-                }
-            }
-        },
-        SET_SELECTED(index: number): void {
-            const keyValue = this.Data[index][this.keyField]
-            const targetIndex = this.Selected.indexOf(keyValue)
-            if (targetIndex === -1) {
-                this.Selected.push(keyValue)
-            } else {
-                this.Selected.splice(targetIndex, 1)
-            }
-        },
-        SET_EXPANDED(keyValue: string | number, value: boolean): void {
-            return
-        },
-    }
-
-    @Emit('rowClick')
-    private onRowClick(row: any, index: number): void { return }
-
-    @Emit('select')
-    private onCheck(row: any, index: number): void { return }
-
     private render(): VNode {
         const { height, border, header, rowSelect, classes, select, expand } = this
         const noHeader = header === 'none'

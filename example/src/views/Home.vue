@@ -2,21 +2,21 @@
     <m-container style="padding:20px">
         <m-row space="xs">
             <m-col>
+                <m-button @click="selectedData.push('Cupcake')">烦烦烦 广告费</m-button>
                 <m-table class="m--mb-lg"
                          :data="tableData"
+                         :selected="selectedData"
                          key-field="name"
                          select="multi"
                          row-select
-                         :selected-data.sync="selectedData"
-                         :no-select-data="disSelectData"
                          expand="multi"
-                         :expanded-data.sync="expandedData"
                          row-expand
                          height="300px"
                          header="sticky"
                          hover="row"
                          border
                       >
+                    <m-table-column type="checkbox" width="80"/>
                     <m-table-column title="name" field="name" width="300" align="left"/>
                     <m-table-column title="calories" width="300" field="calories" />
                     <m-table-column width="300">
@@ -29,7 +29,7 @@
                     <template slot="head-extra">
                         <tr>
                             <td rowspan="2">店铺哦及</td>
-                            <td colspan="2">sad</td>
+                            <td colspan="3  ">sad</td>
                         </tr>
                         <tr>
                             <td>店铺哦及</td>
@@ -37,13 +37,14 @@
                         </tr>
                     </template>
                 </m-table>
+                {{selectedData}}
                 <m-table ref="dataTable"
                     class="m--mb-lg"
                     :data="tableData"
+                    :selected.sync="selectedData"
                     key-field="name"
                     select="multi"
                     row-select
-                    :selected-data.sync="selectedData"
                     height="300px"
                     hover="row"
                     border>
