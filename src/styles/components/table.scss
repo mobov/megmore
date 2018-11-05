@@ -24,15 +24,6 @@
                     width: 0;
                 }
             }
-            &:before {
-                content: ' ';
-                position: absolute;
-                height: 100%;
-                width: 1px;
-                background-color: $--color-border;
-                top: 0;
-                right: 0;
-            }
             &:after {
                 content: ' ';
                 position: absolute;
@@ -85,7 +76,19 @@
 
     // border
     &.m--border {
-
+        table {
+            td {
+                &:before {
+                    content: ' ';
+                    position: absolute;
+                    height: 100%;
+                    width: 1px;
+                    background-color: $--color-border;
+                    top: 0;
+                    right: 0;
+                }
+            }
+        }
     }
 
     // sticky-header
@@ -119,11 +122,10 @@
 
     // expand
     .m-table-body__expand {
+        height: 0 !important;
         > td {
             padding: 0;
-            > * {
-                transition: all ease .3s;
-            }
         }
+
     }
 }

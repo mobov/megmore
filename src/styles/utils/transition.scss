@@ -5,24 +5,13 @@
    backface-visibility: hidden;
 }
 
-.m--transition-scale-enter,
-.m--transition-scale-leave-active {
-    transform: scale(0);
+
+.m-transition-expansion-enter-active,
+.m-transition-expansion-leave-active {
+    transition: all .3s ease;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
     opacity: 0;
 }
 
 
-.m--transition-expansion-enter,
-.m--transition-expansion-leave-active {
-    transition: max-height .3s ease;
-    //backface-visibility: hidden;
-    max-height: 50px;
-    height: 100px;
-}
-
-.m--transition-expansion-enter,
-.m--transition-expansion-leave-active {
-    max-height: 0;
-    height: 0;
-    //opacity: 0;
-}

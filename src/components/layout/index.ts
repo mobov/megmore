@@ -1,4 +1,4 @@
-import './layout.scss'
+import '@/styles/components/layout.scss'
 import MContainer from '@/components/layout/container'
 import MRow from '@/components/layout/row'
 import MCol from '@/components/layout/col'

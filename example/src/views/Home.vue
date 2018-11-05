@@ -31,11 +31,11 @@
                     <template slot="head-extra">
                         <tr>
                             <td rowspan="2">店铺哦及</td>
-                            <td colspan="3  ">sad</td>
+                            <td colspan="3">sad</td>
                         </tr>
                         <tr>
                             <td>店铺哦及</td>
-                            <td>sad</td>
+                            <td colspan="2">sad</td>
                         </tr>
                     </template>
                 </m-table>
@@ -49,8 +49,7 @@
                     row-select
                     row-expand
                     height="300px"
-                    hover="row"
-                    border>
+                    hover="row">
                     <m-table-column type="checkbox" width="80"/>
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />

@@ -1,5 +1,6 @@
 import { Component, Prop, Emit, Vue, Inject } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
+import { MTransitionExpansion } from '@/components/transition'
 import MCheckbox from '@/components/checkbox'
 import MRadio from '@/components/radio'
 import { VNode, VNodeChildren } from 'vue'
@@ -8,7 +9,7 @@ import { on, off } from '@/utils/event'
 
 const prefix = 'm-table-body'
 
-@Component({ components: { MCheckbox, MRadio }})
+@Component({ components: { MCheckbox, MRadio, MTransitionExpansion }})
 export default class TableBody extends Vue {
     @Prop({ type: String })
     private height!: string
@@ -53,8 +54,7 @@ export default class TableBody extends Vue {
 
     private handleRowClick(row: any, index: number): void {
         const { selectable, rowSelect, expandable, rowExpand } = this
-        console.log(rowExpand)
-        console.log(expandable)
+
         if (selectable && rowSelect) {
             this.handleRowSelect(row, index)
         }
@@ -136,26 +136,24 @@ export default class TableBody extends Vue {
                     {RCols(row, index, isSelected)}
                 </tr>
     }
-    private RExpand(row: any, index: number): VNode | null {
-        if (!this.$parent.$scopedSlots.expand) { return null }
+    private RExpand(row: any, index: number): VNode | undefined {
+        if (!this.$parent.$scopedSlots.expand) { return undefined }
 
         const { TableStore, TableCols, expandable } = this
         const { Expanded, keyField } = TableStore
 
-        if (!expandable) { return null }
+        if (!expandable) { return undefined }
 
         const isExpanded = Expanded.includes(row[keyField])
 
         return <tr staticClass={`${prefix}__expand`}>
-                    <td colSpan={TableCols.length}>
-                        <transition name='m--transition-expansion'>
-                            <div staticClass={`${prefix}__expand-content`}>
-                                { isExpanded
-                                    ? this.$parent.$scopedSlots.expand(row)
-                                    : null
-                                }
-                            </div>
-                        </transition>
+                    <td colSpan={TableCols.length}><MTransitionExpansion>
+                            { isExpanded
+                                ? <div staticClass={`${prefix}__expand-content`}>
+                                    { this.$parent.$scopedSlots.expand(row) }
+                                  </div>
+                                : undefined
+                            }</MTransitionExpansion>
                     </td>
                </tr>
     }
