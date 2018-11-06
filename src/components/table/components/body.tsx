@@ -69,7 +69,7 @@ export default class TableBody extends Vue {
         this.TableStore.SET_EXPANDED(index)
     }
     private RCols(row: any, index: number, isSelected: boolean): VNode {
-        const { TableCols, selectable, handleRowSelect } = this
+        const { TableCols, selectable, expandable, handleRowSelect } = this
         const result: any = []
 
         const RContent = (item: any): VNode => {
@@ -88,6 +88,8 @@ export default class TableBody extends Vue {
                 content = <MCheckbox value={isSelected}
                                      nativeOnClick={(event: Event) => { event.stopPropagation()}}
                                      onInput={() => handleRowSelect(row, index)} />
+            } else if (type === 'checkbox' && expandable) {
+                content = scopedSlots.default(row)
             } else if (scopedSlots) {
                 // 自定模板
                 content = scopedSlots.default(row)

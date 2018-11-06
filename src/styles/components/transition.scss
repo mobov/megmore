@@ -1,8 +1,9 @@
 
 .m-transition-expansion-enter-active,
 .m-transition-expansion-leave-active {
-    transition: all .3s ease-in-out;
+    transition: all .35s cubic-bezier(0.23, 1, 0.32, 1);
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
+    will-change: height;
     //opacity: 0;
 }

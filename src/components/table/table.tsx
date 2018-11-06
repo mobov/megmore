@@ -48,8 +48,8 @@ export default class MTable extends Vue {
     @Prop({ type: String, default: 'none' })
     private select?: 'none' | 'single' | 'multi'
 
-    @Prop({ type: Array, default: () => [] })
-    private selected?: any
+    @Prop({ type: [Array, String, Number], default: () => [] })
+    private selected?: any | string | number
 
     @Prop({ type: Array, default: () => [] })
     private noSelect?: any
@@ -60,8 +60,8 @@ export default class MTable extends Vue {
     @Prop({ type: String, default: 'single' })
     private expand?: 'none' | 'single' | 'multi'
 
-    @Prop({ type: Array, default: () => []  })
-    private expanded?: any
+    @Prop({ type: [Array, String, Number], default: () => []  })
+    private expanded?: any | string | number
 
     @Prop({ type: String })
     private filter?: any
@@ -177,16 +177,21 @@ export default class MTable extends Vue {
             this.syncSelected(this.TableStore.Selected)
         },
         SET_EXPANDED: (index: number): void => {
+            const { expand } = this
             const { Data, Expanded, keyField } = this.TableStore
             const keyValue = Data[index][keyField]
             const targetIndex = Expanded.indexOf(keyValue)
 
             if (targetIndex === -1) {
-                Expanded.push(keyValue)
+                if (expand === 'single') {
+                    this.TableStore.Expanded = [keyValue]
+                } else {
+                    this.TableStore.Expanded.push(keyValue)
+                }
             } else {
-                Expanded.splice(targetIndex, 1)
+                this.TableStore.Expanded.splice(targetIndex, 1)
             }
-            this.syncExpanded(Expanded)
+            this.syncExpanded(this.TableStore.Expanded)
         },
     }
 

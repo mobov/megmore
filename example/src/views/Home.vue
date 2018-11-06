@@ -8,10 +8,10 @@
                          :selected="selectedData"
                          key-field="name"
                          select="multi"
-                         expand="multi"
+                         expand="single"
                          :expanded="expandedData"
                          row-expand
-                         height="300px"
+                         height="600px"
                          header="sticky"
                          hover="row"
                          border>
