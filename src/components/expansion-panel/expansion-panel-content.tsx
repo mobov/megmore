@@ -24,8 +24,6 @@ export default class MExpansionPanelContent extends mixins(toggleable) {
   private beforeDestory() {
     this.contentRemove(this)
   }
- 
-
 
   private async enter(el: HTMLElement, done: () => void) {
     el.style.overflow = 'hidden'

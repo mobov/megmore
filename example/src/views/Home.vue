@@ -24,7 +24,7 @@
                             自定义内容{{scope.name}}
                         </template>
                     </m-table-column>
-                    <div slot="expand"  slot-scope="scope">
+                    <div class="m--p-xl" slot="expand"  slot-scope="scope">
                         表格expand内容{{scope}}
                     </div>
                     <!--多级表头追加-->

@@ -7,17 +7,22 @@
         border-collapse: collapse;
         position: relative;
         border-spacing: 0;
+        background-color: inherit;
         > thead {
+            background-color: inherit;
             width: inherit;
         }
         > tbody{
+            background-color: inherit;
             width: inherit;
         }
         tr {
+            background-color: white;
             border: none;
         }
         td {
             border: none;
+            background-color: inherit;
             position: relative;
             &:last-child {
                 &:before {
@@ -123,9 +128,12 @@
     // expand
     .m-table-body__expand {
         height: 0 !important;
+
         > td {
             padding: 0;
         }
-
+        .m-table-body__expand-content {
+            box-shadow: getElevation(4) inset;
+        }
     }
 }

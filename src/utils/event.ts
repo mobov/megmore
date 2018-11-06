@@ -57,10 +57,11 @@ export const off = (() => {
     }
 )()
 
-export function once(
+export const once = (
     element: Element | Document | Window,
     event: string,
-    handler: () => void): void {
+    handler: () => void,
+): void => {
     const run = () => {
         handler()
         off(element, event, run, false)

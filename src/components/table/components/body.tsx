@@ -147,13 +147,15 @@ export default class TableBody extends Vue {
         const isExpanded = Expanded.includes(row[keyField])
 
         return <tr staticClass={`${prefix}__expand`}>
-                    <td colSpan={TableCols.length}><MTransitionExpansion>
+                    <td colSpan={TableCols.length}>
+                        <MTransitionExpansion>
                             { isExpanded
                                 ? <div staticClass={`${prefix}__expand-content`}>
                                     { this.$parent.$scopedSlots.expand(row) }
                                   </div>
                                 : undefined
-                            }</MTransitionExpansion>
+                            }
+                        </MTransitionExpansion>
                     </td>
                </tr>
     }

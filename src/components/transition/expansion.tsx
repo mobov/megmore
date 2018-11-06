@@ -2,21 +2,21 @@ import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 const prefix = 'm-transition-expansion'
-function getSize (size) {
-    console.log(size)
-    if (!size) return 0;
-    const index = size.indexOf('px');
-    if (index === -1) return 0;
-    return Number(size.substring(0, index));
+function getSize(size: string): number {
+    if (!size) { return 0 }
+    const index = size.indexOf('px')
+    if (index === -1) { return 0 }
+    return Number(size.substring(0, index))
 }
 @Component({ functional: true } as FunctionalComponentOptions)
 export default class MTransitionExpansion extends Vue {
     private render(h: any, { props, data, children }: any): VNode {
 
         function beforeEnter(el: HTMLElement): void {
-            el.dataset.oldPaddingTop = el.style.paddingTop;
-            el.dataset.oldPaddingBottom = el.style.paddingBottom;
-            el.dataset.oldOverflow = el.style.overflow;
+            console.log(el.style.height)
+            el.dataset.originPaddingTop = el.style.paddingTop;
+            el.dataset.originPaddingBottom = el.style.paddingBottom;
+            el.dataset.originOverflow = el.style.overflow;
             el.style.paddingTop = '0';
             el.style.paddingBottom = '0';
             el.style.height = '0';
@@ -24,21 +24,21 @@ export default class MTransitionExpansion extends Vue {
         function enter(el: HTMLElement): void {
             el.style.display = 'block';
             el.style.overflow = 'hidden';
-            el.style.height = el.scrollHeight + getSize(el.dataset.oldPaddingTop) + getSize(el.dataset.oldPaddingBottom) + 'px';
-            el.style.paddingTop = el.dataset.oldPaddingTop;
-            el.style.paddingBottom = el.dataset.oldPaddingBottom;
+            el.style.height = el.scrollHeight + getSize(el.dataset.originPaddingTop) + getSize(el.dataset.originPaddingBottom) + 'px';
+            el.style.paddingTop = el.dataset.originPaddingTop;
+            el.style.paddingBottom = el.dataset.originPaddingBottom;
         }
         function afterEnter(el: HTMLElement): void {
-            el.style.display = '';
-            el.style.height = '';
-            el.style.overflow = el.dataset.oldOverflow;
-            el.style.paddingTop = el.dataset.oldPaddingTop;
-            el.style.paddingBottom = el.dataset.oldPaddingBottom;
+            // el.style.display = '';
+            // el.style.height = '';
+            el.style.overflow = el.dataset.originOverflow;
+            el.style.paddingTop = el.dataset.originPaddingTop;
+            el.style.paddingBottom = el.dataset.originPaddingBottom;
         }
         function beforeLeave(el: HTMLElement): void {
-            el.dataset.oldPaddingTop = el.style.paddingTop;
-            el.dataset.oldPaddingBottom = el.style.paddingBottom;
-            el.dataset.oldOverflow = el.style.overflow;
+            el.dataset.originPaddingTop = el.style.paddingTop;
+            el.dataset.originPaddingBottom = el.style.paddingBottom;
+            el.dataset.originOverflow = el.style.overflow;
 
             el.style.display = 'block';
             if (el.scrollHeight !== 0) {
@@ -58,9 +58,9 @@ export default class MTransitionExpansion extends Vue {
         function afterLeave(el: HTMLElement): void {
             el.style.display = 'none';
             el.style.height = '';
-            el.style.overflow = el.dataset.oldOverflow;
-            el.style.paddingTop = el.dataset.oldPaddingTop;
-            el.style.paddingBottom = el.dataset.oldPaddingBottom;
+            el.style.overflow = el.dataset.originOverflow;
+            el.style.paddingTop = el.dataset.originPaddingTop;
+            el.style.paddingBottom = el.dataset.originPaddingBottom;
         }
 
         return <transition name={prefix}

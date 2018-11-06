@@ -1,0 +1,8 @@
+
+.m-transition-expansion-enter-active,
+.m-transition-expansion-leave-active {
+    transition: all .3s ease-in-out;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    //opacity: 0;
+}
