@@ -15,6 +15,7 @@ const SuperCls = Mixins(toggleable)
 export default class MPopover extends SuperCls {
   private style: any = {}
   private content!: HTMLDivElement
+  private popperVM!: Vue
   @Prop({ type: Boolean })
   private inheritWidth!: boolean //  使用ref的宽度
 
@@ -75,7 +76,14 @@ export default class MPopover extends SuperCls {
       off(this.scoller, 'scroll', this.setStyle)// 滚动事件解绑
     }
   }
-
+  private beforeCreate() {
+    this.popperVM = new Vue({
+      data: { node: null },
+      render(h) {
+        return this.node as VNode
+      },
+    }).$mount();
+  }
   private mounted() {
     this.showContent()
     on(this.refElement, 'click', this.toggle)
@@ -198,23 +206,20 @@ export default class MPopover extends SuperCls {
     if (!this.visible) {
       return
     }
-    document.body.appendChild(this.content)
+    document.body.appendChild(this.popperVM.$el)
     on(this.scoller, 'scroll', this.setStyle)
     this.setStyle()
   }
   private render() {
-    return (
-      <div class='m-popover' v-m-click-outside={this.hide}>
-        <transition name='m-popover'>
-          {this.visible && (
-            <div v-m-click-outside={this.hide} ref='content' class={`${clsPrefix('content')}`} style={this.style}>
-              {this.$slots.default}
-            </div>
-          )}
-        </transition>
-        {this.$slots.ref}
-      </div>
+    this.popperVM.node = (
+      <transition name='m-popover'>
+        {this.visible && (
+          <div v-m-click-outside={this.hide} ref='content' class={`${clsPrefix('content')}`} style={this.style}>
+            {this.$slots.default}
+          </div>
+        )}
+      </transition>
     )
+    return (this.$slots.ref[0])
   }
-
 }

@@ -44,3 +44,34 @@ export function getScrollEventTarget(el: Element): Element | Window {
 export function getScrollbarSize(el: HTMLElement): number {
     return el.offsetWidth - el.clientWidth
 }
+
+//clickoutside手动绑定
+export const outSideHandleKey = 'm-clickoutside-context'
+interface Node extends Element {
+    [outSideHandleKey]: {
+        id: number,
+        documentHandler: (e: MouseEvent, startClick: MouseEvent) => void,
+        methodName: string,
+        bindingFn: () => void,
+    }
+}
+
+export const outSideNodeList: Node[] = []
+export function onClickOutSide(dom: Node, cb: () => any) {
+    dom[outSideHandleKey] = cb
+    dom.documentHandler = (mouseup: MouseEvent, mousedown: MouseEvent) => {
+        const target1 = mouseup.target as Node
+        const target2 = mousedown.target as Node
+        if (dom.contains(target1) || dom.contains(target2) || outSideNodeList.includes(target1) || outSideNodeList.includes(target1)) {
+            return
+        }
+        el[ctx].bindingFn && el[ctx].bindingFn();
+    }
+    outSideNodeList.push(dom)
+}
+export function offClickOutSide(dom: Node, cb: () => any) {
+    const index = outSideNodeList.findIndex(item => item === dom)
+    outSideNodeList.splice(index, 1)
+    delete dom.documentHandler
+    delete dom[outSideHandleKey]
+}

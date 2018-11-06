@@ -1,6 +1,9 @@
 <template>
     <m-container style="padding:20px">
         <m-row space="xs">
+            <MTooltip>
+                <m-button  loading>fullscreen modal</m-button>
+            </MTooltip>
             <m-col>
                 <m-button @click="selectedData.push('Cupcake')">烦烦烦 广告费</m-button>
                 <m-table class="m--mb-lg"
@@ -259,7 +262,7 @@
                 </template>
             </MExpansionPanelContent>
         </MExpansionPanel>
-
+        
     </m-container>
 </template>
 
