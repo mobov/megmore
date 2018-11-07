@@ -72,8 +72,7 @@ export default class TableBody extends Vue {
     private RCols(row: any, index: number): VNode {
         const { TableCols, selectable, select, expandable, handleRowSelect, handleRowExpand } = this
         const { Selected, keyField, NoSelect, Expanded } = this.TableStore
-        const isSelected = Selected.includes(row[keyField])
-        const isExpanded = Expanded.includes(row[keyField])
+
 
         const result: any = []
 
@@ -86,6 +85,8 @@ export default class TableBody extends Vue {
             const field = item.componentOptions.propsData.field
 
             if (type === 'select' && selectable) {
+                const isSelected = Selected.includes(row[keyField])
+
                 if (select === 'multi') {
                     content = <MCheckbox value={isSelected}
                                          nativeOnClick={(event: Event) => { event.stopPropagation()}}
@@ -96,7 +97,9 @@ export default class TableBody extends Vue {
                                       onInput={() => handleRowSelect(row, index)} />
                 }
             } else if (type === 'expand' && expandable) {
-                content = <div onClick={(event: Event) => {
+                const isExpanded = Expanded.includes(row[keyField])
+
+                    content = <div onClick={(event: Event) => {
                                 event.stopPropagation()
                                 handleRowExpand(row, index)
                             }}>

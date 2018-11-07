@@ -156,16 +156,23 @@ export default class MTable extends Vue {
             }
         },
         SET_SELECTED: (index: number): void => {
+            const { select } = this
             const { Data, Selected, keyField } = this.TableStore
             const keyValue = Data[index][keyField]
             const targetIndex = Selected.indexOf(keyValue)
 
             if (targetIndex === -1) {
-                Selected.push(keyValue)
+                if (select === 'multi') {
+                    // multi
+                    this.TableStore.Selected.push(keyValue)
+                } else {
+                    // single
+                    this.TableStore.Selected = [keyValue]
+                }
             } else {
-                Selected.splice(targetIndex, 1)
+                this.TableStore.Selected.splice(targetIndex, 1)
             }
-            this.syncSelected(Selected)
+            this.syncSelected(this.TableStore.Selected)
         },
         SET_SELECTED_ALL: (): void => {
             const { Data, Selected, keyField } = this.TableStore
@@ -178,9 +185,9 @@ export default class MTable extends Vue {
         },
         SET_EXPANDED: (index: number): void => {
             const { expand } = this
-            const { Data, Expanded, keyField } = this.TableStore
+            const { Data, keyField } = this.TableStore
             const keyValue = Data[index][keyField]
-            const targetIndex = Expanded.indexOf(keyValue)
+            const targetIndex = this.TableStore.Expanded.indexOf(keyValue)
 
             if (targetIndex === -1) {
                 if (expand === 'single') {

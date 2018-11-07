@@ -48,7 +48,7 @@
                     :data="tableData"
                     :selected.sync="selectedData"
                     key-field="name"
-                    select="multi"
+                    select="single"
                     expand="single"
                     row-select
                     row-expand

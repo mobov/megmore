@@ -2,7 +2,6 @@
 import Vue from 'vue'
 import {Shape, Variety} from '@/types/model'
 
-
 export interface ComponentOptions extends Vue  {
         // base
         elevation?: number
