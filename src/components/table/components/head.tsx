@@ -14,6 +14,9 @@ export default class TableHead extends Vue {
     @Inject()
     private TableStore!: any
 
+    @Prop({ type: String})
+    private select!: 'none' | 'single' | 'multi'
+
     private widthMap: any = []
     private updateSize(widthMap: any): void {
         this.widthMap = widthMap
@@ -22,8 +25,8 @@ export default class TableHead extends Vue {
         this.TableStore.SET_SELECTED_ALL()
     }
     private RCell(item: any, index: number): VNode {
-        const { TableStore, handleSelectAll } = this
-        const { Data, keyField, Selected } = TableStore
+        const { TableStore, select, handleSelectAll } = this
+        const { Data, Selected } = TableStore
         const children = item.componentOptions.children
         const propsData = item.componentOptions.propsData
         const propsDefault = item.componentOptions.Ctor.options.props
@@ -31,7 +34,7 @@ export default class TableHead extends Vue {
             let content: any = null
             const type = item.componentOptions.propsData.type
 
-            if (type === 'checkbox') {
+            if (type === 'select' && select === 'multi') {
                 const selectedLength = Selected.length
                 const dataLength = Data.length
 

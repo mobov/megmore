@@ -14,53 +14,53 @@ export default class MTransitionExpansion extends Vue {
 
         function beforeEnter(el: HTMLElement): void {
             console.log(el.style.height)
-            el.dataset.originPaddingTop = el.style.paddingTop;
-            el.dataset.originPaddingBottom = el.style.paddingBottom;
-            el.dataset.originOverflow = el.style.overflow;
-            el.style.paddingTop = '0';
-            el.style.paddingBottom = '0';
-            el.style.height = '0';
+            el.dataset.originPaddingTop = el.style.paddingTop
+            el.dataset.originPaddingBottom = el.style.paddingBottom
+            el.dataset.originOverflow = el.style.overflow
+            el.style.paddingTop = '0'
+            el.style.paddingBottom = '0'
+            el.style.height = '0'
         }
         function enter(el: HTMLElement): void {
-            el.style.display = 'block';
-            el.style.overflow = 'hidden';
-            el.style.height = el.scrollHeight + getSize(el.dataset.originPaddingTop) + getSize(el.dataset.originPaddingBottom) + 'px';
-            el.style.paddingTop = el.dataset.originPaddingTop;
-            el.style.paddingBottom = el.dataset.originPaddingBottom;
+            el.style.display = 'block'
+            el.style.overflow = 'hidden'
+            el.style.height = el.scrollHeight + getSize(el.dataset.originPaddingTop) + getSize(el.dataset.originPaddingBottom) + 'px'
+            el.style.paddingTop = el.dataset.originPaddingTop
+            el.style.paddingBottom = el.dataset.originPaddingBottom
         }
         function afterEnter(el: HTMLElement): void {
             // el.style.display = '';
             // el.style.height = '';
-            el.style.overflow = el.dataset.originOverflow;
-            el.style.paddingTop = el.dataset.originPaddingTop;
-            el.style.paddingBottom = el.dataset.originPaddingBottom;
+            el.style.overflow = el.dataset.originOverflow
+            el.style.paddingTop = el.dataset.originPaddingTop
+            el.style.paddingBottom = el.dataset.originPaddingBottom
         }
         function beforeLeave(el: HTMLElement): void {
-            el.dataset.originPaddingTop = el.style.paddingTop;
-            el.dataset.originPaddingBottom = el.style.paddingBottom;
-            el.dataset.originOverflow = el.style.overflow;
+            el.dataset.originPaddingTop = el.style.paddingTop
+            el.dataset.originPaddingBottom = el.style.paddingBottom
+            el.dataset.originOverflow = el.style.overflow
 
-            el.style.display = 'block';
+            el.style.display = 'block'
             if (el.scrollHeight !== 0) {
-                el.style.height = el.scrollHeight + 'px';
+                el.style.height = el.scrollHeight + 'px'
             }
-            el.style.overflow = 'hidden';
+            el.style.overflow = 'hidden'
         }
         function leave(el: HTMLElement): void {
             if (el.scrollHeight !== 0) {
                 setTimeout(() => {
-                    el.style.height = 0;
-                    el.style.paddingTop = 0;
-                    el.style.paddingBottom = 0;
-                });
+                    el.style.height = 0
+                    el.style.paddingTop = 0
+                    el.style.paddingBottom = 0
+                })
             }
         }
         function afterLeave(el: HTMLElement): void {
-            el.style.display = 'none';
-            el.style.height = '';
-            el.style.overflow = el.dataset.originOverflow;
-            el.style.paddingTop = el.dataset.originPaddingTop;
-            el.style.paddingBottom = el.dataset.originPaddingBottom;
+            el.style.display = 'none'
+            el.style.height = ''
+            el.style.overflow = el.dataset.originOverflow
+            el.style.paddingTop = el.dataset.originPaddingTop
+            el.style.paddingBottom = el.dataset.originPaddingBottom
         }
 
         return <transition name={prefix}

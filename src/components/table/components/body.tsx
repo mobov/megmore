@@ -9,7 +9,7 @@ import { on, off } from '@/utils/event'
 
 const prefix = 'm-table-body'
 
-@Component({ components: { MCheckbox, MRadio, MTransitionExpansion }})
+@Component({ components: { MCheckbox, MRadio, MIcon, MTransitionExpansion }})
 export default class TableBody extends Vue {
     @Prop({ type: String })
     private height!: string
@@ -66,10 +66,15 @@ export default class TableBody extends Vue {
         this.TableStore.SET_SELECTED(index)
     }
     private handleRowExpand(row: any, index: number): void {
+        console.log(index)
         this.TableStore.SET_EXPANDED(index)
     }
-    private RCols(row: any, index: number, isSelected: boolean): VNode {
-        const { TableCols, selectable, expandable, handleRowSelect } = this
+    private RCols(row: any, index: number): VNode {
+        const { TableCols, selectable, select, expandable, handleRowSelect, handleRowExpand } = this
+        const { Selected, keyField, NoSelect, Expanded } = this.TableStore
+        const isSelected = Selected.includes(row[keyField])
+        const isExpanded = Expanded.includes(row[keyField])
+
         const result: any = []
 
         const RContent = (item: any): VNode => {
@@ -80,16 +85,28 @@ export default class TableBody extends Vue {
             const scopedSlots = item.data.scopedSlots
             const field = item.componentOptions.propsData.field
 
-            if (type === 'radio' && selectable) {
-                content = <MRadio value={isSelected}
-                                  nativeOnClick={(event: Event) => { event.stopPropagation()}}
-                                  onInput={() => handleRowSelect(row, index)} />
-            } else if (type === 'checkbox' && selectable) {
-                content = <MCheckbox value={isSelected}
-                                     nativeOnClick={(event: Event) => { event.stopPropagation()}}
-                                     onInput={() => handleRowSelect(row, index)} />
-            } else if (type === 'checkbox' && expandable) {
-                content = scopedSlots.default(row)
+            if (type === 'select' && selectable) {
+                if (select === 'multi') {
+                    content = <MCheckbox value={isSelected}
+                                         nativeOnClick={(event: Event) => { event.stopPropagation()}}
+                                         onInput={() => handleRowSelect(row, index)} />
+                } else {
+                    content = <MRadio value={isSelected}
+                                      nativeOnClick={(event: Event) => { event.stopPropagation()}}
+                                      onInput={() => handleRowSelect(row, index)} />
+                }
+            } else if (type === 'expand' && expandable) {
+                content = <div onClick={(event: Event) => {
+                                event.stopPropagation()
+                                handleRowExpand(row, index)
+                            }}>
+                            <transition name="m-transition-scale">
+                                { isExpanded
+                                ? <MIcon name='add' />
+                                : <MIcon name='remove' />
+                                }
+                            </transition>
+                          </div>
             } else if (scopedSlots) {
                 // 自定模板
                 content = scopedSlots.default(row)
@@ -126,16 +143,17 @@ export default class TableBody extends Vue {
     }
     private RRow(row: any, index: number): VNode {
         const { TableStore, RCols, handleRowClick, selectable } = this
-        const { Selected, keyField } = TableStore
-        const isSelected = Selected.includes(row[keyField])
-        const classes = {
-            'm--selected': selectable ? isSelected : false,
-        }
+        const { Selected, keyField, NoSelect } = TableStore
+
+        const classes = selectable ? {
+            'm--selected': Selected.includes(row[keyField]),
+            'm--disabled': NoSelect.includes(row[keyField]),
+        } : {}
 
         return  <tr staticClass={`${prefix}__row`}
                     class={classes}
                     onClick={() => handleRowClick(row, index)}>
-                    {RCols(row, index, isSelected)}
+                    {RCols(row, index)}
                 </tr>
     }
     private RExpand(row: any, index: number): VNode | undefined {

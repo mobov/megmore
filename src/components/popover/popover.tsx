@@ -182,8 +182,7 @@ export default class MPopover extends SuperCls {
       } else if (positionModify === 'end') {//  弹窗底部对准内容底部
         contentPositionTop += height
       }
-    }
-    else if (position === 'bottom') {
+    } else if (position === 'bottom') {
       contentPositionTop = top//  弹窗顶部对准内容头部
       if (positionModify === 'start') {// 默认情况
 

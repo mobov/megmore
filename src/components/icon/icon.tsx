@@ -8,6 +8,7 @@ const presetIcons = [
     'check_box', 'check_box_outline_blank', 'indeterminate_check_box',
     'radio_button_checked', 'radio_button_unchecked', 'arrow_drop_down', 'check',
     'info_outline', 'warning', 'error',
+    'keyboard_arrow_down', 'keyboard_arrow_up', 'add', 'remove',
 ]
 
 const prefix = 'm-icon'
@@ -49,7 +50,7 @@ export class MIcon extends Vue {
         const staticClasses = data.staticClass !== undefined ? data.staticClass : ''
         const classes = data.class !== undefined ? data.class : ''
         const styles = Object.assign({ fill: 'currentColor' }, data.style, data.staticStyle)
-        const click = listeners.click || function () { }
+        const click = listeners.click || function() { }
         return (
             <svg xmlns='http://www.w3.org/2000/svg'
                 version='1.1'

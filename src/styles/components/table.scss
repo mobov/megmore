@@ -118,9 +118,14 @@
         }
     }
 
-    // row selected
+
     .m-table-body__row {
+        // row selected
         &.m--selected {
+            background-color: $--color-hover-bg;
+        }
+        // row disabled
+        &.m--disabled {
             background-color: $--color-hover-bg;
         }
     }
@@ -128,12 +133,13 @@
     // expand
     .m-table-body__expand {
         height: 0 !important;
-
+        max-width: 100%;
         > td {
             padding: 0;
         }
         .m-table-body__expand-content {
-            box-shadow: getElevation(4) inset;
+            box-shadow: getElevation(2) inset;
+            background-color: getColor(gray, 50);
         }
     }
 }

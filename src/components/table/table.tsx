@@ -225,8 +225,10 @@ export default class MTable extends Vue {
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 <div staticClass={`${prefix}__wrapper`}>
-                    { noHeader ? ''
-                        : <TableHead ref={'head'} />}
+                    { noHeader ? undefined :
+                        <TableHead ref={'head'}
+                                   select={select}/>
+                    }
                     <TableBody ref={'body'}
                                height={height}
                                border={border}

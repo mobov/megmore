@@ -13,12 +13,12 @@
                          select="multi"
                          expand="single"
                          :expanded="expandedData"
-                         row-expand
                          height="600px"
                          header="sticky"
                          hover="row"
                          border>
-                    <m-table-column type="checkbox" width="80"/>
+                    <m-table-column type="expand" width="100"/>
+                    <m-table-column type="select" width="100"/>
                     <m-table-column title="name" field="name" width="300" align="left"/>
                     <m-table-column title="calories" width="300" field="calories" />
                     <m-table-column width="300">
@@ -49,11 +49,12 @@
                     :selected.sync="selectedData"
                     key-field="name"
                     select="multi"
+                    expand="single"
                     row-select
                     row-expand
                     height="300px"
                     hover="row">
-                    <m-table-column type="checkbox" width="80"/>
+                    <m-table-column type="select" width="80"/>
                     <m-table-column title="name" field="name" />
                     <m-table-column title="calories" field="calories" />
                     <template slot="expand" slot-scope="scope">
