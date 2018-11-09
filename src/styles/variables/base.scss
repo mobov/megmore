@@ -65,6 +65,7 @@ $--Size-button-height:(
     lg: 44,
     xl: 50,
 );
+
 $--size-button-min-width: 88;
 $--size-button-round-radius: 28;
 
@@ -107,6 +108,24 @@ $--Space-table-cell-y: (
     md: 15,
     lg: 20,
     xl: 25,
+);
+
+// icon
+$--Size-icon: (
+    xs: 12,
+    sm: 24,
+    md: 32,
+    lg: 40,
+    xl: 50,
+);
+
+// checkbox & radio
+$--Size-check__wrapper: (
+    xs: 30,
+    sm: 48,
+    md: 60,
+    lg: 72,
+    xl: 96,
 );
 
 $--Transitions: (

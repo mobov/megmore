@@ -27,7 +27,7 @@ export default class MTable extends Vue {
     @Prop({ type: Number, default: 2 })
     private elevation?: number
 
-    @Prop({ type: String, default: 'md' })
+    @Prop({ type: String, default: () => 'md' })
     private size?: Size
 
     @Prop({ type: [String, Number], default: 'auto' })
@@ -226,7 +226,7 @@ export default class MTable extends Vue {
     }
 
     private render(): VNode {
-        const { height, border, header, classes, select, expand, rowSelect, rowExpand } = this
+        const { height, border, header, classes, size, select, expand, rowSelect, rowExpand } = this
         const noHeader = header === 'none'
 
         return (
@@ -234,9 +234,11 @@ export default class MTable extends Vue {
                 <div staticClass={`${prefix}__wrapper`}>
                     { noHeader ? undefined :
                         <TableHead ref={'head'}
+                                   size={size}
                                    select={select}/>
                     }
                     <TableBody ref={'body'}
+                               size={size}
                                height={height}
                                border={border}
                                select={select}

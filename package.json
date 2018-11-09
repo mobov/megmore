@@ -10,7 +10,7 @@
     "generate:icons": "node src/icons-src/generate"
   },
   "dependencies": {
-    "@megmore/es-helper": "^0.0.11",
+    "@megmore/es-helper": "^0.0.17",
     "color": "^3.0.0",
     "es-treasure": "^0.5.7",
     "is-color-stop": "^1.1.0",

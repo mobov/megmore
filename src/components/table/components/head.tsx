@@ -3,6 +3,7 @@ import MIcon from '@/components/icon'
 import MCheckbox from '@/components/checkbox'
 import { VNode } from 'vue'
 import { toAbsStyleSize } from '@/utils/helpers'
+import {Size} from "@/types/model"
 
 const prefix = 'm-table-head'
 
@@ -13,6 +14,9 @@ export default class TableHead extends Vue {
 
     @Inject()
     private TableStore!: any
+
+    @Prop({ type: String})
+    private size!: Size
 
     @Prop({ type: String})
     private select!: 'none' | 'single' | 'multi'
@@ -46,6 +50,7 @@ export default class TableHead extends Vue {
                 const checkAll: any = [0, 1]
 
                 content = <MCheckbox onInput={() => { handleSelectAll() }}
+                                     size={size}
                                      value={checkVal}
                                      label={checkAll}/>
 

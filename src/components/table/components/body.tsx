@@ -6,6 +6,7 @@ import MRadio from '@/components/radio'
 import { VNode, VNodeChildren } from 'vue'
 import { toAbsStyleSize } from '@/utils/helpers'
 import { on, off } from '@/utils/event'
+import {Size} from "@/types/model"
 
 const prefix = 'm-table-body'
 
@@ -19,6 +20,9 @@ export default class TableBody extends Vue {
 
     @Prop({ type: Boolean })
     private noHeader!: boolean
+
+    @Prop({ type: String})
+    private size!: Size
 
     @Prop({ type: Boolean })
     private rowSelect!: boolean
@@ -70,7 +74,7 @@ export default class TableBody extends Vue {
         this.TableStore.SET_EXPANDED(index)
     }
     private RCols(row: any, index: number): VNode {
-        const { TableCols, selectable, select, expandable, handleRowSelect, handleRowExpand } = this
+        const { TableCols, selectable, select, size, expandable, handleRowSelect, handleRowExpand } = this
         const { Selected, keyField, NoSelect, Expanded } = this.TableStore
 
 
@@ -89,10 +93,12 @@ export default class TableBody extends Vue {
 
                 if (select === 'multi') {
                     content = <MCheckbox value={isSelected}
+                                         size={size}
                                          nativeOnClick={(event: Event) => { event.stopPropagation()}}
                                          onInput={() => handleRowSelect(row, index)} />
                 } else {
                     content = <MRadio value={isSelected}
+                                      size={size}
                                       nativeOnClick={(event: Event) => { event.stopPropagation()}}
                                       onInput={() => handleRowSelect(row, index)} />
                 }
@@ -105,8 +111,8 @@ export default class TableBody extends Vue {
                             }}>
                             <transition name="m-transition-scale">
                                 { isExpanded
-                                ? <MIcon name='add' />
-                                : <MIcon name='remove' />
+                                ? <MIcon name='remove' size={size} />
+                                : <MIcon name='add' size={size}/>
                                 }
                             </transition>
                           </div>

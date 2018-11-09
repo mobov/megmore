@@ -5,7 +5,14 @@
                 <m-button  loading>fullscreen modal</m-button>
             </MTooltip>
             <m-col>
-                <m-button @click="selectedData.push('Cupcake')">烦烦烦 广告费</m-button>
+                <div style="display: flex">
+                    <m-button @click="tableSize = 'xs'">xs</m-button>
+                    <m-button @click="tableSize = 'sm'">sm</m-button>
+                    <m-button @click="tableSize = 'md'">md</m-button>
+                    <m-button @click="tableSize = 'lg'">lg</m-button>
+                    <m-button @click="tableSize = 'xl'">xl</m-button>
+                </div>
+
                 <m-table class="m--mb-lg"
                          :data="tableData"
                          :selected="selectedData"
@@ -16,6 +23,7 @@
                          height="600px"
                          header="sticky"
                          hover="row"
+                         :size="tableSize"
                          border>
                     <m-table-column type="expand" width="100"/>
                     <m-table-column type="select" width="100"/>
@@ -283,6 +291,7 @@ export default {
       checkAll: ['check1', 'check2', 'check3', 'check4'],
       radio: 1,
       select:[],
+      tableSize: 'sm',
       selectedData: ['Eclair'],
       disSelectData: ['Cupcake'],
       expandedData: ['Lollipop'],

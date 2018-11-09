@@ -8,6 +8,7 @@ import Megmore from '@'
 
 Vue.use(Megmore, {
   theme: 'unicon',
+  size: 'sm',
   icons: {
     MIcon_more_vert,
     MIcon_account_circle,

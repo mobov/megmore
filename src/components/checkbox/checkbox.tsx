@@ -7,6 +7,9 @@ const prefix = 'm-checkbox'
 @Component({ components: { MIcon } })
 export default class MCheckbox extends Vue {
 
+    @Prop({ type: String, default: 'md' })
+    private size?: Size
+
     @Prop({ type: [Array, Number, String, Boolean], default: false })
     private value!: any
 
@@ -35,8 +38,10 @@ export default class MCheckbox extends Vue {
     private isBooleanValue: boolean = false
 
     get classes(): any {
+
         return {
             [`m--disabled`]: this.disabled,
+            [`m--${this.size}`]: true,
         }
     }
 
@@ -75,7 +80,7 @@ export default class MCheckbox extends Vue {
     }
 
     private render(): VNode {
-        const { $slots, classes, color, checkedIcon, uncheckIcon, incheckIcon,
+        const { $slots, classes, color, size, checkedIcon, uncheckIcon, incheckIcon,
                 value, label, handleClick } = this
         this.isArrayValue =  value instanceof Array
         this.isArrayLabel =  label instanceof Array
@@ -83,6 +88,8 @@ export default class MCheckbox extends Vue {
         this.isBooleanValue = typeof value === 'boolean'
         let isCheck = false
         let checkIcon = checkedIcon
+
+        console.log(size)
 
         if ( this.isArrayValue && this.isArrayLabel) {
             // Allcheck下value是数组, label也是数组
@@ -100,10 +107,15 @@ export default class MCheckbox extends Vue {
         const RCheckbox = () => (
             <a staticClass={`${prefix}__checkbox`}
                class={isCheck ? `m--color-${color}` : ''}>
-                <transition name='m--transition-scale'>
-                    {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkIcon} /> : null }
+                <transition name='m-transition-scale'>
+                    {isCheck
+                        ? <MIcon class={`${prefix}__check-icon`}
+                                 name={checkIcon}
+                                 size={size}/>
+                        : undefined
+                    }
                 </transition>
-                <MIcon name={uncheckIcon} />
+                <MIcon size={size} name={uncheckIcon} />
                 <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
             </a>
         )

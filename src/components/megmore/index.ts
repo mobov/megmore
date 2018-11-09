@@ -1,5 +1,8 @@
 import { VueConstructor } from 'vue'
 import { Megmore as MegmorePlugin, MegmoreUseOptions } from '@/types'
+import breakpoints from '@/components/megmore/breakpoints'
+import palettes from '@/components/megmore/palettes'
+import elevations from '@/components/megmore/elevations'
 import { getTheme, registerTheme, useTheme } from '@/components/megmore/theme'
 import MIcon from '@/components/icon'
 
@@ -31,6 +34,10 @@ const Megmore: MegmorePlugin = {
         }
     },
     version: '1.0.0',
+    size: 'md',
+    elevations,
+    palettes,
+    breakpoints,
 }
 
 /* istanbul ignore next */

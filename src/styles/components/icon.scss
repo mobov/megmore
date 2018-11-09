@@ -1,0 +1,11 @@
+
+.m-icon {
+    // size
+    @each $breakpoint in $--Breakpoints {
+        $size: map_get($--Size-icon, $breakpoint);
+        &.m--#{$breakpoint} {
+            height: d($size);
+            width: d($size);
+        }
+    }
+}

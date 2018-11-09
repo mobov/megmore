@@ -1,46 +1,46 @@
-// checkbox
-$--size-checkbox: 26;
-// checkbox
-$--size-checkbox__wrapper: 45;
+
 
 .m-checkbox {
     color: getColor(gray, A500);
     cursor: pointer;
     position: relative;
-    height: d($--size-checkbox);
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
     &.m--disabled {
         opacity: .5;
     }
-    .m-icon {
-        height: d($--size-checkbox);
-        width:  d($--size-checkbox);
-    }
     &__check-icon {
-        height: d($--size-checkbox);
-        width:  d($--size-checkbox);
         position: absolute;
         left: 0;
         top:0;
     }
     &__checkbox {
         position: relative;
-        height: d($--size-checkbox);
-        width:  d($--size-checkbox);
         margin-right: .4em;
     }
     &__checkbox-wrapper {
         position: absolute;
-        left:   d(- $--size-checkbox__wrapper / 2  + $--size-checkbox / 2);
-        top:    d(- $--size-checkbox__wrapper / 2  + $--size-checkbox / 2);
-        height: d($--size-checkbox__wrapper);
-        width:  d($--size-checkbox__wrapper);
         border-radius: 50%;
     }
 
     &__label {
         color: transparent;
+    }
+
+    //size
+    @each $breakpoint in $--Breakpoints {
+        $size: map_get($--Size-icon, $breakpoint);
+        $size-wrapper: map_get($--Size-check__wrapper, $breakpoint);
+        &.m--#{$breakpoint} {
+            height: d($size);
+            width: d($size);
+            .m-checkbox__checkbox-wrapper {
+                left:   d(- $size-wrapper / 2  + $size / 2);
+                top:    d(- $size-wrapper / 2  + $size / 2);
+                height: d($size-wrapper);
+                width:  d($size-wrapper);
+            }
+        }
     }
 }

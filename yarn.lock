@@ -580,9 +580,9 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@megmore/es-helper@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.npmjs.org/@megmore/es-helper/-/es-helper-0.0.11.tgz#1d5d02f89c1a665f1b601a2cdd5b49b22e1cdb47"
+"@megmore/es-helper@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.npmjs.org/@megmore/es-helper/-/es-helper-0.0.17.tgz#9a73ececf06ad026a6c7f4615286755070fd1a2e"
   dependencies:
     clipboard "^2.0.0"
 

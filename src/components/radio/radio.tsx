@@ -8,6 +8,9 @@ const prefix = 'm-radio'
 @Component({ components: { MIcon } })
 export default class MRadio extends Vue {
 
+    @Prop({ type: String, default: () => 'md' })
+    private size?: Size
+
     @Prop({ type: [Boolean, Number, String], default: false })
     private value!: boolean | number | string
 
@@ -41,13 +44,17 @@ export default class MRadio extends Vue {
     }
 
     private render(): VNode {
-        const { $slots, classes, checkedIcon, uncheckIcon, value, label, color, handleClick } = this
+        const { $slots, classes, size, checkedIcon, uncheckIcon, value, label, color, handleClick } = this
         const isCheck = label === value
 
         const RRadio = () => (
             <a staticClass={`${prefix}__checkbox`} class={isCheck ? `m--color-${color}` : ''}>
                 <transition name='m--transition-scale'>
-                    {isCheck ? <MIcon class={`${prefix}__check-icon`} name={checkedIcon} /> : null }
+                    {isCheck
+                        ? <MIcon class={`${prefix}__check-icon`}
+                                      name={checkedIcon}
+                                      size={size} />
+                        : undefined }
                 </transition>
                 <MIcon name={uncheckIcon} />
                 <div v-m-ripple staticClass={`${prefix}__checkbox-wrapper`} />
