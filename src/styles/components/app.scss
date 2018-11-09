@@ -10,5 +10,6 @@ body,
     
 }
 .m-app{
-    overflow-y: scroll
+    @include scroller();
+    @include scroll-bar-slim();
 }

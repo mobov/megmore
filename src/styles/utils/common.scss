@@ -84,6 +84,13 @@
 .m--block {
     width: 100%;
 }
+// flex居中
+.m--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 .m--pointer {
     cursor: pointer;

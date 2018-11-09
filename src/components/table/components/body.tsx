@@ -80,32 +80,38 @@ export default class TableBody extends Vue {
 
         const result: any = []
 
-        const RContent = (item: any): VNode => {
+        const RContent = (
+            item: any,
+            isSelect: boolean = false,
+            isExpand: boolean = false,
+        ): VNode => {
             let content: any = []
 
-            // todo:错误处理
-            const type = item.componentOptions.propsData.type
             const scopedSlots = item.data.scopedSlots
             const field = item.componentOptions.propsData.field
 
-            if (type === 'select' && selectable) {
+            if (isSelect) {
                 const isSelected = Selected.includes(row[keyField])
 
                 if (select === 'multi') {
-                    content = <MCheckbox value={isSelected}
+                    content = <div class="m--center">
+                                <MCheckbox value={isSelected}
                                          size={size}
                                          nativeOnClick={(event: Event) => { event.stopPropagation()}}
                                          onInput={() => handleRowSelect(row, index)} />
+                              </div>
                 } else {
-                    content = <MRadio value={isSelected}
+                    content = <div class="m--center">
+                                <MRadio value={isSelected}
                                       size={size}
                                       nativeOnClick={(event: Event) => { event.stopPropagation()}}
                                       onInput={() => handleRowSelect(row, index)} />
+                              </div>
                 }
-            } else if (type === 'expand' && expandable) {
+            } else if (isExpand) {
                 const isExpanded = Expanded.includes(row[keyField])
-
-                    content = <div onClick={(event: Event) => {
+                    content = <div class="m--center"
+                                onClick={(event: Event) => {
                                 event.stopPropagation()
                                 handleRowExpand(row, index)
                             }}>
@@ -139,10 +145,14 @@ export default class TableBody extends Vue {
             const align = item.componentOptions.align
                 || item.componentOptions.Ctor.options.props.align.default
 
+            const type = item.componentOptions.propsData.type
+            const isSelect = (type === 'select' && selectable)
+            const isExpand = (type === 'expand' && expandable)
+
             return <td staticClass={`${prefix}__cell`}
                        style={styles}
                        align={align}>
-                      {RContent(item)}
+                      {RContent(item, isSelect, isExpand)}
                    </td>
         }
 
