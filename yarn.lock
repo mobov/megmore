@@ -586,6 +586,10 @@
   dependencies:
     clipboard "^2.0.0"
 
+"@megmore/scss-helper@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/@megmore/scss-helper/-/scss-helper-0.0.3.tgz#10f271451eae28525e2fc6f68abd1bd5ccdec073"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "http://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

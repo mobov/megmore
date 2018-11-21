@@ -1,33 +1,38 @@
-@import "import";
-@import 'utils/normalize';
-@import 'utils/font-base';
-@import 'utils/base';
-@import 'utils/transition';
-/*按需引入部分*/
-
-@import "./components/app";
-@import "./components/appBar";
-@import "./components/avatar";
-@import "./components/button";
-@import "./components/modal";
-@import "./components/spin";
-@import "./components/time-picker";
-@import "./components/drawer";
-@import "./components/bottom-sheet";
-@import "./components/expansion-panel";
-@import "./components/popover";
-@import "./components/text-field";
-@import "./components/chip";
-@import "./components/checkbox";
-@import "./components/radio";
-@import "./components/select";
-@import "./components/table";
-@import "./components/toast";
-@import "./components/progress";
-@import "./components/tab";
-@import "./components/icon";
-@import "./components/base/overlay";
-@import "./components/transition";
-@import "./directives/ripple";
-//@import "themes/default";
-@import "utils/common";
+//@import "import";
+//// css variables
+//@import 'variables/avatar';
+//
+//@import 'utils/normalize';
+//@import 'utils/font-base';
+//@import 'utils/base';
+//@import 'utils/transition';
+///*按需引入部分*/
+//@import "../components/app/var.scss";
+//@import "../components/app/app.scss";
+//@import "../components/avatar/var.scss";
+//@import "../components/avatar/avatar.scss";
+//
+//@import "components/appBar";
+//@import "components/button";
+//@import "components/modal";
+//@import "components/spin";
+//@import "components/time-picker";
+//@import "components/drawer";
+//@import "components/bottom-sheet";
+//@import "components/expansion-panel";
+//@import "components/popover";
+//@import "components/text-field";
+//@import "components/chip";
+//@import "components/checkbox";
+//@import "components/radio";
+//@import "components/select";
+//@import "components/table";
+//@import "components/toast";
+//@import "components/progress";
+//@import "components/tab";
+//@import "components/icon";
+//@import "components/base/overlay";
+//@import "components/transition";
+//@import "directives/ripple";
+////@import "themes/default";
+//@import "utils/common";

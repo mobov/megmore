@@ -27,7 +27,11 @@
                          border>
                     <m-table-column type="expand" width="100"/>
                     <m-table-column type="select" width="100"/>
-                    <m-table-column title="name" field="name" width="300" align="left"/>
+                    <m-table-column title="name"
+                                    field="name"
+                                    width="300"
+                                    align="left"
+                                    sortable/>
                     <m-table-column title="calories" width="300" field="calories" />
                     <m-table-column width="300">
                         <span>自定义标题吼吼</span>
@@ -39,18 +43,18 @@
                         表格expand内容{{scope}}
                     </div>
                     <!--多级表头追加-->
-                    <template slot="head-extra">
-                        <tr>
-                            <td rowspan="2">店铺哦及</td>
-                            <td colspan="3">sad</td>
-                        </tr>
-                        <tr>
-                            <td>店铺哦及</td>
-                            <td colspan="2">sad</td>
-                        </tr>
-                    </template>
+                    <!--<template slot="head-extra">-->
+                        <!--<tr>-->
+                            <!--<td rowspan="2">店铺哦及</td>-->
+                            <!--<td colspan="3">sad</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>店铺哦及</td>-->
+                            <!--<td colspan="2">sad</td>-->
+                        <!--</tr>-->
+                    <!--</template>-->
                 </m-table>
-                {{selectedData}}
+
                 <m-table ref="dataTable"
                     class="m--mb-lg"
                     :data="tableData"

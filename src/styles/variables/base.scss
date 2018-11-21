@@ -1,8 +1,9 @@
-@import "palettes";
-@import "elevations";
+@import "common/palette";
+@import "common/elevation";
 
 $--relative: 16 !default;
 $--Breakpoints: (xs sm md lg xl);
+
 //space
 $--Space: (
     xs: 3,

@@ -9,6 +9,7 @@ const presetIcons = [
     'radio_button_checked', 'radio_button_unchecked', 'arrow_drop_down', 'check',
     'info_outline', 'warning', 'error',
     'keyboard_arrow_down', 'keyboard_arrow_up', 'keyboard_arrow_right', 'add', 'remove',
+    'arrow_upward', 'arrow_downward',
 ]
 
 const prefix = 'm-icon'

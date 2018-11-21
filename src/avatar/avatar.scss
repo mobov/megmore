@@ -1,0 +1,55 @@
+@import "~@megmore/scss-helper";
+/**
+ * variables register.
+ */
+:root {
+    --m-avatar-size-xs: 2rem;
+    --m-avatar-size-sm: 3rem;
+    --m-avatar-size-md: 4rem;
+    --m-avatar-size-lg: 5rem;
+    --m-avatar-size-xl: 6rem;
+
+    --m-avatar-font-size-xs: .6rem;
+    --m-avatar-font-size-sm: .8rem;
+    --m-avatar-font-size-md: 1rem;
+    --m-avatar-font-size-lg: 1.4rem;
+    --m-avatar-font-size-xl: 1.8rem;
+
+    --m-avatar-color: 2rem;
+}
+
+/**
+ * components styles.
+ */
+.m-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    > img {
+        @include abs-size(100% ,xy);
+        border-radius: inherit;
+    }
+
+    // size & font-size
+    @each $breakpoint in $--Breakpoints {
+        &.m--#{$breakpoint} {
+            //@include abs-size(var(--m-avatar-size-#{$breakpoint}), xy);
+            width: var(--m-avatar-size-#{$breakpoint});
+            height: var(--m-avatar-size-#{$breakpoint});
+            font-size: var(--m-avatar-font-size-#{$breakpoint});
+        }
+    }
+
+    // variety 
+    &.m--outline {
+        border-width: 2px;
+        border-style: solid;
+    }
+    // shape extends from m-shape
+    // elevation extends from m-elevation
+    // 背景颜色继承utils .bg-name-value
+    // 颜色继承utils .color-name-value
+    // 阴影继承utils .shadow-name-value
+}

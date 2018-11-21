@@ -21,7 +21,14 @@ export default class TableHead extends Vue {
     @Prop({ type: String})
     private select!: 'none' | 'single' | 'multi'
 
+    @Prop({ type: Boolean, default: false })
+    private sortable?: boolean
+
+    @Prop({ type: Function })
+    private sort?: () => boolean
+
     private widthMap: any = []
+
     private updateSize(widthMap: any): void {
         this.widthMap = widthMap
     }
@@ -29,7 +36,7 @@ export default class TableHead extends Vue {
         this.TableStore.SET_SELECTED_ALL()
     }
     private RCell(item: any, index: number): VNode {
-        const { TableStore, select, handleSelectAll } = this
+        const { TableStore, select, handleSelectAll, size  } = this
         const { Data, Selected } = TableStore
         const children = item.componentOptions.children
         const propsData = item.componentOptions.propsData
@@ -54,11 +61,12 @@ export default class TableHead extends Vue {
                                      value={checkVal}
                                      label={checkAll}/>
 
-            } else if (children) {
-                content = children
             } else {
                 // todo:错误处理
-                content = propsData.title || null
+                content = [ propsData.title || children ]
+                if (propsData.sortable !== undefined) {
+                    content.push(<MIcon size={14} name={'arrow_upward'} />)
+                }
             }
 
             return content

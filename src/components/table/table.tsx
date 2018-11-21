@@ -63,11 +63,11 @@ export default class MTable extends Vue {
     @Prop({ type: [Array, String, Number], default: () => []  })
     private expanded?: any | string | number
 
-    @Prop({ type: String })
-    private filter?: any
+    @Prop({ type: Function })
+    private filter?: () => boolean
 
-    @Prop({ type: String })
-    private sort?: any
+    @Prop({ type: String, default: 'single' })
+    private filterMulti?: string
 
     private get classes(): any {
         const { border, header, hover } = this
@@ -91,14 +91,17 @@ export default class MTable extends Vue {
 
         return temp
     }
+
     @Watch('data', { immediate: true, deep: true })
     private handleDataUpdate(val: any): void {
         this.TableStore.Data = this.dataAdaptI(val)
     }
+
     @Watch('selected', { immediate: true })
     private handleSelectedUpdate(val: any): void {
         this.TableStore.Selected = deepCopy(val)
     }
+
     @Watch('expanded', { immediate: true })
     private handleExpandedUpdate(val: any): void {
         this.TableStore.Expanded = deepCopy(val)
@@ -190,10 +193,12 @@ export default class MTable extends Vue {
             const targetIndex = this.TableStore.Expanded.indexOf(keyValue)
 
             if (targetIndex === -1) {
-                if (expand === 'single') {
-                    this.TableStore.Expanded = [keyValue]
-                } else {
+                if (expand === 'multi') {
+                    // multi
                     this.TableStore.Expanded.push(keyValue)
+                } else {
+                    // single
+                    this.TableStore.Expanded = [keyValue]
                 }
             } else {
                 this.TableStore.Expanded.splice(targetIndex, 1)
@@ -228,7 +233,7 @@ export default class MTable extends Vue {
     private render(): VNode {
         const { height, border, header, classes, size, select, expand, rowSelect, rowExpand } = this
         const noHeader = header === 'none'
-
+        console.log(noHeader)
         return (
             <div staticClass={`${prefix}`} class={classes}>
                 <div staticClass={`${prefix}__wrapper`}>

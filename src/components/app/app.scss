@@ -6,9 +6,8 @@ body,
     overflow: hidden;
     padding: 0;
     margin: 0;
-    font-family: Roboto-Regular;
 }
 .m-app{
     @include scroller();
-    @include scroll-bar-slim();
+    @include scroll-bar-slim(14px);
 }

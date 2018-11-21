@@ -1,7 +1,6 @@
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
 import MIcon from '@/components/icon'
 import { VNode } from 'vue'
-import { isHexColor } from 'es-treasure'
 import MSpin from '@/components/spin'
 import { Size, Color, Variety, Shape } from '@/types/model'
 
@@ -38,8 +37,8 @@ export default class MButton extends Vue {
         return {
             [`m--${size}`]: true,
             [`m--${variety}`]: true,
-            [`m--${shape}`]: true,
-            [`m--${block}`]: this.block,
+            [`m--shape-${shape}`]: true,
+            ['m--block']: block,
             [`m--color-${color}`]: !isNormal,
             [`m--border-${color}`]: isOutline,
             [`m--bg-${color}`]: isNormal,

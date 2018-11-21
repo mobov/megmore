@@ -1,0 +1,10 @@
+@import "~@megmore/scss-helper";
+/**
+ * variables register.
+ */
+:root {
+    // elevation
+    @each $index, $elevation in $--Elevations {
+        --m-elevation-#{$index}: #{$elevation};
+    }
+}

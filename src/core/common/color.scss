@@ -1,0 +1,12 @@
+@import "~@megmore/scss-helper";
+/**
+ * variables register.
+ */
+:root {
+    // color
+    @each $main, $colors in $--Palettes {
+        @each $key, $color in $colors {
+            --m-color-#{$main}-#{$key}: #{$color};
+        }
+    }
+}

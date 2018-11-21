@@ -23,6 +23,19 @@
         box-shadow: $elevation;
     }
 }
+// shape 形状
+.m--circle {
+    border-radius: var(--m-radius__circle);
+}
+.m--round {
+    border-radius: var(--m-radius__round);
+}
+.m--corner {
+    border-radius: var(--m-radius__corner);
+}
+.m--square {
+    border-radius: 0;
+}
 
 // space 间距
 .m--m-0 {

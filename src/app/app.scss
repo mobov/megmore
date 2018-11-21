@@ -1,0 +1,25 @@
+@import "~@megmore/scss-helper";
+
+/**
+ * variables register.
+ */
+
+
+/**
+ * components styles.
+ */
+html,
+body,
+.m-app {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    font-size: var(--m-font-base);
+    color: var(--m-font-color);
+}
+.m-app{
+    @include scroller();
+    @include slim-scroll-bar(14px);
+}

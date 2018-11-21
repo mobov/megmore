@@ -23,5 +23,12 @@ export default class MTableColumn extends Vue {
 
     @Prop({ type: String, default: 'primary' })
     private color?: Color
+
+    @Prop({ type: Function })
+    private sort?: () => boolean
+
+    @Prop({ type: Boolean, default: false })
+    private sortable?: boolean
+
 }
 

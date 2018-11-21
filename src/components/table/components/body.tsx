@@ -77,7 +77,6 @@ export default class TableBody extends Vue {
         const { TableCols, selectable, select, size, expandable, handleRowSelect, handleRowExpand } = this
         const { Selected, keyField, NoSelect, Expanded } = this.TableStore
 
-
         const result: any = []
 
         const RContent = (
@@ -117,8 +116,8 @@ export default class TableBody extends Vue {
                             }}>
                             <transition name="m-transition-scale">
                                 { isExpanded
-                                ? <MIcon name='remove' size={size} />
-                                : <MIcon name='add' size={size}/>
+                                    ? <MIcon name='remove' size={size} />
+                                    : <MIcon name='add' size={size}/>
                                 }
                             </transition>
                           </div>
