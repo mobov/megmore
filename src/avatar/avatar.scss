@@ -1,55 +1,57 @@
 @import "~@megmore/scss-helper";
+$--m-avatar-border-size: .2rem;
 /**
  * variables register.
  */
 :root {
+    // selection
     --m-avatar-size-xs: 2rem;
     --m-avatar-size-sm: 3rem;
     --m-avatar-size-md: 4rem;
     --m-avatar-size-lg: 5rem;
     --m-avatar-size-xl: 6rem;
 
-    --m-avatar-font-size-xs: .6rem;
-    --m-avatar-font-size-sm: .8rem;
-    --m-avatar-font-size-md: 1rem;
-    --m-avatar-font-size-lg: 1.4rem;
-    --m-avatar-font-size-xl: 1.8rem;
+    // default
+    --m-avatar-color: var(--m-color-pink-400);
+    --m-avatar-border-color: var(--m-color-pink-400);
+    --m-avatar-font-color: var(--m-font-color-1);
+    --m-avatar-elevation: var(--m-elevation-0);
+    --m-avatar-shape: var(--m-shape-circle);
 
-    --m-avatar-color: 2rem;
+    --m-avatar-size: var(--m-avatar-size-md);
 }
 
 /**
  * components styles.
  */
 .m-avatar {
+    border-radius: var(--m-avatar-shape);
+    box-shadow: var(--m-avatar-elevation);
+    background-color: var(--m-avatar-color);
+    color: var(--m-avatar-font-color);
+
+    width: var(--m-avatar-size);
+    height: var(--m-avatar-size);
+    font-size: var(--m-avatar-font-size);
+
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     cursor: pointer;
-    > img {
+    position: relative;
+    .m-avatar__cover {
         @include abs-size(100% ,xy);
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
         border-radius: inherit;
-    }
-
-    // size & font-size
-    @each $breakpoint in $--Breakpoints {
-        &.m--#{$breakpoint} {
-            //@include abs-size(var(--m-avatar-size-#{$breakpoint}), xy);
-            width: var(--m-avatar-size-#{$breakpoint});
-            height: var(--m-avatar-size-#{$breakpoint});
-            font-size: var(--m-avatar-font-size-#{$breakpoint});
-        }
     }
 
     // variety 
     &.m--outline {
-        border-width: 2px;
+        border-width: $--m-avatar-border-size;
         border-style: solid;
     }
-    // shape extends from m-shape
-    // elevation extends from m-elevation
-    // 背景颜色继承utils .bg-name-value
-    // 颜色继承utils .color-name-value
-    // 阴影继承utils .shadow-name-value
 }

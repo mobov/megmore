@@ -1,6 +1,6 @@
 <template>
   <m-app>
-    <m-app-bar @click.native="log" color="pink-300" font-color="white">
+    <m-app-bar @click.native="log" color="pink-400" font-color="white" size="md" :elevation="1">
       <m-button shape="circle" variety="flat" size="lg" @click="drawer=true">
         <m-icon name="menu" ></m-icon>
       </m-button>
@@ -14,7 +14,10 @@
       <m-button shape="circle" variety="flat" size="lg">
         <m-icon name="more_vert"></m-icon>
       </m-button>
-      <m-avatar variety="outline" type="danger" shape="circle" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3643687533,272026720&fm=58"></m-avatar>
+      <m-avatar variety="outline" type="danger" shape="round"
+                src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3643687533,272026720&fm=58">
+        A
+      </m-avatar>
     </m-app-bar>
     <!--<router-view />-->
     <!--<m-drawer :show.sync="drawer" />-->

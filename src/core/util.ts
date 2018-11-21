@@ -25,31 +25,3 @@ export function isCSSVar(val: string | number): boolean {
         ? false
         : (val.indexOf('--') === 0)
 }
-
-/**
- * 获取计算颜色样式值
- * get styles color value
- * @param val
- * @return {string}
- */
-export function genColor(val: string): string | boolean  {
-    if (val === undefined) { return false }
-    return isPalette(val)
-        ? `var(--m-color-${val})`
-        : isCSSVar(val)
-            ? `var(${val})`
-            : val
-}
-
-/**
- * 获取计算尺寸样式值
- * @param {number | string} val
- * @return {string}
- */
-export function genSize(val: number | string): string | boolean {
-    if (val === undefined) { return false }
-
-    return typeof val === 'number'
-        ? `${val}px`
-        : val
-}

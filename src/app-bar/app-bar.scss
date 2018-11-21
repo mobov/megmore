@@ -3,27 +3,34 @@
  * variables register.
  */
 :root {
+    // selection
     --m-app-bar-size-xs: 2.5rem;
     --m-app-bar-size-sm: 3.5rem;
     --m-app-bar-size-md: 4.5rem;
     --m-app-bar-size-lg: 5.5rem;
     --m-app-bar-size-xl: 6.5rem;
 
-    --m-app-bar-size: var(--m-app-bar-size-md);
+    // default
+    --m-app-bar-color: var(--m-color-pink-400);
     --m-app-bar-font-color: var(--m-font-color-1);
-    --m-app-bar-color: var(--m-color-gray-A100);
+    --m-app-bar-elevation: var(--m-elevation-2);
+
+    --m-app-bar-size: var(--m-app-bar-size-md);
 }
 
 /**
  * components styles.
  */
 .m-app-bar {
-    width: 100%;
+    // theme
+    box-shadow: var(--m-app-bar-elevation);
     height: var(--m-app-bar-size);
+    color: var(--m-app-bar-font-color);
+    background-color: var(--m-app-bar-color);
+
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 0 var(--m-space-md);
-    box-shadow: var(--m-elevation-2);
-    color: var(--m-app-bar-font-color);
-    background-color: var(--m-app-bar-color);
+    transition: all ease .3s;
 }
