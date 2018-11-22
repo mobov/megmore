@@ -3,7 +3,7 @@
  */
 import Color from 'color'
 import Palettes from '@/components/megmore/palettes'
-import Elevations from '@/components/megmore/elevations'
+    import q from '@/components/megmore/elevations'
 
 const currentTheme = 'unicon'
 

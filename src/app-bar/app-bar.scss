@@ -11,8 +11,8 @@
     --m-app-bar-size-xl: 6.5rem;
 
     // default
-    --m-app-bar-color: var(--m-color-pink-400);
-    --m-app-bar-font-color: var(--m-font-color-1);
+    --m-app-bar-color: var(--m-color-main);
+    --m-app-bar-font-color: var(--m-font-color-main);
     --m-app-bar-elevation: var(--m-elevation-2);
 
     --m-app-bar-size: var(--m-app-bar-size-md);
@@ -33,4 +33,7 @@
     align-items: center;
     padding: 0 var(--m-space-md);
     transition: all ease .3s;
+    //position: sticky;
+    //left: 0;
+    //top: 0;
 }

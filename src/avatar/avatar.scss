@@ -5,16 +5,15 @@ $--m-avatar-border-size: .2rem;
  */
 :root {
     // selection
-    --m-avatar-size-xs: 2rem;
-    --m-avatar-size-sm: 3rem;
-    --m-avatar-size-md: 4rem;
-    --m-avatar-size-lg: 5rem;
-    --m-avatar-size-xl: 6rem;
+    --m-avatar-size-xs: 1.5rem;
+    --m-avatar-size-sm: 2.5rem;
+    --m-avatar-size-md: 3.5rem;
+    --m-avatar-size-lg: 4.5rem;
+    --m-avatar-size-xl: 5.5rem;
 
     // default
-    --m-avatar-color: var(--m-color-pink-400);
-    --m-avatar-border-color: var(--m-color-pink-400);
-    --m-avatar-font-color: var(--m-font-color-1);
+    --m-avatar-color: var(--m-color-main);
+    --m-avatar-font-color: var(--m-bg-color-main);
     --m-avatar-elevation: var(--m-elevation-0);
     --m-avatar-shape: var(--m-shape-circle);
 
@@ -30,6 +29,7 @@ $--m-avatar-border-size: .2rem;
     background-color: var(--m-avatar-color);
     color: var(--m-avatar-font-color);
 
+
     width: var(--m-avatar-size);
     height: var(--m-avatar-size);
     font-size: var(--m-avatar-font-size);
@@ -40,6 +40,8 @@ $--m-avatar-border-size: .2rem;
     box-sizing: border-box;
     cursor: pointer;
     position: relative;
+    transition: all ease .3s;
+
     .m-avatar__cover {
         @include abs-size(100% ,xy);
         display: block;
@@ -50,8 +52,20 @@ $--m-avatar-border-size: .2rem;
     }
 
     // variety 
-    &.m--outline {
+    &.m--variety-outline {
+        background-color: var(--m-bg-color-main);
+        border-color: var(--m-avatar-color);
+        color: var(--m-avatar-color);
         border-width: $--m-avatar-border-size;
         border-style: solid;
+    }
+
+    // status
+    &.m--status-success {
+        opacity: 1;
+    }
+    &.m--status-pending,
+    &.m--status-failure {
+        opacity: 0;
     }
 }

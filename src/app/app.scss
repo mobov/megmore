@@ -18,8 +18,9 @@ body,
     margin: 0;
     font-size: var(--m-font-base);
     color: var(--m-font-color);
+    position: relative;
 }
 .m-app{
     @include scroller();
-    @include slim-scroll-bar(14px);
+    @include slim-scroll-bar(y, 12px);
 }

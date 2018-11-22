@@ -1,4 +1,4 @@
-import { Component, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
 import { Size, Color, Variety, Shape } from '@/types/model'
 import { genColor, genSize, genElevation, genShape } from '@/core/style-gen'
 import { STATUS, VARIETY } from "@/core/constant"
@@ -30,15 +30,11 @@ export default class MAvatar extends Vue {
   private src!: string
 
   private status: number = STATUS.pending
+  private curSrc: string | any = ''
 
   private get styles(): any {
-      const { color, fontColor, size, elevation, shape, variety } = this
+      const { color, fontColor, size, elevation, shape } = this
       const styles = { }
-
-      if (variety === VARIETY.outline) {
-          genColor(styles, prefix, 'border-color', 'green')
-          genColor(styles, prefix, 'color', 'green')
-      }
 
       genColor(styles, prefix, 'color', color)
       genColor(styles, prefix, 'font-color', fontColor)
@@ -49,35 +45,42 @@ export default class MAvatar extends Vue {
       return styles
   }
 
+  @Watch('src', { immediate: true })
+  private srcUpdate(val: any): void {
+      if (val !== undefined) {
+          this.status = STATUS.pending
+          this.curSrc = val
+      }
+  }
+
   private get classes(): any {
     return {
-        [`m--${this.variety}`]: true,
-        [`m--${STATUS[this.status]}`]: true,
-
-        // [`m--${this.shape}`]: true,
-        // [`m--color-${this.type}`]: this.variety !== 'normal',
-        // [`m--bg-${this.type}`]: this.variety === 'normal',
-        // [`m--border-${this.type}`]: this.variety === 'outline',
-        // [`m--elevation-${this.elevation}`]: this.elevation,
+        [`m--variety-${this.variety}`]: true,
+        [`m--status-${STATUS[this.status]}`]: true,
     }
   }
 
-  private onLoad(): void {
+  private loadSuccess(): void {
     this.status = STATUS.success
   }
 
+  private loadFailure(): void {
+    this.status = STATUS.failure
+  }
+
   private render(h: any) {
-      const { src, styles, classes, onLoad } = this
+      const { curSrc, styles, classes, loadSuccess, loadFailure } = this
 
       return (
           <div staticClass={prefix}
                style={styles}
                class={classes}>
                {this.$slots.default}
-               <img onLoad={onLoad}
+               <img onLoad={loadSuccess}
+                    onError={loadFailure}
                     staticClass={`${prefix}__cover`}
                     alt=''
-                    src={src} />
+                    src={curSrc} />
           </div>
       )
   }
