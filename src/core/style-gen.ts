@@ -1,5 +1,20 @@
-import { BREAKPOINTS, ELEVATION_MAX, ELEVATION_MIN, SHAPES } from "./constant"
-import { isPalette, isCSSVar } from "./util"
+import Color from 'color'
+import { BREAKPOINTS, ELEVATION_MAX, ELEVATION_MIN, SHAPES } from './constant'
+import { isPalette, isCSSVar, getCSSVal } from './util'
+import { HoverColor } from '@/core/cache'
+
+/**
+ * 获取有效css color属性值
+ * @param {string} val
+ * @return {string}
+ */
+function getStyleColorAttrVal(val: string): string {
+    return isPalette(val)
+        ? `var(--m-color-${val})`
+        : isCSSVar(val)
+            ? `var(${val})`
+            : val
+}
 
 /**
  * 计算颜色样式值
@@ -9,12 +24,36 @@ import { isPalette, isCSSVar } from "./util"
  * @param {string} val
  */
 export function genColor(styles: any, compName: string, property: string, val: string): void {
+
     if (val !== undefined) {
-        styles[`--${compName}-${property}`] = isPalette(val)
-            ? `var(--m-color-${val})`
-            : isCSSVar(val)
-                ? `var(${val})`
-                : val
+        styles[`--${compName}-${property}`] = getStyleColorAttrVal(val)
+    }
+}
+
+
+/**
+ * 计算hover颜色样式值
+ * @param styles
+ * @param {string} compName
+ * @param {string} property
+ * @param {string} val
+ */
+export function genHover(styles: any, compName: string, property: string, val: string): void {
+    console.info(val)
+    if (val !== undefined) {
+        let result = val
+        if (HoverColor.exist(val)) {
+            result = HoverColor.getItem(val)
+        } else {
+            const realVal = getCSSVal(val)
+            console.info(realVal)
+            const colorObj = Color(realVal)
+            result = colorObj.isDark() ? colorObj.lighten(.3) : colorObj.darken(.1)
+            HoverColor.setItem(val, result)
+        }
+        console.info(result)
+
+        styles[`--${compName}-${property}`] = result
     }
 }
 

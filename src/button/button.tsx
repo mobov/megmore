@@ -3,7 +3,7 @@ import { VNode } from 'vue'
 // import MSpin from '@/components/spin'
 import { Size, Color, Variety, Shape } from '@/types/model'
 import { VARIETY } from '@/core/constant'
-import { genColor, genElevation, genShape, genSize } from '@/core/style-gen'
+import { genColor, genElevation, genShape, genSize, genHover } from '@/core/style-gen'
 
 const prefix = 'm-button'
 
@@ -43,7 +43,9 @@ export default class MButton extends Vue {
         genSize(styles, prefix, 'size', size)
         genElevation(styles, prefix, elevation)
         genShape(styles, prefix, shape)
+        genHover(styles, prefix, 'hover-color', color)
 
+        // console.log(styles)
         return styles
     }
 

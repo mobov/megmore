@@ -13,11 +13,13 @@
 
   // default
   --m-button-color: var(--m-color-main);
+  --m-button-hover-color: var(--m-color-main);
   --m-button-font-color: var(--m-bg-color-main);
-  --m-button-elevation: var(--m-elevation-0);
+  --m-button-elevation: var(--m-elevation-2);
   --m-button-shape: var(--m-shape-corner);
 
   --m-button-size: var(--m-button-size-md);
+  --m-button-border-size: .2rem;
 }
 
 .m-button {
@@ -25,8 +27,11 @@
   background-color: var(--m-button-color);
   color: var(--m-button-font-color);
   min-height: var(--m-button-size);
+  min-width: var(--m-button-size);
   padding: 0 calc(var(--m-button-size) / 2);
   border-radius: var(--m-button-shape);
+  box-shadow: var(--m-button-elevation);
+  border-color: var(--m-button-color);
 
 
   display: flex;
@@ -34,47 +39,23 @@
   justify-content: space-around;
   cursor: pointer;
   user-select: none;
-  //// size
-  //@each $name,
-  //$value in $--Size-button-height {
-  //  &.m--#{$name} {
-  //    @include size-abs(d($value), y);
-  //    font-size: d($value /2);
-  //  }
-  //} // type
-  //&.m--normal {
-  //  @include elevation(2)
-  //}
-  //&.m--outline {
-  //  border-width: 2px;
-  //  border-style: solid;
-  //} // shape
-  //&.m--square {
-  //  border-radius: 0
-  //}
-  //&.m--corner {
-  //  border-radius: d(map-get($--Radius, corner))
-  //}
-  //&.m--round {
-  //  border-radius: d(map-get($--Radius, round))
-  //}
-  //&.m--circle {
-  //  border-radius: 50%;
-  //  @each $name,
-  //  $value in $--Size-button-height {
-  //    &.m--#{$name} {
-  //      @include size-abs(d($value), x);
-  //    }
-  //  }
-  //}
-  //&:not(.m--bg-default) {
-  //  color: getColor(grey, 50);
-  //}
-  //color:getColor(grey, A400);
-  //min-width: d($--size-button-min-width);
-  //cursor: pointer;
-  //&>* {
-  //  vertical-align: middle;
-  //}
+  box-sizing: border-box;
+  border-style: solid;
+
+  // hover
+  &:hover {
+    background-color: var(--m-button-hover-color);
+    border-color: var(--m-button-hover-color);
+  }
+
+  // variety
+  &.m--variety-outline {
+    background-color: var(--m-bg-color-main);
+    border-color: var(--m-button-color);
+    color: var(--m-button-color);
+    border-width: var(--m-button-border-size);
+  }
+
+
   transition: all ease .3s;
 }

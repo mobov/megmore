@@ -1,6 +1,12 @@
 <template>
     <m-container style="padding:20px">
         <m-row space="xs">
+            <m-button color="green-700">openToast</m-button>
+            <m-button color="purple-A700">openToast</m-button>
+            <m-button color="deeppurple-900">openToast</m-button>
+            <m-button color="white" font-color="blackry">openToast</m-button>
+            <m-button color="green-700" variety="outline" shape="circle">A </m-button>
+
             <MTooltip>
                 <m-button  loading>fullscreen modal</m-button>
             </MTooltip>
