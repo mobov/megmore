@@ -3,7 +3,7 @@
 /**
  * variables register.
  */
-:root {
+.m-button {
   // selection
   --m-button-size-xs: 2rem;
   --m-button-size-sm: 3rem;
@@ -27,22 +27,36 @@
   background-color: var(--m-button-color);
   color: var(--m-button-font-color);
   min-height: var(--m-button-size);
+  height: var(--m-button-size);
   min-width: var(--m-button-size);
-  padding: 0 calc(var(--m-button-size) / 2);
+  margin: .5em;
   border-radius: var(--m-button-shape);
   box-shadow: var(--m-button-elevation);
   border-color: var(--m-button-color);
+  border-width: var(--m-button-border-size);
 
-
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-around;
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
   border-style: solid;
+  position: relative;
+  //> * {
+  //  margin: 0 calc(var(--m-button-size) / 2);
+  //}
+  > * {
+    vertical-align: middle;
+  }
+  .m-button__icon {
 
-  // hover
+  }
+  .m-button__main {
+    margin: 0 calc(var(--m-button-size) / 4);
+  }
+
+    // hover
   &:hover {
     background-color: var(--m-button-hover-color);
     border-color: var(--m-button-hover-color);
@@ -53,9 +67,24 @@
     background-color: var(--m-bg-color-main);
     border-color: var(--m-button-color);
     color: var(--m-button-color);
-    border-width: var(--m-button-border-size);
+    &:hover {
+      //color: var(--m-button-hover-color);
+      //border-color: var(--m-button-hover-color);
+      //background-color: var(--m-button-hover-color);
+      color: var(--m-button-color);
+    }
   }
 
+  // shape
+  &.m--shape-circle {
+    border-radius: var(--m-button-size);
+  }
+  &.m--shape-round {
+    border-radius: var(--m-shape-round);
+  }
+  &.m--shape-square {
+    border-radius: var(--m-shape-square);
+  }
 
   transition: all ease .3s;
 }

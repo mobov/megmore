@@ -1,6 +1,6 @@
 import { FunctionalComponentOptions, VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import * as iconLib from '../../icons'
+import * as iconLib from './icons'
 const presetIcons = [
     'menu', 'close', 'search',
     'navigate_before', 'navigate_next',
@@ -51,18 +51,18 @@ export class MIcon extends Vue {
         const staticClasses = data.staticClass !== undefined ? data.staticClass : ''
         const classes = data.class !== undefined ? data.class : ''
         const styles = Object.assign({ fill: 'currentColor' }, data.style, data.staticStyle)
-        const click = listeners.click || function(){ }
+        const click = listeners.click || 'javascript(0)'
+
         return (
             <svg xmlns='http://www.w3.org/2000/svg'
-                version='1.1'
-                staticClass={`${prefix} ${prefix}__${props.name} ${staticClasses}`}
-                class={classes}
-                style={styles}
-                height={height}
-                width={width}
-                viewBox={icon.viewBox}
-                onClick={click}
-            >
+                 version='1.1'
+                 staticClass={`${prefix} ${prefix}__${props.name} ${staticClasses}`}
+                 class={classes}
+                 style={styles}
+                 height={height}
+                 width={width}
+                 viewBox={icon.viewBox}
+                 onClick={click}>
                 {icon.paths ? icon.paths.map((path: string) => <path d={path} />) : ''}
                 {icon.polygons ? icon.polygons.map((path: string) => <polygon points={path} />) : ''}
             </svg>
@@ -70,6 +70,11 @@ export class MIcon extends Vue {
     }
 }
 
+/**
+ * 自定义icon
+ * custom icon register
+ * @param data
+ */
 export function setIcons(data: any = {}): void {
     for (const item in data) {
         if (data.hasOwnProperty(item)) {

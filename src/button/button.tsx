@@ -1,14 +1,15 @@
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator'
 import { VNode } from 'vue'
 // import MSpin from '@/components/spin'
+import MIcon from '@/icon'
 import { Size, Color, Variety, Shape } from '@/types/model'
-import { VARIETY } from '@/core/constant'
-import { genColor, genElevation, genShape, genSize, genHover } from '@/core/style-gen'
+import { VARIETY, SHAPE } from '@/core/constant'
+import { genColor, genElevation, genSize, genHover } from '@/core/style-gen'
 
 const prefix = 'm-button'
 
 // @Component({ components: { MIcon, MSpin } })
-@Component
+@Component({ components: { MIcon }})
 export default class MButton extends Vue {
     @Prop({ type: String })
     private size!: Size | number | string
@@ -22,7 +23,7 @@ export default class MButton extends Vue {
     @Prop({ type: String })
     private fontColor!: Color
 
-    @Prop({ type: String })
+    @Prop({ type: String, default: SHAPE.corner })
     private shape!: Shape
 
     @Prop({ type: String, default: VARIETY.normal })
@@ -31,18 +32,20 @@ export default class MButton extends Vue {
     @Prop({ type: Boolean })
     private block!: boolean
 
+    @Prop({ type: String })
+    private icon!: string
+
     @Prop({ type: Boolean })
     private loading!: boolean
 
     private get styles(): any {
-        const { color, fontColor, size, elevation, shape } = this
+        const { color, fontColor, size, elevation } = this
         const styles = { }
 
         genColor(styles, prefix, 'color', color)
         genColor(styles, prefix, 'font-color', fontColor)
         genSize(styles, prefix, 'size', size)
         genElevation(styles, prefix, elevation)
-        genShape(styles, prefix, shape)
         genHover(styles, prefix, 'hover-color', color)
 
         // console.log(styles)
@@ -50,10 +53,11 @@ export default class MButton extends Vue {
     }
 
     private get classes(): any {
-        const { variety, block } = this
+        const { variety, shape, block } = this
 
         return {
             [`m--variety-${variety}`]: true,
+            [`m--shape-${shape}`]: true,
             ['m--block']: block,
         }
     }
@@ -62,7 +66,7 @@ export default class MButton extends Vue {
     private handleClick(e: MouseEvent): void { return }
 
     private render(): VNode {
-        const { classes, styles, handleClick } = this
+        const { classes, styles, icon, handleClick } = this
 
         return (
             <button v-m-ripple
@@ -71,7 +75,10 @@ export default class MButton extends Vue {
                 class={classes}
                 onClick={handleClick}>
                 {/*{this.loading && (this.$slots.spinner || <MSpin />)}*/}
-                {this.$slots.default}
+                {icon ? <MIcon name={icon}/> : undefined}
+                {this.$slots.default
+                    ? (<div class={`${prefix}__main`}>{this.$slots.default}</div>)
+                    : undefined}
             </button>
         )
     }

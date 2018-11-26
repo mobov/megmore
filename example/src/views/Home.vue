@@ -1,15 +1,29 @@
 <template>
     <m-container style="padding:20px">
-        <m-row space="xs">
-            <m-button color="green-700">openToast</m-button>
-            <m-button color="purple-A700">openToast</m-button>
-            <m-button color="deeppurple-900">openToast</m-button>
-            <m-button color="white" font-color="blackry">openToast</m-button>
-            <m-button color="green-700" variety="outline" shape="circle">A </m-button>
-
-            <MTooltip>
-                <m-button  loading>fullscreen modal</m-button>
-            </MTooltip>
+        <m-row space="xs" :cols="12" style="color:red">
+            <m-col :xs="3">
+                <m-button color="green-700">openToast</m-button>
+            </m-col>
+            <m-col :xs="3">
+                <m-button color="purple-A700" shape="round">openToast</m-button>
+            </m-col>
+            <m-col :xs="3">
+                <m-button color="green-700">openToast</m-button>
+            </m-col>
+            <m-col :xs="3">
+                <m-button color="purple-A700" shape="round">openToast</m-button>
+            </m-col>
+            <!--<m-button color="deeppurple-900" shape="circle">openToast</m-button>-->
+            <!--<m-button color="white" font-color="black">openToast</m-button>-->
+            <!--<m-button color="green-700" variety="outline" shape="circle">A </m-button>-->
+            <!--<m-button color="green-700" variety="outline">openToast</m-button>-->
+            <!--<m-button color="purple-A700" variety="outline">openToast</m-button>-->
+            <!--<m-button color="deeppurple-900" variety="outline">openToast</m-button>-->
+            <!--<m-button color="white" font-color="black">openToast</m-button>-->
+            <!--<m-button color="green-700" v shape="circle">A</m-button>-->
+            <!--<MTooltip>-->
+                <!--<m-button  loading>fullscreen modal</m-button>-->
+            <!--</MTooltip>-->
             <m-col>
                 <div style="display: flex">
                     <m-button @click="tableSize = 'xs'">xs</m-button>

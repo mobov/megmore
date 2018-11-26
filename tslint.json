@@ -6,7 +6,7 @@
   "linterOptions": {
     "exclude": [
       "node_modules/**",
-      "src/components/icon/paths.ts"
+      "src/icon/paths.ts"
     ]
   },
   "rules": {

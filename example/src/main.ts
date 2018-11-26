@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 Vue.config.performance = true
 
-import { MIcon_more_vert, MIcon_account_circle } from '@/icons'
+import { MIcon_more_vert, MIcon_account_circle } from '@/icon/icons'
 import Megmore from '@'
 
 Vue.use(Megmore, {

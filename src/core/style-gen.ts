@@ -24,12 +24,10 @@ function getStyleColorAttrVal(val: string): string {
  * @param {string} val
  */
 export function genColor(styles: any, compName: string, property: string, val: string): void {
-
     if (val !== undefined) {
         styles[`--${compName}-${property}`] = getStyleColorAttrVal(val)
     }
 }
-
 
 /**
  * 计算hover颜色样式值
@@ -39,19 +37,17 @@ export function genColor(styles: any, compName: string, property: string, val: s
  * @param {string} val
  */
 export function genHover(styles: any, compName: string, property: string, val: string): void {
-    console.info(val)
     if (val !== undefined) {
         let result = val
         if (HoverColor.exist(val)) {
             result = HoverColor.getItem(val)
         } else {
             const realVal = getCSSVal(val)
-            console.info(realVal)
             const colorObj = Color(realVal)
+
             result = colorObj.isDark() ? colorObj.lighten(.3) : colorObj.darken(.1)
             HoverColor.setItem(val, result)
         }
-        console.info(result)
 
         styles[`--${compName}-${property}`] = result
     }
@@ -86,14 +82,15 @@ export function genElevation(styles: any, compName: string, val: number): void {
     }
 }
 
-/**
- * 计算圆角
+/***
+ * 静态样式表
  * @param styles
  * @param {string} compName
- * @param {string} val
+ * @param {string} property
+ * @param {number | string} val
  */
-export function genShape(styles: any, compName: string, val: string): void {
-    if (val !== undefined && SHAPES.includes(val)) {
-        styles[`--${compName}-shape`] = `var(--m-shape-${val})`
+export function genStaticStyles(styles: any, compName: string, property: string, val: number | string): void {
+    if (val !== undefined) {
+        styles[`--${compName}-${property}`] = val
     }
 }

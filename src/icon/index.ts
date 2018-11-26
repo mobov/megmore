@@ -1,4 +1,4 @@
-import { MIcon, setIcons} from '@/components/icon/icon'
+import { MIcon, setIcons } from './icon'
 
 /* istanbul ignore next */
 MIcon.install = function install(Vue: any): void {
@@ -7,5 +7,5 @@ MIcon.install = function install(Vue: any): void {
 MIcon.register = function register(data: any): void {
     setIcons(data)
 }
-export { MIcon }
+
 export default MIcon

@@ -12,7 +12,7 @@
   "dependencies": {
     "@megmore/es-helper": "^0.0.17",
     "@megmore/scss-helper": "^0.0.3",
-    "color": "^3.0.0",
+    "color": "^3.1.0",
     "es-treasure": "^0.5.7",
     "is-color-stop": "^1.1.0",
     "typescript": "^3.0.1",

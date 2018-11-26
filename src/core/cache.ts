@@ -1,9 +1,7 @@
-
-
 class Cache {
 
     private BUFFER: any = {}
-    // constructor() { }
+
     public getItem(key: string): any {
         return this.BUFFER[key]
     }

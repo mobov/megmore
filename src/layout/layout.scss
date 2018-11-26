@@ -1,0 +1,117 @@
+@import "../core/common/breakpoints";
+/*
+ * 断点
+ */
+$--Breakpoints: (xs sm md lg xl);
+
+/*
+ * 栅格响应断点
+ */
+$--Grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+) !default;
+
+/*
+ * 栅格容器尺寸
+ */
+$--Container-max-size: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px
+) !default;
+
+/**
+ * variables register.
+ */
+.m-row {
+    --m-row-cols: 24;
+}
+/**
+ * components styles.
+ */
+.m-row {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    &--wrap {
+        &-normal {
+            flex-wrap: wrap;
+        }
+        &-reverse {
+            flex-wrap: wrap-reverse;
+        }
+        &-none {
+            flex-wrap: nowrap;
+        }
+    }
+    &--justify {
+        &-start {
+            justify-content: flex-start;
+        }
+        &-center {
+            justify-content: center;
+        }
+        &-end {
+            justify-content: flex-end;
+        }
+        &-between {
+            justify-content: space-between;
+        }
+        &-around {
+            justify-content: space-around;
+        }
+        &-evenly {
+            justify-content: space-evenly;
+        }
+    }
+    &--align {
+        &-start {
+            align-items: flex-start;
+        }
+        &-center {
+            align-items: center;
+        }
+        &-stretch {
+            align-items: stretch;
+        }
+        &-end {
+            align-items: flex-end;
+        }
+    }
+
+    //@each $breakpoint, $value in $--Grid-breakpoints {
+    //    &--space-#{$breakpoint} {
+    //        padding: d(map_get($--Space, $breakpoint));
+    //        .m-col {
+    //            padding: d(map_get($--Space, $breakpoint));
+    //        }
+    //    }
+    //}
+}
+.m-col {
+    --m-col-span-xs: var(--m-row-cols);
+    --m-col-span-sm: var(--m-col-span-xs);
+    --m-col-span-md: var(--m-col-span-sm);
+    --m-col-span-lg: var(--m-col-span-md);
+    --m-col-span-xl: var(--m-col-span-lg);
+    //--m-col-span: var(--m-col-span-xs);
+    width: calc((var(--m-col-span-xs) / var(--m-row-cols)) * 100%);
+    @each $breakpoint, $value in $--Grid-breakpoints {
+        @include media-breakpoint-up($breakpoint, $--Grid-breakpoints) {
+            width: calc((var(--m-col-span-#{$breakpoint}) / var(--m-row-cols)) * 100%);
+        }
+    }
+
+    box-sizing: border-box;
+
+}
+
+
+.m-flex-filler {
+    flex-grow: 1!important
+}

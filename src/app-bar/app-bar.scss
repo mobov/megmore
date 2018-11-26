@@ -2,7 +2,7 @@
 /**
  * variables register.
  */
-:root {
+.m-app-bar {
     // selection
     --m-app-bar-size-xs: 2.5rem;
     --m-app-bar-size-sm: 3.5rem;
@@ -31,7 +31,8 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0 var(--m-space-md);
+    padding: 0 calc(var(--m-app-bar-size) / 4);
+    box-sizing: border-box;
     transition: all ease .3s;
     //position: sticky;
     //left: 0;

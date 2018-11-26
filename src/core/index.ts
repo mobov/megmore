@@ -6,7 +6,7 @@ import './common/theme.scss'
 import { VueConstructor } from 'vue'
 import { Megmore as MegmorePlugin, MegmoreUseOptions } from '@/types'
 import { getTheme, registerTheme, useTheme } from '@/components/megmore/theme'
-import MIcon from '@/components/icon'
+import MIcon from '@/icon'
 
 const Megmore: MegmorePlugin = {
     install(Vue: VueConstructor, opts?: MegmoreUseOptions): void {

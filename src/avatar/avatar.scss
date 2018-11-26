@@ -3,7 +3,7 @@ $--m-avatar-border-size: .2rem;
 /**
  * variables register.
  */
-:root {
+.m-avatar {
     // selection
     --m-avatar-size-xs: 1.5rem;
     --m-avatar-size-sm: 2.5rem;
@@ -15,7 +15,6 @@ $--m-avatar-border-size: .2rem;
     --m-avatar-color: var(--m-color-main);
     --m-avatar-font-color: var(--m-bg-color-main);
     --m-avatar-elevation: var(--m-elevation-0);
-    --m-avatar-shape: var(--m-shape-circle);
 
     --m-avatar-size: var(--m-avatar-size-md);
 }
@@ -24,7 +23,6 @@ $--m-avatar-border-size: .2rem;
  * components styles.
  */
 .m-avatar {
-    border-radius: var(--m-avatar-shape);
     box-shadow: var(--m-avatar-elevation);
     background-color: var(--m-avatar-color);
     color: var(--m-avatar-font-color);
