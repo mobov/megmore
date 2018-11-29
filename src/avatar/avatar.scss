@@ -38,7 +38,7 @@ $--m-avatar-border-size: .2rem;
     box-sizing: border-box;
     cursor: pointer;
     position: relative;
-    transition: all ease .3s;
+    //transition: all ease .3s;
 
     .m-avatar__cover {
         @include abs-size(100% ,xy);

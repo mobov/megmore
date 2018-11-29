@@ -1,16 +1,52 @@
 <template>
     <m-container style="padding:20px">
-        <m-row space="xs" :cols="12" style="color:red">
-            <m-col :xs="3">
+        <m-row space="xs" :cols="24">
+            <m-col :xs="12" :sm="6" :md="3">
                 <m-button color="green-700">openToast</m-button>
             </m-col>
-            <m-col :xs="3">
+            <m-col :xs="12" :sm="6" :md="3">
                 <m-button color="purple-A700" shape="round">openToast</m-button>
             </m-col>
-            <m-col :xs="3">
+            <m-col :xs="12" :sm="6" :md="3">
                 <m-button color="green-700">openToast</m-button>
             </m-col>
-            <m-col :xs="3">
+            <m-col :xs="12" :sm="6" :md="3">
+                <m-chip class="m--mr-sm" size="xs" closeable closeover>
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="sm" closeable closeover>
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="md" closeable closeover>
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="lg" closeable closeover>
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" color="green" size="40px" closeable closeover>
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="xs">
+                    <!--<m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />-->
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="sm">
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="md">
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
+                <m-chip class="m--mr-sm" size="lg" closeable>
+                    <m-avatar slot="media" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532848823575&di=940fe99aec0381b8ef366c52ab006095&imgtype=0&src=http%3A%2F%2Fwww.wodeyiku.com%2Fuploads3%2Fimage%2F201703%2F0301l1k3cuc3avi.jpg" />
+                    <span>呵呵</span>
+                </m-chip>
                 <m-button color="purple-A700" shape="round">openToast</m-button>
             </m-col>
             <!--<m-button color="deeppurple-900" shape="circle">openToast</m-button>-->

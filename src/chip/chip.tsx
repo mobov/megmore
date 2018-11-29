@@ -1,7 +1,8 @@
 import { Component, Prop, Emit, Model, Provide, Vue } from 'vue-property-decorator'
 import { Size, Color, Variety, Shape } from '@/types/model'
-import MAvatar from '../../components/avatar/avatar'
-import MIcon from '../../components/icon/'
+import { genColor, genElevation, genSize, genHover } from '@/core/style-gen'
+import MAvatar from '../avatar'
+import MIcon from '../icon'
 import { VNode } from 'vue'
 
 const prefix = 'm-chip'
@@ -9,13 +10,16 @@ const prefix = 'm-chip'
 @Component({ components: { MAvatar, MIcon }})
 export default class MChip extends Vue {
 
-    @Prop({ type: String, default: 'sm' })
+    @Prop({ type: String })
     private size!: Size | string
 
-    @Prop({ type: String, default: 'primary' })
-    private type!: Color
+    @Prop({ type: String })
+    private color!: Color
 
-    @Prop({ type: Number, default: 2 })
+    @Prop({ type: String })
+    private fontColor!: Color
+
+    @Prop({ type: Number })
     private elevation!: number
 
     @Prop({ type: String, default: 'normal' })
@@ -25,50 +29,75 @@ export default class MChip extends Vue {
     private shape!: Shape
 
     @Prop({ type: Boolean, default: false })
-    private closetoggle!: boolean
+    private closeable!: boolean
+
+    @Prop({ type: Boolean, default: false })
+    private closeover!: boolean
+
+    private get styles(): any {
+        const { color, fontColor, size, elevation } = this
+        const styles = { }
+
+        genColor(styles, prefix, 'color', color)
+        genColor(styles, prefix, 'font-color', fontColor)
+        genSize(styles, prefix, 'size', size)
+        genElevation(styles, prefix, elevation)
+        genHover(styles, prefix, 'hover-color', color)
+
+        return styles
+    }
+
+    private get classes(): any {
+        const { variety, shape, closeable, closeover } = this
+
+        return{
+            [`m--variety-${variety}`]: true,
+            [`m--shape-${shape}`]: true,
+            [`${prefix}--closeable`]: closeable,
+            [`${prefix}--closeover`]: closeover,
+        }
+    }
 
     @Emit('close')
-    handleClose(e: MouseEvent): void {
+    private handleClose(e: MouseEvent): void {
         e.stopPropagation()
     }
 
     @Emit('click')
-    handleClick(e: MouseEvent): void { void(0) }
+    private handleClick(e: MouseEvent): void { return }
 
-    get classes(): any {
-        const isNormal  = this.variety === 'normal'
-        const isOutline = this.variety === 'outline'
+    private RMedia(): VNode[] | undefined  {
+        const { $slots } = this
 
-        return{
-            [`m--${this.size}`]: true,
-            [`m--${this.variety}`]: true,
-            [`m--${this.shape}`]: true,
-            [`m--color-${this.type}`]: !isNormal,
-            [`m--border-${this.type}`]: isOutline,
-            [`m--bg-${this.type}`]: isNormal,
-            [`m--elevation-${this.elevation}`]: this.elevation,
-            [`m--closeable`]: this.$listeners.close,
-            [`m--closetoggle`]: this.closetoggle,
+        if ($slots.media) {
+            if (!$slots.media[0]!.data!.staticClass) {
+                $slots.media[0]!.data!.staticClass = ''
+            }
+            $slots.media[0]!.data!.staticClass += ` ${prefix}__media`
+
+            return $slots.media
         }
+        return undefined
     }
 
-    public render(): VNode {
-        const { classes, $slots, $listeners, closetoggle, handleClose, handleClick } = this
+    private RClose(): VNode | undefined {
+        const { closeable, closeover, handleClose } = this
 
-        const RMedia = () => {
-            return $slots.media ? <div staticClass={`${prefix}__media`}>
-                {$slots.media}
-            </div> : ''
-        }
+        return (closeable || closeover
+            ? <MIcon staticClass={`${prefix}__close`} onClick={handleClose} name='cancel' />
+            : undefined)
+    }
 
-        const RClose = () => {
-            return $listeners.close || closetoggle ? <MIcon onClick={handleClose} name='cancel' /> : ''
-        }
+    private render(): VNode {
+        const { classes, styles, $slots,  RMedia, RClose, handleClick } = this
 
         return (
-            <div staticClass={prefix} class={classes} onClick={handleClick}>
+            <div staticClass={prefix}
+                 style={styles}
+                 class={classes}
+                 onClick={handleClick}>
                 {RMedia()}
-                <div staticClass={`${prefix}__content`}>
+                <div staticClass={`${prefix}__main`}>
                     {$slots.default}
                 </div>
                 {RClose()}
